@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+* {
+    margin: 0;
+    padding: 0;
+   
+}
+
+html {
+    font-size: 10px;
+}
+
+#wrap{
+    width: 1000px;
+    margin: 100px auto;
+    font-size: 0;
+}
+
+#wrap > .wrap_title{
+    margin-bottom: 20px;
+}
+.wrap_title>h2>strong{
+    font-size: 2.5rem;
+}
+
+/* ---------------------------------------- */
+
+#container {
+    width : 100%;
+    box-sizing: border-box;
+}
+
+
+
+#container >ul li {
+   
+    width: 16%;
+    height: 40px;
+    margin: 0;
+ 
+}
+#container >ul li:nth-of-type(1) {
+    width: 20%;
+   
+}
+
+\

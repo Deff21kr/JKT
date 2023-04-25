@@ -23,10 +23,6 @@
 		<java-version>17</java-version>
 		<!-- <java-home>${env.JAVA_HOME}</java-home> -->
 
-		<!-- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target> -->
-
 		<org.springframework-version>5.3.26</org.springframework-version>
 		<org.aspectj-version>1.9.19</org.aspectj-version>
 		<org.apache.logging.log4j-version>2.20.0</org.apache.logging.log4j-version>
@@ -173,13 +169,12 @@
 			</exclusions>
 		</dependency>
 
+		<!-- =============== DataSource =============== -->
 		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 			<version>5.0.1</version>
 		</dependency>
-
-		<!-- =============== MyBatis =============== -->
 
 		<dependency>
 			<groupId>org.mybatis</groupId>

@@ -4,33 +4,36 @@
 
 /* color: color-constrast(aquamarine vs pink, yellow, green); */
 /* accent-color: white; */
-html{
-  font-size: 10px;
-}
+
 :root {
   --color-white: #eee ;
   --color-light-gray: lightgray;
   --color-gray: gray;
   --color-dark-gray: darkslategray;
-
   --color-skyblue: skyblue;
   --color-mark-blue: #2B65F8;
+/* color: var(--color-dark-gray) */
 }
 
+
 * {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  font-size: 1.5rem;
+}
+
+html {
+  font-size: 10px;
 }
 
 ul, li, ol {
   list-style-type: none;
+  font-size: 2rem;
 }
 
 a {
   text-decoration: none;
-  color: black;
+  color: inherit
 }
 
 body {

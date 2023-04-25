@@ -1,12 +1,5 @@
 @charset "utf8";
 
-html{
-  font-size: 10px;
-}
-*{
-  font-size: 1.5rem;
-}
-
 .header-bottom-line {
   border: 1px solid var(--color-light-gray);
 
@@ -82,50 +75,58 @@ hr {
   height: 1px;
 }
 
-.sfoot {
-  width: 1000px;
+.footcontainer {
+  width: 1200px;
   height: 100%;
   margin: auto;
   display: flex;
   flex-direction: row;
 }
 
-.afoot,
-.bfoot {
-  width: 280px;
-  margin-top: 70px;
+.A-foot .logo img {
+  width: 155px;
+  margin-top: 10px;
 }
 
-.comp {
+.A-foot > div > div {
+  display: inline-block;
+  font-size: 20px;
+  border: none;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  color: grey;
+}
+
+.cs1 a:hover {
+  color: black;
+  text-decoration: underline;
+}
+.cs2 a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+.A-foot .cs1 {
+  width: 170px;
+}
+
+/* .comp {
   color: grey;
   margin-bottom: 20px;
   margin-top: 20px;
-}
+} */
 
 #prov, 
 #priv {
+  margin-left: 10px;
   text-decoration: none;
   color: grey;
+
 }
 
 #priv {
   padding-right: 10px;
   border-right: 1px solid;
-}
-
-.cust {
-  width: 100px;
-  height: 40px;
-  font-size: 15px;
-  background-color: white;
-  border-radius: 7px;
-  border: none;
-  box-shadow: 0px 0px 2px;
-  margin-top: 65px;
-  cursor: pointer;
-}
-
-#mail {
-  margin-top: 18px;
-  color: grey;
 }

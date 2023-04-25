@@ -13,32 +13,32 @@ import lombok.extern.log4j.Log4j2;
 @Controller		
 public class SampleController {	
 	
-	@RequestMapping(path = "/list", method=RequestMethod.GET)
+	@RequestMapping(path = "/qnaList", method=RequestMethod.GET)
 	String list() {
-		log.trace("list() invoked.");
+		log.trace("qnaList() invoked.");
 		
-		return "list";
+		return "qnaList";
 	} // list
 	
-	@RequestMapping(path = "/view", method=RequestMethod.GET)
+	@RequestMapping(path = "/qnaView", method=RequestMethod.GET)
 	String view() {
-		log.trace("view() invoked.");
+		log.trace("qnaView() invoked.");
 		
-		return "view";
+		return "qnaView";
 	} // view
 	
-	@RequestMapping(path = "/write", method=RequestMethod.GET)
+	@RequestMapping(path = "/qnaWrite", method=RequestMethod.GET)
 	String write() {
-		log.trace("write() invoked.");
+		log.trace("qnaWrite() invoked.");
 		
-		return "write";
+		return "qnaWrite";
 	} // write
 	
-	@RequestMapping(path = "/edit", method=RequestMethod.GET)
+	@RequestMapping(path = "/qnaEdit", method=RequestMethod.GET)
 	String edit() {
-		log.trace("edit() invoked.");
+		log.trace("qnaEdit() invoked.");
 		
-		return "edit";
+		return "qnaEdit";
 	} // edit
 	
 	@RequestMapping(path = "/replyEdit", method=RequestMethod.GET)

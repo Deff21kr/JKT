@@ -104,8 +104,8 @@
 
                 <!-- bt : button -->
                 <div class="bt_wrap">
-                    <button type="submit" onclick="location.href='list';">목록</button> 
-                    <button type="submit" onclick="location.href='edit';">수정</button> 
+                    <button type="submit" onclick="location.href='qnaList';">목록</button> 
+                    <button type="submit" onclick="location.href='qnaEdit';">수정</button> 
                     <!-- <a href="list" class="on">목록</a>
                     <a href="edit">수정</a> -->
                 </div>

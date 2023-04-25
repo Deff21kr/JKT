@@ -31,35 +31,35 @@
                 </div>
                 <div>
                     <div class="num">1</div>
-                    <div class="title"><a href="view">2박3일 서울코스 추천해주세요!</a></div>
+                    <div class="title"><a href="qnaView">2박3일 서울코스 추천해주세요!</a></div>
                     <div class="writer">hyeonna</div>
                     <div class="date">2023.04.11</div>
                     <div class="count">13</div>
                 </div>
                 <div>
                     <div class="num">2</div>
-                    <div class="title"><a href="view">2박3일 서울코스 추천해주세요!</a></div>
+                    <div class="title"><a href="qnaView">2박3일 서울코스 추천해주세요!</a></div>
                     <div class="writer">hyeonna</div>
                     <div class="date">2023.04.11</div>
                     <div class="count">45</div>
                 </div>
                 <div>
                     <div class="num">3</div>
-                    <div class="title"><a href="view">2박3일 서울코스 추천해주세요!</a></div>
+                    <div class="title"><a href="qnaView">2박3일 서울코스 추천해주세요!</a></div>
                     <div class="writer">hyeonna</div>
                     <div class="date">2023.04.11</div>
                     <div class="count">77</div>
                 </div>
                 <div>
                     <div class="num">4</div>
-                    <div class="title"><a href="view">2박3일 서울코스 추천해주세요!</a></div>
+                    <div class="title"><a href="qnaView">2박3일 서울코스 추천해주세요!</a></div>
                     <div class="writer">hyeonna</div>
                     <div class="date">2023.04.11</div>
                     <div class="count">2</div>
                 </div>
                 <div>
                     <div class="num">5</div>
-                    <div class="title"><a href="view">2박3일 서울코스 추천해주세요!</a></div>
+                    <div class="title"><a href="qnaView">2박3일 서울코스 추천해주세요!</a></div>
                     <div class="writer">hyeonna</div>
                     <div class="date">2023.04.11</div>
                     <div class="count">19</div>
@@ -81,7 +81,7 @@
             <!-- bt : button -->
             <div class="bt_wrap"> 
                 <!-- <a href="write" class="on">등록</a> -->
-                <button type="submit" onclick="location.href='write';">등록</button>
+                <button type="submit" onclick="location.href='qnaWrite';">등록</button>
             </div>
         </div>
     </div>

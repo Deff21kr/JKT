@@ -10,17 +10,11 @@
 
 		<title>여행시그널</title>
 
-
-		<!-- style -->
-		<link rel="stylesheet" href="css/header.css">
-		<link rel="stylesheet" href="css/footer.css">
-
 		<!-- fonts awesome -->
 		<script src="https://kit.fontawesome.com/7235c72187.js" crossorigin="anonymous"></script>
 
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-		<link rel="shortcut icon" href="../../imgs/여행시그널-removebg-preview.png" type="image/x-icon">
 
 		<style>
 			* {

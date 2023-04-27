@@ -9,7 +9,7 @@ import org.zerock.myapp.domain.UsersVO;
 public interface UsersMapper {
 
 	// 1. 어따쓸지 고민
-	@Select("SELECT * FROM TBL_USERS")
+	@Select("SELECT  /*+ index_desc(tbl_users) */  * FROM TBL_USERS ")
 	public abstract List<UsersVO> selectList();
 
 	// 2. 회원가입

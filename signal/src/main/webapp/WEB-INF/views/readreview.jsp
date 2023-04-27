@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>후기 상세 페이지</title>
-    <link rel="stylesheet" href="css/readreview.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/readreview.css">
     <script src="https://kit.fontawesome.com/e6512126dd.js" crossorigin="anonymous"></script>
 </head>
 

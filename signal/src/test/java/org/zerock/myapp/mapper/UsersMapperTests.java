@@ -86,7 +86,7 @@ public class UsersMapperTests {
 	public void testDelete() {
 		log.trace("testDelete invoked");
 
-		Integer userno = 8;
+		Integer userno = 10;
 		Integer affectedLines = this.mapper.delete(userno);
 		log.info("\tbno : {}, affectedLines : {} \nisSucces ", userno, affectedLines, (affectedLines == 1));
 

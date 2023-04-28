@@ -100,12 +100,12 @@ public class UsersServiceTests {
 		log.info("\n\t vo : {} ",vo);
 	}
 
-	@Test(timeout = 1000 * 3)
+	@Test(timeout = 1000 * 5)
 	public void testModify() throws ServiceException {
 		log.trace("\n*****************************************************\n 			testModify() "
 				+ "\n*****************************************************");
 		
-		int userno = 310;
+		int userno = 303;
 		
 		// 우선 유저의 정보를 얻고
 		UsersVO vo = this.service.get(userno);

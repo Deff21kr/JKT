@@ -9,7 +9,6 @@
 
 	<insert id="insert">
 		<selectKey keyProperty="userno" order="AFTER" resultType="int">
-			<!-- select "ISEQ$$74653".NEXTVAL,"ISEQ$$_74653".CURRVAL from dual -->
 			select "ISEQ$$_74653".CURRVAL from dual
 		</selectKey>
 
@@ -36,12 +35,18 @@
 	<update id="update">
 		UPDATE tbl_users
 		SET id=#{ID},
-		nickname=#{nickName},
-		password=#{password},
-		email=#{EMail},
-		phonenumber=#{phoneNumber},
-		MBTI=#{MBTI},
-		likeArea=#{likeArea}
+			nickname=#{nickName},
+			name = #{name},
+			password=#{password},
+			email=#{EMail},
+			phoneNumber=#{phoneNumber}
+			<if test="MBTI != null">
+				,MBTI=#{MBTI}
+			</if>
+			<if test="likeArea != null">
+				,likeArea=#{likeArea}
+			</if>
+			
 		WHERE userno = #{userno}
 	</update>
 

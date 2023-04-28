@@ -10,7 +10,8 @@
 
     <title>마이페이지</title>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
+    <link rel="stylesheet" href="../../resources/css/mypageStyle.css">
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -108,6 +109,7 @@
             <!-- 작성글 -->
             <div id="tabs-2">
                 <!-- <h3>작성글</h3> -->
+
                 <div class="board_list">
 
                     <div class="top">
@@ -142,11 +144,12 @@
                             <div class="writer">작성자</div>
                             <div class="date">작성일</div>
                         </div>
+                        
                     </div>
 
                     <div class="board_page">
                         <a href="#" class="bt first">< <</a>
-                        <a href="#" class="bt prev"><            </a>
+                        <a href="#" class="bt prev"> < </a>
                         <a href="#" class="num on">1</a>
                         <a href="#" class="num">2</a>
                         <a href="#" class="num">3</a>

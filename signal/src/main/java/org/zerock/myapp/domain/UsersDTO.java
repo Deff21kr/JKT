@@ -9,7 +9,7 @@ public class UsersDTO {
 	private Integer userno;
 	private String ID;
 	private String nickName;
-	private String Name;
+	private String name;
 	private String password;
 	private String gender;
 	private String EMail;

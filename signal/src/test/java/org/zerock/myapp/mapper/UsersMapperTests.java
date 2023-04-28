@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -75,7 +76,7 @@ public class UsersMapperTests {
 	public void testSelect() {
 		log.trace("testSelect invoked");
 
-		Integer userno = 308;
+		Integer userno = 303;
 
 		UsersVO vo = this.mapper.select(userno);
 		log.info("\tbno : {} , vo : {}", userno, vo);
@@ -96,12 +97,14 @@ public class UsersMapperTests {
 	public void testUpdate() {
 		log.trace("testUpdate invoked");
 
-		Integer userno = 308;
+		Integer userno = 303;
 		UsersVO vo = this.mapper.select(userno);
 
-		assertNotNull(vo);
+		Objects.requireNonNull(vo);
 		// VO => DTO
 		UsersDTO dto = vo.toDTO();
+		log.info("\tdto : {}", dto);
+
 		dto.setPassword("123123Signal");
 
 		log.info("\tdto : {}", dto);

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> 여행 후기 게시판 </title>
 
-    <link rel="stylesheet" href="../css/reviewboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reviewboard.css">
     <script src="https://kit.fontawesome.com/e6512126dd.js" crossorigin="anonymous"></script>
 </head>
 
@@ -33,7 +33,7 @@
                     <div class="post-wrap">
                         <div class="profile">
                             <a href="#" class="profile-img">
-                                <img src="img/profile.jpg" alt="프로필사진" />
+                                <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                             </a>
                             <a href="#" class="nickname">닉네임입니다</a>
                             <span class="like"><i class="fa-regular fa-heart"></i> 20</span>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="post">
                             <a href="#" class="post">
-                                <img src="img/사진영역.png" alt="사진1" class="postimg">
+                                <img src="${pageContext.request.contextPath}/resources/img/사진영역.png" alt="사진1" class="postimg">
                             </a>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                     <div class="post-wrap">
                         <div class="profile">
                             <a href="#" class="profile-img">
-                                <img src="img/profile.jpg" alt="프로필사진" />
+                                <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                             </a>
                             <a href="#" class="nickname">닉네임입니다</a>
                             <span class="like"><i class="fa-regular fa-heart"></i> 20</span>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="post">
                             <a href="#" class="post">
-                                <img src="img/사진영역.png" alt="사진1" class="postimg">
+                                <img src="${pageContext.request.contextPath}/resources/img/사진영역.png" alt="사진1" class="postimg">
                             </a>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                     <div class="post-wrap">
                         <div class="profile">
                             <a href="#" class="profile-img">
-                                <img src="img/profile.jpg" alt="프로필사진" />
+                                <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                             </a>
                             <a href="#" class="nickname">닉네임입니다</a>
                             <span class="like"><i class="fa-regular fa-heart"></i> 20</span>
@@ -75,7 +75,7 @@
                         </div>
                         <div class="post">
                             <a href="#" class="post">
-                                <img src="img/사진영역.png" alt="사진1" class="postimg">
+                                <img src="${pageContext.request.contextPath}/resources/img/사진영역.png" alt="사진1" class="postimg">
                             </a>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                     <div class="post-wrap">
                         <div class="profile">
                             <a href="#" class="profile-img">
-                                <img src="img/profile.jpg" alt="프로필사진" />
+                                <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                             </a>
                             <a href="#" class="nickname">닉네임입니다</a>
                             <span class="like"><i class="fa-regular fa-heart"></i> 20</span>
@@ -92,7 +92,7 @@
                         </div>
                         <div class="post">
                             <a href="#" class="post">
-                                <img src="img/사진영역.png" alt="사진1" class="postimg">
+                                <img src="${pageContext.request.contextPath}/resources/img/사진영역.png" alt="사진1" class="postimg">
                             </a>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                     <div class="post-wrap">
                         <div class="profile">
                             <a href="#" class="profile-img">
-                                <img src="img/profile.jpg" alt="프로필사진" />
+                                <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                             </a>
                             <a href="#" class="nickname">닉네임입니다</a>
                             <span class="like"><i class="fa-regular fa-heart"></i> 20</span>
@@ -109,7 +109,7 @@
                         </div>
                         <div class="post">
                             <a href="#" class="post">
-                                <img src="img/사진영역.png" alt="사진1" class="postimg">
+                                <img src="${pageContext.request.contextPath}/resources/img/사진영역.png" alt="사진1" class="postimg">
                             </a>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                     <div class="post-wrap">
                         <div class="profile">
                             <a href="#" class="profile-img">
-                                <img src="img/profile.jpg" alt="프로필사진" />
+                                <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                             </a>
                             <a href="#" class="nickname">닉네임입니다</a>
                             <span class="like"><i class="fa-regular fa-heart"></i> 20</span>
@@ -126,7 +126,7 @@
                         </div>
                         <div class="post">
                             <a href="#" class="post">
-                                <img src="img/사진영역.png" alt="사진1" class="postimg">
+                                <img src="${pageContext.request.contextPath}/resources/img/사진영역.png" alt="사진1" class="postimg">
                             </a>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
                     <div class="post-wrap">
                         <div class="profile">
                             <a href="#" class="profile-img">
-                                <img src="img/profile.jpg" alt="프로필사진" />
+                                <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                             </a>
                             <a href="#" class="nickname">닉네임입니다</a>
                             <span class="like"><i class="fa-regular fa-heart"></i> 20</span>
@@ -143,7 +143,7 @@
                         </div>
                         <div class="post">
                             <a href="#" class="post">
-                                <img src="img/사진영역.png" alt="사진1" class="postimg">
+                                <img src="${pageContext.request.contextPath}/resources/img/사진영역.png" alt="사진1" class="postimg">
                             </a>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                     <div class="post-wrap">
                         <div class="profile">
                             <a href="#" class="profile-img">
-                                <img src="img/profile.jpg" alt="프로필사진" />
+                                <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                             </a>
                             <a href="#" class="nickname">닉네임입니다</a>
                             <span class="like"><i class="fa-regular fa-heart"></i> 20</span>
@@ -160,7 +160,7 @@
                         </div>
                         <div class="post">
                             <a href="#" class="post">
-                                <img src="img/사진영역.png" alt="사진1" class="postimg">
+                                <img src="${pageContext.request.contextPath}/resources/img/사진영역.png" alt="사진1" class="postimg">
                             </a>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
                     <div class="post-wrap">
                         <div class="profile">
                             <a href="#" class="profile-img">
-                                <img src="img/profile.jpg" alt="프로필사진" />
+                                <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                             </a>
                             <a href="#" class="nickname">닉네임입니다</a>
                             <span class="like"><i class="fa-regular fa-heart"></i> 20</span>
@@ -177,11 +177,11 @@
                         </div>
                         <div class="post">
                             <a href="#" class="post">
-                                <img src="img/사진영역.png" alt="사진1" class="postimg">
+                                <img src="${pageContext.request.contextPath}/resources/img/사진영역.png" alt="사진1" class="postimg">
                             </a>
                         </div>
                     </div>
-                </li>
+                </li>  
             </ul>
         </section>
 

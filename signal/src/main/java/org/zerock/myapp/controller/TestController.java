@@ -18,5 +18,11 @@ public class TestController {
 		
 		return "mypage";
 	}
+	
+	@GetMapping(path="/reviewboard")
+	String test3() {
+		
+		return "reviewboard";
+	}
 
 }

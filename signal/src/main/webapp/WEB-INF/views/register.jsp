@@ -63,22 +63,22 @@
                             <p style="text-align: left; font-size: 12px; color: #666;">MBTI</p>
                             <select name="MBTI">
                                 <option value="">MBTI유형</option>
-                                <option value="관리자형">ISTJ(현실주의자)</option>
-                                <option value="관리자형">ISFJ(수호자)</option>
-                                <option value="관리자형">ESTJ(경영자)</option>
-                                <option value="관리자형">ESFJ(집정관)</option>
-                                <option value="탐험가형">ISTP(장인)</option>
-                                <option value="탐험가형">ISFP(모험가)</option>
-                                <option value="탐험가형">ESFJ(연예인)</option>
-                                <option value="탐험가형">ESTP(사업가)</option>
-                                <option value="외교관형">INFJ(옹호자)</option>
-                                <option value="외교관형">INFP(중재자)</option>
-                                <option value="외교관형">ENFP(활동가)</option>
-                                <option value="외교관형">ENFJ(선도자)</option>
-                                <option value="분석가형">INTJ(전략가)</option>
-                                <option value="분석가형">INTP(논리술사)</option>
-                                <option value="분석가형">ENTP(변론가)</option>
-                                <option value="분석가형">ENTJ(통솔자)</option>
+                                <option value="관리자형">ISTJ</option>
+                                <option value="관리자형">ISFJ</option>
+                                <option value="관리자형">ESTJ</option>
+                                <option value="관리자형">ESFJ</option>
+                                <option value="탐험가형">ISTP</option>
+                                <option value="탐험가형">ISFP</option>
+                                <option value="탐험가형">ESFJ</option>
+                                <option value="탐험가형">ESTP</option>
+                                <option value="외교관형">INFJ</option>
+                                <option value="외교관형">INFP</option>
+                                <option value="외교관형">ENFP</option>
+                                <option value="외교관형">ENFJ</option>
+                                <option value="분석가형">INTJ</option>
+                                <option value="분석가형">INTP</option>
+                                <option value="분석가형">ENTP</option>
+                                <option value="분석가형">ENTJ</option>
                             </select>
                         </div>
 

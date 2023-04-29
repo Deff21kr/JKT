@@ -41,7 +41,7 @@ header .category > li:nth-of-type(1) a img {
   width: 160px;
 }
 
-header .category input[type=text] {
+header .category > input[type=text] {
   border: none;
   background-color: transparent;
 

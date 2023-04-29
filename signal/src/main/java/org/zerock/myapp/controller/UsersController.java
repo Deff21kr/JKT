@@ -51,10 +51,10 @@ public class UsersController {
 	
 	// 2. 회원가입						필수 파라미터 등록!!
 	@PostMapping(path="/register",
-				params= {"id","nickname","name",
-						"password", "gender", "email",
-						"phonenumber", "birthdate"})	//rttrs 1회성 전달 메소드  
-	String register(@ModelAttribute UsersDTO dto,RedirectAttributes rttrs ) throws ControllerException  {
+				params= {"ID","nickName","name",
+						"password", "gender", "EMail",
+						"phoneNumber", "birthDate"})	//rttrs 1회성 전달 메소드  
+	String register(UsersDTO dto,RedirectAttributes rttrs ) throws ControllerException  {
 		log.trace("register( {}, {} ) ㄲㄲ",dto,rttrs);
 		try {
 			Objects.requireNonNull(dto);		// dto가 제대로 수집되어 널이 아니라면

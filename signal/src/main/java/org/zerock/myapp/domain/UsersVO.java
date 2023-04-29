@@ -3,6 +3,8 @@ package org.zerock.myapp.domain;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Value;
 
 @Value
@@ -15,6 +17,7 @@ public class UsersVO {
 	private String gender;
 	private String EMail;
 	private String phoneNumber;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate birthDate;
 	private Timestamp userRegiDate;
 	private Timestamp withDrawal;

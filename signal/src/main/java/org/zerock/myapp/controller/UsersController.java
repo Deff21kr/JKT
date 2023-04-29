@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.UsersDTO;
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 @Log4j2
 
-@RequestMapping("/users")
+//@RequestMapping("/users")
 @Controller
 public class UsersController {
    
@@ -50,11 +50,11 @@ public class UsersController {
 	} // list : 전체회원조회가 있어야 돼나??
 	
 	// 2. 회원가입						필수 파라미터 등록!!
-	@PostMapping(path="/join",
+	@PostMapping(path="/register",
 				params= {"id","nickname","name",
 						"password", "gender", "email",
 						"phonenumber", "birthdate"})	//rttrs 1회성 전달 메소드  
-	String register(UsersDTO dto,RedirectAttributes rttrs ) throws ControllerException  {
+	String register(@ModelAttribute UsersDTO dto,RedirectAttributes rttrs ) throws ControllerException  {
 		log.trace("register( {}, {} ) ㄲㄲ",dto,rttrs);
 		try {
 			Objects.requireNonNull(dto);		// dto가 제대로 수집되어 널이 아니라면
@@ -62,14 +62,14 @@ public class UsersController {
 				rttrs.addAttribute("result", "true");
 				rttrs.addAttribute("bno",dto.getUserno());
 			}
-			return "redirect:/users/join";
+			return "redirect:/register";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		}
 	
 	} // 회원가입창으로 이동
 	
-	@GetMapping("/join" )
+	@GetMapping("/register" )
 	void register() {
 		log.trace("join() invoked.");
 		

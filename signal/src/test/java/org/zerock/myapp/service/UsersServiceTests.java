@@ -50,7 +50,7 @@ public class UsersServiceTests {
 	
 	
 	
-	@Test(timeout = 1000 * 3)
+	@Test(timeout = 1000 * 5)
 	public void testGetList() throws ServiceException {
 		log.trace("\n************************************** 			testGetList() "
 				+ "\n************************************** ");

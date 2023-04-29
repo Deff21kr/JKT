@@ -46,6 +46,7 @@ public class UsersMapperTests {
 //      users.forEach(log::trace);
 	}
 
+	
 	@Test(timeout = 1000 * 4)
 	public void testInsert() {
 		log.trace("testInsert invoked");

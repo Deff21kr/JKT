@@ -22,7 +22,7 @@ public class LoginServiceImpl implements LoginService {
 		UsersVO vo = mapper.selectUserIdPw(dto); // 아이디, 비밀번호 조회
 		
 		if(vo == null) {
-			log.warn("vo is null...");
+			log.warn("아이디 비밀번호가 일치하지 않습니다.");
 			return null;
 		}
 		

@@ -15,9 +15,9 @@
   href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
   />
   <!-- style -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/style2.css">
-  <link rel="stylesheet" href="css/mainpage.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style2.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mainpage.css">
   <!-- fonts awesome -->
   <script src="https://kit.fontawesome.com/1486713bf1.js" crossorigin="anonymous"></script>
   <!-- swiper script -->
@@ -31,7 +31,7 @@
     
     <div class="signup-container">
       <div><a href="login.jsp">로그인</a></div>
-      <div><a href="logoutAction.jsp">로그아웃</a></div>
+      <div><a href="/logout">로그아웃</a></div>
       <div><a href="join.jsp">회원가입</a></div>
     </div>
 

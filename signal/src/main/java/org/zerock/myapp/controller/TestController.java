@@ -13,10 +13,10 @@ public class TestController {
 //		return "register";
 //	}
 	
-	@GetMapping(path="/mypage")
+	@GetMapping(path="/mainpage")
 	String test2() {
 		
-		return "mypage";
+		return "mainpage";
 	}
 	
 	@GetMapping(path="/reviewboard")

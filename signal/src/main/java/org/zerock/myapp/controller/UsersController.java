@@ -73,7 +73,6 @@ public class UsersController {
 	void register() {
 		log.trace("join() invoked.");
 		
-		
 	}
 	
 	
@@ -99,25 +98,24 @@ public class UsersController {
 	} // 특정 회원의 모든 게시물 조회
 	
 	
-//	@PostMapping(path="/modify" , params ="bno")
-//	String modify(BoardDTO dto,RedirectAttributes rttrs) 
-//			throws ControllerException {
-//		log.trace("modify({}) invoked.",dto);
-//		
-//		try {
-//			Objects.requireNonNull(dto);
-//			
-//			if( this.service.modify(dto) ) {
-//				rttrs.addAttribute("result","true");
-//				rttrs.addAttribute("bno",dto.getBno());
-//			}
-//			
-//			return "redirect:/board/list";
-//		} catch (Exception e) {
-//			throw new ControllerException(e);
-//		}
-//		
-//	} // 회원정보수정?
+	@PostMapping(path="/modify")
+	String modify(UsersDTO dto,RedirectAttributes rttrs) 
+			throws ControllerException {
+		log.trace("modify({}) invoked.",dto);
+		
+		try {
+			Objects.requireNonNull(dto);
+			
+			if( this.service.modify(dto) ) {
+				rttrs.addAttribute("result","true");
+				rttrs.addAttribute("userno",dto.getUserno());
+			}
+			
+			return "redirect:/mypage";
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	} // 회원정보수정?
 
 	
 	

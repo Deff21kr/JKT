@@ -380,15 +380,15 @@
             <!-- 회원정보 수정 -->
             <div id="tabs-6">
                 <!-- <h3>회원정보수정</h3> -->
-                <form method="post" action="member_update.jsp">
+                <form method="post" action="/mypage">
 
                     <label for="name">이름</label>
-                    <input type="text" id="name" name="name" value="${sessionScope.user.name}" required><br>
+                    <input type="text" id="name" name="name" value="${sessionScope.dto.name}"><br>
 
                     <label for="email">이메일</label>
-                    <input type="email" id="email" name="email" value="${sessionScope.user.email}" required><br>
+                    <input type="text" id="email" name="Email" value="${sessionScope.dto.EMail}" ><br>
 
-                    <button type="button" onclick="sendEmail()">이메일 인증<button><br>
+                    <!-- <button type="button" onclick="sendEmail()">이메일 인증<button><br> -->
                     <label for="emailAuth">인증번호</label>
                     <input type="text" id="emailAuth" name="emailAuth" disabled><br>
 
@@ -396,14 +396,13 @@
                     <input type="password" id="password" name="password" required><br>
 
                     <label for="newPassword">새 비밀번호</label>
-                    <input type="password" id="newPassword" name="newPassword" required><br>
+                    <input type="password" id="newPassword" name="password"><br>
 
                     <label for="confirmPassword">새 비밀번호 확인</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+                    <input type="password" id="confirmPassword" name="password"><br>
 
-                    <button type="submit">수정</button>
+                    <input type="submit" value="수정">
                 </form>
-
             </div>
 
 

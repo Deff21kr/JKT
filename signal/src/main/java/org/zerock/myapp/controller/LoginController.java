@@ -31,7 +31,7 @@ public class LoginController {
 						@RequestParam("password") String password,
 						HttpServletRequest request,
 						Model model) {
-		log.info("login({},{})", id, password);
+		log.trace("login({},{}) invoked.", id, password);
 		
 		UsersDTO dto = new UsersDTO();
 		dto.setID(id);
@@ -39,8 +39,8 @@ public class LoginController {
 		
 		UsersDTO login = service.login(dto); // 로그인 서비스 실행
 		
-		if(login == null) {
-			model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			if(login == null) {
+				model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 			return "loginpage"; // 로그인 실패시 로그인 폼 페이지로 이동
 		}
 		
@@ -48,7 +48,7 @@ public class LoginController {
 		HttpSession session = request.getSession();
 		session.setAttribute("login", login);
 		
-		return "home"; // 메인 페이지로 이동
+		return "mainpage"; // 메인 페이지로 이동
 	}
 	
 	@GetMapping("/logout")
@@ -59,6 +59,6 @@ public class LoginController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		return "home"; // 메인 페이지로 이동
+		return "mainpage"; // 메인 페이지로 이동
 	}
 }

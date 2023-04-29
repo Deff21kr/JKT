@@ -9,8 +9,8 @@
   
   <title>Travel Signal - Login Page</title>
 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/loginpage.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/loginpage.css">
   <!-- fonts awesome -->
   <script src="https://kit.fontawesome.com/1486713bf1.js" crossorigin="anonymous"></script>
 </head>
@@ -36,6 +36,10 @@
         <button type="submit">Login</button>  
       </fieldset>
     </form>
+    
+    <div class="message">
+  ${msg}
+</div>
   
     <div id="hr-line">
       <div class="hr-line"></div>

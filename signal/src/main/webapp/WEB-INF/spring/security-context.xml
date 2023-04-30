@@ -8,18 +8,24 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.7.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 		
-		<security:http auto-config="true" use-expressions="true" >
+		<bean id="customAccessDenied" class="org.zerock.myapp.security.CustomAccessDeniedHandler"></bean>
+		<bean id="customLoginSuccess" class="org.zerock.myapp.security.CustomLoginSuccessHandler"></bean>
+		
+		<security:http >
 
 			
-				<security:intercept-url pattern="/sample/all" access="permitAll"/>
+			<security:intercept-url pattern="/sample/all" access="permitAll"/>
 
-				<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')" />
-	
-				<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')" />
-	
-				<security:form-login />
+			<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')" />
+
+			<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')" />
 			
-				<security:access-denied-handler error-page="/accessError"/>
+			<!-- <security:access-denied-handler error-page="/accessError"/>  -->
+			<!-- <security:form-login /> -->
+			
+			<security:access-denied-handler ref="customAccessDenied"/> 
+			<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
+			<security:logout logout-url="/customLogout" invalidate-session="true" />
 		</security:http>
 
 		<security:authentication-manager>

@@ -21,6 +21,28 @@ public class CommonColtroller {
 		
 		model.addAttribute("msg","Access Denied");
 		
+	} // 접근 제한
+	
+	@GetMapping("/customLogin")
+	public void loginInput(String error, String logout, Model model) {
+		
+		log.info("\n\terror : {}", error);
+		log.info("\n\tlogout : {}", logout);
+		
+		if(error != null) {
+			model.addAttribute("error", "Login Error Check Your Account");
+		}
+		if(logout != null) {
+			model.addAttribute("logout" , "Logout!!");
+		}
+		
 	}
+	
 
+	@GetMapping("/customLogout")
+	public void logoutGET() {
+		log.info("custom logout");
+	}
+	
+	
 }

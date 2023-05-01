@@ -108,7 +108,7 @@
                         <label>
                             <!-- <span>PW</span> -->
                             <p style="text-align: left; font-size:12px; color:#666">E-mail</p>
-                            <input type="text" placeholder="이메일" class="size">
+                            <input type="text" placeholder="이메일" class="size" name="EMail" >
                         </label> <!--이메일-->
 
 

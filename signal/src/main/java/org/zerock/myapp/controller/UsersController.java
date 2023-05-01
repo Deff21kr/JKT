@@ -50,10 +50,11 @@ public class UsersController {
 	} // list : 전체회원조회가 있어야 돼나??
 	
 	// 2. 회원가입						필수 파라미터 등록!!
-	@PostMapping(path="/register",
-				params= {"ID","nickName","name",
-						"password", "gender", "EMail",
-						"phoneNumber", "birthDate"})	//rttrs 1회성 전달 메소드  
+	@PostMapping(path="/register"
+//				,params= {"ID","nickName","name",
+//						"password", "gender", "EMail",
+//						"phoneNumber", "birthDate","MBTI","likeArea"}
+			)	//rttrs 1회성 전달 메소드  
 	String register(UsersDTO dto,RedirectAttributes rttrs ) throws ControllerException  {
 		log.trace("register( {}, {} ) ㄲㄲ",dto,rttrs);
 		try {

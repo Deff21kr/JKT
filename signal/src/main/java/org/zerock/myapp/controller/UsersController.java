@@ -60,7 +60,7 @@ public class UsersController {
 			Objects.requireNonNull(dto);		// dto가 제대로 수집되어 널이 아니라면
 			if (this.service.register(dto)) {	// if Success
 				rttrs.addAttribute("result", "true");
-				rttrs.addAttribute("bno",dto.getUserno());
+				rttrs.addAttribute("userno",dto.getUserno());
 			}
 			return "redirect:/register";
 		} catch(Exception e) {

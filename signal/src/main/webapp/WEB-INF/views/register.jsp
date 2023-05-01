@@ -63,22 +63,22 @@
                             <p style="text-align: left; font-size: 12px; color: #666;">MBTI</p>
                             <select name="MBTI">
                                 <option value="">MBTI유형</option>
-                                <option value="관리자형">ISTJ</option>
-                                <option value="관리자형">ISFJ</option>
-                                <option value="관리자형">ESTJ</option>
-                                <option value="관리자형">ESFJ</option>
-                                <option value="탐험가형">ISTP</option>
-                                <option value="탐험가형">ISFP</option>
-                                <option value="탐험가형">ESFJ</option>
-                                <option value="탐험가형">ESTP</option>
-                                <option value="외교관형">INFJ</option>
-                                <option value="외교관형">INFP</option>
-                                <option value="외교관형">ENFP</option>
-                                <option value="외교관형">ENFJ</option>
-                                <option value="분석가형">INTJ</option>
-                                <option value="분석가형">INTP</option>
-                                <option value="분석가형">ENTP</option>
-                                <option value="분석가형">ENTJ</option>
+                                <option value="ISTJ">ISTJ</option>
+                                <option value="ISFJ">ISFJ</option>
+                                <option value="ESTJ">ESTJ</option>
+                                <option value="ESFJ">ESFJ</option>
+                                <option value="ISTP">ISTP</option>
+                                <option value="ISFP">ISFP</option>
+                                <option value="ESFJ">ESFJ</option>
+                                <option value="ESTP">ESTP</option>
+                                <option value="INFJ">INFJ</option>
+                                <option value="INFP">INFP</option>
+                                <option value="ENFP">ENFP</option>
+                                <option value="ENFJ">ENFJ</option>
+                                <option value="INTJ">INTJ</option>
+                                <option value="INTP">INTP</option>
+                                <option value="ENTP">ENTP</option>
+                                <option value="ENTJ">ENTJ</option>
                             </select>
                         </div>
 
@@ -101,14 +101,14 @@
                                 <option value="2" selected>KT</option>
                                 <option value="3" selected>LG</option>
                             </select>
-                            <input placeholder="-빼고 숫자만 입력" class="size num2" required>
+                            <input placeholder="-빼고 숫자만 입력" class="size num2" name="phoneNumber" required>
                         </label> <!--전화번호-->
 
 
                         <label>
                             <!-- <span>PW</span> -->
                             <p style="text-align: left; font-size:12px; color:#666">E-mail</p>
-                            <input type="text" placeholder="이메일" class="size" name="EMail" >
+                            <input type="text" placeholder="이메일" class="size">
                         </label> <!--이메일-->
 
 

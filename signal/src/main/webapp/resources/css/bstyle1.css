@@ -86,6 +86,8 @@ a {
     vertical-align: middle;
     font-size: 1.4rem;
     text-align: center;
+    text-decoration: none;
+    color: black;
 } 
 
 .board_list > div:hover {
@@ -105,7 +107,7 @@ a {
     text-align: center;
 }
 
-.board_list .writer {
+.board_list .nickname {
     width: 20%;
 }
 
@@ -124,37 +126,64 @@ a {
     font-size: 0;
 }
 
-.board_page a {
+.board_page .Prev,
+.board_page .pageNum,
+.board_page .Next {
     display: inline-block;
     width: 32px;
     height: 35px;
-    /* height 값 안에 있어라 */
     box-sizing: border-box;
     border: 1px solid rgb(208, 207, 207) ;
     border-left: 0;
     vertical-align: middle;
-    /* line-height : 줄 높이 */
     line-height: 100%;
 }
 
-.board_page a.bt {
+/* .board_page a {
+    display: inline-block;
+    width: 32px;
+    height: 35px;
+    box-sizing: border-box;
+    border: 1px solid rgb(208, 207, 207) ;
+    border-left: 0;
+    vertical-align: middle;
+    line-height: 100%;
+} */
+
+.board_page .Prev,
+.board_page .Next {
+    width: 40px;
     padding-top: 10px;
     font-size: 1.2rem;
     /* << 사이 조정 */
     letter-spacing: -1px;
 }
 
-.board_page a.num {
+.board_page .pageNum {
     padding-top: 9px;
     font-size: 1.4rem;
 }
 
-.board_page a.num.on {
+/* .board_page a.num.on {
+    border-color: #2B65F8;
+    background: #2B65F8 ;
+    color: #fff;
+} */
+
+.current {
     border-color: #2B65F8;
     background: #2B65F8 ;
     color: #fff;
 }
 
-.board_page a:first-child {
+.board_page .Prev {
     border-left: 1px solid rgb(208, 207, 207) ;
 }
+
+.board_page .pageNum {
+    border-left: 1px solid rgb(208, 207, 207) ;
+}
+
+/* .board_page a:first-child {
+    border-left: 1px solid rgb(208, 207, 207) ;
+} */

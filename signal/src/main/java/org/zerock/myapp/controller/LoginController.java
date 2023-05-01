@@ -24,7 +24,7 @@ public class LoginController {
 	@GetMapping("/login")
 	public String login() {
 		return "loginpage"; // 로그인 폼 페이지로 이동
-	}
+	} // login
 	
 	@PostMapping("/login")
 	public String login(@RequestParam("ID") String id,
@@ -39,17 +39,17 @@ public class LoginController {
 		
 		UsersDTO login = service.login(dto); // 로그인 서비스 실행
 		
-			if(login == null) {
-				model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
-			return "loginpage"; // 로그인 실패시 로그인 폼 페이지로 이동
-		}
+		if(login == null) {
+			model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+		return "loginpage"; // 로그인 실패시 로그인 폼 페이지로 이동
+		} // if
 		
 		// 로그인 성공시, 세션에 로그인 정보를 저장
 		HttpSession session = request.getSession();
 		session.setAttribute("login", login);
 		
 		return "mainpage"; // 메인 페이지로 이동
-	}
+	} // login
 	
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
@@ -60,8 +60,8 @@ public class LoginController {
 		session.invalidate();
 		
 		return "mainpage"; // 메인 페이지로 이동
-	}
+	} // logout
 	
 	
 	
-}
+} // end class

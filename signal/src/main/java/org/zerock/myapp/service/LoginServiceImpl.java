@@ -17,7 +17,7 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public UsersDTO login(UsersDTO dto) {
-		log.info("login({})", dto);
+		log.info("login({}) invoked.", dto);
 		
 		UsersVO vo = mapper.selectUserIdPw(dto); // 아이디, 비밀번호 조회
 		
@@ -31,8 +31,8 @@ public class LoginServiceImpl implements LoginService {
 		log.info("login : {}", login);
 		
 		return login;
-	}
+	} // login
 
 
 	
-}
+} // end class

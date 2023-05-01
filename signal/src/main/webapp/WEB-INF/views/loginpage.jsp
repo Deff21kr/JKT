@@ -38,8 +38,8 @@
     </form>
     
     <div class="message">
-  ${msg}
-</div>
+  		${msg}
+	</div>
   
     <div id="hr-line">
       <div class="hr-line"></div>

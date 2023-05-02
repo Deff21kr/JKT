@@ -77,10 +77,10 @@ public class UsersMapperTests {
 	public void testSelect() {
 		log.trace("testSelect invoked");
 
-		Integer userno = 303;
+		String id = "Deff21kr";
 
-		UsersVO vo = this.mapper.select(userno);
-		log.info("\tbno : {} , vo : {}", userno, vo);
+		UsersVO vo = this.mapper.select(id);
+		log.info("\tbno : {} , vo : {}", id, vo);
 
 	} // 유저 조회
 
@@ -88,9 +88,9 @@ public class UsersMapperTests {
 	public void testDelete() {
 		log.trace("testDelete invoked");
 
-		Integer userno = 10;
-		Integer affectedLines = this.mapper.delete(userno);
-		log.info("\tbno : {}, affectedLines : {} \nisSucces ", userno, affectedLines, (affectedLines == 1));
+		String id = "Deff21kr";
+		Integer affectedLines = this.mapper.delete(id);
+		log.info("\tbno : {}, affectedLines : {} \nisSucces ", id, affectedLines, (affectedLines == 1));
 
 	} // 회원 탈퇴 : 아이디,비번 요구
 
@@ -98,19 +98,19 @@ public class UsersMapperTests {
 	public void testUpdate() {
 		log.trace("testUpdate invoked");
 
-		Integer userno = 303;
-		UsersVO vo = this.mapper.select(userno);
+		String id = "Deff21kr";
+		UsersVO vo = this.mapper.select(id);
 
 		Objects.requireNonNull(vo);
 		// VO => DTO
 		UsersDTO dto = vo.toDTO();
 		log.info("\tdto : {}", dto);
 
-		dto.setPassword("123123Signal");
+		dto.setPassword("123qwe123");
 
 		log.info("\tdto : {}", dto);
 		Integer affectedLines = this.mapper.update(dto);
-		log.info("\tbno : {}, affectedLines : {} \nisSucces ", dto.getUserno(), affectedLines, (affectedLines == 1));
+		log.info("\tbno : {}, affectedLines : {} \nisSucces ", dto.getID(), affectedLines, (affectedLines == 1));
 
 	} // cpmtext:pads
 

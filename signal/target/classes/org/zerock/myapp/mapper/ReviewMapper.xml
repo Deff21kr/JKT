@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.myapp.mapper.ReviewMapper">
+
+    <insert id="insert">
+        <selectKey keyProperty="postno" order="AFTER" resultType="int">
+        SELECT "ISEQ$$_74521".CURRVAL FROM dual
+        </selectKey>
+
+        INSERT INTO tbl_reviewboard (title, content, nickname) 
+        VALUES (#{title}, #{content}, #{nickname})
+    </insert>
+
+    <select id="select" resultType="org.zerock.myapp.domain.ReviewVO">
+        SELECT * 
+        FROM tbl_reviewboard
+        WHERE postno = #{postno}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM tbl_reviewboard
+        WHERE postno = #{postno}
+    </delete>
+
+    <update id="update">
+        UPDATE tbl_reviewboard
+        SET title = #{title}, 
+            content = #{content}, 
+            nickname = #{nickname}, 
+            modifydate = current_date
+        WHERE postno = #{postno}
+    </update>
+
+</mapper>

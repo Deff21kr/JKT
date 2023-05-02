@@ -7,11 +7,10 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Value
-public class ReviewVO {
+public class ReviewBoardVO {
 	
 	private Integer postno;
-	private Integer userno;
-	private String nickname;
+	private String nickName;
 	private String title;
 	private String content;
 	private Integer views;
@@ -19,13 +18,12 @@ public class ReviewVO {
 	private Timestamp regidate;
 	private Timestamp modifydate;
 
-	public ReviewDTO toDTO() {
+	public ReviewBoardDTO toDTO() {
 		log.trace("toDTO() invoked");
 
-	ReviewDTO dto = new ReviewDTO();
+	ReviewBoardDTO dto = new ReviewBoardDTO();
 	dto.setPostno(postno);
-	dto.setUserno(userno);
-	dto.setNickname(nickname);
+	dto.setNickName(nickName);
 	dto.setTitle(title);
 	dto.setContent(content);
 	dto.setViews(views);

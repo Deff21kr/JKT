@@ -52,7 +52,8 @@ public class UsersServiceTests {
 	
 	@Test(timeout = 1000 * 5)
 	public void testGetList() throws ServiceException {
-		log.trace("\n************************************** 			testGetList() "
+		log.trace("\n************************************** 			"
+				+ "\n		testGetList() "
 				+ "\n************************************** ");
 		
 //		Criteria cri = new Criteria();

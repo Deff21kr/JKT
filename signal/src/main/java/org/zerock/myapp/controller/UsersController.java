@@ -30,7 +30,7 @@ public class UsersController {
 	@Setter (onMethod_=@Autowired)
 	private UsersService service;
 	
-	// 1. 회원 목록 조회
+	// 1. 회원 목록 조회 (전부)
 	@GetMapping("/list")//리턴타입이 보이드이므로 리퀘스트 맵핑이 uri
 	void list(Model model) throws ControllerException {
 		log.trace("list({}) ㄲㄲ",model);
@@ -77,8 +77,8 @@ public class UsersController {
 	}
 	
 	
-	// 3. 특정 회원 조회
-	@GetMapping(path={"/get","/modify"}, params = "userno")
+	// 3. 특정회원 조회
+	@GetMapping(path={"/get"}, params = "userno")
 //	String get(@RequestParam("bno") Integer bno ,Model model) 
 //			throws ControllerException {
 	void get(@RequestParam("userno") Integer userno ,Model model) 
@@ -116,31 +116,31 @@ public class UsersController {
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}
-	} // 회원정보수정?
+	} // 회원정보수정
+	
+	@PostMapping(path="/remove")
+	String remove(UsersDTO dto,RedirectAttributes rttrs) 
+			throws ControllerException {
+		log.trace("modify({}) invoked.",dto);
+		
+		try {
+			Objects.requireNonNull(dto);
+			
+			if( this.service.remove(dto.getUserno()) ) {
+				rttrs.addAttribute("result","true");
+				rttrs.addAttribute("userno",dto.getUserno());
+			}
+			
+			return "/mainpage";
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	} // 탈퇴?
 
 	
 	
 	
-//	@PostMapping(path="/remove")
-//	String remove (Integer bno , RedirectAttributes rttrs) 
-//			throws ControllerException {
-//		log.trace("remove({}) invoked.",bno);
-//		
-//		try {
-//			
-//			if( this.service.remove(bno) ) {
-//				rttrs.addAttribute("result","true");
-//				rttrs.addAttribute("bno",bno);
-//			}
-//			
-//			return "redirect:/board/list";
-//		} catch (Exception e) {
-//			throw new ControllerException(e);
-//		}
-//		
-//		
-//		
-//	} // 탈퇴창
+//?
 	
 	
 	

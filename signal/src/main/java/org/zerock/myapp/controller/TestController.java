@@ -19,10 +19,10 @@ public class TestController {
 		return "mainpage";
 	}
 	
-	@GetMapping(path="/reviewboard")
+	@GetMapping(path="/mypage")
 	String test3() {
 		
-		return "reviewboard";
+		return "mypage";
 	}
 
 }

@@ -9,7 +9,6 @@ import lombok.Value;
 
 @Value
 public class UsersVO {
-	private Integer userno;
 	private String ID;
 	private String nickName;
 	private String name;
@@ -29,7 +28,6 @@ public class UsersVO {
 		
 		UsersDTO dto = new UsersDTO();
 		
-		dto.setUserno(userno);
 		dto.setID(ID);
 		dto.setNickName(nickName);
 		dto.setName(name);

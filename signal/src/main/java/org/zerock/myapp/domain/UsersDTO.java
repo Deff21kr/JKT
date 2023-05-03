@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 public class UsersDTO {
-	private Integer userno;
 	private String ID;
 	private String nickName;
 	private String name;

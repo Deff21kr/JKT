@@ -30,7 +30,7 @@ public class UsersController {
 	@Setter (onMethod_=@Autowired)
 	private UsersService service;
 	
-	// 1. 회원 목록 조회
+	// 1. 회원 목록 조회 (전부)
 	@GetMapping("/list")//리턴타입이 보이드이므로 리퀘스트 맵핑이 uri
 	void list(Model model) throws ControllerException {
 		log.trace("list({}) ㄲㄲ",model);
@@ -61,7 +61,7 @@ public class UsersController {
 			Objects.requireNonNull(dto);		// dto가 제대로 수집되어 널이 아니라면
 			if (this.service.register(dto)) {	// if Success
 				rttrs.addAttribute("result", "true");
-				rttrs.addAttribute("userno",dto.getUserno());
+				rttrs.addAttribute("userno",dto.getID());
 			}
 			return "redirect:/register";
 		} catch(Exception e) {
@@ -77,17 +77,17 @@ public class UsersController {
 	}
 	
 	
-	// 3. 특정 회원 조회
-	@GetMapping(path={"/get","/modify"}, params = "userno")
+	// 3. 특정회원 조회
+	@GetMapping(path={"/get"}, params = "ID")
 //	String get(@RequestParam("bno") Integer bno ,Model model) 
 //			throws ControllerException {
-	void get(@RequestParam("userno") Integer userno ,Model model) 
+	void get(@RequestParam("ID") String ID ,Model model) 
 				throws ControllerException {
 		
 		log.trace("get() 인보크");
 		
 		try {
-			UsersVO vo = this.service.get(userno);
+			UsersVO vo = this.service.get(ID);
 			model.addAttribute("__BOARD__",vo);
 			
 //			return "뷰이름";
@@ -109,38 +109,34 @@ public class UsersController {
 			
 			if( this.service.modify(dto) ) {
 				rttrs.addAttribute("result","true");
-				rttrs.addAttribute("userno",dto.getUserno());
+				rttrs.addAttribute("userno",dto.getID());
 			}
 			
 			return "redirect:/mypage";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}
-	} // 회원정보수정?
+	} // 회원정보수정
+	
+	@PostMapping(path="/remove")
+	String remove(UsersDTO dto,RedirectAttributes rttrs) 
+			throws ControllerException {
+		log.trace("modify({}) invoked.",dto);
+		
+		try {
+			Objects.requireNonNull(dto);
+			
+			if( this.service.remove(dto.getID()) ) {
+				rttrs.addAttribute("result","true");
+				rttrs.addAttribute("userno",dto.getID());
+			}
+			
+			return "/mainpage";
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	} // 탈퇴?
 
-	
-	
-	
-//	@PostMapping(path="/remove")
-//	String remove (Integer bno , RedirectAttributes rttrs) 
-//			throws ControllerException {
-//		log.trace("remove({}) invoked.",bno);
-//		
-//		try {
-//			
-//			if( this.service.remove(bno) ) {
-//				rttrs.addAttribute("result","true");
-//				rttrs.addAttribute("bno",bno);
-//			}
-//			
-//			return "redirect:/board/list";
-//		} catch (Exception e) {
-//			throw new ControllerException(e);
-//		}
-//		
-//		
-//		
-//	} // 탈퇴창
 	
 	
 	

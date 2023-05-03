@@ -16,13 +16,13 @@ public interface UsersService {
 	public abstract Boolean register(UsersDTO dto) throws ServiceException;
 	
 	// 3. 특정 회원 조회
-	public abstract UsersVO get(Integer userno) throws ServiceException;
+	public abstract UsersVO get(String ID) throws ServiceException;
 	
 	// 4. 회원정보수정
 	public abstract Boolean modify(UsersDTO dto) throws ServiceException;
 	
 	// 5. 탈퇴
-	public abstract Boolean remove(Integer userno) throws ServiceException;
+	public abstract Boolean remove(String ID) throws ServiceException;
 	
 	
 } // end interface

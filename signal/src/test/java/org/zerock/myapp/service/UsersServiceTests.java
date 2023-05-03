@@ -52,7 +52,8 @@ public class UsersServiceTests {
 	
 	@Test(timeout = 1000 * 5)
 	public void testGetList() throws ServiceException {
-		log.trace("\n************************************** 			testGetList() "
+		log.trace("\n************************************** 			"
+				+ "\n		testGetList() "
 				+ "\n************************************** ");
 		
 //		Criteria cri = new Criteria();
@@ -93,8 +94,8 @@ public class UsersServiceTests {
 		log.trace("\n*****************************************************\n 			testGet() "
 				+ "\n*****************************************************");
 		
-		int userno = 310;
-		UsersVO vo = this.service.get(userno);
+		String id = "ㅂ2ㅂㅇ바이";
+		UsersVO vo = this.service.get(id);
 		
 		Objects.requireNonNull(vo);
 		log.info("\n\t vo : {} ",vo);
@@ -105,10 +106,10 @@ public class UsersServiceTests {
 		log.trace("\n*****************************************************\n 			testModify() "
 				+ "\n*****************************************************");
 		
-		int userno = 303;
+		String id = "ㅂ2ㅂㅇ바이";
 		
 		// 우선 유저의 정보를 얻고
-		UsersVO vo = this.service.get(userno);
+		UsersVO vo = this.service.get(id);
 		
 		// 널이 아니라면
 		Objects.requireNonNull(vo);
@@ -117,7 +118,7 @@ public class UsersServiceTests {
 		UsersDTO dto =vo.toDTO();
 		log.info("\n\t 수정 전 : {} ",vo);
 		// 회원정보수정
-		dto.setID("ㅂ2ㅂㅇ바이");
+		dto.setPassword("ㅂ2ㅂㅇ바이");
 		Objects.requireNonNull(dto);
 		boolean isSuccess = this.service.modify(dto);
 		log.info("\n\t isSuccess : {}" ,isSuccess);
@@ -132,8 +133,8 @@ public class UsersServiceTests {
 		log.trace("\n*****************************************************\n 			testRemove() "
 				+ "\n*****************************************************");
 		
-		int userno = 305;
-		boolean isDeleted = this.service.remove(userno);
+		String id = "ㅂ2ㅂㅇ바이";
+		boolean isDeleted = this.service.remove(id);
 		
 		log.info("\n\t isDeleted : {} ",isDeleted);
 	}

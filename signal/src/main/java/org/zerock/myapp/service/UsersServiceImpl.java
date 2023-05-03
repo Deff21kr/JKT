@@ -1,6 +1,5 @@
 package org.zerock.myapp.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,13 +55,13 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 	}
 
 	@Override
-	public UsersVO get(Integer userno) throws ServiceException {
+	public UsersVO get(String ID) throws ServiceException {
 		log.trace("\n*********************************************************\n			get({}) "
-				+ "\n********************************************************* ",userno);
+				+ "\n********************************************************* ",ID);
 
 		try {
 
-			return this.dao.select(userno);
+			return this.dao.select(ID);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}
@@ -82,13 +81,13 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 	}
 
 	@Override
-	public Boolean remove(Integer userno) throws ServiceException {
+	public Boolean remove(String ID) throws ServiceException {
 		log.trace("\n*********************************************************\n			remove({}) "
-				+ "\n********************************************************* ",userno);
+				+ "\n********************************************************* ",ID);
 
 		try {
 
-			return (this.dao.delete(userno) == 1);
+			return (this.dao.delete(ID) == 1);
 
 		} catch (Exception e) {
 			throw new ServiceException(e);

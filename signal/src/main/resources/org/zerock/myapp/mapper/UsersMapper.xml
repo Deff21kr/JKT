@@ -8,9 +8,6 @@
 <mapper namespace="org.zerock.myapp.mapper.UsersMapper">
 
 	<insert id="insert">
-		<selectKey keyProperty="userno" order="AFTER" resultType="int">
-			select "ISEQ$$_74653".CURRVAL from dual
-		</selectKey>
 
 		INSERT INTO tbl_users 
 				(id, nickname, name, 
@@ -24,17 +21,17 @@
 	<select id="select" resultType="org.zerock.myapp.domain.UsersVO">
 		SELECT *
 		FROM tbl_users
-		WHERE userno = #{userno}
+		WHERE id = #{ID}
 	</select>
 
 	<delete id="delete">
 		DELETE FROM tbl_users
-		WHERE userno = #{userno}
+		WHERE id = #{ID}
 	</delete>
 
 	<update id="update">
 		UPDATE tbl_users
-		SET id=#{ID},
+		SET
 			nickname=#{nickName},
 			name = #{name},
 			password=#{password},
@@ -47,7 +44,7 @@
 				,likeArea=#{likeArea}
 			</if>
 			
-		WHERE userno = #{userno}
+		WHERE id = #{ID}
 	</update>
 
 

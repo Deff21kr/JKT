@@ -12,8 +12,11 @@
         SELECT "ISEQ$$_75766".CURRVAL FROM dual
         </selectKey>
 
-        INSERT INTO tbl_qnaboard (title, content, nickname) 
-        VALUES (#{title}, #{content}, #{nickname})
+        <!-- INSERT INTO tbl_qnaboard (title, content) 
+        VALUES (#{title}, #{content}) -->
+
+        INSERT INTO tbl_qnaboard (nickname, title, content) 
+        VALUES (#{nickname}, #{title}, #{content})
     </insert>
 
     <select id="select" resultType="org.zerock.myapp.domain.QnABoardVO">
@@ -30,8 +33,8 @@
     <update id="update">
         UPDATE tbl_qnaboard
         SET title = #{title}, 
+        	nickname = #{nickname},
             content = #{content}, 
-            nickname = #{nickname}, 
             modifydate = current_date
         WHERE postno = #{postno}
     </update>

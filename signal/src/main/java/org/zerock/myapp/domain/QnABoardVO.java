@@ -8,11 +8,11 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Value
-public class QnABoardVO {	// POJO, 자바빈즈 클래스여야 함
+public class QnABoardVO {	
 	private Integer postno;
+	private String nickname;
 	private String title;
 	private String content;
-	private String nickname;
 	private Timestamp regidate;
 	private Timestamp modifydate;
 	
@@ -21,9 +21,9 @@ public class QnABoardVO {	// POJO, 자바빈즈 클래스여야 함
 		
 		QnABoardDTO dto = new QnABoardDTO();
 		dto.setPostno(postno);
+		dto.setNickname(nickname);
 		dto.setTitle(title);
 		dto.setContent(content);
-		dto.setNickname(nickname);
 		
 		log.info("\t + dto:{}", dto);
 		

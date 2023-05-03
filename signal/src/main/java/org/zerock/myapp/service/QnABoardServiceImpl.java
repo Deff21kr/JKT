@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @NoArgsConstructor
 
-@Service("boardService")
+@Service("QnABoardService")
 public class QnABoardServiceImpl 
 	implements 
 		QnABoardService ,

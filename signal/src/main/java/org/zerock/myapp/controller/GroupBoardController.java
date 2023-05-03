@@ -3,7 +3,6 @@ package org.zerock.myapp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -11,9 +10,9 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 @Log4j2
 
-@RequestMapping("faqboard")
+@RequestMapping("groupboard")
 @Controller
-public class BoardFAQController {
+public class GroupBoardController {
 	/*
 	 * 각 게시판은 CRUD 가 모두 가능 등록하기 위해 글을 쓰고 수정을 하고 특정 글을 조회하고 모든 글을 조회하고 삭제도 가능! FAQ는
 	 * 하는사람이 알아서 생각바람
@@ -40,7 +39,7 @@ public class BoardFAQController {
 	String register() {
 		log.trace("register() invoked");
 
-		return "redirect:/faqboard/list";
+		return "redirect:/groupboard/list";
 	} // register
 
 	// 3. 게시판 상세조회 페이지 (상세조회 화면, 수정화면)
@@ -55,7 +54,7 @@ public class BoardFAQController {
 	String modify() {
 		log.trace("modify() invoked");
 
-		return "redirect:/faqboard/list";
+		return "redirect:/groupboard/list";
 	} // modify
 
 	// 5. 게시판 삭제
@@ -63,7 +62,7 @@ public class BoardFAQController {
 	String remove() {
 		log.trace("remove() invoked");
 
-		return "redirect:/faqboard/list";
+		return "redirect:/groupboard/list";
 	} // remove
 
 //		===== 댓글 컨트롤러 =====
@@ -80,7 +79,7 @@ public class BoardFAQController {
 	String commentRegister() {
 		log.trace("commentRegister() invoked");
 
-		return "redirect:/faqboard/get";
+		return "redirect:/groupboard/get";
 	} // commentRegister
 
 	// 8. 댓글 수정 페이지
@@ -95,7 +94,7 @@ public class BoardFAQController {
 	String commentModify() {
 		log.trace("commentModify() invoked");
 
-		return "redirect:/faqboard/get";
+		return "redirect:/groupboard/get";
 	} // commentModify
 
 	// 9. 댓글 삭제 페이지
@@ -110,7 +109,7 @@ public class BoardFAQController {
 	String commnetRemove() {
 		log.trace("commentRemove() invoked");
 
-		return "redirect:/faqboard/get";
+		return "redirect:/groupboard/get";
 	} // commnetRemove
 
 }

@@ -2,6 +2,7 @@ package org.zerock.myapp.domain;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,6 +23,8 @@ public class UsersVO {
 	private Timestamp withDrawal;
 	private String MBTI;
 	private String likeArea;
+	private Integer uno;
+	private Boolean enabled;
 	
 	
 	public UsersDTO toDTO() {
@@ -38,7 +41,10 @@ public class UsersVO {
 		dto.setBirthDate(birthDate);
 		dto.setMBTI(MBTI);
 		dto.setLikeArea(likeArea);
+		dto.setUno(uno);
 		
+		dto.setEnabled(enabled);
+		dto.setAuthList(dto.getAuthList());
 		return dto;
 	}
 	

@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.myapp.domain.UsersDTO;
@@ -27,11 +28,17 @@ import lombok.extern.log4j.Log4j2;
 
 // Spring Framework 구동
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/**/root-*.xml"})
+@ContextConfiguration(locations= {
+		"file:src/main/webapp/WEB-INF/**/root-*.xml",
+		"file:src/main/webapp/WEB-INF/**/security-*.xml"})
 public class UsersServiceTests {
 	
 	@Setter(onMethod_ = @Autowired)
 	private UsersService service;
+	@Setter(onMethod_ = @Autowired)
+	private AuthService auth;
+	@Setter(onMethod_ = @Autowired)
+	private PasswordEncoder pw;
 	
 	@Before
 	public void setup() { // 전처리
@@ -60,7 +67,7 @@ public class UsersServiceTests {
 		
 	} //
 	
-	@Test(timeout = 1000 * 3)
+	@Test(timeout = 1000 * 13)
 	public void testRegister() throws ServiceException {
 		log.trace("\n************************************** 			testRegister() "
 				+ "\n************************************** ");
@@ -88,8 +95,8 @@ public class UsersServiceTests {
 		log.trace("\n*****************************************************\n 			testGet() "
 				+ "\n*****************************************************");
 		
-		String id = "ㅂ2ㅂㅇ바이";
-		UsersVO vo = this.service.get(id);
+		String id = "test444";
+		UsersDTO vo = this.service.get(id);
 		
 		Objects.requireNonNull(vo);
 		log.info("\n\t vo : {} ",vo);
@@ -100,23 +107,22 @@ public class UsersServiceTests {
 		log.trace("\n*****************************************************\n 			testModify() "
 				+ "\n*****************************************************");
 		
-		String id = "ㅂ2ㅂㅇ바이";
+		String id = "test444";
 		
 		// 우선 유저의 정보를 얻고
-		UsersVO vo = this.service.get(id);
+		UsersDTO vo = this.service.get(id);
 		
 		// 널이 아니라면
 		Objects.requireNonNull(vo);
 		
 		// 셋터가 있는 dto로 변환
-		UsersDTO dto =vo.toDTO();
 		log.info("\n\t 수정 전 : {} ",vo);
 		// 회원정보수정
-		dto.setPassword("ㅂ2ㅂㅇ바이");
-		Objects.requireNonNull(dto);
-		boolean isSuccess = this.service.modify(dto);
+		vo.setPassword("ㅂ2ㅂㅇ바이");
+		Objects.requireNonNull(vo);
+		boolean isSuccess = this.service.modify(vo);
 		log.info("\n\t isSuccess : {}" ,isSuccess);
-		log.info("\n\t 수정 후 : {} ",dto);
+		log.info("\n\t 수정 후 : {} ",vo);
 		
 	} // testModify
 

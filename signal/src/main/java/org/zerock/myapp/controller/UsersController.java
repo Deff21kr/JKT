@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.UsersDTO;
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 @Log4j2
 
-//@RequestMapping("/users")
+@RequestMapping("/users")
 @Controller
 public class UsersController {
    
@@ -61,9 +61,9 @@ public class UsersController {
 			Objects.requireNonNull(dto);		// dto가 제대로 수집되어 널이 아니라면
 			if (this.service.register(dto)) {	// if Success
 				rttrs.addAttribute("result", "true");
-				rttrs.addAttribute("userno",dto.getID());
+				rttrs.addAttribute("userno",dto.getUno());
 			}
-			return "redirect:/register";
+			return "redirect:/login";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		}

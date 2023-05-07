@@ -18,7 +18,7 @@
             <div id="login">
                 <div id="login_form"><!--로그인 폼-->
 
-                    <form action="/register" method="post">
+                    <form action="/user/register" method="post">
                         <h3 class="login" style="letter-spacing:-1px;">회원가입</h3>
                         <hr>
 
@@ -114,7 +114,10 @@
 
                         <br>
                         <p>
-                            <input type="submit" value="로그인" class="btn">
+                            <input type="submit" value="회원가입" class="btn">
+                            <input
+							type="hidden" name="${_csrf.parameterName }"
+							value="${_csrf.token }">
 
                         </p>
                     </form>

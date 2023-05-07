@@ -63,7 +63,7 @@ public class UsersController {
 				rttrs.addAttribute("result", "true");
 				rttrs.addAttribute("userno",dto.getUno());
 			}
-			return "redirect:/login";
+			return "redirect:/mainpage";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		}

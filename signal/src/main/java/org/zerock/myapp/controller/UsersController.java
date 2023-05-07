@@ -87,7 +87,7 @@ public class UsersController {
 		log.trace("get() 인보크");
 		
 		try {
-			UsersVO vo = this.service.get(ID);
+			UsersDTO vo = this.service.get(ID);
 			model.addAttribute("__BOARD__",vo);
 			
 //			return "뷰이름";

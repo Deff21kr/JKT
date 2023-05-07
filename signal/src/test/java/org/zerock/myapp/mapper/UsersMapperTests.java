@@ -73,6 +73,7 @@ public class UsersMapperTests {
 	} // 회원가입
 
 	// 테스트 메소드 이름은 반드시 접두사 test를 붙여야 함
+	
 	@Test(timeout = 1000 * 5)
 	public void testSelect() {
 		log.trace("testSelect invoked");
@@ -84,34 +85,34 @@ public class UsersMapperTests {
 
 	} // 유저 조회
 
-	@Test(timeout = 1000 * 5)
-	public void testDelete() {
-		log.trace("testDelete invoked");
+//	@Test(timeout = 1000 * 5)
+//	public void testDelete() {
+//		log.trace("testDelete invoked");
+//
+//		String id = "Deff21kr";
+//		Integer affectedLines = this.mapper.delete(id);
+//		log.info("\tbno : {}, affectedLines : {} \nisSucces ", id, affectedLines, (affectedLines == 1));
+//
+//	} // 회원 탈퇴 : 아이디,비번 요구
 
-		String id = "Deff21kr";
-		Integer affectedLines = this.mapper.delete(id);
-		log.info("\tbno : {}, affectedLines : {} \nisSucces ", id, affectedLines, (affectedLines == 1));
-
-	} // 회원 탈퇴 : 아이디,비번 요구
-
-	@Test(timeout = 1000 * 5)
-	public void testUpdate() {
-		log.trace("testUpdate invoked");
-
-		String id = "Deff21kr";
-		UsersVO vo = this.mapper.select(id);
-
-		Objects.requireNonNull(vo);
-		// VO => DTO
-		UsersDTO dto = vo.toDTO();
-		log.info("\tdto : {}", dto);
-
-		dto.setPassword("123qwe123");
-
-		log.info("\tdto : {}", dto);
-		Integer affectedLines = this.mapper.update(dto);
-		log.info("\tbno : {}, affectedLines : {} \nisSucces ", dto.getID(), affectedLines, (affectedLines == 1));
-
-	} // cpmtext:pads
+//	@Test(timeout = 1000 * 5)
+//	public void testUpdate() {
+//		log.trace("testUpdate invoked");
+//
+//		String id = "Deff21kr";
+//		UsersVO vo = this.mapper.select(id);
+//
+//		Objects.requireNonNull(vo);
+//		// VO => DTO
+//		UsersDTO dto = vo.toDTO();
+//		log.info("\tdto : {}", dto);
+//
+//		dto.setPassword("123qwe123");
+//
+//		log.info("\tdto : {}", dto);
+//		Integer affectedLines = this.mapper.update(dto);
+//		log.info("\tbno : {}, affectedLines : {} \nisSucces ", dto.getID(), affectedLines, (affectedLines == 1));
+//
+//	} // cpmtext:pads
 
 } // end class

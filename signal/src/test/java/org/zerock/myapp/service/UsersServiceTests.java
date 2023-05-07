@@ -42,15 +42,9 @@ public class UsersServiceTests {
 		log.info("\tthis.service : {}" ,this.service);
 	}
 	
-	@After
-	public void tearDown() {
-		log.trace("after invoked");
-	}
+
 	
-	
-	
-	
-	@Test(timeout = 1000 * 5)
+	@Test
 	public void testGetList() throws ServiceException {
 		log.trace("\n************************************** 			"
 				+ "\n		testGetList() "

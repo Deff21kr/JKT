@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.OneOnOneBoardDTO;
 import org.zerock.myapp.domain.OneOnOneBoardVO;
 import org.zerock.myapp.exception.ServiceException;
@@ -40,8 +41,11 @@ public class OneOnOneBoardServiceTests {
 	@Test
 	public void testGetList() throws ServiceException {
 		log.trace("testGetList() invoked");
+		
+		Criteria cri = new Criteria();
+		cri.setCurrPage(1);
 
-		List<OneOnOneBoardVO> list = this.service.getList();
+		List<OneOnOneBoardVO> list = this.service.getList(cri);
 		
 		Objects.requireNonNull(list);
 		list.forEach(log::info);

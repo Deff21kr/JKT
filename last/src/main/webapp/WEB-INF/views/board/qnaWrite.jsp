@@ -33,7 +33,6 @@
     	
         <div class="board_wrap">
             <form action="/board/qnaWrite" method="POST">
-            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
             <input type="hidden" name="nickname" value="${__BOARD__.nickname}">
                 <div class="board_title">
                     <strong>QnA</strong>
@@ -62,6 +61,8 @@
                   <div class="bt_wrap"> 
                     <button type="submit" id="submitBtn">등록</button> 
                     <button type="button" id="listBtn">취소</button> 
+                    <!-- <a href="view" class="on">등록</a>
+                    <a href="list">취소</a> -->
                   </div>
                 </div>
             </form>

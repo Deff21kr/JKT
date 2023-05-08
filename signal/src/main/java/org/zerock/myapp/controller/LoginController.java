@@ -21,12 +21,12 @@ public class LoginController {
 	
 	private final LoginService service;
 	
-	@GetMapping("/login")
+	@GetMapping("/loginpost")
 	public String login() {
 		return "loginpage"; // 로그인 폼 페이지로 이동
 	} // login
 	
-	@PostMapping("/login")
+	@PostMapping("/loginpost")
 	public String login(@RequestParam("ID") String id,
 						@RequestParam("password") String password,
 						HttpServletRequest request,

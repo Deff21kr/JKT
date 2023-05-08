@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <!DOCTYPE html>
   <html lang="ko">
 
@@ -28,13 +29,26 @@
     <header>
 
       <div class="signup-container">
-        <div><a href="/login">로그인</a></div>
-        <div><a href="/logout">로그아웃</a></div>
-        <div><a href="join.jsp">회원가입</a></div>
+        <%-- 세션에서 로그인 정보를 가져옴 --%>
+          <c:set var="login" value="${sessionScope.login}" />
+
+          <%-- 로그인 상태에 따라 버튼 보이기/숨기기 --%>
+            <c:if test="${empty login}">
+              <div class="signup-container">
+                <div><a href="/login">로그인</a></div>
+                <div><a href="join.jsp">회원가입</a></div>
+              </div>
+            </c:if>
+            <c:if test="${not empty login}">
+              <div class="signup-container">
+                <div><a href="/logout">로그아웃</a></div>
+                <div><a href="join.jsp">회원가입</a></div>
+              </div>
+            </c:if>
       </div>
 
       <ul class="category">
-        <li><a href="main.html" target="_self"><img src="img/travelsignal2.png" alt="여행시그널로고"></a> </li>
+        <li><a href="/mainpage" target="_self"><img src="img/travelsignal2.png" alt="여행시그널로고"></a> </li>
         <li><a href="#" target="_self">동행 찾기</a> </li>
         <li><a href="#" target="_self">QnA</a> </li>
         <li><a href="#" target="_self">동행 환승</a> </li>

@@ -115,9 +115,7 @@
                         <br>
                         <p>
                             <input type="submit" value="회원가입" class="btn">
-                            <input
-							type="hidden" name="${_csrf.parameterName }"
-							value="${_csrf.token }">
+                           
 
                         </p>
                     </form>

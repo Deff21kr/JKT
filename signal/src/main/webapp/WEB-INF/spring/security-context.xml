@@ -7,12 +7,12 @@
 
 <bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="bcryiptPasswordEncoder"/>
     
-    <bean id="csrfTokenRepository"
+    <!-- <bean id="csrfTokenRepository"
     class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository">
     <property name="headerName" value="X-CSRF-TOKEN"/>
-	</bean>
+	</bean> -->
 	<security:http>
-	 	<security:csrf token-repository-ref="csrfTokenRepository"/>
+	 	<!-- <security:csrf token-repository-ref="csrfTokenRepository"/> -->
 		<security:form-login/>
 	</security:http>
 	

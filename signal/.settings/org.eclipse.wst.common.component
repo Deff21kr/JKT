@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
                                     
     
     
     
+=======
+                        
+>>>>>>> f32aed1 (no message)
     
     
     
@@ -20,37 +24,54 @@
                         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< HEAD
                                                                         
         
         
         
+=======
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+                                                
+>>>>>>> f32aed1 (no message)
         
         
         
         
         <property name="context-root" value="/"/>
+<<<<<<< HEAD
                                                                         
         
         
         
+=======
+                                                
+>>>>>>> f32aed1 (no message)
         
         
         
         
         <property name="java-output-path" value="/signal/target/classes"/>
+<<<<<<< HEAD
                                                                     
     
     
     
+=======
+                                            
+>>>>>>> f32aed1 (no message)
     
     
     
     
     </wb-module>
+<<<<<<< HEAD
                                 
 
 
 
+=======
+                    
+>>>>>>> f32aed1 (no message)
 
 
 

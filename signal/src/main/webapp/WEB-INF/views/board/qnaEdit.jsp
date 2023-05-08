@@ -69,6 +69,7 @@
                         <button type="submit" id="submitBtn">수정</button>
                         <button type="button" id="removeBtn">삭제</button>
                         <button type="button" id="listBtn">취소</button>  
+                        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                     </div>
                 </div>
             </form>

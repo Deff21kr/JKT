@@ -17,7 +17,7 @@
 <body>
 
   <main>
-    <form action="/login" method="post">
+    <form action="/loginpost" method="post">
       <fieldset>
         <legend><h3>로그인</h3></legend>
         <div class="user-area">

@@ -33,8 +33,8 @@
     	
         <div class="board_wrap">
             <form action="/board/qnaWrite" method="POST">
-            <!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> -->
-            <!-- <input type="hidden" name="nickname" value="${__BOARD__.nickname}"> -->
+            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+            <input type="hidden" name="nickname" value="${__BOARD__.nickname}">
                 <div class="board_title">
                     <strong>QnA</strong>
                 </div>
@@ -43,18 +43,18 @@
                         <div class="title">
                             <dl>
                                 <dt>제목</dt>
-                                <dd><input type="text" name ="title" value="${__BOARD__.title}" placeholder="제목 입력" required></dd>
+                                <dd><input type="text" value="${__BOARD__.title}" placeholder="제목 입력" required></dd>
                             </dl>
                         </div>
                         <div class="info">
                             <dl>
                                 <dt>작성자</dt>
-                                <dd><input type="text" name ="nickname" value="${__BOARD__.nickname}" placeholder="작성자 입력" required></dd>
-                                <!-- <dd>${__BOARD__.nickname}</dd> -->
+                                <!-- <dd><input type="text" placeholder="작성자 입력" required></dd> -->
+                                <dd>${__BOARD__.nickname}</dd>
                             </dl>
                         </div>
                         <div class="content">
-                            <textarea name="content" placeholder="내용을 작성해주세요." required>${__BOARD__.content}</textarea>
+                            <textarea placeholder="내용을 작성해주세요." required>${__BOARD__.content}</textarea>
                         </div>
                     </div>
                     
@@ -62,6 +62,8 @@
                   <div class="bt_wrap"> 
                     <button type="submit" id="submitBtn">등록</button> 
                     <button type="button" id="listBtn">취소</button> 
+                    <!-- <a href="view" class="on">등록</a>
+                    <a href="list">취소</a> -->
                   </div>
                 </div>
             </form>

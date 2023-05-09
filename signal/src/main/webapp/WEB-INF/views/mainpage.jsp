@@ -35,7 +35,7 @@
           <%-- 로그인 상태에 따라 버튼 보이기/숨기기 --%>
             <c:if test="${empty login}">
               <div class="signup-container">
-                <div><a href="/login">로그인</a></div>
+                <div><a href="/loginpage">로그인</a></div>
                 <div><a href="join.jsp">회원가입</a></div>
               </div>
             </c:if>

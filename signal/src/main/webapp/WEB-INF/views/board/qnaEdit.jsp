@@ -39,6 +39,7 @@
         <!-- QnA 글쓰기 수정 -->
         <div class="board_wrap">
             <form action="/board/qnaEdit" method="POST">
+            	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                 <input type="hidden" name="currPage" value="${param.currPage}">
                 <input type="hidden" name="postno" value="${__BOARD__.postno}">
                 <input type="hidden" name="nickname" value="${__BOARD__.nickname}">
@@ -69,7 +70,6 @@
                         <button type="submit" id="submitBtn">수정</button>
                         <button type="button" id="removeBtn">삭제</button>
                         <button type="button" id="listBtn">취소</button>  
-                        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                     </div>
                 </div>
             </form>

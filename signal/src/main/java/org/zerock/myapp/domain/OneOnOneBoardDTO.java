@@ -9,7 +9,6 @@ public class OneOnOneBoardDTO {
 	private String nickname;
 	private String title;
 	private String content;
-	private Integer readcnt;
 	private Integer reproot;
 	private Integer repstep;
 	private Integer repindent;

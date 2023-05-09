@@ -13,11 +13,21 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/loginpage.css">
   <!-- fonts awesome -->
   <script src="https://kit.fontawesome.com/1486713bf1.js" crossorigin="anonymous"></script>
+  
+  <script>
+        // To display sign-in result.
+        var result = "${ param.__RESULT__ }";
+
+        if(result != null && result.length > 0) {
+            alert(result);
+        } // if
+    </script>
+    
 </head>
 <body>
 
   <main>
-    <form action="/loginpost" method="post">
+    <form action="/common/login" method="post">
       <fieldset>
         <legend><h3>로그인</h3></legend>
         <div class="user-area">
@@ -33,8 +43,11 @@
           <input id="userpw" name="password" type="password" placeholder="비밀번호">
         </div>
         <a href="#">비밀번호를 잊었습니까?</a>
-        <button type="submit">Login</button>  
-        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+        
+        <div>Remember-me <input type="checkbox" name="rememberMe"></div>
+                <p></p>
+
+                <div><button type="submit">Sign-in</button></div>
       </fieldset>
     </form>
     

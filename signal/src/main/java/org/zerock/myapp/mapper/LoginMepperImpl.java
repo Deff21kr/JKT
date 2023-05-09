@@ -42,8 +42,8 @@ public class LoginMepperImpl implements LoginMapper, InitializingBean, Disposabl
 		try (sqlSession) {
 			// SQL 문장을 수행시킬 클래스의 FQCN을 namespace로 하고
 			// sqlId는 , namespace안의 특정 메소드 이름으로 관례상 맞춤
-			String namespace = "org.zerock.myapp.persistence.UserDAO";
-			String sqlId = "selectUser";
+			String namespace = "org.zerock.myapp.mapper.LoginMapper";
+			String sqlId = "selectUserIdPw";
 			String sql = namespace + "." + sqlId;
 
 			return sqlSession.selectOne(sql, dto);
@@ -60,9 +60,12 @@ public class LoginMepperImpl implements LoginMapper, InitializingBean, Disposabl
 	}
 
 	@Override
-	public Integer updateUserWithRememberMe(String id, String rememberMeCookie, Date rememberMeMaxAge)
+	public Integer updateUserWithRememberMe(
+			String ID, 
+			String rememberMeCookie, 
+			Date rememberMeMaxAge)
 			throws DAOException {
-		log.trace("updateUserWithRememberMe({}, {}, {}) invoked.", id, rememberMeCookie, rememberMeMaxAge);
+		log.trace("updateUserWithRememberMe({}, {}, {}) invoked.", ID, rememberMeCookie, rememberMeMaxAge);
 
 		SqlSession sqlSession = this.sqlSessionFactory.openSession();
 
@@ -75,10 +78,12 @@ public class LoginMepperImpl implements LoginMapper, InitializingBean, Disposabl
 
 			// 바인드 변수에 줄 값은 보관하고 있는 Map<k,v>갹채 샹송
 			Map<String, Object> params = new HashMap<>();
-			params.put("userid", id);
+			params.put("ID", ID);
 			params.put("rememberMe", rememberMeCookie);
 			params.put("rememberMeAge", rememberMeMaxAge);
 			log.info("\n\nparams : {}\n\n ",params);
+			
+			
 			return sqlSession.update(sql, params);
 
 		} catch (Exception e) {
@@ -94,7 +99,7 @@ public class LoginMepperImpl implements LoginMapper, InitializingBean, Disposabl
 		SqlSession sqlSession= this.sqlSessionFactory.openSession();
 		
 		try (sqlSession){
-			String namespace = "org.zerock.myapp.persistence.UserDAO";
+			String namespace = "org.zerock.myapp.mapper.LoginMapper";
 			String sqlId = "selectUserByRememberMe";
 			String sql = namespace+"."+sqlId;
 			

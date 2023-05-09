@@ -11,7 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.util.WebUtils;
-import org.zerock.myapp.domain.UserVO;
+import org.zerock.myapp.domain.UsersVO;
+import org.zerock.myapp.mapper.LoginMapper;
 import org.zerock.myapp.mapper.UsersMapper;
 
 import lombok.NoArgsConstructor;
@@ -26,6 +27,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 	
 	@Setter(onMethod_ = @Autowired)
 	private UsersMapper dao;
+	@Setter(onMethod_ = @Autowired)
+	private LoginMapper login;
 	
 	
 	// HTTP request 가 Request Mapping 대로, Controller의 Handler에 위임되기 직전에 가로채서
@@ -46,22 +49,23 @@ public class AuthInterceptor implements HandlerInterceptor {
 //	      HttpSession session =  req.getSession(false); // 없으면 만들라가 트루, fasle는 없으면 널 반환
 	      // 매개변수 있는 세션과 비교 : 없으면 널을 반환
 	      
-	      HttpSession session =  req.getSession(false); // 자동록인으로 인해 수정
+	      HttpSession session =  req.getSession(); // 자동록인으로 인해 수정
 	      
 //	      일단 세션이 있으면 아래에서 인증정보
-	      if(session == null) { // 아예 세션 자체가 없으면
-	    	  log.info("세션없은 null 임");
-	    	 res.sendRedirect("/user/login");
-	    	return false;
-	    	
-	      } 
+//	      if(session == null) { // 아예 세션 자체가 없으면
+//	    	  log.info("세션없은 null 임");
+//	    	 res.sendRedirect("/common/login");
+//	    	return false;
+//	    	
+//	      } 
 	      
 //	      ==============세션에 인증정보가 있는지 확인 =========================
 	      
 	      String sessionId = session.getId();
     	  log.info("\n1. sessionId : {} ",sessionId);
 	      
-	      UserVO vo = (UserVO) session.getAttribute("__AUTH__");
+	      UsersVO vo = (UsersVO) session.getAttribute("__AUTH__");
+	      
 	      if(vo != null) { // 인증된 웹브라우저
     		  log.info("\n*******************************************************"
     		  		+ "\n******************** 인증완료 *************************"
@@ -93,16 +97,17 @@ public class AuthInterceptor implements HandlerInterceptor {
 //    			  	세션ID => 웹브라우저의 이름으로 쿠키값 설정
     			  String cookieName = rememberMeCookie.getName();
     			  String cookieValue = rememberMeCookie.getValue();
+    			  log.info("\t+ cookieName: {}, cookieValue: {}", cookieName, cookieValue);
     			  
 //    		Step3. step2. 에서 얻어낸 자동로그인 쿠키값(세션ID)으로 tbl_user 테이블 조회 =>
 //    			   정확히 1개의 User가 select = > 마치, userid/userpw 로 사용자 조회한것과 동일
 //    			   만일 사용자가 발견된다면 , 이 사용자에대한 UServo 객체를 획득하고 
 //    			   획득한 UserVO객체를, 현재 웹브라우저에 대응되는 세션객체에 
 //    			   __AUTH__ 이름으로 UserVO 객체를 Credential로 설정
-    			  Objects.requireNonNull(this.dao);
+    			  Objects.requireNonNull(this.login);
     			  
     			  // 자동로그인요청한 웹브라우저의 Credential(인증객체) 확보
-    			  UserVO uvo = this.dao.selectUserByRememberMe(cookieValue);
+    			  UsersVO uvo = this.login.selectUserByRememberMe(cookieValue);
     			  log.info("\nUserVO = {}",uvo);
     			  
 //    	  	Step4. Credential Recovery
@@ -119,9 +124,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 //    	      ==================================================================
 //    	      * 자동로그인 설정이 안되어 있는 경우와, 위의 조건을 만족하지 못하는 경우
 //    	      	즉시, 로그인 창으로 밀어버림(리다이렉션)
-    	      
-    	      
-        	  res.sendRedirect("/user/login");
+    		  log.info("\t2. No credential found. Redirect to Login.");
+        	  res.sendRedirect("/common/login");
         	  return false; // 원래 요청을 처리하지 못하도록 함
     		  
     	  } // if- else
@@ -129,38 +133,4 @@ public class AuthInterceptor implements HandlerInterceptor {
 	} // preHandle
 
 	
-//	// 목적 : 로그인 컨트롤러가 인증정보를 찾아내면 로그인 성공
-//	//			이 인증정보(Credential) UserVO 객체를 현재의 웹 브라우저 만이 열 수 있는 금고상자(세션)에 넣어주자
-//	@Override
-//	public void postHandle(HttpServletRequest req, HttpServletResponse res, Object handler,
-//			ModelAndView modelAndView) throws Exception {
-//		
-//		  log.info("\n*******************************************************"
-//  		  		+ "\n\t\t postHandle(req,res,{} ,{})"
-//  		  		+ "\n*******************************************************",handler,modelAndView);
-//		  
-//// ****** // Step1. 컨트롤러의 핸들러가 반환한 Model과 View의 이름을 획득
-//		  ModelMap returnedModelMap = modelAndView.getModelMap();
-//		  log.info("\treturnedModelMap : {}" , returnedModelMap);
-//
-//		  
-//// ****** // Step2. 인증정보 (UserVO, Credential) 가 있다면, SessionScope 에 Binding 금고상자안에 넣음
-//		  UserVO vo =(UserVO) returnedModelMap.get("__AUTH__");
-//		  log.info("\tvo : {}" , vo);
-//		  if( vo != null) {
-//			  // 정상적인 로그인 성공이라면
-//			  
-//			  // Step3. 세션(금고) 안에 Credential(인증정보)로, UserVO 객체를 바인딩(공유속성)
-//			  HttpSession session = req.getSession(false);
-//			  log.info("\tsessionId : {}" , session.getId());
-//			  session.setAttribute("__AUTH__", vo);	// 인증정보(Creential) 바인딩
-//			  log.info("\n******************************************************"
-//			  		+  "\n\t\tBinding Credential into Session Success!"
-//			  		+  "\n******************************************************");
-//			  
-//		  }
-//		  
-//		  
-//	} // postHandle
-//	
 } // end class

@@ -10,6 +10,7 @@ import lombok.Value;
 
 @Value
 public class UsersVO {
+	
 	private String ID;
 	private String nickName;
 	private String name;
@@ -42,9 +43,8 @@ public class UsersVO {
 		dto.setMBTI(MBTI);
 		dto.setLikeArea(likeArea);
 		dto.setUno(uno);
-		
 		dto.setEnabled(enabled);
-		dto.setAuthList(dto.getAuthList());
+		dto.setRememberMe(dto.getRememberMe());
 		return dto;
 	}
 	

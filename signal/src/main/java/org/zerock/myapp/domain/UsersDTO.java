@@ -24,9 +24,8 @@ public class UsersDTO {
 	private String MBTI;
 	private String likeArea;
 	private Integer uno;
-	
 	private Boolean enabled;
-	private List<AuthDTO> authList;
+	private Boolean rememberMe;
 	
 
 }

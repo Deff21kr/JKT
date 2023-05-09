@@ -11,9 +11,9 @@ public interface LoginMapper {
 	public abstract UsersVO selectUserIdPw(UsersDTO dto) throws DAOException;;
 	
 	public abstract Integer updateUserWithRememberMe(
-			String id,
+			String ID,
 			String rememberMeCookie,
-			Date rememberMeMaAge) throws DAOException;;
+			Date rememberMeMaxAge) throws DAOException;;
 
 	public abstract UsersVO selectUserByRememberMe(String rememberMe) throws DAOException; 
 	

@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.zerock.myapp.domain.UserVO;
-import org.zerock.myapp.mapper.UsersMapper;
+import org.zerock.myapp.domain.UsersVO;
+import org.zerock.myapp.mapper.LoginMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 	@Autowired
-	private UsersMapper dao;
+	private LoginMapper dao;
 
 	/*
 	 * 로그인 인터셉터의 목적은 무엇일까? 목적 : 전처리는 이미 사용자가 로그인창에서 아이디, 암호를 입력,전송 했다는 것은 분명한 사실이기에
@@ -115,10 +115,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 		
 		HttpSession session = req.getSession(false);
 		
-		UserVO vo = (UserVO)session.getAttribute("__AUTH__");
+		UsersVO vo = (UsersVO)session.getAttribute("__AUTH__");
 		
 		log.info("\tvo : {}",vo);
-		return vo.getUserid();
+		return vo.getID();
 		
 		
 	}

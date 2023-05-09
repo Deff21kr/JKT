@@ -1,10 +1,12 @@
 package org.zerock.myapp.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
+import org.zerock.myapp.exception.DAOException;
 import org.zerock.myapp.mapper.LoginMapper;
 import org.zerock.myapp.mapper.UsersMapper;
 
@@ -27,27 +29,27 @@ public class LoginServiceImpl implements LoginService {
 	private UsersMapper users;
 
 	@Override
-	public UsersDTO login(UsersDTO dto) {
+	public UsersVO login(UsersDTO dto) throws DAOException {
 		log.info("login({}) invoked.", dto);
 		
 		UsersVO vo = this.users.select (dto.getID() );
 		
 		
-		this.encoder.matches(dto.getPassword(), vo.getPassword() );
-		vo = this.mapper.selectUserIdPw(dto); // 아이디, 비밀번호 조회
+		boolean is =this.encoder.matches(dto.getPassword(), vo.getPassword() );
+		log.info("\n\nlogin : {}\nvo:{}",is,vo);
 		
-		if(vo == null) {
+		if(is != true) {
 			log.warn("아이디 비밀번호가 일치하지 않습니다.");
 			return null;
+		} else {
+			return vo;
 		}
 		
-		UsersDTO login = vo.toDTO(); // VO를 DTO로 변환
 		
-		log.info("login : {}", login);
 		
-		return login;
+	
 	} // login
-
-
+	
+	
 	
 } // end class

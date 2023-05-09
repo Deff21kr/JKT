@@ -11,7 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.util.WebUtils;
-import org.zerock.myapp.domain.UserVO;
+import org.zerock.myapp.domain.UsersVO;
+import org.zerock.myapp.mapper.LoginMapper;
 import org.zerock.myapp.mapper.UsersMapper;
 
 import lombok.NoArgsConstructor;
@@ -22,7 +23,8 @@ import lombok.extern.log4j.Log4j2;
 
 @Component
 public class LogoutInterceptor implements HandlerInterceptor {
-	@Resource private UsersMapper dao;
+	@Resource private UsersMapper user;
+	@Resource private LoginMapper login;
 	
 /*
  * 로그아웃 요청을 보낸 웹 브라우저가 가지고 있는, 세션객체 금고상자를 파괴하는 작업을
@@ -41,7 +43,7 @@ public class LogoutInterceptor implements HandlerInterceptor {
 	     
 	      // Step1. 현재 로그아웃 요청을 보낸 웹브라우저에 대응하는 세션객체 획득
 	      HttpSession session = req.getSession(false);
-	      UserVO userVO = (UserVO) session.getAttribute("__AUTH__");
+	      UsersVO userVO = (UsersVO) session.getAttribute("__AUTH__");
 	      if( session != null ) {
 	    	  // 세션이 널이 아니면 로그아웃 처리
 	    	  
@@ -64,13 +66,13 @@ public class LogoutInterceptor implements HandlerInterceptor {
 	    	  log.info("\t Remember-Me Cookie Destroyed.");
 	    	  
 	    	  // Step.4 tbl_user 테이블에 설정된 자동로그인 쿠키값과 만료일시 컬럼의 값을 null로 변경
-	    	  Objects.requireNonNull(this.dao);
+	    	  Objects.requireNonNull(this.login);
 	    	  Objects.requireNonNull(userVO);
-	    	  this.dao.updateUserWithRememberMe(userVO.getUserid(), null, null);
+	    	  this.login.updateUserWithRememberMe(userVO.getID(), null, null);
 	    	  log.info("\tRemember-Me Released Successfully. ");
 	      }
 	      
-	      res.sendRedirect("/user/login");
+	      res.sendRedirect("/common/login");
 	      return false; // 이미 false 가 결정됨 왜냐면 뒤로 보내지 않을거니깐!! 즉 여기서 로그아웃!
     	  
 	   } // preHandle

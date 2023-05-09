@@ -8,4 +8,22 @@
 		where id = #{ID} and password = #{password}
 	</select>
 	
+	    <update id="updateUserWithRememberMe">
+       UPDATE tbl_users
+      SET
+          rememberme = #{rememberMe, jdbcType=VARCHAR},
+          rememberage = #{rememberMeAge, jdbcType=DATE}
+      WHERE
+          id = #{ID}
+    </update>
+    
+    
+    <select id="selectUserByRememberMe"
+            resultType="org.zerock.myapp.domain.UsersVO">
+        SELECT *
+        FROM tbl_users
+        WHERE rememberme = #{rememberMe}
+    </select>
+    
+	
 </mapper>

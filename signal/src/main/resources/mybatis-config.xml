@@ -6,5 +6,12 @@
 
 <configuration>
 
+   
+
+ <mappers>
+    <mapper resource="org/zerock/myapp/mapper/LoginMapper.xml" />
+     <mapper resource="org/zerock/myapp/mapper/UsersMapper.xml" />
+  </mappers>
+
 
 </configuration>

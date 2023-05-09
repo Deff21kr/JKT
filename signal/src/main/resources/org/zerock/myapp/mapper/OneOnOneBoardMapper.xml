@@ -35,4 +35,11 @@
             WHERE
                 postno = #{postno}
         </update>
+
+        <select id="replySelect">
+            SELECT *
+            FROM tbl_oneononeinquiry
+            where postno = #{postno}
+        </select>
+
     </mapper>

@@ -21,7 +21,7 @@ public class LoginController {
 	
 	private final LoginService service;
 	
-	@GetMapping("/login")
+	@GetMapping("/loginpage")
 	public String login() {
 		return "loginpage"; // 로그인 폼 페이지로 이동
 	} // login

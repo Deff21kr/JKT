@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @NoArgsConstructor
 
-@RequestMapping("oneononeboard")
+@RequestMapping("board")
 @Controller
 public class OneOnOneBoardController {
 
@@ -33,8 +33,8 @@ public class OneOnOneBoardController {
 	private OneOnOneBoardService service;
 
 	// 1. 게시판 목록 조회
-	@GetMapping("/list")
-	void list(Criteria cri, Model model) throws ControllerException {
+	@GetMapping("/oneonone/list")
+	String list(Criteria cri, Model model) throws ControllerException {
 		log.trace("list({}) invoked", model);
 
 		try {
@@ -47,6 +47,7 @@ public class OneOnOneBoardController {
 			throw new ControllerException(e);
 		} // try-catch
 
+		return "/board/oneonoeList";
 	} // list
 
 	// 2. 새로운 게시물 등록

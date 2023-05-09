@@ -43,6 +43,9 @@
 		<beans:property name="uploadTempDir" value="file:/C:/upload/tmp"/>
 		
 	</beans:bean>
+	
+	<view-controller path="/common/login" 	view-name="common/login"  status-code="200"  />
+	<view-controller path="/common/logout" 	view-name="common/logout"  status-code="200"  />
 
 	<context:component-scan base-package="org.zerock.myapp.controller" />
 	<context:component-scan base-package="org.zerock.myapp.exception" />

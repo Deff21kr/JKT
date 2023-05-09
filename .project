@@ -9,3 +9,38 @@
 	<natures>
 	</natures>
 </projectDescription>
+
+
+
+
+1. 게시판마다 crud 맵핑
+	
+
+
+2. 유저
+	c: /commmon/register (화면 get)		register()
+						 (처리 post)		register(dto, rttrs) -> 성공 : 메인
+						 										실패 : 회원가입
+
+	r: /commmon/login	 (화면 get)				get()
+						 (처리 post)(인터셉터)	get(ID,password,rttrs) -> 성공 : 메인 (로그인상태)
+						 												  실패 : 로그인페이지
+
+	u: /user/mypage (화면 get)		modify 
+					(처리 post)
+
+	d: /user/mypage/remove (처리 post)		
+
+
+
+
+
+
+
+
+
+4. 채팅
+
+5. 환승
+
+6. 플래너

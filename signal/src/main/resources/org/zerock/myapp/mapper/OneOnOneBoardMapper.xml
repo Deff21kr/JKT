@@ -10,8 +10,8 @@
             <selectKey keyProperty="postno" order="AFTER" resultType="int">
                 SELECT "ISEQ$$_74527".CURRVAL FROM dual            
             </selectKey>
-            INSERT INTO tbl_oneononeinquiry(nickname, title, content) 
-            VALUES (#{nickname}, #{title}, #{content})
+            INSERT INTO tbl_oneononeinquiry(nickname, title, content, reproot, repstep, repindent) 
+            VALUES (#{nickname}, #{title}, #{content}, "ISEQ$$_74527".CURRVAL, 0, 0)
         </insert>
 
         <select id="select" resultType="org.zerock.myapp.domain.OneOnOneBoardVO">

@@ -15,7 +15,6 @@ public class OneOnOneBoardVO {
 	private String content;
 	private Timestamp regidate;
 	private Timestamp modifydate;
-	private Integer readcnt;
 	private Integer reproot;
 	private Integer repstep;
 	private Integer repindent;
@@ -28,7 +27,6 @@ public class OneOnOneBoardVO {
 		dto.setNickname(nickname);
 		dto.setTitle(title);
 		dto.setContent(content);
-		dto.setReadcnt(readcnt);
 		dto.setReproot(reproot);
 		dto.setRepstep(repstep);
 		dto.setRepindent(repindent);

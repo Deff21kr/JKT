@@ -76,7 +76,6 @@
             
             <!-- bt : button -->
             <div class="bt_wrap"> 
-                <!-- <a href="write" class="on">등록</a> -->
                 <button type="button" id="regBtn">등록</button>
             </div>
         </div>

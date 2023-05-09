@@ -6,13 +6,11 @@ import java.util.Objects;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.zerock.myapp.domain.AuthDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ServiceException;
-import org.zerock.myapp.mapper.AuthMapper;
 import org.zerock.myapp.mapper.UsersMapper;
 
 import lombok.NoArgsConstructor;
@@ -29,8 +27,10 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 
 	@Setter(onMethod_ = { @Autowired })
 	private UsersMapper dao;
-	@Setter(onMethod_ = { @Autowired })
-	private AuthMapper auth;
+
+	@Setter (onMethod_ = @Autowired)
+	private BCryptPasswordEncoder encoder;
+	
 	@Override
 	public List<UsersVO> getList() throws ServiceException {
 		log.trace("\n*********************************************************\n			getList({}) "
@@ -50,20 +50,18 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		log.trace("\n*********************************************************\n			register({}) "
 				+ "\n********************************************************* ",dto);
 		
-		String hashedPassword = BCrypt.hashpw(dto.getPassword(), BCrypt.gensalt());
+		String hashedPassword = this.encoder.encode(dto.getPassword());
 		try {
-			AuthDTO user = new AuthDTO();
 			dto.setPassword(hashedPassword);
-			String id = dto.getID();
-			user.setUserId(id);
-			return ( (this.dao.insert(dto) == 1) && (this.auth.insertAuth(user)==1 ));
+			
+			return ( (this.dao.insert(dto) == 1));
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}
 	}
 
 	@Override
-	public UsersDTO get(String ID) throws ServiceException {
+	public UsersVO get(String ID) throws ServiceException {
 		log.trace("\n*********************************************************\n			get({}) "
 				+ "\n********************************************************* ",ID);
 
@@ -80,8 +78,9 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		log.trace("\n*********************************************************\n			register({}) "
 				+ "\n********************************************************* ",dto);
 
+		String hashedPassword = this.encoder.encode(dto.getPassword());
 		try {
-
+			dto.setPassword(hashedPassword);
 			return (this.dao.update(dto) == 1);
 		} catch (Exception e) {
 			throw new ServiceException(e);
@@ -122,6 +121,7 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		log.trace("\n*********************************************************\n			destroy() "
 				+ "\n********************************************************* ");
 	}
+
 
 //	======================================================
 

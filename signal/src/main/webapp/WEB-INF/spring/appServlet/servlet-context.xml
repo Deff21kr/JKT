@@ -29,6 +29,8 @@
 	<view-resolvers>
 		<jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</view-resolvers>
+	
+    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
 	<beans:bean 
 		id="multipartResolver" 

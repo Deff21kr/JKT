@@ -7,44 +7,16 @@
 
 <mapper namespace="org.zerock.myapp.mapper.UsersMapper">
 
-	
-	
-	<resultMap type="org.zerock.myapp.domain.UsersDTO" id="usersMap">
-		<id property="ID" column="id" />
-		<result property="ID" column="id" />
-		<result property="nickName" column="nickname" />
-		<result property="name" column="name" />
-		<result property="password" column="password" />
-		<result property="gender" column="gender" />
-		<result property="EMail" column="email" />
-		<result property="phoneNumber" column="phonenumber" />
-		<result property="birthDate" column="birthdate" />
-		<result property="userRegiDate" column="userregidate" />
-		<result property="withDrawal" column="withdrawal" />
-		<result property="MBTI" column="mbti" />
-		<result property="likeArea" column="likearea" />
-		<result property="uno" column="uno" />
-		<result property="enabled" column="enabled" />
-		<collection property="authList" resultMap="authMap"></collection>
-		
-	</resultMap>
-	
-	<resultMap type="org.zerock.myapp.domain.AuthDTO" id="authMap">
-		<result property="userId" column="userid" />
-		<result property="auth" column="auth" />
-	</resultMap>
-
-	<select id="select" resultMap="usersMap">
-		SELECT u.*,a.auth FROM tbl_users u LEFT OUTER JOIN tbl_users_auth a ON u.id = a.userid
-		WHERE u.id=#{ID}
+	<select id="select" resultType="org.zerock.myapp.domain.UsersVO">
+		SELECT *
+		FROM tbl_users
+		WHERE id = #{ID}
 	</select>
-	
-	 
-
-
-
 
 	<insert id="insert">
+		<selectKey keyProperty="uno" order="AFTER" resultType="int">
+			select "ISEQ$$_74653".CURRVAL from dual
+		</selectKey>
 
 		INSERT INTO tbl_users 
 				(id, nickname, name, 
@@ -56,7 +28,6 @@
 		
 	</insert>
 
-	
 
 	<delete id="delete">
 		DELETE FROM tbl_users

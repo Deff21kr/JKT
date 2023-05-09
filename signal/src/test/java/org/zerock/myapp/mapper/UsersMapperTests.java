@@ -10,10 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.zerock.myapp.domain.AuthDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 
@@ -28,14 +27,14 @@ import lombok.extern.log4j.Log4j2;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { 
 		"file:src/main/webapp/WEB-INF/**/root-*.xml",
-		"file:src/main/webapp/WEB-INF/**/security-*.xml"
+		"file:src/main/webapp/WEB-INF/**/servlet-*.xml"
 })
 public class UsersMapperTests {
 
 	@Setter(onMethod_ = { @Autowired })
 	private UsersMapper mapper;
 	@Setter(onMethod_ = { @Autowired })
-	private PasswordEncoder pw;
+	private BCryptPasswordEncoder pw;
 
 	@Before
 	public void setup() {
@@ -84,26 +83,6 @@ public class UsersMapperTests {
 		log.info("\t+ aff: {} \n\tdto : {} ", (aff == 1), dto);
 
 	} // 회원가입
-	@Test(timeout = 1000 * 10)
-	public void testInsertAuth() {
-		AuthDTO auth = new AuthDTO();
-		
-		String id = "test444";
-//		UsersVO vo =this.mapper.select(id);
-//		String userId = vo.getID();
-//		
-//		Objects.requireNonNull(vo);
-////		// VO => DTO
-//		UsersDTO dto = vo.toDTO();
-//		dto.setID(userId);
-		auth.setUserId(id);
-		Integer aff = this.mapper.insertAuth(auth);
-		assert aff != null;
-		log.info("\t+ aff: {} \n\tauth : {} ", (aff == 1), auth);
-
-		
-	}
-	
 	
 
 	// 테스트 메소드 이름은 반드시 접두사 test를 붙여야 함
@@ -113,7 +92,7 @@ public class UsersMapperTests {
 
 		String id = "test444";
 
-		UsersDTO vo = this.mapper.select(id);
+		UsersVO vo = this.mapper.select(id);
 		log.info("\tbno : {} , vo : {}", id, vo);
 
 	} // 유저 조회
@@ -133,12 +112,12 @@ public class UsersMapperTests {
 		log.trace("testUpdate invoked");
 
 		String id = "Deff21kr";
-		UsersDTO dto = this.mapper.select(id);
+		UsersVO vo = this.mapper.select(id);
 
-		Objects.requireNonNull(dto);
+		Objects.requireNonNull(vo);
 		// VO => DTO
-		log.info("\tdto : {}", dto);
-
+		log.info("\tdto : {}", vo);
+		UsersDTO dto = vo.toDTO();
 		dto.setPassword("123qwe123");
 
 		log.info("\tdto : {}", dto);

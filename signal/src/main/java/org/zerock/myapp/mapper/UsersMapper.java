@@ -17,7 +17,7 @@ public interface UsersMapper {
 	public abstract Integer insert(UsersDTO dto);
 
 	// 3. 회원id로 게시물 검색
-	public abstract UsersDTO select(String ID);
+	public abstract UsersVO select(String ID);
 
 	// 4. 회원탈퇴
 	public abstract Integer delete(String ID);

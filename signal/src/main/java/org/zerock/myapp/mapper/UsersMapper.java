@@ -16,8 +16,6 @@ public interface UsersMapper {
 	// 2. 회원가입
 	public abstract Integer insert(UsersDTO dto);
 
-	public abstract Integer insertAuth(AuthDTO auth); // user_auth 테이블에 데이터 삽입
-	
 	// 3. 회원id로 게시물 검색
 	public abstract UsersDTO select(String ID);
 

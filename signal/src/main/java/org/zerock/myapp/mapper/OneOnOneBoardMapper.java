@@ -32,4 +32,7 @@ public interface OneOnOneBoardMapper {
 	@Select("SELECT count(postno) FROM tbl_oneononeinquiry WHERE postno > 0")
 	public abstract Integer getTotalAmount();
 	
+	// 답변글 입력폼 보기
+	public abstract OneOnOneBoardDTO replySelect(Integer postno);
+	
 }

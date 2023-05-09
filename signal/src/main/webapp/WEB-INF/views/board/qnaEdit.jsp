@@ -39,6 +39,7 @@
         <!-- QnA 글쓰기 수정 -->
         <div class="board_wrap">
             <form action="/board/qnaEdit" method="POST">
+            	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                 <input type="hidden" name="currPage" value="${param.currPage}">
                 <input type="hidden" name="postno" value="${__BOARD__.postno}">
                 <input type="hidden" name="nickname" value="${__BOARD__.nickname}">

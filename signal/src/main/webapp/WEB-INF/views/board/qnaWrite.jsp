@@ -33,6 +33,7 @@
     	
         <div class="board_wrap">
             <form action="/board/qnaWrite" method="POST">
+            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
             <input type="hidden" name="nickname" value="${__BOARD__.nickname}">
                 <div class="board_title">
                     <strong>QnA</strong>

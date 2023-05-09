@@ -17,7 +17,7 @@
 <body>
 
   <main>
-    <form action="/login" method="post">
+    <form action="/loginpost" method="post">
       <fieldset>
         <legend><h3>로그인</h3></legend>
         <div class="user-area">
@@ -34,6 +34,7 @@
         </div>
         <a href="#">비밀번호를 잊었습니까?</a>
         <button type="submit">Login</button>  
+        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
       </fieldset>
     </form>
     

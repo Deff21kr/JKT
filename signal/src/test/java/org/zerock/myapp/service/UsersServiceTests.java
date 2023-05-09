@@ -4,12 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.myapp.domain.UsersDTO;
@@ -30,15 +28,12 @@ import lombok.extern.log4j.Log4j2;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= {
 		"file:src/main/webapp/WEB-INF/**/root-*.xml",
-		"file:src/main/webapp/WEB-INF/**/security-*.xml"})
+		"file:src/main/webapp/WEB-INF/**/servlet-*.xml"
+		})
 public class UsersServiceTests {
 	
 	@Setter(onMethod_ = @Autowired)
 	private UsersService service;
-	@Setter(onMethod_ = @Autowired)
-	private AuthService auth;
-	@Setter(onMethod_ = @Autowired)
-	private PasswordEncoder pw;
 	
 	@Before
 	public void setup() { // 전처리
@@ -96,7 +91,7 @@ public class UsersServiceTests {
 				+ "\n*****************************************************");
 		
 		String id = "test444";
-		UsersDTO vo = this.service.get(id);
+		UsersVO vo = this.service.get(id);
 		
 		Objects.requireNonNull(vo);
 		log.info("\n\t vo : {} ",vo);
@@ -110,17 +105,18 @@ public class UsersServiceTests {
 		String id = "test444";
 		
 		// 우선 유저의 정보를 얻고
-		UsersDTO vo = this.service.get(id);
+		UsersVO vo = this.service.get(id);
 		
 		// 널이 아니라면
 		Objects.requireNonNull(vo);
 		
 		// 셋터가 있는 dto로 변환
+		UsersDTO dto = vo.toDTO();
 		log.info("\n\t 수정 전 : {} ",vo);
 		// 회원정보수정
-		vo.setPassword("ㅂ2ㅂㅇ바이");
+		dto.setPassword("ㅂ2ㅂㅇ바이");
 		Objects.requireNonNull(vo);
-		boolean isSuccess = this.service.modify(vo);
+		boolean isSuccess = this.service.modify(dto);
 		log.info("\n\t isSuccess : {}" ,isSuccess);
 		log.info("\n\t 수정 후 : {} ",vo);
 		
@@ -140,8 +136,6 @@ public class UsersServiceTests {
 	}
 
 	
-	
-
 	
 	
 }	// end class

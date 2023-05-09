@@ -29,6 +29,8 @@
 	<view-resolvers>
 		<jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</view-resolvers>
+	
+  
 
 	<beans:bean 
 		id="multipartResolver" 

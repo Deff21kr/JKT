@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.zerock.myapp.domain.UsersVO;
+import org.zerock.myapp.domain.UserVO;
 import org.zerock.myapp.mapper.UsersMapper;
 
 import lombok.NoArgsConstructor;
@@ -79,30 +79,30 @@ public class LoginInterceptor implements HandlerInterceptor {
 			HttpSession session = req.getSession(false);
 			String sessionId = session.getId();			// 쿠키값으로 사용
 			
-//			Cookie rememberMeCookie = new Cookie("__REMEMBER_ME__",sessionId);
-//			
-//			final int maxAge =1*60*60*24*7*52;
-//			rememberMeCookie.setMaxAge(maxAge); // 0: 무한 , 1: 부터 초
-//			rememberMeCookie.setPath("/");
-//			
-//			// Step4. 응답메시지의 Set-Cookie 헤더에 값으로 설정
-//			res.addCookie(rememberMeCookie);
-//			// 쿠키는 작은 문자열 데이터
-//			
-//			// Step5. 
-//			long currDateTime = System.currentTimeMillis();
-//			long expireDateTime = currDateTime + (maxAge *1000L);
-//			
-//			Timestamp rememberMeCookieMaxAge = new Timestamp(expireDateTime);
-//			
-//			int affectedLines = this.dao.updateUserWithRememberMe(
-//					getUserId(req), 
-//					rememberMeCookie.getValue(), 
-//					rememberMeCookieMaxAge);
-//			
-//			boolean isUpdated = (affectedLines == 1);
-//			
-//			log.info("\n\n\tisupdated : {} \n\n",isUpdated);
+			Cookie rememberMeCookie = new Cookie("__REMEMBER_ME__",sessionId);
+			
+			final int maxAge =1*60*60*24*7*52;
+			rememberMeCookie.setMaxAge(maxAge); // 0: 무한 , 1: 부터 초
+			rememberMeCookie.setPath("/");
+			
+			// Step4. 응답메시지의 Set-Cookie 헤더에 값으로 설정
+			res.addCookie(rememberMeCookie);
+			// 쿠키는 작은 문자열 데이터
+			
+			// Step5. 
+			long currDateTime = System.currentTimeMillis();
+			long expireDateTime = currDateTime + (maxAge *1000L);
+			
+			Timestamp rememberMeCookieMaxAge = new Timestamp(expireDateTime);
+			
+			int affectedLines = this.dao.updateUserWithRememberMe(
+					getUserId(req), 
+					rememberMeCookie.getValue(), 
+					rememberMeCookieMaxAge);
+			
+			boolean isUpdated = (affectedLines == 1);
+			
+			log.info("\n\n\tisupdated : {} \n\n",isUpdated);
 		} // if
 		
 
@@ -115,10 +115,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 		
 		HttpSession session = req.getSession(false);
 		
-		UsersVO vo = (UsersVO)session.getAttribute("__AUTH__");
+		UserVO vo = (UserVO)session.getAttribute("__AUTH__");
 		
 		log.info("\tvo : {}",vo);
-		return vo.getID();
+		return vo.getUserid();
 		
 		
 	}

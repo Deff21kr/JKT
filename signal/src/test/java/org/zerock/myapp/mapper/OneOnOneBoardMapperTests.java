@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.OneOnOneBoardDTO;
 import org.zerock.myapp.domain.OneOnOneBoardVO;
 
@@ -42,7 +43,10 @@ public class OneOnOneBoardMapperTests {
 	public void testSelectList() {
 		log.trace("testSelectList() invoked");
 		
-		List<OneOnOneBoardVO> boards = this.mapper.selectList();
+        Criteria cri = new Criteria();
+        cri.setCurrPage(20);
+		
+		List<OneOnOneBoardVO> boards = this.mapper.selectList(cri);
 		Objects.requireNonNull(boards);
 		boards.forEach(log::info);
 	} // testSelectList

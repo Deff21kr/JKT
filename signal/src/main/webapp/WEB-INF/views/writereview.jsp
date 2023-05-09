@@ -11,7 +11,7 @@
     <title>글쓰기 페이지</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/writereview.css">
-    <script src="js/writereview.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/writereview.js"></script>
 </head>
 
 

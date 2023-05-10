@@ -44,7 +44,7 @@ public class OneOnOneBoardMapperTests {
 		log.trace("testSelectList() invoked");
 		
         Criteria cri = new Criteria();
-        cri.setCurrPage(20);
+        cri.setCurrPage(1);
 		
 		List<OneOnOneBoardVO> boards = this.mapper.selectList(cri);
 		Objects.requireNonNull(boards);
@@ -58,7 +58,7 @@ public class OneOnOneBoardMapperTests {
 		OneOnOneBoardDTO dto = new OneOnOneBoardDTO();
 		dto.setTitle("NEW_TITLE");
 		dto.setContent("NEW_CONTENT");
-		dto.setNickname("hyeondae");
+		dto.setNickName("hyeondae");
 		
 		log.info("\t + dto : {}", dto);
 //		---
@@ -72,27 +72,27 @@ public class OneOnOneBoardMapperTests {
 	public void testSelect() {
 		log.trace("testSelect() invoked");
 	
-		Integer postno = 15;
-		OneOnOneBoardVO vo = this.mapper.select(postno);
-		log.info("\t + postno : {}, vo, {}", postno, vo);
+		Integer postNo = 116;
+		OneOnOneBoardVO vo = this.mapper.select(postNo);
+		log.info("\t + postNo : {}, vo, {}", postNo, vo);
 	} // testSelect
 	
 	@Test(timeout = 1000*5)
 	public void testDelete() {
 		log.trace("testDelete() invoked");
 		
-		Integer postno = 15;
+		Integer postNo = 15;
 		
-		Integer affectedLines = this.mapper.delete(postno);
-		log.info("postno: {}, affectedLines: {}", postno, affectedLines);
+		Integer affectedLines = this.mapper.delete(postNo);
+		log.info("postNo: {}, affectedLines: {}", postNo, affectedLines);
 	} // testDelete
 	
 	@Test(timeout = 1000*5)
 	public void testUpdate() {
 		log.trace("testUpdate() invoked");
 		
-		Integer postno = 15;
-		OneOnOneBoardVO vo = this.mapper.select(postno);
+		Integer postNo = 115;
+		OneOnOneBoardVO vo = this.mapper.select(postNo);
 
 		assertNotNull(vo);
 		
@@ -108,6 +108,41 @@ public class OneOnOneBoardMapperTests {
 
 	} // testUpdate
 	
+	
+	@Test(timeout = 1000*5)
+	public void testIncrease() {
+		log.trace("testIncrease() invoked");
+		
+		OneOnOneBoardDTO dto = new OneOnOneBoardDTO();
+		dto.setRepRoot(116);
+		dto.setRepStep(1);
+		
+		Integer affectedLines = this.mapper.increase(dto);
+		log.info("affectedLines: {}", affectedLines);
+	} // testIncrease
+	
+	@Test
+	public void testResponse() {
+		log.trace("testResponse() invoked");
+		
+		OneOnOneBoardDTO dto = new OneOnOneBoardDTO();
+		dto.setNickName("hyeondae");
+		dto.setTitle("pleaseSuccess2");
+		dto.setContent("plzzz2");
+		dto.setRepRoot(116);
+		dto.setRepStep(0);
+		dto.setRepIndent(0);
+		
+		log.info("\t dto : {}", dto);
+		
+		assertNotNull(dto);
+		Integer affectedLines = this.mapper.response(dto);
+		
+		log.info("\t + affectedLines : {}", affectedLines);
+		
+		
+		
+	} // testResponse
 	
 	
 	

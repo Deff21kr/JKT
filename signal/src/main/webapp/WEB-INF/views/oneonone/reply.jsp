@@ -68,17 +68,19 @@
 
         <br>
         
-        <form action="/oneononeboard/register" method="POST" enctype="multipart/form-data">
-        	<input type="hidden" name="postno" value="${__BOARD__.postno}">
-            <input type="hidden" name="nickname" value="${__BOARD__.nickname}">
+        <form action="/board/oneonone/reply" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="nickName" value="${__1on1_BOARD__.nickName}">
+            <input type="hidden" name="repRoot" value="${__1on1_BOARD__.repRoot}">
+            <input type="hidden" name="repStep" value="${__1on1_BOARD__.repStep}">
+            <input type="hidden" name="repIndent" value="${__1on1_BOARD__.repIndent}">
         
             <div class="form-group">
                 <label for="title">문의 제목</label>
-                <input type="text" class="form-control" id="title" name="title" required placeholder="제목을 입력해주세요." value="${ __BOARD__.title}">
+                <input type="text" class="form-control" id="title" name="title" required placeholder="제목을 입력해주세요." value="RE: ${ __1on1_BOARD__.title}">
             </div>
             <div class="form-group">
                 <label for="content">문의 내용</label>
-                <textarea class="form-control" id="content" name="content" rows="5" placeholder="내용을 입력해주세요." value="${ __BOARD__.content }" required></textarea>
+                <textarea class="form-control" id="content" name="content" rows="5" placeholder="내용을 입력해주세요." required></textarea>
             </div>
             <div class="form-group">
                 <label for="file">첨부파일:</label>

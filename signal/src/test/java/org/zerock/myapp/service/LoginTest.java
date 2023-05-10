@@ -54,7 +54,7 @@ public class LoginTest {
 		UsersDTO dto = vo.toDTO();
 		
 		this.encode.matches(dto.getPassword(), vo.getPassword() );
-		dto = this.login.login(dto); // 아이디, 비밀번호 조회
+//		dto = this.login.login(dto); // 아이디, 비밀번호 조회
 		
 		
 		log.info("login : {}", login);

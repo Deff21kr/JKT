@@ -105,7 +105,22 @@ public class OneOnOneBoardServiceImpl implements OneOnOneBoardService, Initializ
 		log.trace("getTotal() invoked");
 		
 		return this.dao.getTotalAmount();
-	} // destroy
+	}
+
+	@Override
+	public Boolean reply(OneOnOneBoardDTO dto) throws ServiceException {
+		log.trace("reply() invoked");
+		try {
+			this.dao.increase(dto);
+			
+			return (this.dao.response(dto) == 1);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
+		
+		
+	} // reply
 
 	
 } // end class

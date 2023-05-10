@@ -16,15 +16,18 @@ public interface OneOnOneBoardService {
 	public abstract Boolean register(OneOnOneBoardDTO dto) throws ServiceException;
 	
 	// 3. 특정 게시물 상세조회( READ )
-	public abstract OneOnOneBoardVO get(Integer postno) throws ServiceException;
+	public abstract OneOnOneBoardVO get(Integer postNo) throws ServiceException;
 	
 	// 4. 특정 게시물 업데이트 ( UPDATE )
 	public abstract Boolean modify(OneOnOneBoardDTO dto) throws ServiceException;
 	
 	// 5. 특정 게시물 삭제 ( DELETE )
-	public abstract Boolean remove(Integer postno) throws ServiceException;
+	public abstract Boolean remove(Integer postNo) throws ServiceException;
 	
 	// 6. 총 게시물 개수 반환
 	public abstract Integer getTotal() throws ServiceException;	
+	
+	// 7. 답변글 달기
+	public abstract Boolean reply(OneOnOneBoardDTO dto) throws ServiceException;
 
 }

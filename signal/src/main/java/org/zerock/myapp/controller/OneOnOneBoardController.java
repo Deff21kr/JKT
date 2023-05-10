@@ -70,6 +70,7 @@ public class OneOnOneBoardController {
 
 	} // register
 
+	// 2-1. 새로운 게시물 등록화면  --> 로그인기능이 없어 register.jsp에 임시적으로 하드코딩함 (** 나중에 수정해야함!! **)
 	@GetMapping("/register")
 	String register() {
 		log.trace("register() invoked");

@@ -19,18 +19,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
         
-        <script>
+        <script defer>
             $(function () {
                 $('#listBtn').click(function () {
                     location = "/board/oneonone/list?currPage=${param.currPage}";
                 });
                 $('#removeBtn').click(function () {
                     let formObj = $("form");
-                    formObj.attr("action", "/board/oneonone/remove");
+                    formObj.attr("action", "/board/oneonone/remove?postNo=${__1on1_BOARD__.postNo}");
                     formObj.attr("method", "POST");
                     formObj.submit();
                 });
             });
+            
+
         </script>
     </head>
     <body>
@@ -41,10 +43,13 @@
             <form action="/board/oneonone/modify" method="POST">
             	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                 <input type="hidden" name="currPage" value="${param.currPage}">
-                <input type="hidden" name="postno" value="${__1on1_BOARD__.postNo}">
-                <input type="hidden" name="nickname" value="${__1on1_BOARD__.nickName}">
+                <input type="hidden" name="postNo" value="${__1on1_BOARD__.postNo}">
+                <input type="hidden" name="nickName" value="${__1on1_BOARD__.nickName}">
+                <input type="hidden" name="repRoot" value="${__1on1_BOARD__.repRoot}">
+                <input type="hidden" name="repStep" value="${__1on1_BOARD__.repStep}">
+				<input type="hidden" name="repIndent" value="${__1on1_BOARD__.repIndent}">
                 <div class="board_title">
-                    <strong>QnA</strong>
+                    <strong>1:1 문의 게시판</strong>
                 </div>
                 <div class="board_write_wrap">
                     <div class="board_write">

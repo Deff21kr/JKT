@@ -31,6 +31,7 @@
                     location = "/board/oneonone/reply?currPage=${param.currPage}&postNo=${__1on1_BOARD__.postNo}&repRoot=${__1on1_BOARD__.repRoot}&repStep=${__1on1_BOARD__.repStep}&repIndent=${__1on1_BOARD__.repIndent}";
                 });
             });
+            
         </script>
     </head>
 

@@ -69,16 +69,16 @@
         <br>
         
         <form action="/board/oneonone/register" method="POST" enctype="multipart/form-data">
-        	<input type="hidden" name="postno" value="${__1on1_BOARD__.postNo}">
-            <input type="hidden" name="nickname" value="${__1on1_BOARD__.nickName}">
+            <!-- nickName 하드코딩함 로그인기능 생기면 수정할 것! -->
+            <input type="hidden" name="nickName" value="임시닉네임">
         
             <div class="form-group">
                 <label for="title">문의 제목</label>
-                <input type="text" class="form-control" id="title" name="title" required placeholder="제목을 입력해주세요." value="${ __1on1_BOARD__.title}">
+                <input type="text" class="form-control" id="title" name="title" required placeholder="제목을 입력해주세요." />
             </div>
             <div class="form-group">
                 <label for="content">문의 내용</label>
-                <textarea class="form-control" id="content" name="content" rows="5" placeholder="내용을 입력해주세요." value="${ __1on1_BOARD__.content }" required></textarea>
+                <textarea class="form-control" id="content" name="content" rows="5" placeholder="내용을 입력해주세요." required></textarea>
             </div>
             <div class="form-group">
                 <label for="file">첨부파일:</label>

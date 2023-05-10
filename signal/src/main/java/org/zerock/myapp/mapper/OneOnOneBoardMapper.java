@@ -10,11 +10,17 @@ import org.zerock.myapp.domain.OneOnOneBoardVO;
 public interface OneOnOneBoardMapper {
 	
 	// 게시글 목록 조회
-	@Select(" SELECT  /*+ index_desc(tbl_oneononeinquiry) */  * FROM tbl_oneononeinquiry "
-			+ " ORDER BY repRoot desc, repStep asc"
+//	@Select(" SELECT  /*+ index_desc(tbl_oneononeinquiry) */  * FROM tbl_oneononeinquiry "
+//			+ " ORDER BY repRoot desc, repStep asc"
+//			+ "	OFFSET ( #{currPage} - 1 ) * #{amount} ROWS"
+//			+ "	FETCH NEXT #{amount} ROWS ONLY"
+//			)
+	@Select("SELECT *\r\n"
+			+ "FROM tbl_oneononeinquiry\r\n"
+			+ "ORDER BY repRoot DESC, repStep ASC\r\n"
 			+ "	OFFSET ( #{currPage} - 1 ) * #{amount} ROWS"
 			+ "	FETCH NEXT #{amount} ROWS ONLY"
-			)
+			+ "")
 	public abstract List<OneOnOneBoardVO> selectList(Criteria cri);
 	
 	// 게시글 등록

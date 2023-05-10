@@ -22,13 +22,15 @@
         $(function () {
             $('#regBtn').click(function () {
                 let currPage = "${pageMaker.cri.currPage}";
-                location = "board/oneonone/register?currPage="+currPage;
+                location = "/board/oneonone/register?currPage="+currPage;
             });
             $('.pageNum').on('click', function(e) {
                 let selectedPageNum = e.currentTarget.textContent;
                 location = "/board/oneonone/list?currPage="+selectedPageNum;
             });
         });
+        
+        
     </script>
 </head>
 
@@ -51,7 +53,12 @@
                 <div>
                     <c:forEach var="boardVO" items="${__1on1_LIST__}">
                         <div class="num">${boardVO.postNo}</div>
-                        <div class="title"><a href="/board/oneonone/get?currPage=${pageMaker.cri.currPage}&postNo=${boardVO.postNo}">${boardVO.title}</a></div>
+                        <div class="title">
+                            <c:forEach begin="1" end="${boardVO.repIndent}">
+                                <%= "&nbsp;&nbsp;" %>
+                            </c:forEach>
+                                <a href="/board/oneonone/get?currPage=${pageMaker.cri.currPage}&postNo=${boardVO.postNo}">${boardVO.title}</a></div>
+                            
                         <div class="nickname">${boardVO.nickName}</div>
                         <div class="date"><fmt:formatDate pattern="yyyy/MM/dd" value="${boardVO.regiDate}" /></div>
                     </c:forEach>

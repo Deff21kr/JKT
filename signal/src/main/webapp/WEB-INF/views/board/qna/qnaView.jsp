@@ -32,7 +32,7 @@
     </head>
 
     <body>
-    	<%@include file="../header.jsp" %>
+    	<%@include file="../../header.jsp" %>
     	
         <!-- QnA 글 보기 -->
         <div class="board_wrap">
@@ -49,7 +49,7 @@
                         </dl>
                         <dl>
                             <dt>작성자</dt>
-                            <dd>${__AUTH__.nickname}</dd>
+                            <dd>${__BOARD__.nickname}</dd>
                         </dl>
                         <dl>
                             <dt>등록일</dt>
@@ -121,7 +121,7 @@
             </div>
         </div>
     
-    	<%@include file="../footer.jsp" %>
+    	<%@include file="../../footer.jsp" %>
     	
     </body>
     

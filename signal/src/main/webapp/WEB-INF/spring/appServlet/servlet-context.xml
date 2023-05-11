@@ -55,6 +55,7 @@
 	</beans:bean>
 	
 	<view-controller path="/common/logout" view-name="/common/logout"  status-code="200" />
+	<view-controller path="/user/mypage" view-name="user/mypage"  status-code="200" />
 	
 	<context:component-scan base-package="org.zerock.myapp.controller" />
 	<context:component-scan base-package="org.zerock.myapp.exception" />

@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 @Log4j2
 
-@RequestMapping("/review")
+@RequestMapping("/board/review")
 @Controller
 public class BoardReviewController {
 /*

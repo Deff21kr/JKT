@@ -89,7 +89,7 @@ public class CommonController {
 		@GetMapping("/register" )
 		String register() {
 			log.trace("join() invoked.");
-			return "/user/register"; 
+			return "/common/register"; 
 			
 		}
 		

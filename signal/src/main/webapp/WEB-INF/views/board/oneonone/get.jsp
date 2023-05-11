@@ -36,7 +36,7 @@
     </head>
 
     <body>
-    	<%@include file="../header.jsp" %>
+    	<%@include file="../../header.jsp" %>
     	
         <!-- 1대1 글 보기 -->
         <div class="board_wrap">
@@ -77,7 +77,7 @@
             </div>
         </div>
     
-    	<%@include file="../footer.jsp" %>
+    	<%@include file="../../footer.jsp" %>
     	
     </body>
     

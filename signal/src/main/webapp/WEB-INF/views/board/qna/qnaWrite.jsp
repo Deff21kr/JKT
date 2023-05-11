@@ -29,7 +29,7 @@
     </head>
 
     <body>
-    	<%@include file="../header.jsp" %>
+    	<%@include file="../../header.jsp" %>
     	
         <div class="board_wrap">
             <form action="/board/qna/register" method="POST">
@@ -71,7 +71,7 @@
             </form>
         </div>
         
-        <%@include file="../footer.jsp" %>
+        <%@include file="../../footer.jsp" %>
         
     </body>
 

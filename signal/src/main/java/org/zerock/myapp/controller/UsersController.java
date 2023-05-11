@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 @Log4j2
 
-@RequestMapping("/board/anjrlt")
+@RequestMapping("/user")
 @Controller
 public class UsersController {
    

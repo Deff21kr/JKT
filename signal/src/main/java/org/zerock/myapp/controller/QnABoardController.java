@@ -53,7 +53,7 @@ public class QnABoardController {
 		PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
 		model.addAttribute("pageMaker", pageDTO);
 		
-		return "board/qnaList";
+		return "board/qna/qnaList";
 		
 		} catch (Exception e) {
 			throw new ControllerException(e);
@@ -63,7 +63,7 @@ public class QnABoardController {
 	@GetMapping("/register")
 	String register() {
 		log.trace("register() invoked.");
-		return "board/qnaWrite";
+		return "board/qna/qnaWrite";
 	}
 	
 	// 2. 새로운 게시물 등록
@@ -94,7 +94,7 @@ public class QnABoardController {
 	
 	// 3. 특정 게시물 상세조회
     @GetMapping(path={"/get", "/modify"},  params = "postno")
-    void get(@RequestParam Integer postno, Model model
+    String get(@RequestParam Integer postno, Model model
 //    		HttpServletRequest req, HttpServletResponse res 
     		) throws  ControllerException {
         log.trace("get() invoked.");
@@ -136,7 +136,7 @@ public class QnABoardController {
 // =====================================================        	
             QnABoardVO vo = this.service.get(postno);
             model.addAttribute("__BOARD__", vo);
-            
+            return "/board/qna/qnaView";
         }catch (Exception e){
             throw new ControllerException(e);
         } // try-catch

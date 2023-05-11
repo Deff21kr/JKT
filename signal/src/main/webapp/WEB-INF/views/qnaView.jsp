@@ -107,7 +107,9 @@
             </h1>
             <hr>
 
-            <%@include file="../header.jsp" %>
+            <header>
+    			<jsp:include page="header.jsp" />
+   			</header>
 
                 <!-- QnA 글 보기 -->
                 <div class="board_wrap">
@@ -201,7 +203,9 @@
 
 
 
-                <%@include file="../footer.jsp" %>
+     	<footer>
+      		<jsp:include page="footer.jsp" />
+    	</footer>
 
 
         </body>

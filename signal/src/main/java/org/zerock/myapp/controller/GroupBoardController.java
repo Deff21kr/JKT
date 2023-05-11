@@ -61,6 +61,7 @@ public class GroupBoardController {
 			if( this.service.register(dto) ) {		
 				rttrs.addFlashAttribute("result", "true");
 				rttrs.addFlashAttribute("postno", dto.getPostNo());
+				
 			} // if
 			
 			return "redirect:/board/group/list";

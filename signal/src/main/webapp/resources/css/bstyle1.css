@@ -59,7 +59,7 @@ a {
 }
 
 .board_list {
-    width: 100%;
+    width: 120%;
     border-top: 1px solid #000 ;
 }
 
@@ -99,7 +99,7 @@ a {
 }
 
 .board_list .title {
-    width: 50%;
+    width: 30%;
     text-align: left;
 }
 
@@ -115,8 +115,8 @@ a {
     width: 10%;
 }
 
-.board_list .count {
-    width: 10%;
+.board_list .readcnt {
+    width: 20%;
 }
 
 .board_page {

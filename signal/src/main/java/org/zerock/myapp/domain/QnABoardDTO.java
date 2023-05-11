@@ -9,5 +9,6 @@ public class QnABoardDTO {
 	private String nickname;
 	private String title;
 	private String content;
+	private Integer readcnt;
 	
 } // end class

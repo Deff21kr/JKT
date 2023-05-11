@@ -26,4 +26,8 @@ public interface QnABoardService {
 
 	// 6. 총 게시물 갯수 반환
 	public abstract Integer getTotal() throws ServiceException;
+	
+	// 7. 조회수
+	public abstract Integer updateReadcnt(Integer postno) throws ServiceException;
+	
 } // end interface

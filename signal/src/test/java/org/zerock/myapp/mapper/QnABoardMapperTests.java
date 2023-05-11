@@ -75,7 +75,7 @@ public class QnABoardMapperTests {
     public void testSelect() {
         log.trace("testSelect() invoked.");
 
-        Integer postno = 100;
+        Integer postno = 120;
 
         QnABoardVO vo = this.mapper.select(postno);
         log.info("\t+ postno : {}, vo : {}", postno, vo);
@@ -119,5 +119,14 @@ public class QnABoardMapperTests {
     	log.info("\t + totalAmount : {}", totalAmount);
     	
     } // testGetTotalAmount
+    
+    @Test(timeout = 1000 * 2)
+    public void testUpdateReadcnt() {
+    	log.trace("testUpdateReadcnt() inovoked.");
+    	
+    	Integer postno = 120;
+    	Integer rc = this.mapper.updateReadcnt(postno);
+    	log.info("testUpdateReadcnt({}, {}) invoked.", postno, rc);
+    }
 
 } // end class

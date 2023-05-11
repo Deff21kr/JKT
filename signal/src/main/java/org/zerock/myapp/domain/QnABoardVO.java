@@ -15,6 +15,7 @@ public class QnABoardVO {
 	private String content;
 	private Timestamp regidate;
 	private Timestamp modifydate;
+	private Integer readcnt;
 	
 	public QnABoardDTO toDTO() {
 		log.trace("toDTO() invoked.");

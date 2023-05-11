@@ -110,12 +110,24 @@ public class QnABoardServiceTests {
 		log.info("\t+ isDeleted : {}", isDeleted);
 	} // testRemove	
 	
-	@Test(timeout = 1000 *2)
+	@Test(timeout = 1000 * 2)
 	public void testGetTotal() throws ServiceException {
 		log.trace("testGetTotal() invoked.");
 		
 		int totalAmount = this.service.getTotal();
 		log.info("\t + totalAmount: {}", totalAmount );
 	} // testGetTotal
+	
+	@Test(timeout = 1000 * 2)
+	public void testUpdateReadcnt() throws ServiceException {
+		log.trace("testUpdateReadcnt() invoked.");
+		
+		int postno = 100;
+		Integer rc  = this.service.updateReadcnt(postno);
+		
+		assert rc != null;
+		log.info("\t+ vo : {}", rc);
+		
+	} // testUpdateReadcnt
 	
 } // end class

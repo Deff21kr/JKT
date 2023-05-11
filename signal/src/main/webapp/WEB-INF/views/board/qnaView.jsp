@@ -54,10 +54,10 @@
                         <dl>
                             <dt>등록일</dt>
                             <dd>${__BOARD__.regidate}</dd>
-                        </dl>
+                        </dl> 
                         <dl>
                             <dt>조회수</dt>
-                            <dd>13</dd>
+                            <dd>${__BOARD__.readcnt}</dd>
                         </dl>
                     </div>
                     <div class="content" readonly>${__BOARD__.content}</div>

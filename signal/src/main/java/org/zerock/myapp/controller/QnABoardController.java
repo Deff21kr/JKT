@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +16,10 @@ import org.zerock.myapp.domain.QnABoardDTO;
 import org.zerock.myapp.domain.QnABoardVO;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
+import org.zerock.myapp.domain.QNACommentDTO;
+import org.zerock.myapp.domain.QNACommentVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.service.QNACommentService;
 import org.zerock.myapp.service.QnABoardService;
 
 import lombok.NoArgsConstructor;
@@ -32,9 +36,13 @@ public class QnABoardController {
 	@Setter(onMethod_ = @Autowired)
 	private QnABoardService service;
 	
+	@Setter(onMethod_ = @Autowired)
+	private QNACommentService commentService;
+	
 	// 1. 게시판 목록 조회
 	@GetMapping("/qnaList")
-	void list(Criteria cri, Model model) throws ControllerException {
+//	@GetMapping(path={"/qnaList", "/qnaView", "/comments"},  params = "postno")
+	void list(Criteria cri, Model model, QnABoardVO vo) throws ControllerException {
 		log.trace("list({}, {}) invoked.", cri, model);
 		
 		try {
@@ -44,6 +52,7 @@ public class QnABoardController {
 		
 		PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
 		model.addAttribute("pageMaker", pageDTO);
+		
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
@@ -58,7 +67,7 @@ public class QnABoardController {
 		try {
 			Objects.requireNonNull(dto);
 			
-			if( this.service.register(dto) ) {		
+			if( this.service.register(dto) ) { 	
 				rttrs.addFlashAttribute("result", "true");
 				rttrs.addFlashAttribute("postno", dto.getPostno());
 			} // if
@@ -76,7 +85,7 @@ public class QnABoardController {
 		
 	} // register
 	
-	// 3. 특정 게시물 상세조회
+	// 3. 특정 게시물 상세조회 및 댓글 조회
     @GetMapping(path={"/qnaView", "/qnaEdit"},  params = "postno")
     void get(@RequestParam Integer postno, Model model) throws  ControllerException {
         log.trace("get() invoked.");
@@ -84,6 +93,9 @@ public class QnABoardController {
         try{
             QnABoardVO vo = this.service.get(postno);
             model.addAttribute("__BOARD__", vo);
+            
+            List<QNACommentVO> commentList = this.commentService.getList(postno);
+            model.addAttribute("__COMMENT_LIST__", commentList);
         }catch (Exception e){
             throw new ControllerException(e);
         } // try-catch
@@ -128,5 +140,56 @@ public class QnABoardController {
 			throw new ControllerException(e);
 		} // try-catch
 	} // remove
+	
+//	-------------- 댓글 C/R/U/D ------------------------
+	
+	
+		
+		// 댓글 등록
+//		@RequestMapping(value = "/replyRegist", method= {RequestMethod.POST})
+		@PostMapping("/qnaReply")
+		String insert(@ModelAttribute QNACommentDTO dto, Criteria cri,RedirectAttributes rttrs) throws ControllerException {
+		    log.trace("addComment({}) invoked.", dto);
+		    try {
+		    	
+		    	dto.setNickname("화가 안나는 홍기서");
+		    	commentService.insert(dto);
+		        rttrs.addAttribute("postno", dto.getPostno());
+		        return "redirect:/board/qnaView";
+		    } catch (Exception e) {
+		        throw new ControllerException(e);
+		    }
+		} // addComment
+
+		
+		// 댓글 수정
+		@PostMapping("/edit")
+		String editComment(QNACommentDTO dto, RedirectAttributes rttrs) throws ControllerException {
+			log.trace("editComment({}) invoked.", dto);
+			
+			try {
+				commentService.update(dto);
+				rttrs.addAttribute("postno", dto.getPostno());
+				return "redirect:/board/qnaView";
+			} catch (Exception e) {
+				throw new ControllerException(e);
+			}
+		} // editComment
+		
+		// 댓글 삭제
+		@PostMapping("/delete")
+		String deleteComment(@RequestParam(value = "commentno", required=false) Integer commentno, Integer postno,RedirectAttributes rttrs) throws ControllerException {
+			log.trace("deleteComment({}) invoked.", commentno);
+			
+			try {
+				commentService.deleteComment(commentno);
+				rttrs.addAttribute("postno", postno);
+				return "redirect:/board/qnaView";
+			} catch (Exception e) {
+				throw new ControllerException(e);
+			}
+		} // deleteComment
+	
+	
 	
 } // end class

@@ -24,8 +24,7 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
-	@Autowired
-	private UsersMapper users;
+	@Autowired private UsersMapper users;
 	
 
 	@Override

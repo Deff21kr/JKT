@@ -70,8 +70,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 		boolean rememberMe = checkRememberMeOption(req);	// 조건2 검사
 		log.info("\t+ Remember-Me: authencated({}), rememberMe({})", authencated, rememberMe);	
 		
+		
+
 		if(authencated && rememberMe) {	// 자동로그인 처리조건을 만족한다면....
-			
 			
 			
 			// Step.2 자동로그인설정을 요청한 웹브라우저의 이름인 세션ID 획득

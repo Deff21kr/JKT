@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 @Log4j2
 
-@RequestMapping("/user")
+@RequestMapping("/board/anjrlt")
 @Controller
 public class UsersController {
    
@@ -49,38 +49,11 @@ public class UsersController {
 
 	} // list : 전체회원조회가 있어야 돼나??
 	
-	// 2. 회원가입						필수 파라미터 등록!!
-	@PostMapping(path="/register"
-//				,params= {"ID","nickName","name",
-//						"password", "gender", "EMail",
-//						"phoneNumber", "birthDate","MBTI","likeArea"}
-			)	//rttrs 1회성 전달 메소드  
-	String register(UsersDTO dto,RedirectAttributes rttrs ) throws ControllerException  {
-		log.trace("register( {}, {} ) ㄲㄲ",dto,rttrs);
-		try {
-			Objects.requireNonNull(dto);		// dto가 제대로 수집되어 널이 아니라면
-			if (this.service.register(dto)) {	// if Success
-				rttrs.addAttribute("result", "true");
-				rttrs.addAttribute("userno",dto.getUno());
-			}
-			return "redirect:/mainpage";
-		} catch(Exception e) {
-			throw new ControllerException(e);
-		}
 	
-	} // 회원가입창으로 이동
-	
-	@GetMapping("/register" )
-	void register() {
-		log.trace("join() invoked.");
-		
-	}
 	
 	
 	// 3. 특정회원 조회
 	@GetMapping(path={"/get"}, params = "ID")
-//	String get(@RequestParam("bno") Integer bno ,Model model) 
-//			throws ControllerException {
 	void get(@RequestParam("ID") String ID ,Model model) 
 				throws ControllerException {
 		
@@ -99,7 +72,7 @@ public class UsersController {
 	} // 특정 회원의 모든 게시물 조회
 	
 	
-	@PostMapping(path="/modify")
+	@PostMapping(path="/mypage")
 	String modify(UsersDTO dto,RedirectAttributes rttrs) 
 			throws ControllerException {
 		log.trace("modify({}) invoked.",dto);
@@ -118,7 +91,7 @@ public class UsersController {
 		}
 	} // 회원정보수정
 	
-	@PostMapping(path="/remove")
+	@PostMapping(path="/mypage/remove")
 	String remove(UsersDTO dto,RedirectAttributes rttrs) 
 			throws ControllerException {
 		log.trace("modify({}) invoked.",dto);
@@ -136,10 +109,21 @@ public class UsersController {
 			throw new ControllerException(e);
 		}
 	} // 탈퇴?
+	
+	@GetMapping(path={"/mypage/group/list"}, params = "ID")
+	String myGroupList() {
+		
+		return "redirect:mypage";
+		
+	}
+	
+	@PostMapping(path={"/mypage/group/{동행명}/evaluate"}, params = "ID")
+	void partnerEvaluate() {
+		
+	}
+
 
 	
 	
-	
-   
    
 } // end class

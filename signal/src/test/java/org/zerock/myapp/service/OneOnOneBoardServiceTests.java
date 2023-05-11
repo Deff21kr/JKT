@@ -56,7 +56,7 @@ public class OneOnOneBoardServiceTests {
 		log.trace("testRegister() invoked");
 		
 		OneOnOneBoardDTO dto = new OneOnOneBoardDTO();
-		dto.setNickname("hyeondaeA");
+		dto.setNickName("hyeondaeA");
 		dto.setTitle("New_titleA");
 		dto.setContent("New_contentA");
 		
@@ -73,7 +73,7 @@ public class OneOnOneBoardServiceTests {
 	public void testGet() throws ServiceException {
 		log.trace("testGet() invoked");
 		
-		Integer postno = 3;
+		Integer postno = 115;
 		
 		OneOnOneBoardVO vo = this.service.get(postno);
 		assertNotNull(vo);
@@ -85,7 +85,7 @@ public class OneOnOneBoardServiceTests {
 	public void testModify() throws ServiceException {
 		log.trace("testModify() invoked");
 		
-		Integer postno = 3;
+		Integer postno = 115;
 		OneOnOneBoardVO vo = this.service.get(postno);
 		
 		assertNotNull(vo);
@@ -113,6 +113,21 @@ public class OneOnOneBoardServiceTests {
 	} // testRemove
 	
 	
+	@Test
+	public void testReply() throws ServiceException {
+		log.trace("testReply() invoked");
+	
+		OneOnOneBoardDTO dto = new OneOnOneBoardDTO();
+		dto.setNickName("hyeondaeTTT2-1");
+		dto.setTitle("serviceTestTitle2-1");
+		dto.setContent("plz two-one clear");
+		dto.setRepRoot(116);
+		dto.setRepStep(1);
+		dto.setRepIndent(0);
+		
+		this.service.reply(dto);
+		
+	} // testReply
 	
 	
 	

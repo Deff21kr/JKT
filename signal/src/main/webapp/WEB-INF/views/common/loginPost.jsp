@@ -8,16 +8,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Travel Signal - Login Page</title>
+  <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="${pageContext.request.contextPath }/resources/favicon.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/loginpage.css">
   <!-- fonts awesome -->
   <script src="https://kit.fontawesome.com/1486713bf1.js" crossorigin="anonymous"></script>
+  
+  <script>
+        // To display sign-in result.
+        var result = "${ param.__RESULT__ }";
+
+        if(result != null && result.length > 0) {
+            alert(result);
+        } // if
+    </script>
+    
 </head>
 <body>
 
   <main>
-    <form action="/loginpost" method="post">
+    <form action="/common/loginPost" method="post">
       <fieldset>
         <legend><h3>로그인</h3></legend>
         <div class="user-area">
@@ -33,8 +45,11 @@
           <input id="userpw" name="password" type="password" placeholder="비밀번호">
         </div>
         <a href="#">비밀번호를 잊었습니까?</a>
-        <button type="submit">Login</button>  
-        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+        
+        <div>Remember-me <input type="checkbox" name="rememberMe"></div>
+                <p></p>
+
+                <div><button type="submit">Sign-in</button></div>
       </fieldset>
     </form>
     

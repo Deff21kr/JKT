@@ -12,23 +12,33 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-	<!-- 어노테이션 기반으로 스프링mvc를 구현하겠다 -->
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<!-- 정적 파일을 보관하는 경로와, 이렇게 요청이 들어오면 이 폴더 안에서 찾아다가 서비스 하겠다. -->
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<!-- <beans:bean 
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean> -->
 
 	<view-resolvers>
 		<jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</view-resolvers>
+	
+	<interceptors>
+<interceptor>
+			<mapping path="/common/loginPost"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/board/**/*" />
+			<exclude-mapping path="/board/**/*list" />
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/common/logout" />
+			<beans:ref bean="logoutInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
   
 
@@ -43,9 +53,12 @@
 		<beans:property name="uploadTempDir" value="file:/C:/upload/tmp"/>
 		
 	</beans:bean>
-
+	
+	<view-controller path="/common/logout" view-name="/common/logout"  status-code="200" />
+	
 	<context:component-scan base-package="org.zerock.myapp.controller" />
 	<context:component-scan base-package="org.zerock.myapp.exception" />
+	<context:component-scan base-package="org.zerock.myapp.interceptor" />
 	
 
 	

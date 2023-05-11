@@ -24,5 +24,11 @@ public class TestController {
 		
 		return "mypage";
 	}
+	
+	@GetMapping(path="/transfer")
+	String test4() {
+		
+		return "transfer";
+	}
 
 }

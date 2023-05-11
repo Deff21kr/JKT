@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Travel Signal - Main Page</title>
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
 
     <!-- swiper style -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -30,19 +32,19 @@
 
       <div class="signup-container">
         <%-- 세션에서 로그인 정보를 가져옴 --%>
-          <c:set var="login" value="${sessionScope.login}" />
+          <c:set var="login" value="${sessionScope.__AUTH__}" />
 
           <%-- 로그인 상태에 따라 버튼 보이기/숨기기 --%>
             <c:if test="${empty login}">
               <div class="signup-container">
-                <div><a href="/loginpage">로그인</a></div>
-                <div><a href="join.jsp">회원가입</a></div>
+                <div><a href="/common/loginPost">로그인</a></div>
+                <div><a href="/common/register">회원가입</a></div>
               </div>
             </c:if>
             <c:if test="${not empty login}">
               <div class="signup-container">
-                <div><a href="/logout">로그아웃</a></div>
-                <div><a href="join.jsp">회원가입</a></div>
+                <div><a href="/common/logout">로그아웃</a></div>
+                <div><a href="/common/register">회원가입</a></div>
               </div>
             </c:if>
       </div>

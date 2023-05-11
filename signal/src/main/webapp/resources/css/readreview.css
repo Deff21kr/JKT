@@ -23,11 +23,23 @@ h1 {
     padding: 10px;
 }
   
-.container {
+.wrap-container {
     width: 80%;
     margin: 40px auto;
     /* border: 2px solid blue;  */
 }
+
+
+
+/* 사진슬라이더 영역 */
+
+.container {
+    width: 640px !important;
+    height:400px !important;
+    overflow: hidden;
+}
+
+
 
 
 
@@ -70,12 +82,13 @@ h1 {
 
 }
 
-.date {
+.regi-date {
     display: inline-block;
-    font-size: 14px;
-    position: absolute;
+    font-size: 13px;
+    /* position: absolute; */
     bottom: 0px;
     left: 160px;
+    margin-left: 30px;
     
 }
 

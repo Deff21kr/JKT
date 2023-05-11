@@ -9,29 +9,27 @@ import lombok.extern.log4j.Log4j2;
 @Value
 public class OneOnOneBoardVO {
 
-	private Integer postno;
-	private String nickname;
+	private Integer postNo;
+	private String nickName;
 	private String title;
 	private String content;
-	private Timestamp regidate;
-	private Timestamp modifydate;
-	private Integer readcnt;
-	private Integer reproot;
-	private Integer repstep;
-	private Integer repindent;
+	private Timestamp regiDate;
+	private Timestamp modifyDate;
+	private Integer repRoot;
+	private Integer repStep;
+	private Integer repIndent;
 	
 	public OneOnOneBoardDTO toDTO() {
 		log.trace("toDTO() invoked");
 		
 		OneOnOneBoardDTO dto = new OneOnOneBoardDTO();
-		dto.setPostno(postno);
-		dto.setNickname(nickname);
+		dto.setPostNo(postNo);
+		dto.setNickName(nickName);
 		dto.setTitle(title);
 		dto.setContent(content);
-		dto.setReadcnt(readcnt);
-		dto.setReproot(reproot);
-		dto.setRepstep(repstep);
-		dto.setRepindent(repindent);
+		dto.setRepRoot(repRoot);
+		dto.setRepStep(repStep);
+		dto.setRepIndent(repIndent);
 		
 		log.info("\t + dto : {}", dto);
 		

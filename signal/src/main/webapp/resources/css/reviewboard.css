@@ -111,11 +111,15 @@ h1 {
 }
 
 .like {
-    color: rgb(111, 111, 111)
+    margin-left: 66px;
+    color: rgb(111, 111, 111);
+    font-size: 15px;
 }
 
 .view {
+    margin-left: 12px;
     color: rgb(111, 111, 111);
+    font-size: 15px;
 }
 
 

@@ -5,13 +5,12 @@ import lombok.Data;
 @Data
 public class OneOnOneBoardDTO {
 
-	private Integer postno;
-	private String nickname;
+	private Integer postNo;
+	private String nickName;
 	private String title;
 	private String content;
-	private Integer readcnt;
-	private Integer reproot;
-	private Integer repstep;
-	private Integer repindent;
+	private Integer repRoot;
+	private Integer repStep;
+	private Integer repIndent;
 
 }

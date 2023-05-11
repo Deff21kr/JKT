@@ -181,7 +181,7 @@
                             </a>
                         </div>
                     </div>
-                </li>  
+                </li>
             </ul>
         </section>
 

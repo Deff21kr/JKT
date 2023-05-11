@@ -9,6 +9,7 @@ public class GroupBoardVO {
 	private Integer postNo;
 	private Integer userNo;
 	private String title;
+	private String content;
 	private String area;
 	private Integer memberNum;
 	private String recruitStatus;

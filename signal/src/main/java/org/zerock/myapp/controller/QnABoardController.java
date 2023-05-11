@@ -3,6 +3,10 @@ package org.zerock.myapp.controller;
 import java.util.List;
 import java.util.Objects;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +41,8 @@ public class QnABoardController {
 	private LoginService login;
 	
 	// 1. 게시판 목록 조회
-	@GetMapping("/qnaList")
-	void list(Criteria cri, Model model) throws ControllerException {
+	@GetMapping("/list")
+	String list(Criteria cri, Model model) throws ControllerException {
 		log.trace("list({}, {}) invoked.", cri, model);
 		
 		try {
@@ -48,6 +52,9 @@ public class QnABoardController {
 		
 		PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
 		model.addAttribute("pageMaker", pageDTO);
+		
+		return "board/qnaList";
+		
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
@@ -70,34 +77,79 @@ public class QnABoardController {
 				rttrs.addFlashAttribute("postno", dto.getPostno());
 			} // if
 			
-			return "redirect:/board/qnaList";
+			return "redirect:/board/qna/list";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
 	} // register
 	
 	// 단순 등록화면 요청
+<<<<<<< HEAD
 //	@GetMapping("/qnaWrite")
 //	void register() {
 //		log.trace("register() invoked.");
 //		
 //	} // register
+=======
+	@GetMapping("/register")
+	void register() {
+		log.trace("register() invoked.");
+		
+	} // register
+>>>>>>> 03ab36d9f47aa781293cc383f1096869c461ca39
 	
 	// 3. 특정 게시물 상세조회
-    @GetMapping(path={"/qnaView", "/qnaEdit"},  params = "postno")
-    void get(@RequestParam Integer postno, Model model) throws  ControllerException {
+    @GetMapping(path={"/get", "/modify"},  params = "postno")
+    void get(@RequestParam Integer postno, Model model
+//    		HttpServletRequest req, HttpServletResponse res 
+    		) throws  ControllerException {
         log.trace("get() invoked.");
 
         try{
+        	Integer rc = this.service.updateReadcnt(postno);
+        	model.addAttribute("_BOARD_", rc);
+        	
+//// ========= 조회수 중복방지 =================================
+//        	
+//        	Cookie oldCookie = null;
+//        	Cookie[] cookies = req.getCookies();
+//        	if(cookies != null) {
+//        		for(Cookie cookie : cookies) {
+//        			if(cookie.getName().equals("postno")) {
+//        				oldCookie = cookie;
+//        			} // if
+//        		} // enhanced for
+//        	} // if
+//        	
+//        	if(oldCookie != null) {
+//        		if(!oldCookie.getValue().contains("[" + postno.toString() + "]")) {
+//        			service.get(postno);
+//        			oldCookie.setValue(oldCookie.getValue() + "_[" + postno + "]");
+//        			oldCookie.setPath("/");
+//        			oldCookie.setMaxAge(60 * 60 * 24);
+//        			res.addCookie(oldCookie);
+//        			log.info(">>>>> check oldCookie");
+//        		}
+//        	} else {
+//        		service.get(postno);
+//        		Cookie newCookie = new Cookie("postno", "_[" + postno + "]" );
+//        		newCookie.setPath("/");
+//        		newCookie.setMaxAge(60 * 60 * 24);
+//        		res.addCookie(newCookie);
+//        		log.info(">>>>> check newCookie");
+//        	} 
+        	
+// =====================================================        	
             QnABoardVO vo = this.service.get(postno);
             model.addAttribute("__BOARD__", vo);
+            
         }catch (Exception e){
             throw new ControllerException(e);
         } // try-catch
     } // get
 	
     // 4. 특정 게시물 업데이트(수정화면)
-    @PostMapping("/qnaEdit")
+    @PostMapping("/modify")
     String modify(QnABoardDTO dto, Integer currPage, RedirectAttributes rttrs) throws ControllerException {
     	log.trace("modify({}, {}) invoked.", dto, currPage);
     	
@@ -110,7 +162,7 @@ public class QnABoardController {
 				rttrs.addFlashAttribute("result", "true");
 				rttrs.addFlashAttribute("postno", dto.getPostno());
 			} // if
-			return "redirect:/board/qnaList";
+			return "redirect:/board/qna/list";
 			
 		} catch(Exception e) {
 			throw new ControllerException(e);
@@ -129,7 +181,7 @@ public class QnABoardController {
 				rttrs.addFlashAttribute("result", "true");
 				rttrs.addFlashAttribute("postno", postno);
 			} // if
-			return "redirect:/board/qnaList";
+			return "redirect:/board/qna/list";
 			
 		} catch(Exception e) {
 			throw new ControllerException(e);

@@ -96,6 +96,19 @@ public class QnABoardServiceImpl
 		} // try-catch
 	} // remove
 	
+	// 조회수
+	@Override
+	public Integer updateReadcnt(Integer postno) throws ServiceException {
+		log.trace("updateReadcnt({}) invoked.", postno);
+		
+		try {
+			return this.dao.updateReadcnt(postno);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
+	} // updateRecnt
+	
 	
 //	====== IntitializingBean, DisposableBean ======
 
@@ -123,6 +136,7 @@ public class QnABoardServiceImpl
 		
 		return this.dao.getTotalAmount();
 		
-	}
+	} // getTotal
+
 
 } // end class

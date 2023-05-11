@@ -22,11 +22,11 @@
         <script>
             $(function () {
                 $('#listBtn').click(function () {
-                    location = "/board/qnaList?currPage=${param.currPage}";
+                    location = "/board/qna/list?currPage=${param.currPage}";
                 });
                 $('#removeBtn').click(function () {
                     let formObj = $("form");
-                    formObj.attr("action", "/board/remove");
+                    formObj.attr("action", "/board/qna/remove");
                     formObj.attr("method", "POST");
                     formObj.submit();
                 });
@@ -38,11 +38,11 @@
         
         <!-- QnA 글쓰기 수정 -->
         <div class="board_wrap">
-            <form action="/board/qnaEdit" method="POST">
+            <form action="/board/qna/modify" method="POST">
             	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                 <input type="hidden" name="currPage" value="${param.currPage}">
                 <input type="hidden" name="postno" value="${__BOARD__.postno}">
-                <input type="hidden" name="nickname" value="${__BOARD__.nickname}">
+                <input type="hidden" name="nickname" value="${__AUTH__.nickname}">
                 <div class="board_title">
                     <strong>QnA</strong>
                 </div>
@@ -57,7 +57,7 @@
                         <div class="info">
                             <dl>
                                 <dt>작성자</dt>
-                                <dd>${__BOARD__.nickname}</dd>
+                                <dd>${__AUTH__.nickname}</dd>
                             </dl>
                         </div>
                         <div class="content">

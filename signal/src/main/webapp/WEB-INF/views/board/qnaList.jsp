@@ -25,11 +25,11 @@
         $(function () {
             $('#regBtn').click(function () {
                 let currPage = "${pageMaker.cri.currPage}";
-                location = "/board/qnaWrite?currPage="+currPage;
+                location = "/board/qna/register?currPage="+currPage;
             });
             $('.pageNum').on('click', function(e) {
                 let selectedPageNum = e.currentTarget.textContent;
-                location = "/board/qnaList?currPage="+selectedPageNum;
+                location = "/board/qna/list?currPage="+selectedPageNum;
             });
         });
     </script>
@@ -45,32 +45,33 @@
         </div>
         <div class="board_list_wrap">
             <div class="board_list">
+                <input type="hidden" name="readcnt" value="${boardVO.readcnt}">
                 <div class="top">
                     <div class="num">번호</div>
                     <div class="title">제목</div>
                     <div class="nickname">작성자</div>
                     <div class="date">등록일</div>
-                    <div class="count">조회수</div>
+                    <div class="readcnt">조회수</div>
                 </div>
                 <div>
                     <c:forEach var="boardVO" items="${__LIST__}">
                         <div class="num">${boardVO.postno}</div>
-                        <div class="title"><a href="/board/qnaView?currPage=${pageMaker.cri.currPage}&postno=${boardVO.postno}">${boardVO.title}</a></div>
+                        <div class="title"><a href="/board/qna/get?currPage=${pageMaker.cri.currPage}&postno=${boardVO.postno}">${boardVO.title}</a></div>
                         <div class="nickname">${boardVO.nickname}</div>
                         <div class="date"><fmt:formatDate pattern="yyyy/MM/dd" value="${boardVO.regidate}" /></div>
-                        <div class="count">13</div>
+                        <div class="count">${boardVO.readcnt}</div>
                     </c:forEach>
                 </div>
             </div>
             <div class="board_page">
                     <c:if test="${pageMaker.prev}">
-                        <div class="Prev"><a href="/board/qnaList?currPage=${pageMaker.startPage - 1}">Prev</a></div>
+                        <div class="Prev"><a href="/board/qna/list?currPage=${pageMaker.startPage - 1}">Prev</a></div>
                     </c:if>
                     <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
                         <div class="pageNum ${pageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
                     </c:forEach>
                     <c:if test="${pageMaker.next}">
-                        <div class="Next"><a href="/board/qnaList?currPage=${pageMaker.endPage + 1}">Next</a></div>
+                        <div class="Next"><a href="/board/qna/list?currPage=${pageMaker.endPage + 1}">Next</a></div>
                     </c:if>
             </div>
             

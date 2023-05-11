@@ -22,7 +22,7 @@
         <script>
             $(function () {
                 $('#listBtn').click(function () {
-                    location.href = "/board/qnaList?currPage=${param.currPage}";
+                    location.href = "/board/qna/list?currPage=${param.currPage}";
                 });
             });
         </script>
@@ -33,6 +33,10 @@
     	
         <div class="board_wrap">
             <form action="/board/qna/register" method="POST">
+<<<<<<< HEAD
+=======
+            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+>>>>>>> 03ab36d9f47aa781293cc383f1096869c461ca39
                 <div class="board_title">
                     <strong>QnA</strong>
                 </div>

@@ -39,4 +39,7 @@ public interface QnABoardMapper {
 	@Select("SELECT count(postno) FROM TBL_QNABOARD WHERE postno > 0")
 	public abstract Integer getTotalAmount();
 	
+	// 7. 조회수 올리기
+	public Integer updateReadcnt(Integer postno);
+	
 } // end interface

@@ -1,4 +1,4 @@
-package org.zerock.myapp.mapper;
+package org.zerock.myapp.persistence;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -17,10 +17,10 @@ import org.zerock.myapp.exception.DAOException;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-@Repository("loginMapper")
+@Repository("loginDAO")
 @AllArgsConstructor
 @Log4j2
-public class LoginMepperImpl implements LoginMapper, InitializingBean, DisposableBean {
+public class LoginDAOImpl implements LoginDAO, InitializingBean, DisposableBean {
 	
 	private SqlSessionFactory sqlSessionFactory;
 
@@ -42,7 +42,7 @@ public class LoginMepperImpl implements LoginMapper, InitializingBean, Disposabl
 		try (sqlSession) {
 			// SQL 문장을 수행시킬 클래스의 FQCN을 namespace로 하고
 			// sqlId는 , namespace안의 특정 메소드 이름으로 관례상 맞춤
-			String namespace = "org.zerock.myapp.mapper.LoginMapper";
+			String namespace = "org.zerock.myapp.persistence.LoginDAO";
 			String sqlId = "selectUserIdPw";
 			String sql = namespace + "." + sqlId;
 
@@ -54,10 +54,7 @@ public class LoginMepperImpl implements LoginMapper, InitializingBean, Disposabl
 
 	}
 	
-	@Override
-	public void destroy() throws Exception {
 
-	}
 
 	@Override
 	public Integer updateUserWithRememberMe(
@@ -72,7 +69,7 @@ public class LoginMepperImpl implements LoginMapper, InitializingBean, Disposabl
 		try (sqlSession) {
 			// SQL 문장을 수행시킬 클래스의 FQCN을 namespace로 하고
 			// sqlId는 , namespace안의 특정 메소드 이름으로 관례상 맞춤
-			String namespace = "org.zerock.myapp.mapper.LoginMapper";
+			String namespace = "org.zerock.myapp.persistence.LoginDAO";
 			String sqlId = "updateUserWithRememberMe";
 			String sql = namespace + "." + sqlId;
 
@@ -99,7 +96,7 @@ public class LoginMepperImpl implements LoginMapper, InitializingBean, Disposabl
 		SqlSession sqlSession= this.sqlSessionFactory.openSession();
 		
 		try (sqlSession){
-			String namespace = "org.zerock.myapp.mapper.LoginMapper";
+			String namespace = "org.zerock.myapp.persistence.LoginDAO";
 			String sqlId = "selectUserByRememberMe";
 			String sql = namespace+"."+sqlId;
 			
@@ -109,7 +106,10 @@ public class LoginMepperImpl implements LoginMapper, InitializingBean, Disposabl
 		} // try-with-resources
 		
 	}
+	@Override
+	public void destroy() throws Exception {
 
+	}
 
 	
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.zerock.myapp.mapper.LoginMapper">
+<mapper namespace="org.zerock.myapp.persistence.LoginDAO">
 	
 	<select id="selectUserIdPw" resultType="org.zerock.myapp.domain.UsersVO">
 		select *
@@ -11,8 +11,8 @@
 	    <update id="updateUserWithRememberMe">
        UPDATE tbl_users
       SET
-          rememberme = #{rememberMe, jdbcType=VARCHAR},
-          rememberage = #{rememberMeAge, jdbcType=DATE}
+          rememberMe = #{rememberMe, jdbcType=VARCHAR},
+          rememberAge = #{rememberMeAge, jdbcType=DATE}
       WHERE
           id = #{ID}
     </update>
@@ -22,7 +22,7 @@
             resultType="org.zerock.myapp.domain.UsersVO">
         SELECT *
         FROM tbl_users
-        WHERE rememberme = #{rememberMe}
+        WHERE rememberMe = #{rememberMe}
     </select>
     
 	

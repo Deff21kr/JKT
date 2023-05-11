@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j2;
 @ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/**/root-*.xml"})
 public class RememberMeTest {
 	@Setter(onMethod_ = @Autowired)
-	private LoginMapper login;
+	private LoginDAO login;
 	@Setter(onMethod_ = @Autowired)
 	private UsersMapper user;
 	

@@ -1,4 +1,4 @@
-package org.zerock.myapp.mapper;
+package org.zerock.myapp.persistence;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.DAOException;
 
-public interface LoginMapper {
+public interface LoginDAO {
 	
 	public abstract UsersVO selectUserIdPw(UsersDTO dto) throws DAOException;;
 	

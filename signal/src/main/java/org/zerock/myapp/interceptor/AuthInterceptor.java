@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.util.WebUtils;
 import org.zerock.myapp.domain.UsersVO;
-import org.zerock.myapp.mapper.LoginMapper;
 import org.zerock.myapp.mapper.UsersMapper;
+import org.zerock.myapp.persistence.LoginDAO;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +28,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 	@Setter(onMethod_ = @Autowired)
 	private UsersMapper dao;
 	@Setter(onMethod_ = @Autowired)
-	private LoginMapper login;
+	private LoginDAO login;
 	
 	
 	// HTTP request 가 Request Mapping 대로, Controller의 Handler에 위임되기 직전에 가로채서

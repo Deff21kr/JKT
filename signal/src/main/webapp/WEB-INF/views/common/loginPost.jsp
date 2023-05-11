@@ -8,6 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Travel Signal - Login Page</title>
+  <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="${pageContext.request.contextPath }/resources/favicon.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/loginpage.css">
@@ -27,7 +29,7 @@
 <body>
 
   <main>
-    <form action="/common/login" method="post">
+    <form action="/common/loginPost" method="post">
       <fieldset>
         <legend><h3>로그인</h3></legend>
         <div class="user-area">

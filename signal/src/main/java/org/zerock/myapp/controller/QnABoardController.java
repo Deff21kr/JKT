@@ -84,19 +84,17 @@ public class QnABoardController {
 	} // register
 	
 	// 단순 등록화면 요청
-<<<<<<< HEAD
 //	@GetMapping("/qnaWrite")
 //	void register() {
 //		log.trace("register() invoked.");
 //		
 //	} // register
-=======
+	
 	@GetMapping("/register")
-	void register() {
+	void registesr() {
 		log.trace("register() invoked.");
 		
 	} // register
->>>>>>> 03ab36d9f47aa781293cc383f1096869c461ca39
 	
 	// 3. 특정 게시물 상세조회
     @GetMapping(path={"/get", "/modify"},  params = "postno")

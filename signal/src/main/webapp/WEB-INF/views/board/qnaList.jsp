@@ -45,7 +45,7 @@
         </div>
         <div class="board_list_wrap">
             <div class="board_list">
-                <input type="hidden" name="readcnt" value="${boardVO.readcnt}">
+                <!-- <input type="hidden" name="readcnt" value="${boardVO.readcnt}"> -->
                 <div class="top">
                     <div class="num">번호</div>
                     <div class="title">제목</div>
@@ -59,7 +59,7 @@
                         <div class="title"><a href="/board/qna/get?currPage=${pageMaker.cri.currPage}&postno=${boardVO.postno}">${boardVO.title}</a></div>
                         <div class="nickname">${boardVO.nickname}</div>
                         <div class="date"><fmt:formatDate pattern="yyyy/MM/dd" value="${boardVO.regidate}" /></div>
-                        <div class="count">${boardVO.readcnt}</div>
+                        <div class="readcnt">${boardVO.readcnt}</div>
                     </c:forEach>
                 </div>
             </div>

@@ -146,7 +146,7 @@ public class OneOnOneBoardController {
 		
 		try {
 			Objects.requireNonNull(dto);
-			
+						
 			if(this.service.reply(dto)) {
 				rttrs.addAttribute("result", "true");
 				rttrs.addAttribute("postno", dto.getPostNo());

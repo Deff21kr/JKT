@@ -9,7 +9,7 @@
 
     <insert id="insert">
         <selectKey keyProperty="postno" order="AFTER" resultType="int">
-        SELECT "ISEQ$$_81591".CURRVAL FROM dual
+        SELECT "ISEQ$$_75766".CURRVAL FROM dual
         </selectKey>
 
         INSERT INTO tbl_qnaboard (nickname, title, content) 

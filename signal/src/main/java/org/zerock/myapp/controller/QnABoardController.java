@@ -62,6 +62,7 @@ public class QnABoardController {
 	
 	@GetMapping("/register")
 	String register() {
+		log.trace("register() invoked.");
 		return "board/qnaWrite";
 	}
 	
@@ -89,12 +90,7 @@ public class QnABoardController {
 //		log.trace("register() invoked.");
 //		
 //	} // register
-	
-	@GetMapping("/register")
-	void registesr() {
-		log.trace("register() invoked.");
-		
-	} // register
+
 	
 	// 3. 특정 게시물 상세조회
     @GetMapping(path={"/get", "/modify"},  params = "postno")

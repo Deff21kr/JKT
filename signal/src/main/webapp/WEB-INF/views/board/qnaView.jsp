@@ -22,10 +22,10 @@
         <script>
             $(function () {
                 $('#listBtn').click(function () {
-                    location = "/board/qnaList?currPage=${param.currPage}";
+                    location = "/board/qna/list?currPage=${param.currPage}";
                 });
                 $('#modifyBtn').click(function () {
-                    location = "/board/qnaEdit?currPage=${param.currPage}&postno=${__BOARD__.postno}";
+                    location = "/board/qna/modify?currPage=${param.currPage}&postno=${__BOARD__.postno}";
                 });
             });
         </script>
@@ -49,7 +49,7 @@
                         </dl>
                         <dl>
                             <dt>작성자</dt>
-                            <dd>${__BOARD__.nickname}</dd>
+                            <dd>${__AUTH__.nickname}</dd>
                         </dl>
                         <dl>
                             <dt>등록일</dt>

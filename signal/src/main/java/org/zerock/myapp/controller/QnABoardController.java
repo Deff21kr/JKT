@@ -30,15 +30,15 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/board/qna")
 public class QnABoardController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private QnABoardService service;
 	
 	// 1. 게시판 목록 조회
-	@GetMapping("/qnaList")
-	void list(Criteria cri, Model model) throws ControllerException {
+	@GetMapping("/list")
+	String list(Criteria cri, Model model) throws ControllerException {
 		log.trace("list({}, {}) invoked.", cri, model);
 		
 		try {
@@ -49,6 +49,8 @@ public class QnABoardController {
 		PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
 		model.addAttribute("pageMaker", pageDTO);
 		
+		return "board/qnaList";
+		
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
@@ -56,7 +58,7 @@ public class QnABoardController {
 	
 	
 	// 2. 새로운 게시물 등록
-	@PostMapping("/qnaWrite")
+	@PostMapping("/register")
 	String register(QnABoardDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		log.trace("register({}, {}) invoked.", dto, rttrs);
 		
@@ -68,21 +70,21 @@ public class QnABoardController {
 				rttrs.addFlashAttribute("postno", dto.getPostno());
 			} // if
 			
-			return "redirect:/board/qnaList";
+			return "redirect:/board/qna/list";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
 	} // register
 	
 	// 단순 등록화면 요청
-	@GetMapping("/qnaWrite")
+	@GetMapping("/register")
 	void register() {
 		log.trace("register() invoked.");
 		
 	} // register
 	
 	// 3. 특정 게시물 상세조회
-    @GetMapping(path={"/qnaView", "/qnaEdit"},  params = "postno")
+    @GetMapping(path={"/get", "/modify"},  params = "postno")
     void get(@RequestParam Integer postno, Model model
 //    		HttpServletRequest req, HttpServletResponse res 
     		) throws  ControllerException {
@@ -132,7 +134,7 @@ public class QnABoardController {
     } // get
 	
     // 4. 특정 게시물 업데이트(수정화면)
-    @PostMapping("/qnaEdit")
+    @PostMapping("/modify")
     String modify(QnABoardDTO dto, Integer currPage, RedirectAttributes rttrs) throws ControllerException {
     	log.trace("modify({}, {}) invoked.", dto, currPage);
     	
@@ -145,7 +147,7 @@ public class QnABoardController {
 				rttrs.addFlashAttribute("result", "true");
 				rttrs.addFlashAttribute("postno", dto.getPostno());
 			} // if
-			return "redirect:/board/qnaList";
+			return "redirect:/board/qna/list";
 			
 		} catch(Exception e) {
 			throw new ControllerException(e);
@@ -164,7 +166,7 @@ public class QnABoardController {
 				rttrs.addFlashAttribute("result", "true");
 				rttrs.addFlashAttribute("postno", postno);
 			} // if
-			return "redirect:/board/qnaList";
+			return "redirect:/board/qna/list";
 			
 		} catch(Exception e) {
 			throw new ControllerException(e);

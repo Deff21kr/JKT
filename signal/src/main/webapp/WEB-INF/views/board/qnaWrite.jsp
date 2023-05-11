@@ -33,7 +33,10 @@
     	
         <div class="board_wrap">
             <form action="/board/qna/register" method="POST">
+<<<<<<< HEAD
+=======
             <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+>>>>>>> 03ab36d9f47aa781293cc383f1096869c461ca39
                 <div class="board_title">
                     <strong>QnA</strong>
                 </div>
@@ -42,18 +45,18 @@
                         <div class="title">
                             <dl>
                                 <dt>제목</dt>
-                                <dd><input type="text" name="title" value="${__BOARD__.title}" placeholder="제목 입력" required></dd>
+                                <dd><input type="text" name="title" placeholder="제목 입력" required></dd>
                             </dl>
                         </div>
                         <div class="info">
                             <dl>
                                 <dt>작성자</dt>
-                                <dd><input type="text" name="nickname" placeholder="작성자 입력" required></dd>
+                                <dd><input type="hidden" name="nickname" value ="${__AUTH__.nickName }" required> ${__AUTH__.nickName }</dd>
                                 <!-- <dd>${__BOARD__.nickname}</dd> -->
                             </dl>
                         </div>
                         <div class="content">
-                            <textarea  name="content" placeholder="내용을 작성해주세요." required>${__BOARD__.content}</textarea>
+                            <textarea  name="content" placeholder="내용을 작성해주세요." required></textarea>
                         </div>
                     </div>
                     

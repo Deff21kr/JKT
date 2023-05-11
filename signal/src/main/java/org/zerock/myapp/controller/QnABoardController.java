@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.myapp.domain.QnABoardDTO;
-import org.zerock.myapp.domain.QnABoardVO;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
+import org.zerock.myapp.domain.QnABoardDTO;
+import org.zerock.myapp.domain.QnABoardVO;
+import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.service.LoginService;
 import org.zerock.myapp.service.QnABoardService;
 
 import lombok.NoArgsConstructor;
@@ -35,6 +37,8 @@ public class QnABoardController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private QnABoardService service;
+	@Autowired
+	private LoginService login;
 	
 	// 1. 게시판 목록 조회
 	@GetMapping("/list")
@@ -56,6 +60,10 @@ public class QnABoardController {
 		} // try-catch
 	} // list
 	
+	@GetMapping("/register")
+	String register() {
+		return "board/qnaWrite";
+	}
 	
 	// 2. 새로운 게시물 등록
 	@PostMapping("/register")
@@ -64,7 +72,6 @@ public class QnABoardController {
 		
 		try {
 			Objects.requireNonNull(dto);
-			
 			if( this.service.register(dto) ) {		
 				rttrs.addFlashAttribute("result", "true");
 				rttrs.addFlashAttribute("postno", dto.getPostno());
@@ -77,11 +84,19 @@ public class QnABoardController {
 	} // register
 	
 	// 단순 등록화면 요청
+<<<<<<< HEAD
+//	@GetMapping("/qnaWrite")
+//	void register() {
+//		log.trace("register() invoked.");
+//		
+//	} // register
+=======
 	@GetMapping("/register")
 	void register() {
 		log.trace("register() invoked.");
 		
 	} // register
+>>>>>>> 03ab36d9f47aa781293cc383f1096869c461ca39
 	
 	// 3. 특정 게시물 상세조회
     @GetMapping(path={"/get", "/modify"},  params = "postno")

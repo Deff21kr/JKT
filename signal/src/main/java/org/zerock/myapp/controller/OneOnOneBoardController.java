@@ -47,7 +47,7 @@ public class OneOnOneBoardController {
 			throw new ControllerException(e);
 		} // try-catch
 
-		return "/oneonone/list";
+		return "/board/oneonone/list";
 	} // list
 
 	// 2. 새로운 게시물 등록
@@ -75,7 +75,7 @@ public class OneOnOneBoardController {
 	String register() {
 		log.trace("register() invoked");
 		
-		return "/oneonone/register";
+		return "/board/oneonone/register";
 	} // register
 	
 	// 3. 특정 게시물 상세조회
@@ -91,7 +91,7 @@ public class OneOnOneBoardController {
 			throw new ControllerException(e);
 		} // try-catch
 
-		return "/oneonone/get";
+		return "/board/oneonone/get";
 	} // get
 	
 
@@ -171,7 +171,7 @@ public class OneOnOneBoardController {
 			throw new ControllerException(e);
 		}
 
-		return "/oneonone/reply";
+		return "/board/oneonone/reply";
 	} // reply
 	
 	
@@ -188,7 +188,7 @@ public class OneOnOneBoardController {
 			throw new ControllerException(e);
 		} // try-catch
 
-		return "/oneonone/modify";
+		return "/board/oneonone/modify";
 	} // get
 	
 	

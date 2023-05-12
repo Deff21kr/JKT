@@ -52,6 +52,10 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< HEAD
+=======
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+>>>>>>> 03922e5a355f760660e6e425e593e267178c658e
                                                                                                         
         
         
@@ -65,6 +69,7 @@
         
         
         <property name="context-root" value="/"/>
+<<<<<<< HEAD
                                                                                                         
         
         
@@ -77,6 +82,8 @@
         
         
         
+=======
+>>>>>>> 03922e5a355f760660e6e425e593e267178c658e
         <property name="java-output-path" value="/signal/target/classes"/>
                                                                                                     
     

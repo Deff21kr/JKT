@@ -29,7 +29,10 @@
     </head>
 
     <body>
-        <%@include file="../../header.jsp" %>
+    <header>
+    	<%@include file="../../header.jsp" %>
+    </header>
+        
 
 
             <form action="/board/group/register" method="POST">
@@ -140,7 +143,7 @@
                             <div class="info">
                                 <dl>
                                     <dt>작성자</dt>
-                                    <dd><input type="text" name="nickName" placeholder="작성자 입력" required></dd>
+                                    <dd><input type="hidden" name="nickName" value ="${__AUTH__.nickName }" required> ${__AUTH__.nickName }</dd>
                                     <!-- <dd>${__BOARD__.nickName}</dd> -->
                                 </dl>
                             </div>

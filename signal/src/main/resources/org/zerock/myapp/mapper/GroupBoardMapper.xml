@@ -21,17 +21,17 @@
 
     <select id="select" resultType="org.zerock.myapp.domain.GroupBoardVO">
         SELECT * 
-        FROM tbl_qnaboard
-        WHERE postno = #{postno}
+        FROM tbl_groupboard
+        WHERE postno = #{postNo}
     </select>
 
     <delete id="delete">
-        DELETE FROM tbl_qnaboard
-        WHERE postno = #{postno}
+        DELETE FROM tbl_groupboard
+        WHERE postno = #{postNo}
     </delete>
 
     <update id="update">
-        UPDATE tbl_qnaboard
+        UPDATE tbl_groupboard
         SET title = #{title}, 
         	nickName = #{nickName},
             content = #{content}, 
@@ -41,7 +41,7 @@
             recruitStatus = #{recruitStatus}, 
             startDate = #{startDate}, 
             endDate = #{endDate}
-        WHERE postno = #{postno}
+        WHERE postno = #{postNo}
     </update>
 
 </mapper>

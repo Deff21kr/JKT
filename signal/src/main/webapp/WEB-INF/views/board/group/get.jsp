@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <!DOCTYPE html>
     <html lang="ko">
@@ -25,8 +26,9 @@
                     location = "/board/qnaList?currPage=${param.currPage}";
                 });
                 $('#modifyBtn').click(function () {
-                    location = "/board/qnaEdit?currPage=${param.currPage}&postno=${__BOARD__.postno}";
+                    location = "/board/qnaEdit?currPage=${param.currPage}&postno=${__BOARD__.postNo}";
                 });
+              
             });
         </script>
     </head>
@@ -45,15 +47,15 @@
                     <div class="info">
                         <dl>
                             <dt>번호</dt>
-                            <dd>${__BOARD__.postno}</dd>
+                            <dd>${__BOARD__.postNo}</dd>
                         </dl>
                         <dl>
                             <dt>작성자</dt>
-                            <dd>${__BOARD__.nickname}</dd>
+                            <dd>${__BOARD__.nickName}</dd>
                         </dl>
                         <dl>
                             <dt>등록일</dt>
-                            <dd>${__BOARD__.regidate}</dd>
+                            <dd>${__BOARD__.regiDate}</dd>
                         </dl>
                         <dl>
                             <dt>조회수</dt>
@@ -115,8 +117,15 @@
 
                 <!-- bt : button -->
                 <div class="bt_wrap">
+                <c:if test="${not __BOARD__.nickName.equals(__AUTH__.nickName)}">
+	               <button type="button" id="applyBtn">신청</button> 
+            	</c:if>
+                	
                     <button type="button" id="listBtn">목록</button> 
-                    <button type="button" id="modifyBtn">수정</button> 
+                    
+              	<c:if test="${__BOARD__.nickName.equals(__AUTH__.nickName)}">
+	               <button type="button" id="modifyBtn">수정</button> 
+            	</c:if>
                 </div>
             </div>
         </div>

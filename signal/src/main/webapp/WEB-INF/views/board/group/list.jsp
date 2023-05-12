@@ -13,9 +13,9 @@
     <!-- swiper style -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <!-- style -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style2.css">
-    <link rel="stylesheet" href="css/mainpage.css">
+    <link rel="stylesheet" href="../../resources/css/style.css">
+    <link rel="stylesheet" href="../../resources/css/style2.css">
+    <link rel="stylesheet" href="../../resources/css/mainpage.css">
     <!-- fonts awesome -->
     <script src="https://kit.fontawesome.com/1b2c39c9c4.js" crossorigin="anonymous"></script>
     <!-- swiper script -->
@@ -27,41 +27,10 @@
 
 <body>
 
-    <!-- header -->
-    <header>
-
-        <div class="signup-container">
-            <div><a href="loginpage.html">로그인</a></div>
-            <div><a href="#">회원가입</a></div>
-        </div>
-
-        <ul class="category">
-            <li><a href="main.html" target="_self"><img src="img/travelsignal2.png" alt="여행시그널로고"></a> </li>
-            <li><a href="#" target="_self">동행 찾기</a> </li>
-            <li><a href="#" target="_self">QnA</a> </li>
-            <li><a href="#" target="_self">동행 환승</a> </li>
-            <li><a href="#" target="_self">플래너</a> </li>
-            <li><a href="#" target="_self">여행후기</a> </li>
-            <li>
-                <div>
-                    <input type="text">
-                    <i class="fab fa-searchengin search-icon"></i>
-                </div>
-            </li>
-        </ul>
+   <header>
+    	<%@include file="../../header.jsp" %>
     </header>
-
-    <hr class="header-bottom-line">
-
-    <main>
-        <div class="place">
-            <div class="place-menu">
-                <div>
-                    <!-- <img src="img/travelsignal2.png" alt="여행시그널로고"> -->
-                    <strong><a href="#" target="_self">동행 찾기</a></strong>
-                </div>
-            </div>
-
+ 	<div class="place">
             <div class="searchbox">
 
                 <div class="area">

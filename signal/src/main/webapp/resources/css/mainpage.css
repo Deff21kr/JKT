@@ -253,8 +253,8 @@ main hr:nth-of-type(1) {
 }
 
 .content {
-  background-color: rgb(199, 239, 255);
-  color: darkblue;
+  /* background-color: rgb(199, 239, 255); */
+  /* color: darkblue; */
   border-radius: 0.5rem;
   padding: 4px 2px;
   margin-bottom: 4px;

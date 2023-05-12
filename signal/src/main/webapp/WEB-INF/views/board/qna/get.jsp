@@ -10,11 +10,11 @@
         <title>QnA 게시글 상세조회</title>
         
         <!-- <link rel="stylesheet" href="../../resources/css/css.css"> -->
-        <link rel="stylesheet" href="../../resources/css/style1.css">
-        <link rel="stylesheet" href="../../resources/css/style2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle1.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle3.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style1.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle1.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle3.css">
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
@@ -25,7 +25,7 @@
                     location = "/board/qna/list?currPage=${param.currPage}";
                 });
                 $('#modifyBtn').click(function () {
-                    location = "/board/qna/modify?currPage=${param.currPage}&postno=${__BOARD__.postno}";
+                    location = "/board/qna/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";
                 });
             });
         </script>
@@ -45,19 +45,19 @@
                     <div class="info">
                         <dl>
                             <dt>번호</dt>
-                            <dd>${__BOARD__.postno}</dd>
+                            <dd>${__BOARD__.postNo}</dd>
                         </dl>
                         <dl>
                             <dt>작성자</dt>
-                            <dd>${__BOARD__.nickname}</dd>
+                            <dd>${__BOARD__.nickName}</dd>
                         </dl>
                         <dl>
                             <dt>등록일</dt>
-                            <dd>${__BOARD__.regidate}</dd>
+                            <dd>${__BOARD__.regiDate}</dd>
                         </dl> 
                         <dl>
                             <dt>조회수</dt>
-                            <dd>${__BOARD__.readcnt}</dd>
+                            <dd>${__BOARD__.readCnt}</dd>
                         </dl>
                     </div>
                     <div class="content" readonly>${__BOARD__.content}</div>
@@ -116,7 +116,9 @@
                 <!-- bt : button -->
                 <div class="bt_wrap">
                     <button type="button" id="listBtn">목록</button> 
-                    <button type="button" id="modifyBtn">수정</button> 
+                    <c:if test="${__BOARD__.nickName.equals(__AUTH__.nickName)}">
+                  <button type="button" id="modifyBtn">수정</button> 
+                    </c:if>
                 </div>
             </div>
         </div>

@@ -12,11 +12,11 @@
     <title>QnA List</title>
 
 	<!-- <link rel="stylesheet" href="../../resources/css/css.css"> -->
-        <link rel="stylesheet" href="../../resources/css/style1.css">
-        <link rel="stylesheet" href="../../resources/css/style2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle1.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle3.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style1.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle1.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle3.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
@@ -55,11 +55,11 @@
                 </div>
                 <div>
                     <c:forEach var="boardVO" items="${__LIST__}">
-                        <div class="num">${boardVO.postno}</div>
-                        <div class="title"><a href="/board/qna/get?currPage=${pageMaker.cri.currPage}&postno=${boardVO.postno}">${boardVO.title}</a></div>
-                        <div class="nickname">${boardVO.nickname}</div>
-                        <div class="date"><fmt:formatDate pattern="yyyy/MM/dd" value="${boardVO.regidate}" /></div>
-                        <div class="readcnt">${boardVO.readcnt}</div>
+                        <div class="num">${boardVO.postNo}</div>
+                        <div class="title"><a href="/board/qna/get?currPage=${pageMaker.cri.currPage}&postNo=${boardVO.postNo}">${boardVO.title}</a></div>
+                        <div class="nickname">${boardVO.nickName}</div>
+                        <div class="date"><fmt:formatDate pattern="yyyy/MM/dd" value="${boardVO.regiDate}" /></div>
+                        <div class="readcnt">${boardVO.readCnt}</div>
                     </c:forEach>
                 </div>
             </div>

@@ -10,11 +10,11 @@
         <title>QnA 게시물 수정</title>
         
         <!-- <link rel="stylesheet" href="../../resources/css/css.css"> -->
-        <link rel="stylesheet" href="../../resources/css/style1.css">
-        <link rel="stylesheet" href="../../resources/css/style2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle1.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle3.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style1.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle1.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle3.css">
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
@@ -39,10 +39,9 @@
         <!-- QnA 글쓰기 수정 -->
         <div class="board_wrap">
             <form action="/board/qna/modify" method="POST">
-            	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                 <input type="hidden" name="currPage" value="${param.currPage}">
-                <input type="hidden" name="postno" value="${__BOARD__.postno}">
-                <input type="hidden" name="nickname" value="${__AUTH__.nickname}">
+                <input type="hidden" name="postNo" value="${__BOARD__.postNo}">
+                <input type="hidden" name="nickName" value="${__AUTH__.nickName}">
                 <div class="board_title">
                     <strong>QnA</strong>
                 </div>
@@ -57,7 +56,7 @@
                         <div class="info">
                             <dl>
                                 <dt>작성자</dt>
-                                <dd>${__AUTH__.nickname}</dd>
+                                <dd>${__AUTH__.nickName}</dd>
                             </dl>
                         </div>
                         <div class="content">

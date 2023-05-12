@@ -10,11 +10,11 @@
         <title>1:1 고객게시판 상세조회</title>
         
         <!-- <link rel="stylesheet" href="../../resources/css/css.css"> -->
-        <link rel="stylesheet" href="../../resources/css/style1.css">
-        <link rel="stylesheet" href="../../resources/css/style2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle1.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle3.css">
+        <link rel="stylesheet" href="/resources/css/style1.css">
+        <link rel="stylesheet" href="/resources/css/style2.css">
+        <link rel="stylesheet" href="/resources/css/bstyle1.css">
+        <link rel="stylesheet" href="/resources/css/bstyle2.css">
+        <link rel="stylesheet" href="/resources/css/bstyle3.css">
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
@@ -41,7 +41,7 @@
         <!-- 1대1 글 보기 -->
         <div class="board_wrap">
             <div class="board_title">
-                <strong>QnA</strong>
+                <strong>1대1 문의게시판</strong>
             </div>
             <div class="board_view_wrap">
                 <div class="board_view">
@@ -60,9 +60,13 @@
                             <dd>${__1on1_BOARD__.regiDate}</dd>
                         </dl>
                         <dl>
-                            <dt>조회수</dt>
-                            <dd>13</dd>
+                        	<c:if test="${not empty __1on1_BOARD__.modifyDate}">
+	                        	<dt>수정일</dt>
+	                            <dd>${__1on1_BOARD__.modifyDate}</dd>
+                        	</c:if>
+                            
                         </dl>
+
                     </div>
                     <div class="content" readonly>${__1on1_BOARD__.content}</div>
                 </div>

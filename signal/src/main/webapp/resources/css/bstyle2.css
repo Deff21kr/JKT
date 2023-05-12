@@ -66,6 +66,7 @@
 }
 
 .board_view .content {
+	min-height: 250px;
     padding: 30px;
     /* border-bottom: 1px solid #000; */
     line-height: 160%;

@@ -12,6 +12,7 @@ import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.GroupBoardVO;
 import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.mapper.GroupBoardMapper;
+import org.zerock.myapp.mapper.GroupMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,7 +31,6 @@ public class GroupBoardServiceImpl
 
 	@Setter(onMethod_= {@Autowired} )
 	private GroupBoardMapper dao;		// 영속성 계층의 DAO 빈을 주입받음 (DB작업이 필요하기 때문)
-
 
 	// 1. 게시판 목록을 얻어 반환
 	@Override

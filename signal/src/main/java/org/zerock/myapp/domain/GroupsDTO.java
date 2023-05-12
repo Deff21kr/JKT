@@ -8,9 +8,9 @@ public class GroupsDTO {
 	private Integer groupNo;
 	private String groupName;
 	private String recruitStatus;
-	private Integer maxMember;
-	private Integer CurrentMember;
-	private String Area;
+	private Integer memberNum;
+	private Integer currentMember;
+	private String area;
 	private Integer postNo;
 
 }

@@ -14,9 +14,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.GroupBoardVO;
+import org.zerock.myapp.domain.GroupsDTO;
 import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.service.GroupBoardService;
+import org.zerock.myapp.service.GroupService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +33,8 @@ public class GroupBoardController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private GroupBoardService service;
+	@Setter(onMethod_ = @Autowired)
+	private GroupService group;
 	
 	// 1. 게시판 목록 조회
 	@GetMapping("/list")
@@ -52,19 +56,22 @@ public class GroupBoardController {
 	
 	// 2. 새로운 게시물 등록
 	@PostMapping("/register")
-	String register(GroupBoardDTO dto, RedirectAttributes rttrs) throws ControllerException {
+	String register(GroupBoardDTO dto,GroupsDTO dh, RedirectAttributes rttrs) throws ControllerException {
 		log.trace("register({}, {}) invoked.", dto, rttrs);
 		
 		try {
 			Objects.requireNonNull(dto);
+			// 게시글에서 지역,날짜,인원,멤버수,글번호 등을 뽑아내어 
+			// 새로운 게시글이 등록될때 동행역시 생성
 			
-			if( this.service.register(dto) ) {		
+			if( this.service.register(dto) & this.group.register(dh,dto)) {		
 				rttrs.addFlashAttribute("result", "true");
 				rttrs.addFlashAttribute("postno", dto.getPostNo());
-				
-			} // if
+				return "redirect:/board/group/list";
+			} else {
+				return null;
+			}
 			
-			return "redirect:/board/group/list";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} // try-catch

@@ -46,27 +46,27 @@
 
                         <div>
                             <label>
-                                <input type="radio" name="area" value="seoul">
+                                <input type="radio" name="area" value="서울">
                                 서울
                             </label>
                             <label>
-                                <input type="radio" name="area" value="gyeonggi">
+                                <input type="radio" name="area" value="경기">
                                 경기
                             </label>
                             <label>
-                                <input type="radio" name="area" value="chungcheong">
+                                <input type="radio" name="area" value="충청">
                                 충청
                             </label>
                             <label>
-                                <input type="radio" name="area" value="jeolla">
+                                <input type="radio" name="area" value="전라">
                                 전라
                             </label>
                             <label>
-                                <input type="radio" name="area" value="gyeongsang">
+                                <input type="radio" name="area" value="경상">
                                 경상
                             </label>
                             <label>
-                                <input type="radio" name="area" value="jeju">
+                                <input type="radio" name="area" value="제주">
                                 제주
                             </label>
                         </div>
@@ -138,6 +138,8 @@
                                 <dl>
                                     <dt>제목</dt>
                                     <dd><input type="text" name="title" placeholder="제목 입력" required></dd>
+                                    <dt>동행이름</dt>
+                                    <dd><input type="text" name="groupName" placeholder="동행이름" required></dd>
                                 </dl>
                             </div>
                             <div class="info">

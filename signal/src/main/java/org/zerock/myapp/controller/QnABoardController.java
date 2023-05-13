@@ -19,9 +19,7 @@ import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.domain.QnABoardDTO;
 import org.zerock.myapp.domain.QnABoardVO;
-import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
-import org.zerock.myapp.service.LoginService;
 import org.zerock.myapp.service.QnABoardService;
 
 import lombok.NoArgsConstructor;
@@ -37,9 +35,6 @@ public class QnABoardController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private QnABoardService service;
-	
-	@Autowired
-	private LoginService login;
 	
 	// 1. 게시판 목록 조회
 	@GetMapping("/list")
@@ -87,34 +82,25 @@ public class QnABoardController {
 	} // register
 
 //	// 3. 특정 게시물 상세조회
-//    @GetMapping(path={"/get" ,"modify"},  params = "postNo")
-//    String get(@RequestParam Integer postNo, Model model) throws  ControllerException {
+//    @GetMapping(path={"/get", "/modify"},  params = "postNo")
+//    void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
 //        log.trace("get() invoked.");
 //
 //        try{
 //        	Integer rc = this.service.updateReadcnt(postNo);
 //        	model.addAttribute("_BOARD_", rc);
-//        	
+//    	
 //            QnABoardVO vo = this.service.get(postNo);
 //            model.addAttribute("__BOARD__", vo);
-//            
-//            return "board/qna/get";
 //            
 //        }catch (Exception e){
 //            throw new ControllerException(e);
 //        } // try-catch
 //    } // get
-
+    
 	// 3. 특정 게시물 상세조회
-<<<<<<< HEAD
-    @GetMapping(path={"/get"},  params = "postno")
-    String get(@RequestParam Integer postno, Model model
-//    		HttpServletRequest req, HttpServletResponse res 
-    		) throws  ControllerException {
-=======
     @GetMapping(path={"/get", "/modify"},  params = "postNo")
     void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
->>>>>>> 6c9fa3e053317db74ef2863e0498c1beffd2b990
         log.trace("get() invoked.");
 
         try{
@@ -128,19 +114,8 @@ public class QnABoardController {
             throw new ControllerException(e);
         } // try-catch
     } // get
-<<<<<<< HEAD
-	
-    @GetMapping("/modify")
-	String modify() {
-		log.trace("register() invoked.");
-		return "board/qna/qnaEdit";
-	}
-    
-    // 4. 특정 게시물 업데이트(수정화면)
-=======
     
 //     4. 특정 게시물 업데이트(수정화면)
->>>>>>> 6c9fa3e053317db74ef2863e0498c1beffd2b990
     @PostMapping("/modify")
     String modify(QnABoardDTO dto, Integer currPage, RedirectAttributes rttrs) throws ControllerException {
     	log.trace("modify({}, {}) invoked.", dto, currPage);

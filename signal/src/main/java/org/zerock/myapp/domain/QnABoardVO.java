@@ -9,20 +9,20 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Value
 public class QnABoardVO {	
-	private Integer postno;
-	private String nickname;
+	private Integer postNo;
+	private String nickName;
 	private String title;
 	private String content;
-	private Timestamp regidate;
-	private Timestamp modifydate;
-	private Integer readcnt;
+	private Timestamp regiDate;
+	private Timestamp modifyDate;
+	private Integer readCnt;
 	
 	public QnABoardDTO toDTO() {
 		log.trace("toDTO() invoked.");
 		
 		QnABoardDTO dto = new QnABoardDTO();
-		dto.setPostno(postno);
-		dto.setNickname(nickname);
+		dto.setPostNo(postNo);
+		dto.setNickName(nickName);
 		dto.setTitle(title);
 		dto.setContent(content);
 		

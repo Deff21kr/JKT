@@ -69,8 +69,7 @@
         <br>
         
         <form action="/board/oneonone/reply" method="POST" enctype="multipart/form-data">
-            <!-- 로그인기능 생기면 nickName 변경해야함 이건 기존작성자 닉네임임 -->
-            <input type="hidden" name="nickName" value="${__1on1_BOARD__.nickName}">
+            <input type="hidden" name="nickName" value="${sessionScope.__AUTH__.nickName}">
             <input type="hidden" name="repRoot" value="${__1on1_BOARD__.repRoot}">
             <input type="hidden" name="repStep" value="${__1on1_BOARD__.repStep}">
             <input type="hidden" name="repIndent" value="${__1on1_BOARD__.repIndent}">

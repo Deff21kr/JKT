@@ -69,8 +69,7 @@
         <br>
         
         <form action="/board/oneonone/register" method="POST" enctype="multipart/form-data">
-            <!-- nickName 하드코딩함 로그인기능 생기면 수정할 것! -->
-            <input type="hidden" name="nickName" value="임시닉네임">
+            <input type="hidden" name="nickName" value="${sessionScope.__AUTH__.nickName}">
         
             <div class="form-group">
                 <label for="title">문의 제목</label>

@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class QNACommentDTO {
-	private Integer commentno;
+	
+	private Integer commentNo;
 	private String content;
-	private Integer postno;
-	private String nickname;
-}
+	private Integer postNo;
+	private String nickName;
+	
+} // end class

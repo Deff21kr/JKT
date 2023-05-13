@@ -17,7 +17,7 @@ main {
 /* 제목 */
 .wrap h1 {
   font-weight: bold;
-  font-size: 1.7rem;
+  font-size: 1.25rem;
   font-family: "orbitron";
 
   color: var(--color-dark-gray);
@@ -162,8 +162,126 @@ main hr:nth-of-type(1) {
 
 /* wrap-2 style */
 .place {
-  height: fit-content;
+  width: 1240px;
+  height: 1500px;
+
 }
+
+.searchbox {
+  border: 2px solid rgb(200, 196, 196);
+  border-radius: 20px;
+  margin-bottom: 40px;
+  background-color: aliceblue;
+}
+
+.area {
+  display: flex;
+  position: relative;
+  height: 50px;
+  align-items: center;
+}
+
+.area button {
+  width: 80px;
+  text-align: left;
+}
+
+.area-select {
+  width : 150px;
+  text-align: center;
+  margin-right: 70px;
+}
+
+/* .area-select::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  width: 1px;
+  height: 20px;
+  margin-top: -10px;
+  background-color: blue;
+} */
+
+/* .area div {
+  border-right: #4663e7 2px solid;
+  padding-right: 10px;
+} */
+
+.caldate {
+  width: 200px;
+  text-align: center;
+}
+
+.caldate::before  {
+  content:attr(data-placeholder);
+  width: 100%;
+  text-align: center;
+}
+
+.caldate:focus::before,
+.caldate:valid::before {
+  display: none;
+}
+
+.calendar {
+  display: flex;
+  position: relative;
+  height: 50px;
+  align-items: center;
+}
+
+.calendar div {
+  display: flex;
+}
+
+.calendar > div div {
+  width: 150px;
+  justify-content: center;
+}
+
+.calselect {
+  justify-content: center;
+  width: 150px;
+  margin-right: 70px;
+}
+
+.groupmember {
+  display: flex;
+  position: relative;
+  height: 50px;
+  align-items: center;
+}
+
+.groupselect {
+  /* text-align: center; */
+  justify-content: center;
+  width: 150px;
+  margin-right: 70px; 
+}
+
+.groupmember div {
+  display: flex;
+}
+
+.groupstatus {
+  display: flex;
+  position: relative;
+  height: 50px;
+  align-items: center;
+}
+
+.groupstatus button {
+  width: 150px;
+  text-align: left;
+}
+
+.groupstatus-select {
+  width : 150px;
+  text-align: center;
+  margin-right: 70px;
+}
+
 
 .place-menu {
   height: 3rem;
@@ -178,16 +296,13 @@ main hr:nth-of-type(1) {
 
 .place-menu div {
   display: flex;
-  align-items: end;
+  align-items: center;
 }
 
 .place-menu img {
   width: 100px;
 }
 
-.place-menu strong {
-  margin: 0px 0.4rem 0.6rem;
-}
 
 .plusBtn {
   width: 100px;
@@ -200,16 +315,18 @@ main hr:nth-of-type(1) {
 }
 
 .place-main {
-  height: 400px;
+  height: fit-content;
 
   display: flex;
   justify-content: space-between;
+  flex-flow: row wrap;
 }
 
 .main {
+  height: 330px;
   margin: 0px 4px;
 }
-/* ------------------------------------------------------ */
+
 .main-pic img {
   width: 300px;
   height: 100%;
@@ -253,8 +370,8 @@ main hr:nth-of-type(1) {
 }
 
 .content {
-  /* background-color: rgb(199, 239, 255); */
-  /* color: darkblue; */
+  background-color: rgb(199, 239, 255);
+  color: darkblue;
   border-radius: 0.5rem;
   padding: 4px 2px;
   margin-bottom: 4px;
@@ -269,7 +386,7 @@ main hr:nth-of-type(1) {
 
 .main-name strong span {
   vertical-align: middle; 
-  font-size: 1.7rem;;
+  font-size: 13px;
 }
 
 .profile-img {
@@ -292,7 +409,7 @@ main hr:nth-of-type(1) {
 .user-name {
   margin-left: 0.4rem;
 }
-/* ------------------------------------------------------ */
+
 .middle-content a {
   padding-left: 30px;
 }

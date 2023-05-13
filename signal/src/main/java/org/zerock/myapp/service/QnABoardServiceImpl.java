@@ -60,11 +60,11 @@ public class QnABoardServiceImpl
 	
 	// 3. 특정 게시물 상세 조회 기능 수행 (READ)
 	@Override
-	public QnABoardVO get(Integer postno) throws ServiceException {
-		log.trace("get({}) invoked.", postno);
+	public QnABoardVO get(Integer postNo) throws ServiceException {
+		log.trace("get({}) invoked.", postNo);
 		
 		try {
-			return this.dao.select(postno);
+			return this.dao.select(postNo);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
@@ -88,11 +88,11 @@ public class QnABoardServiceImpl
 	
 	// 5. 특정 게시물 삭제 기능 수행 (DELETE)
 	@Override
-	public Boolean remove(Integer postno) throws ServiceException {
-		log.trace("remove({}) invoked.", postno);
+	public Boolean remove(Integer postNo) throws ServiceException {
+		log.trace("remove({}) invoked.", postNo);
 		
 		try {
-			return ( this.dao.delete(postno) == 1 );
+			return ( this.dao.delete(postNo) == 1 );
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
@@ -100,11 +100,11 @@ public class QnABoardServiceImpl
 	
 	// 조회수
 	@Override
-	public Integer updateReadcnt(Integer postno) throws ServiceException {
-		log.trace("updateReadcnt({}) invoked.", postno);
+	public Integer updateReadcnt(Integer postNo) throws ServiceException {
+		log.trace("updateReadcnt({}) invoked.", postNo);
 		
 		try {
-			return this.dao.updateReadcnt(postno);
+			return this.dao.updateReadcnt(postNo);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} // try-catch

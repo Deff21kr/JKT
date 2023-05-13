@@ -10,11 +10,11 @@
         <title>QnA 게시글 작성</title>
         
         <!-- <link rel="stylesheet" href="../../resources/css/css.css"> -->
-        <link rel="stylesheet" href="../../resources/css/style1.css">
-        <link rel="stylesheet" href="../../resources/css/style2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle1.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle3.css">
+         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style1.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle1.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle3.css">
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
@@ -48,7 +48,7 @@
                         <div class="info">
                             <dl>
                                 <dt>작성자</dt>
-                                <dd><input type="hidden" name="nickname" value ="${__AUTH__.nickName }" required> ${__AUTH__.nickName }</dd>
+                                <dd><input type="hidden" name="nickName" value ="${__AUTH__.nickName }" required> ${__AUTH__.nickName }</dd>
                                 <!-- <dd>${__BOARD__.nickname}</dd> -->
                             </dl>
                         </div>

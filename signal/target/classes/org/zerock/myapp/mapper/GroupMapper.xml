@@ -19,9 +19,9 @@
 		</selectKey>
 
 		INSERT INTO tbl_groups 
-				(groupname, recruitstatus, membernum, area, postno )
-		VALUES (#{groupName}, #{recruitStatus}, #{memberNum},
-			 #{area}, #{postNo})
+				(groupname, recruitstatus, maxmember, currentmember, area, postno )
+		VALUES (#{groupName}, #{recruitStatus}, #{maxMember},
+			#{currentMember}, #{Area}, #{postNo})
 		
 	</insert>
 

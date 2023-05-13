@@ -42,7 +42,7 @@
             	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                 <input type="hidden" name="currPage" value="${param.currPage}">
                 <input type="hidden" name="postno" value="${__BOARD__.postno}">
-                <input type="hidden" name="nickname" value="${__AUTH__.nickname}">
+                <input type="hidden" name="nickname" value="${__AUTH__.nickName}">
                 <div class="board_title">
                     <strong>QnA</strong>
                 </div>
@@ -57,7 +57,7 @@
                         <div class="info">
                             <dl>
                                 <dt>작성자</dt>
-                                <dd>${__AUTH__.nickname}</dd>
+                                <dd>${__AUTH__.nickName}</dd>
                             </dl>
                         </div>
                         <div class="content">

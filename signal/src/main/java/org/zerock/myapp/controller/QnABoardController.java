@@ -93,7 +93,7 @@ public class QnABoardController {
 
 	
 	// 3. 특정 게시물 상세조회
-    @GetMapping(path={"/get", "/modify"},  params = "postno")
+    @GetMapping(path={"/get"},  params = "postno")
     String get(@RequestParam Integer postno, Model model
 //    		HttpServletRequest req, HttpServletResponse res 
     		) throws  ControllerException {
@@ -142,6 +142,12 @@ public class QnABoardController {
         } // try-catch
     } // get
 	
+    @GetMapping("/modify")
+	String modify() {
+		log.trace("register() invoked.");
+		return "board/qna/qnaEdit";
+	}
+    
     // 4. 특정 게시물 업데이트(수정화면)
     @PostMapping("/modify")
     String modify(QnABoardDTO dto, Integer currPage, RedirectAttributes rttrs) throws ControllerException {

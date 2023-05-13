@@ -45,6 +45,7 @@
 		<property name="dataSource" ref="hikariDataSource"/>
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
 	</bean>
+	
 	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	<mybatis-spring:scan base-package="org.zerock.myapp.mapper" />
 	

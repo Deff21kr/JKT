@@ -108,10 +108,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			boolean isUpdated = (affectedLines == 1);
 			log.info("\t+ isUpdated: {}", isUpdated);
 		} 
-//		else {
-//			res.sendRedirect("/common/loginPost");
-//		}
-		
+//		
 	} // postHandle
 	
 	

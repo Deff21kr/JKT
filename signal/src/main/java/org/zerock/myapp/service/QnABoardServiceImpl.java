@@ -77,7 +77,9 @@ public class QnABoardServiceImpl
 		log.trace("modify({}) invoked.", dto);
 		
 		try {
-			return ( this.dao.update(dto) == 1 );
+//			QnABoardVO vo = this.dao.select(dto.getPostNo());
+			
+			return ( this.dao.update(dto.getPostNo());
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} // try-catch

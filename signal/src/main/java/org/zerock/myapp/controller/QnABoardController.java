@@ -106,8 +106,15 @@ public class QnABoardController {
 //    } // get
 
 	// 3. 특정 게시물 상세조회
+<<<<<<< HEAD
+    @GetMapping(path={"/get"},  params = "postno")
+    String get(@RequestParam Integer postno, Model model
+//    		HttpServletRequest req, HttpServletResponse res 
+    		) throws  ControllerException {
+=======
     @GetMapping(path={"/get", "/modify"},  params = "postNo")
     void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
+>>>>>>> 6c9fa3e053317db74ef2863e0498c1beffd2b990
         log.trace("get() invoked.");
 
         try{
@@ -121,8 +128,19 @@ public class QnABoardController {
             throw new ControllerException(e);
         } // try-catch
     } // get
+<<<<<<< HEAD
+	
+    @GetMapping("/modify")
+	String modify() {
+		log.trace("register() invoked.");
+		return "board/qna/qnaEdit";
+	}
+    
+    // 4. 특정 게시물 업데이트(수정화면)
+=======
     
 //     4. 특정 게시물 업데이트(수정화면)
+>>>>>>> 6c9fa3e053317db74ef2863e0498c1beffd2b990
     @PostMapping("/modify")
     String modify(QnABoardDTO dto, Integer currPage, RedirectAttributes rttrs) throws ControllerException {
     	log.trace("modify({}, {}) invoked.", dto, currPage);

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -24,38 +27,37 @@
 		<org.aspectj-version>1.9.19</org.aspectj-version>
 		<org.apache.logging.log4j-version>2.20.0</org.apache.logging.log4j-version>
 		<jackson-version>2.14.2</jackson-version>
-
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+		
 	</properties>
+
 
 	<dependencies>
 
-		<!-- =============== Logging =============== -->
+        <!-- =============== Logging =============== -->
 
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${org.apache.logging.log4j-version}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${org.apache.logging.log4j-version}</version>
+        </dependency>
 
-		<!-- For Spring framework, HikariCP, DriverSpy logging -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>${org.apache.logging.log4j-version}</version>
-		</dependency>
+        <!-- For Spring framework, HikariCP, DriverSpy logging -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${org.apache.logging.log4j-version}</version>
+        </dependency>
 
 
-		<!-- ============= Servlet/JSP ============= -->
-
+        <!-- ============= Servlet/JSP ============= -->
+			
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-
+	
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
@@ -70,8 +72,8 @@
 		</dependency>
 
 
-		<!-- =============== AspectJ =============== -->
-
+        <!-- =============== AspectJ =============== -->
+				
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
@@ -85,7 +87,7 @@
 		</dependency>
 
 
-		<!-- ================ Spring =============== -->
+        <!-- ================ Spring =============== -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -100,10 +102,10 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${org.springframework-version}</version>
-			<scope>test</scope>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>${org.springframework-version}</version>
+		    <scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -120,54 +122,57 @@
 
 		<!-- ================ Spring Seciruty =============== -->
 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>5.8.2</version>
-		</dependency>
+	 <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>5.8.2</version>
+   </dependency>
+  
 
 
-		<!-- =============== JDBC =============== -->
+		
+		
+        <!-- =============== JDBC =============== -->
 
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
 			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 			<version>1.16</version>
 		</dependency>
-
+		  
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8-production</artifactId>
 			<version>21.3.0.0</version>
-
+		
 			<type>pom</type>
-
+		
 			<exclusions>
 				<exclusion>
 					<groupId>com.oracle.database.ha</groupId>
 					<artifactId>simplefan</artifactId>
 				</exclusion>
-
+		
 				<exclusion>
 					<groupId>com.oracle.database.ha</groupId>
 					<artifactId>ons</artifactId>
 				</exclusion>
-
+		
 				<exclusion>
 					<groupId>com.oracle.database.jdbc</groupId>
 					<artifactId>rsi</artifactId>
 				</exclusion>
-
+		
 				<exclusion>
 					<groupId>com.oracle.database.jdbc</groupId>
 					<artifactId>ucp</artifactId>
 				</exclusion>
-
+		
 				<exclusion>
 					<groupId>com.oracle.database.xml</groupId>
 					<artifactId>xdb</artifactId>
 				</exclusion>
-
+		
 				<exclusion>
 					<groupId>com.oracle.database.xml</groupId>
 					<artifactId>xmlparserv2</artifactId>
@@ -194,7 +199,7 @@
 			<version>3.0.1</version>
 		</dependency>
 
-
+		
 		<!-- =============== Testing =============== -->
 
 		<!-- <dependency>
@@ -203,7 +208,7 @@
 			<version>5.9.2</version>
 			<scope>test</scope>
 		</dependency> -->
-
+    	
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -213,14 +218,14 @@
 
 
 		<!-- ========== Transf. to return JSON or XML  =========== -->
-
-
+	
+		
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 			<version>${jackson-version}</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -228,14 +233,16 @@
 		</dependency>
 
 
-		<!-- ================ Misc ================= -->
+
+
+        <!-- ================ Misc ================= -->
 
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-
+	
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -248,52 +255,46 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.5</version>
 		</dependency>
-
-		<dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>javax.annotation-api</artifactId>
-			<version>1.3.2</version>
-		</dependency>
-
-
+		
+		     
 	</dependencies>
 
 
-	<build>
+    <build>
 
 		<finalName>/</finalName>
 
-		<plugins>
+        <plugins>
 
-			<plugin>
+            <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.3.2</version>
-			</plugin>
+            </plugin>
 
-			<plugin>
+            <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<version>2.10</version>
 
-				<configuration>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>false</downloadJavadocs>
-				</configuration>
-			</plugin>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>false</downloadJavadocs>
+                </configuration>
+            </plugin>
 
-			<plugin>
+            <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
+                <version>3.11.0</version>
 
 				<configuration>
 					<release>${java-version}</release>
 				</configuration>
-			</plugin>
+            </plugin>
 
-		</plugins>
+        </plugins>
 
-	</build>
+    </build>
 
 </project>

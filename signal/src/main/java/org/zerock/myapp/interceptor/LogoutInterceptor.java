@@ -2,12 +2,12 @@ package org.zerock.myapp.interceptor;
 
 import java.util.Objects;
 
-import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.util.WebUtils;
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Component
 public class LogoutInterceptor implements HandlerInterceptor {
-	@Resource private LoginDAO login;
+	@Autowired private LoginDAO login;
 	
 	
 	
@@ -61,14 +61,13 @@ public class LogoutInterceptor implements HandlerInterceptor {
 			log.info("\t+ Remember-Me Cookie Destroyed.");
 			
 			// Step.4 tbl_user 테이블에 설정된 자동로그인 쿠키값과 만료일시 컬럼의 값을 null로 변경
-			Objects.requireNonNull(this.login);
 			Objects.requireNonNull(userVO);
 			
 			this.login.updateUserWithRememberMe(userVO.getID(), null, null);
 			log.info("\t+ Remember-Me Released Successfully.");
 		} // if
 				
-		res.sendRedirect("/common/login");	// 로그아웃처리 후, 로그인 창으로 다시 밀어버림
+		res.sendRedirect("/common/loginPost");	// 로그아웃처리 후, 로그인 창으로 다시 밀어버림
 		
 		return false;		// 이미 결정됨: 로그아웃 처리는 여기서 하겟다!!!!란 의도
 	} // preHandle

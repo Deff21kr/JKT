@@ -10,6 +10,6 @@ public class UserGroupDTO {
 	private Integer appNo;
 	private String ID;
 	private Integer groupNo;
-	private Integer outCome;
+	private String outCome;
 	private Timestamp appDate;
 }

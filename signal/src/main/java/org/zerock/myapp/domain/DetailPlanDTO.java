@@ -1,0 +1,17 @@
+package org.zerock.myapp.domain;
+
+import java.util.Date;
+
+import lombok.Data;
+
+@Data
+public class DetailPlanDTO {
+
+	private Integer detailPlanNo;
+	private Integer planNo;
+	private String planDay;
+	private Date planTime;
+	private String place;
+	private String detailPlan;
+	
+}

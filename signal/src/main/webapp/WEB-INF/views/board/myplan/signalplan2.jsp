@@ -216,7 +216,7 @@
 
 	<body>
 
-		<%@ include file="header.jsp" %>
+		<%@ include file="/WEB-INF/views/header.jsp" %>
 
 			<section id="sec">
 
@@ -492,7 +492,7 @@
 
 
 
-			<%@ include file="footer.jsp" %>
+			<%@ include file="/WEB-INF/views/footer.jsp" %>
 	</body>
 
 	</html>

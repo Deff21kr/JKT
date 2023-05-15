@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.domain.QnABoardDTO;
 import org.zerock.myapp.domain.QnABoardVO;
+import org.zerock.myapp.domain.UsersDTO;
+import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.service.QnABoardService;
 
@@ -81,24 +84,7 @@ public class QnABoardController {
 		
 	} // register
 
-//	// 3. 특정 게시물 상세조회
-//    @GetMapping(path={"/get", "/modify"},  params = "postNo")
-//    void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
-//        log.trace("get() invoked.");
-//
-//        try{
-//        	Integer rc = this.service.updateReadcnt(postNo);
-//        	model.addAttribute("_BOARD_", rc);
-//    	
-//            QnABoardVO vo = this.service.get(postNo);
-//            model.addAttribute("__BOARD__", vo);
-//            
-//        }catch (Exception e){
-//            throw new ControllerException(e);
-//        } // try-catch
-//    } // get
-    
-	// 3. 특정 게시물 상세조회
+//	 3. 특정 게시물 상세조회
     @GetMapping(path={"/get", "/modify"},  params = "postNo")
     void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
         log.trace("get() invoked.");
@@ -114,6 +100,63 @@ public class QnABoardController {
             throw new ControllerException(e);
         } // try-catch
     } // get
+    
+	
+	
+//	// 3. 특정 게시물 상세조회
+//    @GetMapping(path={"/get"},  params = "postNo")
+//    String get(@RequestParam Integer postNo, Model model,
+//    		 HttpServletRequest req, HttpServletResponse res
+//    		) throws  ControllerException {
+//        log.trace("get(req, res, {}) invoked.", req, res);
+//
+//        try{
+//        	Integer rc = this.service.updateReadcnt(postNo);
+//        	model.addAttribute("_BOARD_", rc);
+//    	
+//            QnABoardVO vo = this.service.get(postNo);
+//            model.addAttribute("__BOARD__", vo);
+//            
+//            Cookie oldCookie = null;
+//            Cookie[] cookies = req.getCookies();
+//            
+//            if(cookies != null) {
+//            	for(Cookie cookie : cookies) {
+//            		 log.info("\t+ cookieName: {}, cookieValue: {}", cookie.getName(), cookie.getValue());
+//            		 
+//            		 if(cookie.getName().equals("newView")) {
+//            			 oldCookie = cookie;
+//            		 } // if
+//            	} // enhanced for
+//            } // if
+//            
+//            if(oldCookie != null) {
+//            	if(!oldCookie.getValue().contains("["+ postNo.toString() +"]")) {
+//            		service.updateReadcnt(postNo);
+//            		log.info("oldCookiePostNo({}) checked.", postNo);
+//            		
+//            		oldCookie.setValue(oldCookie.getValue() + "_[" + postNo + "]");
+//            		oldCookie.setPath("/");
+//            		oldCookie.setMaxAge(60 * 60 * 24);
+//            		res.addCookie(oldCookie);
+//            	}
+//            } else {
+//            	service.updateReadcnt(postNo);
+//            	Cookie newCookie = new Cookie("newView", "[" + postNo + "]");
+//            	log.info("newCookiePostNo({}) checked.", postNo);
+//            	
+//            	newCookie.setPath("/");
+//            	newCookie.setMaxAge(60 * 60 * 24);
+//            	res.addCookie(newCookie);
+//            } // if - else
+//          
+//            return "board/qna/get";
+//            
+//        }catch (Exception e){
+//            throw new ControllerException(e);
+//        } // try-catch
+//    } // get
+	
     
 //     4. 특정 게시물 업데이트(수정화면)
     @PostMapping("/modify")
@@ -135,6 +178,22 @@ public class QnABoardController {
 			throw new ControllerException(e);
 		} // try-catch
     } // modify
+    
+//    @GetMapping(path={"/modify"},  params = "postNo")
+//    void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
+//        log.trace("get() invoked.");
+//
+//        try{
+//        	Integer rc = this.service.updateReadcnt(postNo);
+//        	model.addAttribute("_BOARD_", rc);
+//    	
+//            QnABoardVO vo = this.service.get(postNo);
+//            model.addAttribute("__BOARD__", vo);
+//            
+//        }catch (Exception e){
+//            throw new ControllerException(e);
+//        } // try-catch
+//    } // modify
     
     // 5. 특정 게시물 삭제(DELETE)
 	@PostMapping("/remove")

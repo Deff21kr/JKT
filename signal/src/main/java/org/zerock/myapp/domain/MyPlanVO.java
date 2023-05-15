@@ -1,6 +1,6 @@
 package org.zerock.myapp.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,11 +10,11 @@ import lombok.Value;
 public class MyPlanVO {
 
 	private Integer planNo;
-	private Integer userNo;
 	private String planName;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date startDate;
+	private LocalDate startDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date endDate;
-	
+	private LocalDate endDate;
+	private String nickName;
+	private Integer duration;
 }

@@ -1,168 +1,284 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-<html lang="ko">
 
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<!DOCTYPE html>
+			<html lang="ko">
 
-<title>여행시그널</title>
+			<head>
+				<meta charset="UTF-8">
+				<meta http-equiv="X-UA-Compatible" content="IE=edge">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- fonts awesome -->
-<script src="https://kit.fontawesome.com/7235c72187.js"
-	crossorigin="anonymous"></script>
+				<title>여행시그널</title>
 
-<style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+				<!-- fonts awesome -->
+				<script src="https://kit.fontawesome.com/7235c72187.js" crossorigin="anonymous"></script>
 
-body {
-	width: 1200px;
-	margin: auto;
-}
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+				<script
+					src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
 
-header {
-	border-bottom: 1px solid rgb(208, 207, 207);
-}
 
-a {
-	text-decoration: none;
-	color: black;
-}
+				<style>
+					* {
+						margin: 0;
+						padding: 0;
+						box-sizing: border-box;
+					}
 
-/* #sec {
-                width: 1200px;
-                height: 1000px;
-                border: 1px solid;
-            } */
-.topmain {
-	width: 1112px;
-	height: 130px;
-	display: flex;
-	justify-content: space-between;
-	align-items: end;
-	margin: auto;
-	padding: 20px 12px;
-}
+					body {
+						width: 1200px;
+						margin: auto;
+					}
 
-.plannerlist {
-	/* margin: 50px 0px 20px 50px; */
-	width: 220px;
-	height: 65px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: aliceblue;
-	border: 1px solid rgb(167, 208, 245);
-	border-radius: 17px;
-}
+					header {
+						border-bottom: 1px solid rgb(208, 207, 207);
+					}
 
-.plannerlist-make {
-	/* margin: 50px 0px 20px 50px; */
-	width: 140px;
-	height: 50px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: #4463e6;
-	color: white;
-	border: none;
-	border-radius: 17px;
-}
+					a {
+						text-decoration: none;
+						color: black;
+					}
+					
+					p {
+						font-size: 13px
+					}
 
-.plannerlist-make>a {
-	color: white;
-	font-weight: lighter;
-}
+					/* #sec {
+						width: 1200px;
+						height: 1000px;
+						border: 1px solid;
+					} */
+					.topmain {
+						width: 1112px;
+						height: 130px;
+						display: flex;
+						justify-content: space-between;
+						align-items: end;
+						margin: auto;
+						padding: 20px 12px;
+					}
 
-.content {
-	display: block;
-	float: left;
-	width: 350px;
-	height: 380px;
-	border: 1px solid #dfdfdf;
-	margin: 20px 10px 20px 10px;
-}
+					.plannerlist {
+						/* margin: 50px 0px 20px 50px; */
+						width: 140px;
+						height: 50px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						/* background: aliceblue;
+						border: 1px solid rgb(167, 208, 245); */
+						border-radius: 17px;
+					}
 
-.content:hover {
-	border: 1px solid #4463e6;
-}
-</style>
-</head>
+					.plannerlist-make {
+						/* margin: 50px 0px 20px 50px; */
+						width: 140px;
+						height: 50px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						background: #4463e6;
+						color: white;
+						border: none;
+						border-radius: 17px;
+					}
 
-<body>
+					.plannerlist-make>a {
+						color: white;
+						font-weight: lighter;
+					}
+					
+					.plannerlist span {
+						font-size: 20px;
+					}
 
-	<%@ include file="/WEB-INF/views/header.jsp"%>
+					.planContent {
+						display: block;
+						float: left;
+						width: 350px;
+						height: 380px;
+						border: 1px solid #dfdfdf;
+						margin: 20px 10px 20px 10px;
+					}
 
-	<section id="sec">
+					.planContent:hover {
+						border: 1px solid #4463e6;
+					}
 
-		<div class="topmain">
-			<div class="plannerlist">
-				<h3>플래너 리스트</h3>
-			</div>
 
-			<button class="plannerlist-make">
-				<a href="/board/myplan/makePlan">플래너 만들기</a>
-			</button>
-		</div>
+					.board_page {
+						/* 위로 여백 떨어짐 */
+						margin-top: 30px;
+						text-align: center;
+						font-size: 0;
+					}
 
-		<div class="maincontent"
-			style="border: 1px solid gainsboro; width: 1112px; min-height: 700px; margin: 0px auto 40px; border-radius: 20px;">
+					.board_page .Prev,
+					.board_page .pageNum,
+					.board_page .Next {
+						display: inline-block;
+						width: 32px;
+						height: 35px;
+						box-sizing: border-box;
+						border: 1px solid rgb(208, 207, 207);
+						border-left: 0;
+						vertical-align: middle;
+						line-height: 100%;
+					}
 
-			<a href="#" class="content">
-				<div class="title"
-					style="background: ghostwhite; width: 100%; height: 150px; border-bottom: 1px solid #dfdfdf; padding: 20px 20px; display: flex; flex-direction: column; justify-content: center;">
-					<div>
-						<p>동행그룹명 : 재균님의 동행</p>
-						<br>
-					</div>
+					/* .board_page a {
+						display: inline-block;
+						width: 32px;
+						height: 35px;
+						box-sizing: border-box;
+						border: 1px solid rgb(208, 207, 207) ;
+						border-left: 0;
+						vertical-align: middle;
+						line-height: 100%;
+					} */
 
-					<div style="display: flex; justify-content: space-between;">
-						<div>
-							<p>여행기간</p>
-							<br>
-							<p>2023.03.25 ~ 2023.03.29</p>
+					.board_page .Prev,
+					.board_page .Next {
+						width: 40px;
+						padding-top: 10px;
+						font-size: 1.2rem;
+						/* << 사이 조정 */
+						letter-spacing: -1px;
+						cursor: pointer;
+					}
+
+					.board_page .pageNum {
+						padding-top: 9px;
+						font-size: 1.4rem;
+						cursor: pointer;
+					}
+
+					/* .board_page a.num.on {
+						border-color: #2B65F8;
+						background: #2B65F8 ;
+						color: #fff;
+					} */
+
+					.current {
+						border-color: #2B65F8;
+						background: #2B65F8;
+						color: #fff;
+					}
+
+					.board_page .Prev {
+						border-left: 1px solid rgb(208, 207, 207);
+					}
+
+					.board_page .pageNum {
+						border-left: 1px solid rgb(208, 207, 207);
+					}
+				</style>
+			</head>
+
+			<body>
+
+				<%@ include file="/WEB-INF/views/header.jsp" %>
+
+					<section id="sec">
+
+						<div class="topmain">
+							<div class="plannerlist">
+								<strong>
+									<span>
+										플래너 리스트
+									</span>
+								</strong> 
+								
+							</div>
+
+							<button class="plannerlist-make">
+								<a href="/board/myplan/makePlan">플래너 만들기</a>
+							</button>
 						</div>
-						<div
-							style="justify-content: center; display: flex; align-items: center;">
-							<button
-								style="width: 90px; height: 50px; font-size: 14px; color: white;
+
+						<div class="maincontent"
+							style="border: 1px solid gainsboro; width: 1112px; min-height: 700px; margin: 0px auto 40px; border-radius: 20px; padding: 20px 0px;">
+
+							<c:if test="${not empty __AUTH__.nickName}">
+								<c:forEach var="MyPlanVO" items="${__MYPLAN__}">
+
+									<a href="#" class="planContent">
+										<div class="title"
+											style="background: ghostwhite; width: 100%; height: 150px; border-bottom: 1px solid #dfdfdf; padding: 20px 20px; display: flex; flex-direction: column; justify-content: center;">
+											<div>
+												<p>플래너명 : ${MyPlanVO.planName}</p>
+												<br>
+											</div>
+
+											<div style="display: flex; justify-content: space-between;">
+												<div>
+													<p>여행기간 :</p>
+													<br>
+
+
+
+													<p>
+														<!-- <fmt:formatDate value="${MyPlanVO.startDate}"
+															pattern="yyyy-MM-dd" />  -->
+															${MyPlanVO.startDate}~${MyPlanVO.endDate}
+														<!-- <fmt:formatDate value="${MyPlanVO.endDate}"
+															pattern="yyyy-MM-dd" /> -->
+													</p>
+												</div>
+												<div
+													style="justify-content: center; display: flex; align-items: center;">
+													<button style="width: 90px; height: 50px; font-size: 14px; color: white;
 	/* display: flex; */ background: #4463e6; border: none; border-radius: 30px; cursor: pointer;">플래너보기</button>
+												</div>
+											</div>
+										</div>
+
+										<div style="width: 348px; height: 230px; padding: 15px;">
+											<ul style="max-height: 180px; overflow: hidden;">
+												<h4 style="margin: 10px;">DAY 1</h4>
+												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
+												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
+												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
+												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
+												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
+											</ul>
+										</div>
+									</a>
+								</c:forEach>
+							</c:if>
+							<!-- float 마지막은 clear:both -->
+							<div class="clear" style="clear: both;"></div>
+
+
+							<div class="board_page">
+								<c:if test="${pageMaker.prev}">
+									<div class="Prev"><a
+											href="/board/oneonone/list?currPage=${pageMaker.startPage - 1}">Prev</a>
+									</div>
+								</c:if>
+								<c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+									<div class="pageNum ${pageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}
+									</div>
+								</c:forEach>
+								<c:if test="${pageMaker.next}">
+									<div class="Next"><a
+											href="/board/oneonone/list?currPage=${pageMaker.endPage + 1}">Next</a></div>
+								</c:if>
+							</div>
+
+
+
 						</div>
-					</div>
-				</div>
-
-				<div style="width: 348px; height: 230px; padding: 15px;">
-					<ul style="max-height: 180px; overflow: hidden;">
-						<h4 style="margin: 10px;">DAY 1</h4>
-						<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-						<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-						<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-						<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-						<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-					</ul>
-				</div>
-			</a> <a href="#" class="content"> </a> <a href="#" class="content"> </a>
-			<a href="#" class="content"> </a>
-			<!-- float 마지막은 clear:both -->
-			<div class="clear" style="clear: both;"></div>
 
 
 
-		</div>
+					</section>
 
 
+					<%@ include file="/WEB-INF/views/footer.jsp" %>
+			</body>
 
-	</section>
-
-
-	<%@ include file="/WEB-INF/views/footer.jsp"%>
-</body>
-
-</html>
+			</html>

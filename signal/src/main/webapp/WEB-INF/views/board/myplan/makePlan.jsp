@@ -13,6 +13,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
 
 
+
+
     <!-- style -->
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
@@ -46,8 +48,7 @@
 
       #sec {
         width: 1200px;
-        height: 1000px;
-        border: 1px solid;
+        height: 800px;
         padding: 20px;
       }
 
@@ -60,6 +61,10 @@
       }
 
       fieldset {
+      	position: fixed;
+      	margin: 0 auto;
+	    left: 0;
+	    right: 0;
         margin: auto;
         background: white;
         width: 450px;
@@ -133,20 +138,21 @@
         <fieldset>
           <h1>나만의 플래너 생성</h1>
 
-          <form action="/board/myplan/makePlan" method="post" onsubmit="onSubmit()">
+          <form action="/board/myplan/makePlan" method="POST">
+            <input type="hidden" name="nickName" value="${sessionScope.__AUTH__.nickName}">
             <div>
-              <label for="planner-name">플래너 이름:</label>
-              <input type="text" id="planner-name" name="planner-name" required>
+              <label for="planName">플래너 이름:</label>
+              <input type="text" id="planName" name="planName" required>
             </div>
 
             <div>
-              <label for="travel-start">여행 출발:</label>
-              <input type="date" id="travel-start" name="travel-start" required>
+              <label for="startDate">여행 출발:</label>
+              <input type="date" id="startDate" name="startDate" required>
             </div>
 
             <div>
-              <label for="travel-end">여행 종료:</label>
-              <input type="date" id="travel-finish" name="travel-end" required>
+              <label for="endDate">여행 종료:</label>
+              <input type="date" id="endDate" name="endDate" required>
             </div>
 
             <div class="submit-button">
@@ -161,7 +167,7 @@
       </section>
 
       <%@ include file="/WEB-INF/views/footer.jsp" %>
-
+      
 
   </body>
 

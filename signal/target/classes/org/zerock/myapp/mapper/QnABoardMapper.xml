@@ -8,12 +8,12 @@
 <mapper namespace="org.zerock.myapp.mapper.QnABoardMapper">
 
     <insert id="insert">
-        <selectKey keyProperty="postno" order="AFTER" resultType="int">
+        <selectKey keyProperty="postNo" order="AFTER" resultType="int">
         SELECT "ISEQ$$_75766".CURRVAL FROM dual
         </selectKey>
 
-        INSERT INTO tbl_qnaboard (nickname, title, content) 
-        VALUES (#{nickname}, #{title}, #{content})
+        INSERT INTO tbl_qnaboard (nickName, title, content) 
+        VALUES (#{nickName}, #{title}, #{content})
     </insert>
 
     <select id="select" resultType="org.zerock.myapp.domain.QnABoardVO">
@@ -25,23 +25,21 @@
     <delete id="delete">
         DELETE FROM tbl_qnaboard
         WHERE postNo = #{postNo}
-
     </delete>
 
     <update id="update">
         UPDATE tbl_qnaboard
         SET title = #{title}, 
-        	nickname = #{nickname},
+        	nickName = #{nickName},
             content = #{content}, 
-            modifydate = current_date
-        WHERE postno = #{postno}
+            modifyDate = current_date
+        WHERE postNo = #{postNo}
     </update>
 
     <update id="updateReadcnt">
         UPDATE tbl_qnaboard
         SET readCnt = readCnt + 1
         WHERE postNo = #{postNo}
-
     </update>
     
 

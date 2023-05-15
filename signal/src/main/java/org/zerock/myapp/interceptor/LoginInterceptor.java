@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.zerock.myapp.domain.UsersVO;
@@ -34,9 +33,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 	 */
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
-		log.trace("==============================================================");
+		log.trace("=====================================================");
 		log.trace("preHandler(req, res, {}) invoked.", handler);
-		log.trace("==============================================================");
+		log.trace("=====================================================");
 		
 		// Step.1 로그인 요청을 보낸 웹브라우저에 대응되는 세션객체 획득
 		HttpSession session = req.getSession(false);
@@ -107,7 +106,22 @@ public class LoginInterceptor implements HandlerInterceptor {
 			
 			boolean isUpdated = (affectedLines == 1);
 			log.info("\t+ isUpdated: {}", isUpdated);
+//			
+//			String redirectUri = (String) req.getSession().getAttribute("redirectUri");
+//			if (redirectUri != null) {
+//				   res.sendRedirect(redirectUri);
+//				} else {
+//				   // redirectUri가 없다면 로그인 이후의 기본 페이지로 리다이렉트
+//				   res.sendRedirect("/");
+//				}
+//
+//			
 		} 
+		
+	
+        
+    
+		
 //		
 	} // postHandle
 	

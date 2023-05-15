@@ -110,17 +110,24 @@ public class UsersController {
 		}
 	} // 탈퇴?
 	
-	@GetMapping(path={"/mypage/group/list"}, params = "ID")
+//	@GetMapping(path={"/mypage/group/list"}, params = "ID")
+//	String myGroupList() {
+//		
+//		return "redirect:mypage";
+//		
+//	}
+	
+	@GetMapping(path={"/mypage"})
 	String myGroupList() {
 		
-		return "redirect:mypage";
+		return "user/mypage";
 		
 	}
 	
-	@PostMapping(path={"/mypage/group/{동행명}/evaluate"}, params = "ID")
-	void partnerEvaluate() {
-		
-	}
+//	@PostMapping(path={"/mypage/group/{동행명}/evaluate"}, params = "ID")
+//	void partnerEvaluate() {
+//		
+//	}
 
 
 	

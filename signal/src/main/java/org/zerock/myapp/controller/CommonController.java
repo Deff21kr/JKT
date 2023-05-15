@@ -1,6 +1,9 @@
 package org.zerock.myapp.controller;
 
 import java.util.Objects;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,11 +53,11 @@ public class CommonController {
 			
 			if (vo != null) { // 로그인을 성공했다면 (why? 영속성까지 들어가서 객체를 반환한다는건 데이터가 맞게 들어갔다는 뜻)
 				model.addAttribute("__AUTH__", vo);	// Request Scope
-				
+				  
+				log.info("\ndto : {} ,model : {}", dto,model);
 				return "redirect:/mainpage"; // 인증 성공시 매인페이지로!!
 			} else { // 로그인 실패
 					rttrs.addAttribute("__RESULT__","실패");
-					
 					return "redirect:/common/loginPost"; // 다시 로그인 페이지로
 			}
 		} catch (Exception e) {

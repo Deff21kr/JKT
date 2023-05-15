@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.myapp.domain.UserGroupDTO;
+import org.zerock.myapp.exception.DAOException;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,16 +41,16 @@ public class UserGroupTests {
 	
 	}
 	@Test
-	public void selectList() {
-		this.mapper.selectList();
+	public void selectList() throws DAOException {
+		this.mapper.selectList(2);
 	}
 	
 	@Test
-	public void insert() {
+	public void insert() throws DAOException {
 		
 		UserGroupDTO dto = new UserGroupDTO();
-		dto.setID("1212121212");
-		dto.setGroupNo(6);
+		dto.setID("1111");
+		dto.setGroupNo(2);
 		
 		Integer aff = this.mapper.insert(dto);
 		assert aff != null;

@@ -19,9 +19,7 @@ import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.domain.QnABoardDTO;
 import org.zerock.myapp.domain.QnABoardVO;
-import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
-import org.zerock.myapp.service.LoginService;
 import org.zerock.myapp.service.QnABoardService;
 
 import lombok.NoArgsConstructor;
@@ -37,8 +35,6 @@ public class QnABoardController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private QnABoardService service;
-	@Autowired
-	private LoginService login;
 	
 	// 1. 게시판 목록 조회
 	@GetMapping("/list")
@@ -53,18 +49,12 @@ public class QnABoardController {
 		PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
 		model.addAttribute("pageMaker", pageDTO);
 		
-		return "board/qna/qnaList";
+		return "board/qna/list";
 		
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
 	} // list
-	
-	@GetMapping("/register")
-	String register() {
-		log.trace("register() invoked.");
-		return "board/qna/qnaWrite";
-	}
 	
 	// 2. 새로운 게시물 등록
 	@PostMapping("/register")
@@ -75,7 +65,7 @@ public class QnABoardController {
 			Objects.requireNonNull(dto);
 			if( this.service.register(dto) ) {		
 				rttrs.addFlashAttribute("result", "true");
-				rttrs.addFlashAttribute("postno", dto.getPostno());
+				rttrs.addFlashAttribute("postnNo", dto.getPostNo());
 			} // if
 			
 			return "redirect:/board/qna/list";
@@ -85,64 +75,47 @@ public class QnABoardController {
 	} // register
 	
 	// 단순 등록화면 요청
-//	@GetMapping("/qnaWrite")
-//	void register() {
-//		log.trace("register() invoked.");
-//		
-//	} // register
+	@GetMapping("/register")
+	void register() {
+		log.trace("register() invoked.");
+		
+	} // register
 
-	
+//	// 3. 특정 게시물 상세조회
+//    @GetMapping(path={"/get", "/modify"},  params = "postNo")
+//    void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
+//        log.trace("get() invoked.");
+//
+//        try{
+//        	Integer rc = this.service.updateReadcnt(postNo);
+//        	model.addAttribute("_BOARD_", rc);
+//    	
+//            QnABoardVO vo = this.service.get(postNo);
+//            model.addAttribute("__BOARD__", vo);
+//            
+//        }catch (Exception e){
+//            throw new ControllerException(e);
+//        } // try-catch
+//    } // get
+    
 	// 3. 특정 게시물 상세조회
-    @GetMapping(path={"/get", "/modify"},  params = "postno")
-    String get(@RequestParam Integer postno, Model model
-//    		HttpServletRequest req, HttpServletResponse res 
-    		) throws  ControllerException {
+    @GetMapping(path={"/get", "/modify"},  params = "postNo")
+    void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
         log.trace("get() invoked.");
 
         try{
-        	Integer rc = this.service.updateReadcnt(postno);
+        	Integer rc = this.service.updateReadcnt(postNo);
         	model.addAttribute("_BOARD_", rc);
-        	
-//// ========= 조회수 중복방지 =================================
-//        	
-//        	Cookie oldCookie = null;
-//        	Cookie[] cookies = req.getCookies();
-//        	if(cookies != null) {
-//        		for(Cookie cookie : cookies) {
-//        			if(cookie.getName().equals("postno")) {
-//        				oldCookie = cookie;
-//        			} // if
-//        		} // enhanced for
-//        	} // if
-//        	
-//        	if(oldCookie != null) {
-//        		if(!oldCookie.getValue().contains("[" + postno.toString() + "]")) {
-//        			service.get(postno);
-//        			oldCookie.setValue(oldCookie.getValue() + "_[" + postno + "]");
-//        			oldCookie.setPath("/");
-//        			oldCookie.setMaxAge(60 * 60 * 24);
-//        			res.addCookie(oldCookie);
-//        			log.info(">>>>> check oldCookie");
-//        		}
-//        	} else {
-//        		service.get(postno);
-//        		Cookie newCookie = new Cookie("postno", "_[" + postno + "]" );
-//        		newCookie.setPath("/");
-//        		newCookie.setMaxAge(60 * 60 * 24);
-//        		res.addCookie(newCookie);
-//        		log.info(">>>>> check newCookie");
-//        	} 
-        	
-// =====================================================        	
-            QnABoardVO vo = this.service.get(postno);
+    	
+            QnABoardVO vo = this.service.get(postNo);
             model.addAttribute("__BOARD__", vo);
-            return "/board/qna/qnaView";
+            
         }catch (Exception e){
             throw new ControllerException(e);
         } // try-catch
     } // get
-	
-    // 4. 특정 게시물 업데이트(수정화면)
+    
+//     4. 특정 게시물 업데이트(수정화면)
     @PostMapping("/modify")
     String modify(QnABoardDTO dto, Integer currPage, RedirectAttributes rttrs) throws ControllerException {
     	log.trace("modify({}, {}) invoked.", dto, currPage);
@@ -154,7 +127,7 @@ public class QnABoardController {
 			
 			if( this.service.modify(dto) ) {		// if success
 				rttrs.addFlashAttribute("result", "true");
-				rttrs.addFlashAttribute("postno", dto.getPostno());
+				rttrs.addFlashAttribute("postNo", dto.getPostNo());
 			} // if
 			return "redirect:/board/qna/list";
 			
@@ -165,15 +138,15 @@ public class QnABoardController {
     
     // 5. 특정 게시물 삭제(DELETE)
 	@PostMapping("/remove")
-	String remove(@RequestParam("postno") Integer postno, Integer currPage, RedirectAttributes rttrs) throws ControllerException {
-		log.trace("remove({}, {}) invoked.", postno, currPage);
+	String remove(@RequestParam("postNo") Integer postNo, Integer currPage, RedirectAttributes rttrs) throws ControllerException {
+		log.trace("remove({}, {}) invoked.", postNo, currPage);
     
     	try {
     		rttrs.addAttribute("currPage", currPage);
     		
-			if( this.service.remove(postno) ) {		// if success
+			if( this.service.remove(postNo) ) {		// if success
 				rttrs.addFlashAttribute("result", "true");
-				rttrs.addFlashAttribute("postno", postno);
+				rttrs.addFlashAttribute("postNo", postNo);
 			} // if
 			return "redirect:/board/qna/list";
 			

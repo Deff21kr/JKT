@@ -16,18 +16,18 @@ public interface QnABoardService {
 	public abstract Boolean register(QnABoardDTO dto) throws ServiceException;
 	
 	// 3. 특정 게시물 상세 조회 기능 수행 (READ)
-	public abstract QnABoardVO get(Integer postno) throws ServiceException;
+	public abstract QnABoardVO get(Integer postNo) throws ServiceException;
 	
 	// 4. 특정 게시물 업데이트 기능 수행 (UPDATE)
 	public abstract Boolean modify(QnABoardDTO dto) throws ServiceException;
 	
 	// 5. 특정 게시물 삭제 기능 수행 (DELETE)
-	public abstract Boolean remove(Integer postno) throws ServiceException;
+	public abstract Boolean remove(Integer postNo) throws ServiceException;
 
 	// 6. 총 게시물 갯수 반환
 	public abstract Integer getTotal() throws ServiceException;
 	
 	// 7. 조회수
-	public abstract Integer updateReadcnt(Integer postno) throws ServiceException;
+	public abstract Integer updateReadcnt(Integer postNo) throws ServiceException;
 	
 } // end interface

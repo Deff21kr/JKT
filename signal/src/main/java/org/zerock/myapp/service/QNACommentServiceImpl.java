@@ -17,71 +17,76 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Service("QNACommentService")
-public class QNACommentServiceImpl implements QNACommentService,
-InitializingBean,
-DisposableBean{
-    
+public class QNACommentServiceImpl implements QNACommentService, InitializingBean, DisposableBean{
 	
 	@Setter(onMethod_ = @Autowired)
 	private QNACommentMapper dao;
     
-    @Override
-	public void destroy() throws Exception {
-		log.info("파괴 호추루루루");
-	}
-
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		log.info("afterPropertiesSet() 호추룬머ㅝㅜㅁㄹ너ㅜㄴ");
-	}
-	
 	// 1. 게시판 목록을 얻어 반환해주는 기능 수행
-		@Override
-		public List<QNACommentVO> getList(Integer postno) throws ServiceException {
-			log.trace("getList() invoked.");
-			
-			try {
-				return this.dao.selectList(postno);
-			} catch(Exception e){
-				throw new ServiceException(e);
-			} // try-catch
-		} // getList
+	@Override
+	public List<QNACommentVO> getList(Integer postNo) throws ServiceException {
+		log.trace("getList() invoked.");
+		
+		try {
+			return this.dao.selectList(postNo);
+		} catch(Exception e){
+			throw new ServiceException(e);
+		} // try-catch
+		
+	} // getList
 
 	
 	// 댓글 작성
 	@Override
 	public Boolean insert(QNACommentDTO dto) throws ServiceException {
+		log.trace("insert() invoked.");
+		
 		try {
 			return ( this.dao.insert(dto) == 1 );
 		} catch(Exception e){
 			throw new ServiceException(e);
 		} // try-catch
-	}
+		
+	} // insert
 	
 	// 댓글 삭제
 	@Override
-	public Boolean deleteComment(Integer commentno) throws ServiceException {
+	public Boolean deleteComment(Integer commentNo) throws ServiceException {
+		log.trace("delete() invoked.");
+		
 		try {
-			return ( this.dao.deletecomment(commentno) == 1 );
+			return ( this.dao.deletecomment(commentNo) == 1 );
 		} catch(Exception e){
 			throw new ServiceException(e);
 		} // try-catch
-	}
+		
+	} // deleteComment
 
 	@Override
 	public Boolean update(QNACommentDTO dto) throws ServiceException {
-		log.info("업데이트 했따아아아");
+		log.info("update() invoked.");
 		
 		try {
 			return (this.dao.update(dto) == 1);
 		} catch(Exception e) {
 			throw new ServiceException(e);
-		}
-	}
+		} // try-catch
+		
+	} // update
+	
+//	====== IntitializingBean, DisposableBean ======
 
-
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		log.info("afterPropertiesSet() invoked.");
+		
+	} // afterPropertiesSet
+	
+   @Override
+	public void destroy() throws Exception {
+		log.info("destroy() invoked.");
+		
+	} // destroy
 	
 
-	
-
-}
+} // end class

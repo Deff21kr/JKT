@@ -27,19 +27,19 @@ public interface QnABoardMapper {
 	public abstract Integer insert(QnABoardDTO dto);
 	
 	// 3. 특정 게시물 상세조회
-	public abstract QnABoardVO select(Integer postno);
+	public abstract QnABoardVO select(Integer postNo);
    
 	// 4. 특정 게시물 삭제
-	public abstract Integer delete(Integer postno) throws DAOException;
+	public abstract Integer delete(Integer postNo) throws DAOException;
 	
 	// 5. 특정 게시물 업데이트(갱신)
 	public abstract Integer update(QnABoardDTO dto);
 
 	// 6. 총 게시물 갯수 반환
-	@Select("SELECT count(postno) FROM TBL_QNABOARD WHERE postno > 0")
+	@Select("SELECT count(postNo) FROM TBL_QNABOARD WHERE postNo > 0")
 	public abstract Integer getTotalAmount();
 	
 	// 7. 조회수 올리기
-	public Integer updateReadcnt(Integer postno);
+	public Integer updateReadcnt(Integer postNo);
 	
 } // end interface

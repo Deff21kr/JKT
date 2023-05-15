@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="org.zerock.myapp.mapper.QNACommentMapper">
 
   <insert id="insert">
@@ -7,26 +9,26 @@
       SELECT ISEQ$$_74649.CURRVAL FROM dual
     </selectKey>
 
-    insert into tbl_QNAComment (content, nickname, postno)
-    values(#{content}, #{nickname}, #{postno})
+    insert into tbl_QNAComment (content, nickName, postNo)
+    values(#{content}, #{nickName}, #{postNo})
   </insert>
 
   <select id="select" resultType="org.zerock.myapp.domain.QNACommentVO">
         SELECT * 
         FROM tbl_QNAComment 
-        WHERE postno = #{postno}
+        WHERE postNo = #{postNo}
   </select>
 
   <delete id="deletecomment">
-    DELETE FROM tbl_QNAComment WHERE commentno = #{commentno}
+    DELETE FROM tbl_QNAComment WHERE commentNo = #{commentNo}
   </delete>
 
 <update id="update">
         UPDATE tbl_QNAComment 
         SET 
-        content=#{content}, 
+        content = #{content}, 
         MODFIYDATE = current_date
-        WHERE commentNo = #{commentno}
+        WHERE commentNo = #{commentNo}
     </update>
 
 </mapper>

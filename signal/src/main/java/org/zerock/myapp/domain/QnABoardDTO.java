@@ -5,10 +5,11 @@ import lombok.Data;
 
 @Data			
 public class QnABoardDTO {
-	private Integer postno;
-	private String nickname;
+	
+	private Integer postNo;
+	private String nickName;
 	private String title;
 	private String content;
-	private Integer readcnt;
+	private Integer readCnt;
 	
 } // end class

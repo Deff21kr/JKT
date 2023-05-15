@@ -11,21 +11,21 @@ public interface QNACommentMapper {
 	// 댓글 조회
 	@Select("""
 			SELECT *
-			FROM tbl_QNAComment WHERE postno = #{postno}
+			FROM tbl_QNAComment WHERE postNo = #{postNo}
 			""")
-	public abstract List<QNACommentVO> selectList(Integer postno);
+	public abstract List<QNACommentVO> selectList(Integer postNo);
 	
 	// 댓글 상세조회 업데이트 할때 필요함...
-	public abstract QNACommentVO select(Integer commentno);
+	public abstract QNACommentVO select(Integer commentNo);
 		
 	// 댓글 작성
 	public abstract Integer insert(QNACommentDTO dto);
 	
 	// 댓글 삭제
-	public abstract Integer deletecomment(Integer commentno);
+	public abstract Integer deletecomment(Integer commentNo);
 	
 	// 댓글 수정
 	public abstract Integer update(QNACommentDTO dto);
 	
 	
-}
+} // end interface

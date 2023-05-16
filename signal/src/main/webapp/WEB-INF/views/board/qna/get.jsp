@@ -94,7 +94,7 @@
                 </div>
 				
 				<!-- 댓글 -->
-                <%@include file="../../boardComment.jsp" %>
+                <%@include file="../../QnAboardComment.jsp" %>
 
                 <!-- bt : button -->
                 <div class="bt_wrap">

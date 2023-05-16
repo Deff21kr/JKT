@@ -32,9 +32,9 @@
 	// 댓글 삭제 
 	$(document).on('click', '.delete-comment', function() {
 		let commentNo = $(this).data("comment-no");
-		let postNo = "${__BOARD__.postNo}";
+		let postNo = "${__GROUP__.postNo}";
 		$.ajax({
-			url : '/board/qna/delete',
+			url : '/user/delete',
 			type : 'POST',
 			data : {
 				commentNo : commentNo,
@@ -76,7 +76,7 @@
 				// newContent: newContent
 				content : content
 			},
-			url : '/board/qna/edit',
+			url : '/user/edit',
 			type : 'POST',
 			success : function(result) {
 				alert('수정이 완료되었습니다.')
@@ -122,7 +122,7 @@
 					<textarea class="edit-content" placeholder="수정할 내용을 입력해라"></textarea>
 					<button type="button" class="submit-edit-btn"
 						data-comment-no="${comment.commentNo}"
-						data-post-no="${__BOARD__.postNo}"
+						data-post-no="${__GROUP__.postNo}"
 						data-content="${comment.content}">수정 제출</button>
 				</div>
 			</div>
@@ -130,8 +130,8 @@
 	</div>
 
 	<!-- 댓글 작성 -->
-	<form action="/board/qna/qnaReply" method="post">
-		<input type="hidden" name="postNo" value="${__BOARD__.postNo}">
+	<form action="/user/qnaReply" method="post">
+		<input type="hidden" name="postNo" value="${__GROUP__.postNo}">
 		<input type="hidden" name="nickName" value="${__AUTH__.nickName}">
 		<div class="reply_write">
 			<div>

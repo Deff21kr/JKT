@@ -7,12 +7,11 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.GroupBoardCriteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.GroupBoardVO;
 import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.mapper.GroupBoardMapper;
-import org.zerock.myapp.mapper.GroupMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,7 +33,7 @@ public class GroupBoardServiceImpl
 
 	// 1. 게시판 목록을 얻어 반환
 	@Override
-	public List<GroupBoardVO> getList(Criteria cri) throws ServiceException {
+	public List<GroupBoardVO> getList(GroupBoardCriteria cri) throws ServiceException {
 		log.trace("getList() invoekd.");
 		
 		try {
@@ -104,6 +103,19 @@ public class GroupBoardServiceImpl
 		
 		return this.dao.getTotalAmount();
 	} // getTotal
+	
+	
+	// 7. 카테고리별 검색 기능
+	@Override
+	public List<GroupBoardVO> searchList(GroupBoardCriteria cri) throws ServiceException {
+	    log.trace("searchList() invoked.");
+
+	    try {
+	        return this.dao.searchList(cri);
+	    } catch (Exception e) {
+	        throw new ServiceException(e);
+	    } // try-catch
+	} // searchList
 	
 	
 //	====== IntitializingBean, DisposableBean ======

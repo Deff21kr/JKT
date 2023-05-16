@@ -6,10 +6,10 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.myapp.domain.QNACommentDTO;
-import org.zerock.myapp.domain.QNACommentVO;
+import org.zerock.myapp.domain.QnACommentDTO;
+import org.zerock.myapp.domain.QnACommentVO;
 import org.zerock.myapp.exception.ServiceException;
-import org.zerock.myapp.mapper.QNACommentMapper;
+import org.zerock.myapp.mapper.QnACommentMapper;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -17,14 +17,14 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Service("QNACommentService")
-public class QNACommentServiceImpl implements QNACommentService, InitializingBean, DisposableBean{
+public class QnACommentServiceImpl implements QnACommentService, InitializingBean, DisposableBean{
 	
 	@Setter(onMethod_ = @Autowired)
-	private QNACommentMapper dao;
+	private QnACommentMapper dao;
     
 	// 1. 게시판 목록을 얻어 반환해주는 기능 수행
 	@Override
-	public List<QNACommentVO> getList(Integer postNo) throws ServiceException {
+	public List<QnACommentVO> getList(Integer postNo) throws ServiceException {
 		log.trace("getList() invoked.");
 		
 		try {
@@ -38,7 +38,7 @@ public class QNACommentServiceImpl implements QNACommentService, InitializingBea
 	
 	// 댓글 작성
 	@Override
-	public Boolean insert(QNACommentDTO dto) throws ServiceException {
+	public Boolean insert(QnACommentDTO dto) throws ServiceException {
 		log.trace("insert() invoked.");
 		
 		try {
@@ -51,11 +51,11 @@ public class QNACommentServiceImpl implements QNACommentService, InitializingBea
 	
 	// 댓글 삭제
 	@Override
-	public Boolean deleteComment(Integer commentNo) throws ServiceException {
+	public Boolean delete(Integer commentNo) throws ServiceException {
 		log.trace("delete() invoked.");
 		
 		try {
-			return ( this.dao.deletecomment(commentNo) == 1 );
+			return ( this.dao.delete(commentNo) == 1 );
 		} catch(Exception e){
 			throw new ServiceException(e);
 		} // try-catch
@@ -63,7 +63,7 @@ public class QNACommentServiceImpl implements QNACommentService, InitializingBea
 	} // deleteComment
 
 	@Override
-	public Boolean update(QNACommentDTO dto) throws ServiceException {
+	public Boolean update(QnACommentDTO dto) throws ServiceException {
 		log.info("update() invoked.");
 		
 		try {
@@ -86,7 +86,9 @@ public class QNACommentServiceImpl implements QNACommentService, InitializingBea
 	public void destroy() throws Exception {
 		log.info("destroy() invoked.");
 		
-	} // destroy
+	}
+
+
 	
 
 } // end class

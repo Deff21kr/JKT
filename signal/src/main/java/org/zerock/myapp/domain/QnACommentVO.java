@@ -8,7 +8,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Value
 @Log4j2
-public class QNACommentVO {
+public class QnACommentVO {
 	
 	private Integer commentNo;
 	private String content;
@@ -17,10 +17,10 @@ public class QNACommentVO {
 	private String nickName;
 	private Integer postNo;
 	
-	public QNACommentDTO toDTO() {
+	public QnACommentDTO toDTO() {
 		log.trace("toDTO() invoked.");
 		
-		QNACommentDTO dto = new QNACommentDTO();
+		QnACommentDTO dto = new QnACommentDTO();
 		dto.setCommentNo(this.commentNo);
 		dto.setContent(this.content);
 		

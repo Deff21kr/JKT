@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+>>>>>>> 54d413129feb8924a0f0fb578bf1499119963533
 
     <!DOCTYPE html>
     <html lang="ko">
@@ -92,7 +100,7 @@
                 </div>
 				
 				<!-- 댓글 -->
-                <%@include file="../../boardComment.jsp" %>
+                <%@include file="../../QnAboardComment.jsp" %>
 
                 <!-- bt : button -->
                 <div class="bt_wrap">

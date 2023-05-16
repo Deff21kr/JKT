@@ -23,10 +23,10 @@
         <script>
             $(function () {
                 $('#listBtn').click(function () {
-                    location = "/board/qnaList?currPage=${param.currPage}";
+                    location = "/board/group/list?currPage=${param.currPage}";
                 });
                 $('#modifyBtn').click(function () {
-                    location = "/board/qnaEdit?currPage=${param.currPage}&postno=${__BOARD__.postNo}";
+                    location = "/board/group/modify?currPage=${param.currPage}&postno=${__BOARD__.postNo}";
                 });
               
             });
@@ -118,7 +118,11 @@
                 <!-- bt : button -->
                 <div class="bt_wrap">
                 <c:if test="${not __BOARD__.nickName.equals(__AUTH__.nickName)}">
-	               <button type="button" id="applyBtn">신청</button> 
+	                <form action="/user/mygroup/register" method="post" >
+	                	<input type="hidden" name="ID" value="${__AUTH__.ID }" >
+	                	<input type="hidden" name="postNo" value="${__BOARD__.postNo }" >
+						<button type="submit" id="applyBtn">신청</button> 	                
+	                </form>
             	</c:if>
                 	
                     <button type="button" id="listBtn">목록</button> 

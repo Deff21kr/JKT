@@ -12,6 +12,12 @@
 		FROM tbl_groups
 		WHERE groupno = #{groupNo}
 	</select>
+	
+	<select id="selectPost" resultType="org.zerock.myapp.domain.GroupsDTO">
+		SELECT *
+		FROM tbl_groups
+		WHERE postno = #{postNo}
+	</select>
 
 	<insert id="insert">
 		<selectKey keyProperty="groupNo" order="AFTER" resultType="int">
@@ -24,6 +30,7 @@
 			 #{area}, #{postNo})
 		
 	</insert>
+	
 
 
 	<delete id="delete">
@@ -34,11 +41,8 @@
 	<update id="update">
 		UPDATE tbl_groups
 		SET
-			groupname=#{nickName},
 			recruitstatus = #{recruitStatus},
-			maxmember =  #{maxMember},
-			currentmember=#{currentMember},
-			area=#{Area}
+			currentmember=#{currentMember}
 		WHERE groupno = #{groupNo}
 	</update>
 

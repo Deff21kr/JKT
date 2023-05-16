@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="../../resources/css/bstyle1.css">
         <link rel="stylesheet" href="../../resources/css/bstyle2.css">
         <link rel="stylesheet" href="../../resources/css/bstyle3.css">
+        <link rel="stylesheet" href="../../resources/css/groupboardRegister.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
@@ -33,6 +34,12 @@
     	<%@include file="../../header.jsp" %>
     </header>
         
+
+                <div class="board_wrap">
+                    <!-- <input type="hidden" name="nickname" value="${__BOARD__.nickname}"> -->
+                    <div class="board_title">
+                        <strong>동행찾기</strong>
+                    </div>
 
 
             <form action="/board/group/register" method="POST">
@@ -127,11 +134,7 @@
 
                 </div>
 
-                <div class="board_wrap">
-                    <!-- <input type="hidden" name="nickname" value="${__BOARD__.nickname}"> -->
-                    <div class="board_title">
-                        <strong>동행찾기</strong>
-                    </div>
+
                     <div class="board_write_wrap">
                         <div class="board_write">
                             <div class="title">

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.GroupBoardCriteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
+import org.zerock.myapp.domain.GroupBoardPageDTO;
 import org.zerock.myapp.domain.GroupBoardVO;
 import org.zerock.myapp.domain.GroupsDTO;
-import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.service.GroupBoardService;
 import org.zerock.myapp.service.GroupService;
@@ -38,7 +38,7 @@ public class GroupBoardController {
 	
 	// 1. 게시판 목록 조회
 	@GetMapping("/list")
-	void list(Criteria cri, Model model) throws ControllerException {
+	void list(GroupBoardCriteria cri, Model model) throws ControllerException {
 		log.trace("list({}, {}) invoked.", cri, model);
 		
 		try {
@@ -46,7 +46,7 @@ public class GroupBoardController {
 		// Request Scope  공유속성 생성
 		model.addAttribute("__LIST__", list);
 		
-		PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
+		GroupBoardPageDTO pageDTO = new GroupBoardPageDTO(cri, this.service.getTotal());
 		model.addAttribute("pageMaker", pageDTO);
 		} catch (Exception e) {
 			throw new ControllerException(e);
@@ -85,12 +85,12 @@ public class GroupBoardController {
 	} // register
 	
 	// 3. 특정 게시물 상세조회
-    @GetMapping(path={"/get", "/modify"},  params = "postno")
-    void get(@RequestParam Integer postno, Model model) throws  ControllerException {
+    @GetMapping(path={"/get", "/modify"},  params = "postNo")
+    void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
         log.trace("get() invoked.");
 
         try{
-            GroupBoardVO vo = this.service.get(postno);
+            GroupBoardVO vo = this.service.get(postNo);
             model.addAttribute("__BOARD__", vo);
         }catch (Exception e){
             throw new ControllerException(e);
@@ -136,5 +136,28 @@ public class GroupBoardController {
 			throw new ControllerException(e);
 		} // try-catch
 	} // remove
+	
+	
+	// 7. 카테고리별 검색 기능
+	@GetMapping("/search")
+	void search(GroupBoardCriteria cri, Model model) throws ControllerException {
+	    log.trace("search({}, {}) invoked.", cri, model);
+
+	    try {
+	        List<GroupBoardVO> list = this.service.searchList(cri);
+	        // Request Scope에 공유속성 생성
+	        model.addAttribute("__SEARCH__", list);
+
+	        GroupBoardPageDTO pageDTO = new GroupBoardPageDTO(cri, this.service.getTotal());
+	        model.addAttribute("pageMaker", pageDTO);
+	    } catch (Exception e) {
+	        throw new ControllerException(e);
+	    } // try-catch
+	} // search
+	
+	
+	
+	
+	
 	
 } // end class

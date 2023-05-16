@@ -3,7 +3,7 @@ package org.zerock.myapp.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
-import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.GroupBoardCriteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.GroupBoardVO;
 import org.zerock.myapp.exception.DAOException;
@@ -15,12 +15,12 @@ public interface GroupBoardMapper {
 	// 1. LIST - 게시판 목록조회
 	@Select("""
 			SELECT 
-			/*+ index_desc(tbl_qnaboard) */ *
+			/*+ index_desc(tbl_groupboard) */ *
 			FROM TBL_GROUPBOARD
 			OFFSET (#{currPage} -1) * #{amount} ROWS
 			FETCH NEXT #{amount} ROWS ONLY
 			""")
-	public abstract List<GroupBoardVO> selectList(Criteria cri);
+	public abstract List<GroupBoardVO> selectList(GroupBoardCriteria cri);
 	
 	
 	// 2. Create(Insert) - 새로운 게시물 등록
@@ -38,5 +38,8 @@ public interface GroupBoardMapper {
 	// 6. 총 게시물 갯수 반환
 	@Select("SELECT count(postno) FROM TBL_GROUPBOARD WHERE postno > 0")
 	public abstract Integer getTotalAmount();
+	
+    // 7. 카테고리별 검색 기능
+    List<GroupBoardVO> searchList(GroupBoardCriteria cri);
 	
 } // end interface

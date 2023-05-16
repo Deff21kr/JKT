@@ -37,7 +37,7 @@
                     });
                     $('.pageNum').on('click', function (e) {
                         let selectedPageNum = e.currentTarget.textContent;
-                        location = "/board/group/list?currPage=" + selectedPageNum;
+                        location = "/board/group/search?currPage=" + selectedPageNum;
                     });
                 });
             </script>
@@ -150,7 +150,7 @@
 
                     <div class="place-main">
 
-                        <c:forEach var="groupBoardVO" items="${__LIST__}">
+                        <c:forEach var="groupBoardVO" items="${__SEARCH__}">
                             <div class="main">
 
                                 <div class="main-pic">
@@ -198,14 +198,14 @@
 
                 <div class="board_page">
                     <c:if test="${pageMaker.prev}">
-                        <div class="Prev"><a href="/board/group/list?currPage=${pageMaker.startPage - 1}">Prev</a>
+                        <div class="Prev"><a href="/board/group/search?currPage=${pageMaker.startPage - 1}">Prev</a>
                         </div>
                     </c:if>
                     <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
                         <div class="pageNum ${pageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
                     </c:forEach>
                     <c:if test="${pageMaker.next}">
-                        <div class="Next"><a href="/board/group/list?currPage=${pageMaker.endPage + 1}">Next</a>
+                        <div class="Next"><a href="/board/group/search?currPage=${pageMaker.endPage + 1}">Next</a>
                         </div>
                     </c:if>
                 </div>

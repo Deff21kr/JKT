@@ -23,10 +23,10 @@
         <script>
             $(function () {
                 $('#listBtn').click(function () {
-                    location = "/board/qnaList?currPage=${param.currPage}";
+                    location = "/board/group/list?currPage=${param.currPage}";
                 });
                 $('#modifyBtn').click(function () {
-                    location = "/board/qnaEdit?currPage=${param.currPage}&postno=${__BOARD__.postNo}";
+                    location = "/board/group/modify?currPage=${param.currPage}&postno=${__BOARD__.postNo}";
                 });
               
             });

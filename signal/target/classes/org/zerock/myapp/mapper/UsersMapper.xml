@@ -37,7 +37,6 @@
 	<update id="update">
 		UPDATE tbl_users
 		SET
-			nickname=#{nickName},
 			name = #{name},
 			password=#{password},
 			email=#{EMail},

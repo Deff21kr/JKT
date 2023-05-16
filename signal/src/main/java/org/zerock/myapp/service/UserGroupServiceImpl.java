@@ -45,21 +45,23 @@ public class UserGroupServiceImpl implements UserGroupService {
 	public Boolean modify(UserGroupDTO dto) throws ServiceException {
 		
 		GroupsDTO a =this.group.select(dto.getGroupNo());
+		log.info("\n\n 이프전 서비스\n\t dto : {}\n\ta : {} ",dto,a);
 		try {
-				if(dto.getOutCome()=="수락") {
-					log.info("\n\n++서비스impl\n++	dto : {} ,\n	++a : {}\n\n" ,dto,a);
+				if(dto.getOutCome().equals("수락") & (a.getMemberNum() > a.getCurrentMember() )) {
+					log.info("\n\n++서비스 IF \n++	dto : {} ,\n	++a : {}\n\n" ,dto,a);
 					Integer getCurrentMember = a.getCurrentMember();
 					a.setCurrentMember(getCurrentMember+1);
-					this.group.update(a);
+					log.info("\n현재 멤버 +1 : {}",a.getCurrentMember());
+					
+					return ( 1==this.dao.update(dto) & (this.group.updateCurrentMem(a)==1) ) ;
+				} else if(dto.getOutCome().equals("거절")) {
+					log.info("\n\n++서비스 else \n++	dto : {} ,\n	++a : {}\n\n" ,dto,a);
 					return ( 1==this.dao.update(dto) ) ;
-				} else {
-					log.info("\n\n++서비스impl\n++	dto : {} ,\n	++a : {}\n\n" ,dto,a);
-					return ( 1==this.dao.update(dto) ) ;
+				} else { // currMem이 최대멤버보다 같거나 클때
+					return false;
 				}
-//				else if(dto.getOutCome()=="거절") {
-//					return this.dao.delete(dto.getAppNo()) ==1;
-//				}
 		} catch(Exception e) {
+			
 			throw new ServiceException(e);
 		} // try-catch
 		

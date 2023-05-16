@@ -118,9 +118,9 @@
                 <!-- bt : button -->
                 <div class="bt_wrap">
                 <c:if test="${not __BOARD__.nickName.equals(__AUTH__.nickName)}">
-	                <form action="user/mygroup/register">
-	                	<input type="hidden" name="${__AUTH__.ID }" >
-	                	<input type="hidden" name="${__BOARD__.postNo }" >
+	                <form action="/user/mygroup/register" method="post" >
+	                	<input type="hidden" name="ID" value="${__AUTH__.ID }" >
+	                	<input type="hidden" name="postNo" value="${__BOARD__.postNo }" >
 						<button type="submit" id="applyBtn">신청</button> 	                
 	                </form>
             	</c:if>

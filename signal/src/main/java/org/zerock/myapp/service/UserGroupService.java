@@ -3,12 +3,15 @@ package org.zerock.myapp.service;
 import java.util.List;
 
 import org.zerock.myapp.domain.UserGroupDTO;
+import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.exception.ServiceException;
 
 public interface UserGroupService {
 	
 		// 1. 내 동행에 신청한 유저 보여줌
 		public abstract List<UserGroupDTO> getList(String nickName) throws ServiceException;
+		
+		public abstract Boolean register(String ID,Integer groupNo) throws ServiceException;
 		
 		// 3. 특정 게시물 상세 조회 기능 수행 (READ)
 		public abstract UserGroupDTO get(Integer appNo) throws ServiceException;

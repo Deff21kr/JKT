@@ -14,6 +14,8 @@ public interface GroupMapper {
 	public abstract Integer insert(GroupsDTO dto);
 
 	public abstract GroupsDTO select(Integer groupNo);
+	
+	public abstract GroupsDTO selectPost(Integer postNo);
 
 	public abstract Integer delete(String groupNo);
 

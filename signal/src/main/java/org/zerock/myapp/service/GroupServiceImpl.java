@@ -40,6 +40,15 @@ DisposableBean {
 			throw new ServiceException(e);
 		}
 	}
+	
+	@Override
+	public GroupsDTO get(Integer groupNo) throws ServiceException {
+		try {
+			return this.group.select(groupNo);
+		} catch (Exception e){
+			throw new ServiceException(e);
+		}
+	} // destroy
 
 
 	@Override
@@ -57,6 +66,18 @@ DisposableBean {
 	public void destroy() throws Exception {	// 자원해제(=후처리)
 		log.trace("destroy() invoked.");
 		
-	} // destroy
+	}
+
+	@Override
+	public GroupsDTO getPost(Integer postNo) throws ServiceException {
+		try {
+			return this.group.selectPost(postNo);
+		} catch (Exception e){
+			throw new ServiceException(e);
+		}
+	}
+
+
+
 	
 }

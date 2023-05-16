@@ -11,6 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.myapp.domain.GroupBoardVO;
+import org.zerock.myapp.domain.GroupsDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
@@ -49,6 +53,30 @@ public class UserGroupController {
 			throw new ControllerException(e);
 		}
 	}
+	
+	@PostMapping("/mygroup/register")
+	public String register(@RequestParam("ID") String ID,@RequestParam("postNo") Integer postNo,
+			RedirectAttributes rttrs) throws ControllerException {
+		try {
+			log.trace("유저_그룹 등록 ({} ) invoked.");
+			log.trace("유저ID ({} ) invoked.",ID);
+			log.trace("postNo ({} ) invoked.",postNo);
+			GroupsDTO dto = this.group.getPost(postNo);
+			log.info("dto ({} ) invoked.",dto);
+			if(this.service.register(ID,dto.getGroupNo())) {
+				rttrs.addFlashAttribute("postNo", postNo);
+			}
+			return "redirect:/board/group/get?postno="+postNo;
+			
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	}
+	
+	
+	
+	
+	
 	
 //	@PostMapping("/mygroup")
 //	public void uesrGroup(Model model,UsersDTO dto) throws ControllerException {

@@ -66,4 +66,17 @@ public class UserGroupServiceImpl implements UserGroupService {
 //		return null;
 //	}
 
+	@Override
+	public Boolean register(String ID,Integer groupNo) throws ServiceException {
+		
+		try {
+			
+			return ( (this.dao.insert(ID,groupNo) == 1));
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	
+
 }

@@ -21,7 +21,7 @@ public interface UserGroupMapper {
 		public abstract List<UserGroupDTO> selectList(String nickName) throws DAOException;;
 		
 		// 2. 신청시 생성
-		public abstract Integer insert(UserGroupDTO dto) throws DAOException;;
+		public abstract Integer insert(String ID,Integer groupNo) throws DAOException;;
 	
 		// 3. 상세조회
 		public abstract UserGroupDTO select(Integer appNo) throws DAOException;

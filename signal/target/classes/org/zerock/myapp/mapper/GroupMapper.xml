@@ -12,6 +12,12 @@
 		FROM tbl_groups
 		WHERE groupno = #{groupNo}
 	</select>
+	
+	<select id="selectPost" resultType="org.zerock.myapp.domain.GroupsDTO">
+		SELECT *
+		FROM tbl_groups
+		WHERE postno = #{postNo}
+	</select>
 
 	<insert id="insert">
 		<selectKey keyProperty="groupNo" order="AFTER" resultType="int">
@@ -24,6 +30,7 @@
 			 #{area}, #{postNo})
 		
 	</insert>
+	
 
 
 	<delete id="delete">

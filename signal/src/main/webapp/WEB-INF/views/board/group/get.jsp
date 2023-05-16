@@ -21,6 +21,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
         
         <script>
+        var currPage = "${param.currPage}";
+        var postNo = "${__BOARD__.postNo}";
+        
             $(function () {
                 $('#listBtn').click(function () {
                     location = "/board/group/list?currPage=${param.currPage}";
@@ -28,7 +31,13 @@
                 $('#modifyBtn').click(function () {
                     location = "/board/group/modify?currPage=${param.currPage}&postno=${__BOARD__.postNo}";
                 });
+                <!--
+                $('#applyBtn').click(function () {
+                    location.href = "/board/group/get?currPage=" + currPage + "&postno=" + postNo;
+                });
               
+                -->
+               
             });
         </script>
     </head>
@@ -121,6 +130,7 @@
 	                <form action="/user/mygroup/register" method="post" >
 	                	<input type="hidden" name="ID" value="${__AUTH__.ID }" >
 	                	<input type="hidden" name="postNo" value="${__BOARD__.postNo }" >
+	                	<input type="hidden" name="currPage" value="${param.currPage }" >
 						<button type="submit" id="applyBtn">신청</button> 	                
 	                </form>
             	</c:if>

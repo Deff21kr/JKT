@@ -13,10 +13,11 @@ public interface UserGroupMapper {
 	
 		@Select("""
 				SELECT  /*+ index_desc(tbl_user_group) */  
-                a.appno, b.groupname, a.id,b.area, b.recruitstatus,a.outCome,b.membernum,b.currentmember
+                a.appno, b.groupname, a.id,b.area, b.recruitstatus,a.outCome,b.membernum,b.currentmember,b.groupno
                 FROM TBL_USER_GROUP a
                 INNER JOIN tbl_groups b ON a.groupNo = b.groupNo
                 where b.postno IN (select c.postno from tbl_groups c , tbl_groupboard d where c.postno=d.postno and d.nickname=#{nickName})
+				ORDER BY a.appno desc
 				""")
 		public abstract List<UserGroupDTO> selectList(String nickName) throws DAOException;;
 		

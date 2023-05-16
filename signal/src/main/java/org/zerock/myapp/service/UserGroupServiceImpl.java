@@ -10,6 +10,11 @@ import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.mapper.GroupMapper;
 import org.zerock.myapp.mapper.UserGroupMapper;
 
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+@Log4j2
+@NoArgsConstructor
+
 @Service("userGroupService")
 public class UserGroupServiceImpl implements UserGroupService {
 	@Autowired
@@ -38,13 +43,17 @@ public class UserGroupServiceImpl implements UserGroupService {
 //
 	@Override
 	public Boolean modify(UserGroupDTO dto) throws ServiceException {
+		
 		GroupsDTO a =this.group.select(dto.getGroupNo());
 		try {
 				if(dto.getOutCome()=="수락") {
-					a.setCurrentMember(a.getCurrentMember()+1);
+					log.info("\n\n++서비스impl\n++	dto : {} ,\n	++a : {}\n\n" ,dto,a);
+					Integer getCurrentMember = a.getCurrentMember();
+					a.setCurrentMember(getCurrentMember+1);
 					this.group.update(a);
 					return ( 1==this.dao.update(dto) ) ;
 				} else {
+					log.info("\n\n++서비스impl\n++	dto : {} ,\n	++a : {}\n\n" ,dto,a);
 					return ( 1==this.dao.update(dto) ) ;
 				}
 //				else if(dto.getOutCome()=="거절") {

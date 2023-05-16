@@ -1,0 +1,130 @@
+@charset "utf8";
+
+/* main */
+main {
+  height: fit-content;
+}
+
+
+
+/* wrap-2 style */
+.place {
+  width: 1240px;
+  min-height: 1500px;
+
+}
+
+.searchbox {
+  border: 2px solid rgb(200, 196, 196);
+  border-radius: 20px;
+  margin-bottom: 40px;
+  background-color: aliceblue;
+}
+
+.area {
+  display: flex;
+  position: relative;
+  height: 50px;
+  align-items: center;
+}
+
+.area button {
+  width: 80px;
+  text-align: left;
+}
+
+.area-select {
+  width : 150px;
+  text-align: center;
+  margin-right: 70px;
+}
+
+/* .area-select::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  width: 1px;
+  height: 20px;
+  margin-top: -10px;
+  background-color: blue;
+} */
+
+/* .area div {
+  border-right: #4663e7 2px solid;
+  padding-right: 10px;
+} */
+
+.caldate {
+  width: 200px;
+  text-align: center;
+}
+
+.caldate::before  {
+  content:attr(data-placeholder);
+  width: 100%;
+  text-align: center;
+}
+
+.caldate:focus::before,
+.caldate:valid::before {
+  display: none;
+}
+
+.calendar {
+  display: flex;
+  position: relative;
+  height: 50px;
+  align-items: center;
+}
+
+.calendar div {
+  display: flex;
+}
+
+.calendar > div div {
+  width: 150px;
+  justify-content: center;
+}
+
+.calselect {
+  justify-content: center;
+  width: 150px;
+  margin-right: 70px;
+}
+
+.groupmember {
+  display: flex;
+  position: relative;
+  height: 50px;
+  align-items: center;
+}
+
+.groupselect {
+  /* text-align: center; */
+  justify-content: center;
+  width: 150px;
+  margin-right: 70px; 
+}
+
+.groupmember div {
+  display: flex;
+}
+
+.groupstatus {
+  display: flex;
+  position: relative;
+  height: 50px;
+  align-items: center;
+}
+
+.groupstatus button {
+  width: 150px;
+  text-align: left;
+}
+
+.groupstatus-select {
+  width : 150px;
+  text-align: center;
+  margin-right: 70px;
+}

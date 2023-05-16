@@ -43,5 +43,33 @@
             endDate = #{endDate}
         WHERE postno = #{postNo}
     </update>
+    
+    <!-- 7. 카테고리별 검색 기능 -->
+	<select id="searchList" resultType="org.zerock.myapp.domain.GroupBoardVO">
+	    SELECT 
+	    /*+ index_desc(tbl_groupboard) */ *
+	    FROM TBL_GROUPBOARD
+	    <where>
+	        <if test="area != null">
+	            AND area = #{area}
+	        </if>
+	        <if test="memberNum != null">
+	            AND memberNum = #{memberNum}
+	        </if>
+	        <if test="recruitStatus != null">
+	            AND recruitStatus = #{recruitStatus}
+	        </if>
+	        <if test="startDate != null">
+	            AND startDate = #{startDate}
+	        </if>
+	        <if test="endDate != null">
+	            AND endDate = #{endDate}
+	        </if>
+	    </where>
+	    OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
+	    FETCH NEXT #{cri.amount} ROWS ONLY
+	</select>
+	
+	<!-- ... -->
 
 </mapper>

@@ -12,5 +12,7 @@ public class GroupsDTO {
 	private Integer currentMember;
 	private String area;
 	private Integer postNo;
-
+	
+	
+	
 }

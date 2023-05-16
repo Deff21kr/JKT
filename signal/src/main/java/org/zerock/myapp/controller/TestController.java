@@ -25,41 +25,6 @@ public class TestController {
 //		
 //		return "register";
 //	}
-	@GetMapping("/list")
-	String list(Criteria cri, Model model) throws ControllerException {
-		log.trace("list({}, {}) invoked.", cri, model);
-		
-		try {
-		List<QnABoardVO> list = this.service.getList(cri);
-		// Request Scope  공유속성 생성
-		model.addAttribute("__LIST__", list);
-		
-		PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
-		model.addAttribute("pageMaker", pageDTO);
-		
-		return "board/qna/list";
-		
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		} // try-catch
-	} // list
 	
-	@GetMapping(path="/user/mygroup")
-	String test2() {
-		
-		return "user/mygroup";
-	}
 	
-	@GetMapping(path="/mypage")
-	String test3() {
-		
-		return "mypage";
-	}
-	
-	@GetMapping(path="/transfer")
-	String test4() {
-		
-		return "transfer";
-	}
-
 }

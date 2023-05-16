@@ -3,6 +3,7 @@ package org.zerock.myapp.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
+import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.QnABoardDTO;
 import org.zerock.myapp.domain.QnABoardVO;
 import org.zerock.myapp.domain.UserGroupDTO;
@@ -12,13 +13,12 @@ public interface UserGroupMapper {
 	
 		@Select("""
 				SELECT  /*+ index_desc(tbl_user_group) */  
-						a.appno, a.id, b.groupname,b.area, b.recruitstatus,b.membernum,b.currentmember,b.postno
-				FROM TBL_USER_GROUP a
-				INNER JOIN tbl_groups b ON a.groupNo = b.groupNo
-				WHERE a.groupNo = #{groupNo}
-	
+                a.appno, b.groupname, a.id,b.area, b.recruitstatus,a.outCome,b.membernum,b.currentmember
+                FROM TBL_USER_GROUP a
+                INNER JOIN tbl_groups b ON a.groupNo = b.groupNo
+                where b.postno IN (select c.postno from tbl_groups c , tbl_groupboard d where c.postno=d.postno and d.nickname=#{nickName})
 				""")
-		public abstract List<UserGroupDTO> selectList(Integer groupNo) throws DAOException;;
+		public abstract List<UserGroupDTO> selectList(String nickName) throws DAOException;;
 		
 		// 2. 신청시 생성
 		public abstract Integer insert(UserGroupDTO dto) throws DAOException;;

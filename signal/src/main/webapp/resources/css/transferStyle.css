@@ -152,7 +152,7 @@ html {
 }
 
 
-.board_list_post >div > div {
+.board_list_post  .a >div > div {
     display: inline-block;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -170,54 +170,61 @@ html {
     font-size: 1.5rem;
 }
 .board_list > div.top >.num {
-    width: 10%;
+    width: 7%;
 }
 .board_list > div.top >.title {
-    width: 30%;
+    width: 20%;
     text-align: center;
 }
 .board_list > div.top >.writer {
     width: 10%;
     
 }
-.board_list > div.top >.startDate {
-    width: 15%;
-}
-.board_list > div.top >.endDate {
-    width: 15%;
-}
-.board_list > div.top >.person {
-    width: 10%;
+.board_list > div.top >.area {
+    width: 7%;
 }
 .board_list > div.top >.status {
     width: 10%;
 }
-.board_list_post .num {
+.board_list > div.top .result {
+    width: 25%;
+}
+.board_list > div.top >.member {
+    width: 10%;
+}
+.board_list > div.top >.current {
     width: 10%;
 }
 
+/* ---------------------------- */
+.board_list_post .a .num {
+    width: 7%;
+}
 
-
-.board_list_post .title {
-    width: 30%;
+.board_list_post .a .title {
+    width: 20%;
+    padding-left : 20px;
     text-align: left;
 }
 
 
-.board_list .writer {
+.board_list_post .a .writer {
     width: 10%;
 }
 
-.board_list_post .startDate {
-    width: 15%;
+.board_list_post .a  .area {
+    width: 7%;
 }
-.board_list_post .endDate {
-    width: 15%;
-}
-.board_list_post .person {
+.board_list_post .a  .status {
     width: 10%;
 }
-.board_list_post .status {
+.board_list_post .a   .result {
+    width: 25%;
+}
+.board_list_post .a  .member {
+    width: 10%;
+}
+.board_list_post  .a  .current {
     width: 10%;
 }
 

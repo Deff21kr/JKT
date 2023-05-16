@@ -34,11 +34,8 @@
 	<update id="update">
 		UPDATE tbl_groups
 		SET
-			groupname=#{nickName},
 			recruitstatus = #{recruitStatus},
-			maxmember =  #{maxMember},
-			currentmember=#{currentMember},
-			area=#{Area}
+			currentmember=#{currentMember}
 		WHERE groupno = #{groupNo}
 	</update>
 

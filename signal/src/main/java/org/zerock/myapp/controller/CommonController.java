@@ -58,7 +58,7 @@ public class CommonController {
 				model.addAttribute("__AUTH__", vo);	// Request Scope
 				  
 				log.info("\ndto : {} ,model : {}", dto,model);
-				return "redirect:/mainpage"; // 인증 성공시 매인페이지로!!
+				return "redirect:/"; // 인증 성공시 매인페이지로!!
 			} else { // 로그인 실패
 					rttrs.addAttribute("__RESULT__","실패");
 					return "redirect:/common/loginPost"; // 다시 로그인 페이지로

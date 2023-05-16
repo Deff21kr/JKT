@@ -13,7 +13,7 @@ public interface GroupMapper {
 
 	public abstract Integer insert(GroupsDTO dto);
 
-	public abstract GroupsDTO select(String groupNo);
+	public abstract GroupsDTO select(Integer groupNo);
 
 	public abstract Integer delete(String groupNo);
 

@@ -2,6 +2,9 @@ package org.zerock.myapp.mapper;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+import java.util.Objects;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,19 +45,35 @@ public class UserGroupTests {
 	}
 	@Test
 	public void selectList() throws DAOException {
-		this.mapper.selectList(2);
+	        String nickName = "123123";
+	        List<UserGroupDTO> groups = this.mapper.selectList(nickName);
+	        
+	        Objects.requireNonNull(groups);
+	        groups.forEach(log::info);
+		
 	}
 	
 	@Test
 	public void insert() throws DAOException {
 		
 		UserGroupDTO dto = new UserGroupDTO();
-		dto.setID("1111");
-		dto.setGroupNo(2);
+		dto.setID("2222");
+		dto.setGroupNo(8);
 		
 		Integer aff = this.mapper.insert(dto);
 		assert aff != null;
 		log.info("\t+ aff: {} \n\tdto : {} ", (aff == 1), dto);
 	}
+	
+	@Test
+	public void update() throws DAOException {
+		UserGroupDTO dto = this.mapper.select(29);
+		dto.setOutCome("진행중");
+		
+		Integer affectedLines = this.mapper.update(dto);
+		log.info("\tbno : {}, affectedLines : {} \nisSucces ", dto.getOutCome(), affectedLines, (affectedLines == 1));
+	}
+	
+	
 
 } // end class

@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.myapp.domain.GroupBoardVO;
 import org.zerock.myapp.domain.GroupsDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
+import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.service.GroupBoardService;
@@ -54,6 +54,20 @@ public class UserGroupController {
 		}
 	}
 	
+	@PostMapping("/mygroup")
+	public void uesrGroup(Model model,UsersDTO dto) throws ControllerException {
+		try {
+			UsersVO vo = this.user.get(dto.getID());
+			
+			List<UserGroupDTO> list =this.service.getList(vo.getNickName());
+			model.addAttribute("__GROUP__",list);
+			
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+		
+	}
+	
 	@PostMapping("/mygroup/register")
 	public String register(@RequestParam("ID") String ID,@RequestParam("postNo") Integer postNo,
 			RedirectAttributes rttrs) throws ControllerException {
@@ -78,18 +92,6 @@ public class UserGroupController {
 	
 	
 	
-//	@PostMapping("/mygroup")
-//	public void uesrGroup(Model model,UsersDTO dto) throws ControllerException {
-//		try {
-//			UsersVO vo = this.user.get(dto.getID());
-//			
-//			List<UserGroupDTO> list =this.service.getList(vo.getNickName());
-//			model.addAttribute("__GROUP__",list);
-//			
-//		} catch (Exception e) {
-//			throw new ControllerException(e);
-//		}
-//		
-//	}
+
 
 }

@@ -26,7 +26,6 @@ import org.zerock.myapp.domain.QnACommentDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
-import org.zerock.myapp.service.QNACommentService;
 import org.zerock.myapp.service.QnABoardService;
 import org.zerock.myapp.service.QnACommentService;
 

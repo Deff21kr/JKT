@@ -112,63 +112,6 @@ public class QnABoardController {
         } // try-catch
     } // get
     
-	
-	
-//	// 3. 특정 게시물 상세조회
-//    @GetMapping(path={"/get"},  params = "postNo")
-//    String get(@RequestParam Integer postNo, Model model,
-//    		 HttpServletRequest req, HttpServletResponse res
-//    		) throws  ControllerException {
-//        log.trace("get(req, res, {}) invoked.", req, res);
-//
-//        try{
-//        	Integer rc = this.service.updateReadcnt(postNo);
-//        	model.addAttribute("_BOARD_", rc);
-//    	
-//            QnABoardVO vo = this.service.get(postNo);
-//            model.addAttribute("__BOARD__", vo);
-//            
-//            Cookie oldCookie = null;
-//            Cookie[] cookies = req.getCookies();
-//            
-//            if(cookies != null) {
-//            	for(Cookie cookie : cookies) {
-//            		 log.info("\t+ cookieName: {}, cookieValue: {}", cookie.getName(), cookie.getValue());
-//            		 
-//            		 if(cookie.getName().equals("newView")) {
-//            			 oldCookie = cookie;
-//            		 } // if
-//            	} // enhanced for
-//            } // if
-//            
-//            if(oldCookie != null) {
-//            	if(!oldCookie.getValue().contains("["+ postNo.toString() +"]")) {
-//            		service.updateReadcnt(postNo);
-//            		log.info("oldCookiePostNo({}) checked.", postNo);
-//            		
-//            		oldCookie.setValue(oldCookie.getValue() + "_[" + postNo + "]");
-//            		oldCookie.setPath("/");
-//            		oldCookie.setMaxAge(60 * 60 * 24);
-//            		res.addCookie(oldCookie);
-//            	}
-//            } else {
-//            	service.updateReadcnt(postNo);
-//            	Cookie newCookie = new Cookie("newView", "[" + postNo + "]");
-//            	log.info("newCookiePostNo({}) checked.", postNo);
-//            	
-//            	newCookie.setPath("/");
-//            	newCookie.setMaxAge(60 * 60 * 24);
-//            	res.addCookie(newCookie);
-//            } // if - else
-//          
-//            return "board/qna/get";
-//            
-//        }catch (Exception e){
-//            throw new ControllerException(e);
-//        } // try-catch
-//    } // get
-	
-    
 //     4. 특정 게시물 업데이트(수정화면)
     @PostMapping("/modify")
     String modify(QnABoardDTO dto, Integer currPage, RedirectAttributes rttrs) throws ControllerException {

@@ -1,8 +1,14 @@
+<<<<<<< HEAD
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+=======
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+>>>>>>> 54d413129feb8924a0f0fb578bf1499119963533
 
     <!DOCTYPE html>
     <html lang="ko">
@@ -32,7 +38,7 @@
                 });
             });
 
-            // =========== 조회수 ==================
+            // =========== 조회수 중복방지(진행중) ==================
             const postNo = '게시물 번호';
             let ip = '';
             const xhr = new XMLHttpRequest();

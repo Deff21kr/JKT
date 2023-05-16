@@ -58,10 +58,12 @@ public class UserGroupServiceImpl implements UserGroupService {
 					log.info("\n\n++서비스 else \n++	dto : {} ,\n	++a : {}\n\n" ,dto,a);
 					return ( 1==this.dao.update(dto) ) ;
 				} else { // currMem이 최대멤버보다 같거나 클때
-					return false;
+					// 수락을 누르든 거절을 누른든 무조건 거절로 업뎃
+					dto.setOutCome("거절");
+					log.info("무조건 거절 : {}",dto.getOutCome());
+					return (1==this.dao.update(dto));
 				}
 		} catch(Exception e) {
-			
 			throw new ServiceException(e);
 		} // try-catch
 		

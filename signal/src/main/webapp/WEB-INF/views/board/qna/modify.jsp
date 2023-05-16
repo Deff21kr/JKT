@@ -40,13 +40,10 @@
         <div class="board_wrap">
             <form action="/board/qna/modify" method="POST">
                 <input type="hidden" name="currPage" value="${param.currPage}">
-<<<<<<< HEAD:signal/src/main/webapp/WEB-INF/views/board/qna/qnaEdit.jsp
-                <input type="hidden" name="postno" value="${__BOARD__.postno}">
+                <input type="hidden" name="postno" value="${__BOARD__.postNo}">
                 <input type="hidden" name="nickname" value="${__AUTH__.nickName}">
-=======
                 <input type="hidden" name="postNo" value="${__BOARD__.postNo}">
                 <input type="hidden" name="nickName" value="${__AUTH__.nickName}">
->>>>>>> 6c9fa3e053317db74ef2863e0498c1beffd2b990:signal/src/main/webapp/WEB-INF/views/board/qna/modify.jsp
                 <div class="board_title">
                     <strong>QnA</strong>
                 </div>

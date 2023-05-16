@@ -32,9 +32,9 @@
 	// 댓글 삭제 
 	$(document).on('click', '.delete-comment', function() {
 		let commentNo = $(this).data("comment-no");
-		let postNo = "${__GROUP__.postNo}";
+		let postNo = "${__BOARD__.postNo}";
 		$.ajax({
-			url : '/user/delete',
+			url : '/board/group/delete',
 			type : 'POST',
 			data : {
 				commentNo : commentNo,
@@ -76,7 +76,7 @@
 				// newContent: newContent
 				content : content
 			},
-			url : '/user/edit',
+			url : '/board/group/edit',
 			type : 'POST',
 			success : function(result) {
 				alert('수정이 완료되었습니다.')
@@ -90,6 +90,36 @@
 		}); // ajax
 
 	});
+	
+	// 댓글 등록
+	$('#commentForm').one('submit', function(event) {
+		event.preventDefault(); // 폼 기본 제출 방법을 중지
+
+		// 빈 내용 체크
+		if($('.content').val() == "") {
+			alert("내용을 작성해주세요.");
+			return;
+		}
+
+		$.ajax({
+			url: '/board/group/qnaReply', // /board/group/qnaReply
+			type: 'POST',
+			data: $(this).serialize(), // form 데이터
+			success: function(data) {
+				// 댓글 등록 성공
+				alert("댓글이 등록되었습니다.");
+				location.reload(); // 페이지 새로 고침
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				// 댓글 등록 실패
+				alert("댓글 등록에 실패했습니다: " + errorThrown);
+			}
+		});
+	});
+	
+
+
+	
 </script>
 
 </head>
@@ -122,7 +152,7 @@
 					<textarea class="edit-content" placeholder="수정할 내용을 입력해라"></textarea>
 					<button type="button" class="submit-edit-btn"
 						data-comment-no="${comment.commentNo}"
-						data-post-no="${__GROUP__.postNo}"
+						data-post-no="${__BOARD__.postNo}"
 						data-content="${comment.content}">수정 제출</button>
 				</div>
 			</div>
@@ -130,8 +160,8 @@
 	</div>
 
 	<!-- 댓글 작성 -->
-	<form action="/user/qnaReply" method="post">
-		<input type="hidden" name="postNo" value="${__GROUP__.postNo}">
+	<form id="commentForm" action="/board/group/qnaReply" method="post">
+		<input type="hidden" name="postNo" value="${__BOARD__.postNo}">
 		<input type="hidden" name="nickName" value="${__AUTH__.nickName}">
 		<div class="reply_write">
 			<div>

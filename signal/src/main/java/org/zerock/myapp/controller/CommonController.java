@@ -2,6 +2,8 @@ package org.zerock.myapp.controller;
 
 import java.util.Objects;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,7 @@ public class CommonController {
 	String login(
 			UsersDTO dto,
 			Model model,
+			HttpServletRequest req,
 			RedirectAttributes rttrs) throws ControllerException {
 		log.trace("loginPost({}) invoked.", dto);
 
@@ -55,7 +58,7 @@ public class CommonController {
 				model.addAttribute("__AUTH__", vo);	// Request Scope
 				  
 				log.info("\ndto : {} ,model : {}", dto,model);
-				return "redirect:/mainpage"; // 인증 성공시 매인페이지로!!
+				return "redirect:/"; // 인증 성공시 매인페이지로!!
 			} else { // 로그인 실패
 					rttrs.addAttribute("__RESULT__","실패");
 					return "redirect:/common/loginPost"; // 다시 로그인 페이지로

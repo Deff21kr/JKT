@@ -25,7 +25,7 @@
 	            </div>
 	            <div>
 	              <div class="cs1"><a href="#"><strong>자주묻는게시판</strong></a></div>
-	              <div class="cs2"><a href="#"><strong>1:1문의게시판</strong></a></div>
+	              <div class="cs2"><a href="/board/oneonone/list"><strong>1:1문의게시판</strong></a></div>
 	            </div>
 	            <!-- <div class="comp">
 	              <span>주식회사 여행시그널</span>

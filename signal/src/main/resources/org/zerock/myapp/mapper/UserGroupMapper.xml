@@ -8,7 +8,7 @@
 <mapper namespace="org.zerock.myapp.mapper.UserGroupMapper">
 
 	
-
+	<!-- 동행신청버튼눌러 유저_그룹 맵핑테이블 생성-->
 	<insert id="insert">
 		<selectKey keyProperty="appNo" order="AFTER" resultType="int">
 			select "ISEQ$$_77353".CURRVAL from dual
@@ -19,7 +19,23 @@
 		VALUES (#{ID}, #{groupNo} )
 		
 	</insert>
+	
+	<select id="select" resultType="org.zerock.myapp.domain.UserGroupDTO">
+		SELECT *
+		FROM tbl_user_group
+		WHERE appno = #{appNo}
+	</select>
+	
+	<update id="update">
+		UPDATE tbl_user_group
+		SET
+			outcome=#{outCome}
+		WHERE appno = #{appNo}
+	</update>
 
+	<delete id="delete">
+		DELETE FROM tbl_user_group WHERE appno=#{appNo} 
+	</delete>
 
 
 

@@ -14,7 +14,7 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 @Log4j2
 
-@RequestMapping("/board/group")
+@RequestMapping("/user/group")
 @Controller
 public class GroupController {
 	

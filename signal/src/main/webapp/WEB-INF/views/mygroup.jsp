@@ -24,7 +24,7 @@
 
     <div class="board_wrap">
       <div class="board_title">
-        <h2><strong>동행환승</strong></h2>
+        <h2><strong>동행</strong></h2>
       </div>
 
       <div class="board_trans_condition">

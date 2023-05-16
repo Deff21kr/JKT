@@ -3,7 +3,7 @@ package org.zerock.myapp.domain;
 import lombok.Data;
 
 @Data
-public class QNACommentDTO {
+public class QnACommentDTO {
 	
 	private Integer commentNo;
 	private String content;

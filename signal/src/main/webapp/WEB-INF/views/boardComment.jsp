@@ -26,7 +26,7 @@
                 let commentNo = $(this).data("comment-no");
                 let postNo = "${__BOARD__.postNo}";
                 $.ajax({
-                    url: '/board/delete',
+                    url: '/board/qna/delete',
                     type: 'POST',
                     data: {
                         commentNo: commentNo,
@@ -68,7 +68,7 @@
                         // newContent: newContent
                         content: content
                     },
-                    url: '/board/edit',
+                    url: '/board/qna/edit',
                     type: 'POST',
                     success: function (result) {
                         alert('수정이 완료되었습니다.')
@@ -116,11 +116,12 @@
             </div>
 
             <!-- 댓글 작성 -->
-            <form action="/board/qnaReply" method="post">
+            <form action="/board/qna/qnaReply" method="post">
                 <input type="hidden" name="postNo" value="${__BOARD__.postNo}">
+                <input type="hidden" name="nickName" value="${__BOARD__.nickName}">
                 <div class="reply_write">
                     <div>
-                        <div class="nickname">${__BOARD__.nickName}</div>
+                        <div class="nickname">${__AUTH__.nickName}</div>
                         <div class="content">
                             <textarea id="content" name="content" placeholder="내용을 작성해주세요."></textarea>
                         </div>

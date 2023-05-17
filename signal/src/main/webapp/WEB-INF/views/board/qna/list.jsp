@@ -32,6 +32,7 @@
                 location = "/board/qna/list?currPage="+selectedPageNum;
             });
         });
+       
     </script>
 </head>
 
@@ -56,13 +57,17 @@
                 <div>
                     <c:forEach var="boardVO" items="${__LIST__}">
                         <div class="num">${boardVO.postNo}</div>
-                        <div class="title"><a href="/board/qna/get?currPage=${pageMaker.cri.currPage}&postNo=${boardVO.postNo}">${boardVO.title}</a></div>
+                        <div class="title">
+                        <a href="/board/qna/get?currPage=${pageMaker.cri.currPage}&postNo=${boardVO.postNo}" >${boardVO.title}</a></div>
                         <div class="nickname">${boardVO.nickName}</div>
                         <div class="date"><fmt:formatDate pattern="yyyy/MM/dd" value="${boardVO.regiDate}" /></div>
                         <div class="readcnt">${boardVO.readCnt}</div>
                     </c:forEach>
                 </div>
             </div>
+            
+		         
+            
             <div class="board_page">
                     <c:if test="${pageMaker.prev}">
                         <div class="Prev"><a href="/board/qna/list?currPage=${pageMaker.startPage - 1}">Prev</a></div>

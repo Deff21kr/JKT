@@ -1,14 +1,6 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
-
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
->>>>>>> 54d413129feb8924a0f0fb578bf1499119963533
 
     <!DOCTYPE html>
     <html lang="ko">
@@ -69,6 +61,7 @@
     <body>
     	<%@include file="../../header.jsp" %>
     	
+    	
         <!-- QnA 글 보기 -->
         <div class="board_wrap">
             <div class="board_title">
@@ -76,7 +69,6 @@
             </div>
             <div class="board_view_wrap">
                 <div class="board_view">
-                    <input type="hidden"  name="${_csrf.parameterName }" value="${_csrf.token }">
                     <div class="title">${ __BOARD__.title}</div>
                     <div class="info">
                         <dl>

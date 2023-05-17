@@ -5,8 +5,7 @@ import lombok.Data;
 @Data
 public class LoginDTO {
 
-	private String ID;
-	private String password;
-	private Boolean rememberMe;
+	private String postNo;
+	private String currPage;
 
 }

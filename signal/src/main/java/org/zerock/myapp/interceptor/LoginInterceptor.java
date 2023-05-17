@@ -114,15 +114,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 //				   // redirectUri가 없다면 로그인 이후의 기본 페이지로 리다이렉트
 //				   res.sendRedirect("/");
 //				}
-//
 //			
+			
 		} 
-		
-	
-        
-    
-		
-//		
 	} // postHandle
 	
 	

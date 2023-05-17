@@ -92,7 +92,7 @@ public class QnABoardController {
 	} // register
 
 //	 3. 특정 게시물 상세조회
-    @GetMapping(path={"/get", "/modify"},  params = "postNo")
+    @GetMapping(path={"/get*", "/modify*"},  params = "postNo")
     void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
         log.trace("get() invoked.");
 

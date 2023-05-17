@@ -2,9 +2,7 @@ package org.zerock.myapp.controller;
 
 import java.util.Objects;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.myapp.domain.LoginDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
@@ -47,7 +46,7 @@ public class CommonController {
 			Model model,
 			HttpServletRequest req,
 			RedirectAttributes rttrs) throws ControllerException {
-		log.trace("loginPost({}) invoked.", dto);
+		log.trace("loginPost(\n\n{},\n{},\n{}\n) invoked.", dto,model,rttrs);
 
 		try {
 //			UsersVO vo = this.login.authenticate(this.service.get(dto.getID()).toDTO());
@@ -56,9 +55,15 @@ public class CommonController {
 			
 			if (vo != null) { // 로그인을 성공했다면 (why? 영속성까지 들어가서 객체를 반환한다는건 데이터가 맞게 들어갔다는 뜻)
 				model.addAttribute("__AUTH__", vo);	// Request Scope
-				  
+				String re=(String)req.getSession().getAttribute("redirectUri");
+//				log.info("\n\ncurrPage : {}" ,sign.getCurrPage());
+//				log.info("\n\npostNo : {}" ,sign.getPostNo());
+//				if(currPage != null & postNo != null ) {
+//					return re+currPage+postNo;
+//				}
+				log.info("\n\n&&& re &&&& : {} \n\n",re);
 				log.info("\ndto : {} ,model : {}", dto,model);
-				return "redirect:/"; // 인증 성공시 매인페이지로!!
+				return "redirect:"+re; 
 			} else { // 로그인 실패
 					rttrs.addAttribute("__RESULT__","실패");
 					return "redirect:/common/loginPost"; // 다시 로그인 페이지로

@@ -79,7 +79,7 @@
                     <div class="profile_right">
                         <div>
                             <div class="right_top">닉네임</div>
-                            <div class="right_contents">Deff</div>
+                            <div class="right_contents">${__AUTH__.nickName}</div>
                         </div>
                         <div>
                             <div class="right_top">상태메시지</div> 
@@ -91,13 +91,17 @@
                         </div>
                         <div>
                             <div class="right_top">선호여행지</div>
-                            <div class="right_contents">서울</div>
+                            <div class="right_contents">${__AUTH__.likeArea}</div>
                         </div>
                         <div>
                             <div class="right_top">MBTI</div>
-                            <div class="right_contents">ISTP</div>
+                            <div class="right_contents">${__AUTH__.MBTI}</div>
                         </div>
                     </div>
+                    
+                  <div>
+                    <button type="submit"></button>
+                  </div>
                     
                    
                     

@@ -7,20 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupBoardCriteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.GroupBoardPageDTO;
 import org.zerock.myapp.domain.GroupBoardVO;
 import org.zerock.myapp.domain.GroupsDTO;
+import org.zerock.myapp.domain.PageDTO;
+import org.zerock.myapp.domain.QnACommentDTO;
+import org.zerock.myapp.domain.QnACommentVO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.service.GroupBoardService;
 import org.zerock.myapp.service.GroupService;
+import org.zerock.myapp.service.QnACommentService;
 import org.zerock.myapp.service.UserGroupService;
 import org.zerock.myapp.service.UsersService;
 
@@ -43,6 +49,8 @@ public class GroupBoardController {
 	private UserGroupService mapping;
 	@Setter(onMethod_ = @Autowired)
 	private UsersService user;
+	@Setter(onMethod_ = @Autowired)
+	private QnACommentService commentService;
 	
 	// 1. 게시판 목록 조회
 	@GetMapping("/list")
@@ -98,12 +106,19 @@ public class GroupBoardController {
 	
 	// 3. 특정 게시물 상세조회
     @GetMapping(path={"/get", "/modify"},  params = "postNo")
-    void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
+    void get(@RequestParam Integer postNo, Model model, Criteria cri) throws  ControllerException {
         log.trace("get() invoked.");
 
         try{
             GroupBoardVO vo = this.service.get(postNo);
             model.addAttribute("__BOARD__", vo);
+            
+            List<QnACommentVO> commentList = this.commentService.selectList(cri, postNo);
+            model.addAttribute("__COMMENT_LIST__", commentList);
+            log.info("\t+ 댓글 조회된다아아아아");
+            
+            PageDTO pageDTO = new PageDTO(cri, this.commentService.getCommentTotal(postNo));
+    		model.addAttribute("__commentPage__", pageDTO);
         }catch (Exception e){
             throw new ControllerException(e);
         } // try-catch
@@ -167,6 +182,48 @@ public class GroupBoardController {
 	    } // try-catch
 	} // search
 	
+	// 댓글 등록
+//	@RequestMapping(value = "/qnaReply", method= {RequestMethod.POST})
+	@PostMapping("/qnaReply")
+	String insert(@ModelAttribute QnACommentDTO dto, Criteria cri,RedirectAttributes rttrs) throws ControllerException {
+	    log.trace("addComment({}) invoked.", dto);
+	    try {
+	    	commentService.insert(dto);
+	        rttrs.addAttribute("postNo", dto.getPostNo());
+	        return "redirect:/board/qna/get";
+	    } catch (Exception e) {
+	        throw new ControllerException(e);
+	    }
+	} // addComment
+
+	
+	// 댓글 수정
+	@PostMapping("/edit")
+	String editComment(QnACommentDTO dto, RedirectAttributes rttrs) throws ControllerException {
+		log.trace("editComment({}) invoked.", dto);
+		
+		try {
+			commentService.update(dto);
+			rttrs.addAttribute("postNo", dto.getPostNo());
+			return "redirect:/board/qna/get";
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	} // editComment
+	
+	// 댓글 삭제
+	@PostMapping("/delete")
+	String deleteComment(@RequestParam(value = "commentNo", required=false) Integer commentNo, Integer postNo,RedirectAttributes rttrs) throws ControllerException {
+		log.trace("deleteComment({}) invoked.", commentNo);
+		
+		try {
+			commentService.delete(commentNo);
+			rttrs.addAttribute("postNo", postNo);
+			return "redirect:/board/qna/get";
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	} // deleteComment
 	
 	
 	

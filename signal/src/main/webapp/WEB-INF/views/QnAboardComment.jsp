@@ -108,7 +108,7 @@
 	$(function() {
 		$('.pageNum').on('click', function(e) {
 			let selectedPageNum = e.currentTarget.textContent;
-			location = "/board/qna/get?currPage=" + selectedPageNum;
+			location = "/board/qna/get?currPage=" + selectedPageNum +"&postNo=${__BOARD__.postNo}";
 		});
 	});
 </script>
@@ -151,17 +151,16 @@
 	</div>
 	
 	<div class="board_page">
-                    <c:if test="${pageMaker.prev}">
-                        <div class="Prev"><a href="/board/qna/get?currPage=${pageMaker.startPage - 1}">Prev</a></div>
+                    <c:if test="${__commentPage__.prev}">
+                        <div class="Prev"><a href="/board/qna/get?currPage=${__commentPage__.startPage - 1}&postNo=${__BOARD__.postNo}">Prev</a></div>
                     </c:if>
-                    <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                        <div class="pageNum ${pageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+                    <c:forEach var="pageNum" begin="${__commentPage__.startPage}" end="${__commentPage__.endPage}">
+                        <div class="pageNum ${__commentPage__.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
                     </c:forEach>
-                    <c:if test="${pageMaker.next}">
-                        <div class="Next"><a href="/board/qna/get?currPage=${pageMaker.endPage + 1}">Next</a></div>
+                    <c:if test="${__commentPage__.next}">
+                        <div class="Next"><a href="/board/qna/get?currPage=${__commentPage__.endPage + 1}&postNo=${__BOARD__.postNo}">Next</a></div>
                     </c:if>
             </div>
-
 
 	<!-- 댓글 작성 -->
 	<form action="/board/qna/qnaReply" method="POST">
@@ -181,7 +180,6 @@
 	</form>
 
 
-	</div>
 
 </body>
 

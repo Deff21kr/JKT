@@ -32,9 +32,9 @@
 	// 댓글 삭제 
 	$(document).on('click', '.delete-comment', function() {
 		let commentNo = $(this).data("comment-no");
-		let postNo = "${__GROUP__.postNo}";
+		let postNo = "${__BOARD__.postNo}";
 		$.ajax({
-			url : '/user/delete',
+			url : '/board/group/delete',
 			type : 'POST',
 			data : {
 				commentNo : commentNo,
@@ -76,7 +76,7 @@
 				// newContent: newContent
 				content : content
 			},
-			url : '/user/edit',
+			url : '/board/group/edit',
 			type : 'POST',
 			success : function(result) {
 				alert('수정이 완료되었습니다.')
@@ -88,7 +88,28 @@
 				alert('댓글을 수정하는데 실패했습니다.');
 			}
 		}); // ajax
+	});
 
+	// var doubleSubmitFlag = false;
+	// function doubleSubmitCheck() {
+	// 	if (doubleSubmitFlag) {
+	// 		return doubleSubmitFlag;
+	// 	} else {
+	// 		doubleSubmitFlag = true;
+	// 		return false;
+	// 	}
+	// }
+
+	// function insert() {
+	// 	if (doubleSubmitCheck()) return;
+
+	// 	alert("등록");
+	// }
+	$(function() {
+		$('.pageNum').on('click', function(e) {
+			let selectedPageNum = e.currentTarget.textContent;
+			location = "/board/group/get?currPage=" + selectedPageNum +"&postNo=${__BOARD__.postNo}";
+		});
 	});
 </script>
 
@@ -100,7 +121,7 @@
 		<div class="reply_title">댓글</div>
 		<c:forEach items="${__COMMENT_LIST__}" var="comment">
 			<div class="reply_list">
-				<div>
+				<div class="list">
 					<div class="nickname">${comment.nickName}</div>
 					<div class="date">${comment.regiDate}</div>
 					<div class="date">${comment.modifyDate}</div>
@@ -122,16 +143,28 @@
 					<textarea class="edit-content" placeholder="수정할 내용을 입력해라"></textarea>
 					<button type="button" class="submit-edit-btn"
 						data-comment-no="${comment.commentNo}"
-						data-post-no="${__GROUP__.postNo}"
+						data-post-no="${__BOARD__.postNo}"
 						data-content="${comment.content}">수정 제출</button>
 				</div>
 			</div>
 		</c:forEach>
 	</div>
+	
+	<div class="board_page">
+                    <c:if test="${__commentPage__.prev}">
+                        <div class="Prev"><a href="/board/group/get?currPage=${__commentPage__.startPage - 1}&postNo=${__BOARD__.postNo}">Prev</a></div>
+                    </c:if>
+                    <c:forEach var="pageNum" begin="${__commentPage__.startPage}" end="${__commentPage__.endPage}">
+                        <div class="pageNum ${__commentPage__.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+                    </c:forEach>
+                    <c:if test="${__commentPage__.next}">
+                        <div class="Next"><a href="/board/group/get?currPage=${__commentPage__.endPage + 1}&postNo=${__BOARD__.postNo}">Next</a></div>
+                    </c:if>
+            </div>
 
 	<!-- 댓글 작성 -->
-	<form action="/user/qnaReply" method="post">
-		<input type="hidden" name="postNo" value="${__GROUP__.postNo}">
+	<form action="/board/group/qnaReply" method="POST">
+		<input type="hidden" name="postNo" value="${__BOARD__.postNo}">
 		<input type="hidden" name="nickName" value="${__AUTH__.nickName}">
 		<div class="reply_write">
 			<div>
@@ -140,11 +173,13 @@
 					<textarea id="content" name="content" placeholder="내용을 작성해주세요."></textarea>
 				</div>
 				<div class="writeButton">
-					<button type="submit" class="replyWriteBtn">등록</button>
+					<button type="submit" class="replyWriteBtn" id="replyBtn">등록</button>
 				</div>
 			</div>
 		</div>
 	</form>
+
+
 
 </body>
 

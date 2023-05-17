@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="/resources/css/bstyle1.css">
         <link rel="stylesheet" href="/resources/css/bstyle2.css">
         <link rel="stylesheet" href="/resources/css/bstyle3.css">
-        
+          
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
         

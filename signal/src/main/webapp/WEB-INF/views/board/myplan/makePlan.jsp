@@ -12,7 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
 
-
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
     <!-- style -->
@@ -23,6 +24,16 @@
     <script src="https://kit.fontawesome.com/7235c72187.js" crossorigin="anonymous"></script>
 
     <link rel="shortcut icon" href="../../imgs/여행시그널-removebg-preview.png" type="image/x-icon">
+
+	<script defer>
+	    $(function () {
+	        $('#cancel').click(function () {
+	            location = "/board/myplan/main";
+	        });
+	    });
+    
+	</script>
+
 
     <style>
       * {
@@ -147,17 +158,17 @@
 
             <div>
               <label for="startDate">여행 출발:</label>
-              <input type="date" id="startDate" name="startDate" required>
+              <input type="date" id="startDate" name="startDate" placeholder="여행 시작 날짜를 입력해주세요" required>
             </div>
 
             <div>
               <label for="endDate">여행 종료:</label>
-              <input type="date" id="endDate" name="endDate" required>
+              <input type="date" id="endDate" name="endDate" placeholder="여행 종료 날짜를 입력해주세요" required>
             </div>
 
             <div class="submit-button">
               <input type="submit" id="make" value="만들기">
-              <input type="button" id="cancel" value="취소">
+              <button type="button" id="cancel">취소</button>
             </div>
 
           </form>
@@ -169,6 +180,29 @@
       <%@ include file="/WEB-INF/views/footer.jsp" %>
       
 
+	<script defer="defer">
+		document.addEventListener('DOMContentLoaded', function() {
+			  var startDateInput = document.getElementById('startDate');
+			  var endDateInput = document.getElementById('endDate');
+
+			  var startDatepicker = flatpickr(startDateInput, {
+			    dateFormat: 'Y-m-d', // 선택한 날짜의 형식 설정
+			    minDate: 'today', // 현재 날짜부터 선택 가능하도록 설정
+			    onChange: function(selectedDates, selectedDate) {
+			      // 시작 날짜가 변경되면 끝나는 날짜의 최소값을 설정
+			      if (selectedDate !== undefined) {
+			        endDatepicker.set('minDate', selectedDate);
+			      }
+			    }
+			  });
+
+			  var endDatepicker = flatpickr(endDateInput, {
+			    dateFormat: 'Y-m-d', // 선택한 날짜의 형식 설정
+			    minDate: 'today', // 현재 날짜부터 선택 가능하도록 설정
+			  });
+			});
+
+	</script>
   </body>
 
   </html>

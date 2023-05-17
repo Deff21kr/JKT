@@ -50,7 +50,7 @@ public class MyPlanMapperTests {
 		
 		MyPlanDTO dto = new MyPlanDTO();
 		dto.setPlanName("부산여행");
-		dto.setStartDate(startdate);
+		dto.setStartDate(startdate);		
 		dto.setEndDate(enddate);
 		dto.setNickName("hyeondae");
 		

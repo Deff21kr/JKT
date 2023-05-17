@@ -3,6 +3,8 @@ package org.zerock.myapp.service;
 import static org.junit.Assert.assertNotNull;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.junit.Before;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.DetailPlanDTO;
+import org.zerock.myapp.domain.DetailPlanVO;
 import org.zerock.myapp.domain.MyPlanDTO;
 import org.zerock.myapp.domain.MyPlanVO;
 import org.zerock.myapp.exception.ServiceException;
@@ -94,5 +98,82 @@ public class MyPlanServiceTests {
 	} // testGet
 	
 	
+//	==============DETAIL PLAN TEST SERVICE =================
+	@Test
+	public void testGetDetailPlanList() throws ServiceException {
+		log.trace("testGetDetailPlanList() invoked");
+		
+		Integer planNo = 39;
+		
+		List<DetailPlanVO> vo = this.service.getDetailPlanList(planNo);
+		assertNotNull(vo);
+		log.info("\t + vo : {}", vo);
+		
+	} // testGetDetailPlanList
 	
+	@Test
+	public void testRegisterDetailPlan() throws ServiceException {
+		log.trace("testRegisterDetailPlan() invoked");
+
+		java.util.Date date = new java.util.Date();
+		
+		
+		DetailPlanDTO dto = new DetailPlanDTO();
+		dto.setPlanNo(39);
+		dto.setPlanDay(2);
+		dto.setPlace("강원도");
+		dto.setPlanTime(date);
+		dto.setDetailPlan("뭐 할까요?");
+		
+		assertNotNull(dto);
+
+		
+		Boolean result = this.service.registerDetailPlan(dto);
+		log.info("\t + result : {}", result);
+	} // testRegisterDetailPlan
+	
+	@Test
+	public void testGetDetailPlan() throws ServiceException {
+		log.trace("testGetDetailPlan() invoked");
+		
+		Integer detailPlanNo = 10;
+		
+		DetailPlanVO vo = this.service.getDetailPlan(detailPlanNo);
+		assertNotNull(vo);
+		log.info("\t + vo: {}", vo);
+		
+	} // testGetDetailPlan
+	
+	
+	@Test
+	public void testModifyDetailPlan() throws ServiceException {
+		log.trace("testModifyDetailPlan invoked");
+		
+		java.util.Date date = new java.util.Date();
+
+		
+		DetailPlanDTO dto = new DetailPlanDTO();
+		dto.setDetailPlanNo(10);
+		dto.setDetailPlan("수정 완료");
+		dto.setPlace("일산");
+		dto.setPlanTime(date);
+		
+		assertNotNull(dto);
+		log.info("\t + dto : {}", dto);
+		Boolean result = this.service.modifyDetailPlan(dto);
+		log.info("\t +result : {}", result);
+		
+	} // testModifyDetailPlan
+	
+	
+	@Test
+	public void testRemoveDetailPlan() throws ServiceException {
+		log.trace("removeDetailPlan() invoked");
+		
+		Integer detailPlanNo = 6;
+		
+		Boolean result = this.service.removeDetailPlan(detailPlanNo);
+		log.info("\t + result = {}", result);
+		
+	} // removeDetailPlan
 }

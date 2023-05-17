@@ -17,6 +17,8 @@ public interface UsersMapper {
 
 	// 3. 회원id로 게시물 검색
 	public abstract UsersVO select(String ID);
+	
+	public abstract UsersVO selectByNick(String nickName);
 
 	// 4. 회원탈퇴
 	public abstract Integer delete(String ID);

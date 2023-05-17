@@ -89,7 +89,19 @@ public class UserGroupServiceImpl implements UserGroupService {
 			throw new ServiceException(e);
 		}
 	}
+	
+	@Override
+	public Boolean registerDefault(String ID, Integer groupNo) throws ServiceException {
+try {
+			log.info("글쓴이 등록됨");
+			return ( (this.dao.insertDefault(ID,groupNo) == 1));
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
 
+
+	
 	
 
 }

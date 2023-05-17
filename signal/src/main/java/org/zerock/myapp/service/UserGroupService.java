@@ -13,6 +13,8 @@ public interface UserGroupService {
 		
 		public abstract Boolean register(String ID,Integer groupNo) throws ServiceException;
 		
+		public abstract Boolean registerDefault(String ID,Integer groupNo) throws ServiceException;
+		
 		// 3. 특정 게시물 상세 조회 기능 수행 (READ)
 		public abstract UserGroupDTO get(Integer appNo) throws ServiceException;
 //		

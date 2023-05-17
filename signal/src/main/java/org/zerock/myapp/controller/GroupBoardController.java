@@ -16,9 +16,13 @@ import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.GroupBoardPageDTO;
 import org.zerock.myapp.domain.GroupBoardVO;
 import org.zerock.myapp.domain.GroupsDTO;
+import org.zerock.myapp.domain.UserGroupDTO;
+import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.service.GroupBoardService;
 import org.zerock.myapp.service.GroupService;
+import org.zerock.myapp.service.UserGroupService;
+import org.zerock.myapp.service.UsersService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,6 +39,10 @@ public class GroupBoardController {
 	private GroupBoardService service;
 	@Setter(onMethod_ = @Autowired)
 	private GroupService group;
+	@Setter(onMethod_ = @Autowired)
+	private UserGroupService mapping;
+	@Setter(onMethod_ = @Autowired)
+	private UsersService user;
 	
 	// 1. 게시판 목록 조회
 	@GetMapping("/list")
@@ -64,7 +72,11 @@ public class GroupBoardController {
 			// 게시글에서 지역,날짜,인원,멤버수,글번호 등을 뽑아내어 
 			// 새로운 게시글이 등록될때 동행역시 생성
 			
-			if( this.service.register(dto) & this.group.register(dh,dto)) {		
+			if( this.service.register(dto) & this.group.register(dh,dto)) {	
+				
+				UsersVO one = this.user.getByNick(dto.getNickName());
+				this.mapping.registerDefault(one.getID(), dh.getGroupNo());
+				
 				rttrs.addFlashAttribute("result", "true");
 				rttrs.addFlashAttribute("postno", dto.getPostNo());
 				return "redirect:/board/group/list";

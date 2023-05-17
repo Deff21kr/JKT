@@ -18,6 +18,9 @@ public interface UsersService {
 	// 3. 특정 회원 조회
 	public abstract UsersVO get(String ID) throws ServiceException;
 	
+	// 3-1. 특정 회원 조회
+	public abstract UsersVO getByNick(String nickName) throws ServiceException;
+	
 	// 4. 회원정보수정
 	public abstract Boolean modify(UsersDTO dto) throws ServiceException;
 	

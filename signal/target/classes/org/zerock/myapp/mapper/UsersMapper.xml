@@ -12,6 +12,12 @@
 		FROM tbl_users
 		WHERE id = #{ID}
 	</select>
+	
+	<select id="selectByNick" resultType="org.zerock.myapp.domain.UsersVO">
+		SELECT *
+		FROM tbl_users
+		WHERE nickname = #{nickName}
+	</select>
 
 	<insert id="insert">
 		<selectKey keyProperty="uno" order="AFTER" resultType="int">

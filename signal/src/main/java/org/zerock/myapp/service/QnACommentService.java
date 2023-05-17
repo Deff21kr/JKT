@@ -3,6 +3,8 @@ package org.zerock.myapp.service;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.GroupBoardCriteria;
 import org.zerock.myapp.domain.QnACommentDTO;
 import org.zerock.myapp.domain.QnACommentVO;
 import org.zerock.myapp.exception.ServiceException;
@@ -22,5 +24,6 @@ public interface QnACommentService {
 	
 	// 댓글 업데이트
 	public abstract Boolean update(QnACommentDTO dto) throws ServiceException;
+	
 	
 } // end interface

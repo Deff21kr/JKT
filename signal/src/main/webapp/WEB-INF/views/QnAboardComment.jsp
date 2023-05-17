@@ -98,10 +98,7 @@
 				// 	alert("등록");
 				// }
 
-				$('.replyWriteBtn').on('click',function () {
-					$(this).prop('disabled', true);
-					// 나머지 댓글 등록 코드
-				});
+				
 
 			</script>
 
@@ -113,7 +110,7 @@
 				<div class="reply_title">댓글</div>
 				<c:forEach items="${__COMMENT_LIST__}" var="comment">
 					<div class="reply_list">
-						<div>
+						<div class="list">
 							<div class="nickname">${comment.nickName}</div>
 							<div class="date">${comment.regiDate}</div>
 							<div class="date">${comment.modifyDate}</div>
@@ -140,6 +137,8 @@
 				</c:forEach>
 			</div>
 
+
+
 			<!-- 댓글 작성 -->
 			<form action="/board/qna/qnaReply" method="POST">
 				<input type="hidden" name="postNo" value="${__BOARD__.postNo}">
@@ -151,11 +150,14 @@
 							<textarea id="content" name="content" placeholder="내용을 작성해주세요."></textarea>
 						</div>
 						<div class="writeButton">
-							<button type="submit" class="replyWriteBtn" id="replyBtn" onclick="insert();">등록</button>
+							<button type="submit" class="replyWriteBtn" id="replyBtn">등록</button>
 						</div>
 					</div>
 				</div>
 			</form>
+
+
+			</div>
 
 		</body>
 

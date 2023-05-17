@@ -29,7 +29,7 @@
 	<update id="update">
 		UPDATE tbl_user_group
 		SET
-			outcome=#{outCome}
+			outcome = #{outCome}
 		WHERE appno = #{appNo}
 	</update>
 

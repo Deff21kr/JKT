@@ -10,6 +10,11 @@ import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.mapper.GroupMapper;
 import org.zerock.myapp.mapper.UserGroupMapper;
 
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+@Log4j2
+@NoArgsConstructor
+
 @Service("userGroupService")
 public class UserGroupServiceImpl implements UserGroupService {
 	@Autowired
@@ -38,18 +43,26 @@ public class UserGroupServiceImpl implements UserGroupService {
 //
 	@Override
 	public Boolean modify(UserGroupDTO dto) throws ServiceException {
+		
 		GroupsDTO a =this.group.select(dto.getGroupNo());
+		log.info("\n\n 이프전 서비스\n\t dto : {}\n\ta : {} ",dto,a);
 		try {
-				if(dto.getOutCome()=="수락") {
-					a.setCurrentMember(a.getCurrentMember()+1);
-					this.group.update(a);
+				if(dto.getOutCome().equals("수락") & (a.getMemberNum() > a.getCurrentMember() )) {
+					log.info("\n\n++서비스 IF \n++	dto : {} ,\n	++a : {}\n\n" ,dto,a);
+					Integer getCurrentMember = a.getCurrentMember();
+					a.setCurrentMember(getCurrentMember+1);
+					log.info("\n현재 멤버 +1 : {}",a.getCurrentMember());
+					
+					return ( 1==this.dao.update(dto) & (this.group.updateCurrentMem(a)==1) ) ;
+				} else if(dto.getOutCome().equals("거절")) {
+					log.info("\n\n++서비스 else \n++	dto : {} ,\n	++a : {}\n\n" ,dto,a);
 					return ( 1==this.dao.update(dto) ) ;
-				} else {
-					return ( 1==this.dao.update(dto) ) ;
+				} else { // currMem이 최대멤버보다 같거나 클때
+					// 수락을 누르든 거절을 누른든 무조건 거절로 업뎃
+					dto.setOutCome("거절");
+					log.info("무조건 거절 : {}",dto.getOutCome());
+					return (1==this.dao.update(dto));
 				}
-//				else if(dto.getOutCome()=="거절") {
-//					return this.dao.delete(dto.getAppNo()) ==1;
-//				}
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} // try-catch

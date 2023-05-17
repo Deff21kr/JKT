@@ -18,7 +18,25 @@
 		FROM tbl_groups
 		WHERE postno = #{postNo}
 	</select>
-
+	
+	<update id="update">
+		UPDATE tbl_groups
+		SET
+			groupName = #{groupName},
+			recruitStatus = #{recruitStatus},
+			memberNum=#{memberNum},
+			currentMember=#{currentMember},
+			area=#{area}
+		WHERE groupno = #{groupNo}
+	</update>
+	
+	<update id="updateCurrentMem">
+		UPDATE tbl_groups
+		SET
+			currentMember = #{currentMember}
+		WHERE groupno = #{groupNo}
+	</update>
+	
 	<insert id="insert">
 		<selectKey keyProperty="groupNo" order="AFTER" resultType="int">
 			select "ISEQ$$_74662".CURRVAL from dual
@@ -28,7 +46,6 @@
 				(groupname, recruitstatus, membernum, area, postno )
 		VALUES (#{groupName}, #{recruitStatus}, #{memberNum},
 			 #{area}, #{postNo})
-		
 	</insert>
 	
 
@@ -38,14 +55,7 @@
 		WHERE groupno = #{groupNo}
 	</delete>
 
-	<update id="update">
-		UPDATE tbl_groups
-		SET
-			recruitstatus = #{recruitStatus},
-			currentmember=#{currentMember}
-		WHERE groupno = #{groupNo}
-	</update>
-
+	
 
 
 

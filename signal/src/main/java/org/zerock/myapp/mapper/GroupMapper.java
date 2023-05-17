@@ -20,4 +20,6 @@ public interface GroupMapper {
 	public abstract Integer delete(String groupNo);
 
 	public abstract Integer update(GroupsDTO dto);
+	
+	public abstract Integer updateCurrentMem(GroupsDTO dto);
 }

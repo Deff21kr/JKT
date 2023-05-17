@@ -109,7 +109,7 @@ public class GroupBoardController {
 			
 			if( this.service.modify(dto) ) {		// if success
 				rttrs.addFlashAttribute("result", "true");
-				rttrs.addFlashAttribute("postno", dto.getPostNo());
+				rttrs.addFlashAttribute("postNo", dto.getPostNo());
 			} // if
 			return "redirect:/board/group/list";
 			

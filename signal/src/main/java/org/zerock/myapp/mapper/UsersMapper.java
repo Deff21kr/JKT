@@ -3,7 +3,6 @@ package org.zerock.myapp.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
-import org.zerock.myapp.domain.AuthDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 

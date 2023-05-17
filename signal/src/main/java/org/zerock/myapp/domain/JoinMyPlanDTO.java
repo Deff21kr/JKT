@@ -4,10 +4,11 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.Data;
 import lombok.Value;
 
-@Value
-public class JoinMyPlanVO {
+@Data
+public class JoinMyPlanDTO {
 	
 	private Integer planNo;
 	private String planName;

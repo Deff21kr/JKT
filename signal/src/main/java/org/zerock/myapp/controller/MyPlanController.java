@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.DetailPlanVO;
+import org.zerock.myapp.domain.JoinMyPlanDTO;
 import org.zerock.myapp.domain.MyPlanDTO;
 import org.zerock.myapp.domain.MyPlanVO;
 import org.zerock.myapp.domain.PageDTO;
@@ -51,6 +52,9 @@ public class MyPlanController {
 			Objects.requireNonNull(list);
 			log.info("\t + list: {}", list);
 			model.addAttribute("__MYPLAN__", list);
+			
+			List<JoinMyPlanDTO> joinList = this.service.joinList(nickName);
+			model.addAttribute("__JOINLIST__" ,joinList);
 			
 			PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
 			model.addAttribute("pageMaker", pageDTO);

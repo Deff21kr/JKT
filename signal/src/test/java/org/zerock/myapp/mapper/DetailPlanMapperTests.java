@@ -42,7 +42,7 @@ public class DetailPlanMapperTests {
 	public void testSelectList() {
 		log.trace("testSelectList() invoked");
 		
-		List<DetailPlanVO> vo = this.mapper.selectList(12);
+		List<DetailPlanVO> vo = this.mapper.selectList(39);
 		assertNotNull(vo);
 		
 		log.info("\t + vo : {}", vo);
@@ -62,7 +62,7 @@ public class DetailPlanMapperTests {
 		
 		DetailPlanDTO dto = new DetailPlanDTO();
 		
-		dto.setPlanNo(12);
+		dto.setPlanNo(39);
 		dto.setPlanDay(1);
 		dto.setPlanTime(date);
 		dto.setPlace("인천");

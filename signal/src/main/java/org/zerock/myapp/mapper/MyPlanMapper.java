@@ -23,7 +23,7 @@ public interface MyPlanMapper {
 	public abstract MyPlanVO select(Integer planNo);
 	
 	// 요청시점에 총 게시물 개수 반환
-	@Select("SELECT count(postNo) FROM tbl_oneononeinquiry WHERE postNo > 0")
+	@Select("SELECT count(planno) FROM tbl_myplan WHERE planno > 0 AND endDate > current_date")
 	public abstract Integer getTotalAmount();
 	
 //	public abstract 

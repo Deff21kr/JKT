@@ -94,7 +94,7 @@ public class QnABoardController {
 
 //	 3. 특정 게시물 상세조회
     @GetMapping(path={"/get*", "/modify*"},  params = "postNo")
-    void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
+    void get(@RequestParam Integer postNo, Model model, Criteria cri) throws  ControllerException {
         log.trace("get() invoked.");
 
         try{
@@ -107,6 +107,7 @@ public class QnABoardController {
             List<QnACommentVO> commentList = this.commentService.getList(postNo);
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
+            
         }catch (Exception e){
             throw new ControllerException(e);
         } // try-catch

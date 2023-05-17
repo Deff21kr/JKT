@@ -77,13 +77,14 @@ public class QnACommentServiceImpl implements QnACommentService, InitializingBea
 	@Override
 	public void destroy() throws Exception {
 		log.trace("디스토로이이이이이");
-		
+
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		log.trace("후처리이이이잉이ㅣ");
-	} // update
+	}
+
 
 
 } // end class

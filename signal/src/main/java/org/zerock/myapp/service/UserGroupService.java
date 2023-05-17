@@ -25,6 +25,6 @@ public interface UserGroupService {
 //		public abstract Boolean remove(Integer appNo) throws ServiceException;
 //		
 		// 6. 총 게시물 동행 반환
-		public abstract Integer getTotal() throws ServiceException;
+		public abstract Integer getTotal(String nickName) throws ServiceException;
 
 }

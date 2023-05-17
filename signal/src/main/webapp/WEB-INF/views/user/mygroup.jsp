@@ -17,11 +17,12 @@
    	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
 
     <script>
-            $('.pageNum').on('click', function(e) {
-                let selectedPageNum = e.currentTarget.textContent;
-                location = "/user/mygroup?currPage="+selectedPageNum;
-            });
-        });
+	    $(function () {
+	        $('.pageNum').on('click', function(e) {
+	            let selectedPageNum = e.currentTarget.textContent;
+	            location = "/user/mygroup?currPage="+selectedPageNum;
+	        });
+	    });
        
     </script>
 
@@ -137,13 +138,14 @@
 
           <div class="board_page">
             <c:if test="${pageMaker.prev}">
-                 <div class="bt prev"><a href="/user/mygroup?currPage=${pageMaker.startPage - 1}">Prev</a></div>
+                 <div class="Prev"><a href="/user/mygroup?currPage=${pageMaker.startPage - 1}">Prev</a></div>
             </c:if>
             <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
                 <div class="pageNum ${pageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
             </c:forEach>
+            
             <c:if test="${pageMaker.next}">
-                <div class="bt next"><a href="/user/mygroup?currPage=${pageMaker.endPage + 1}">Next</a></div>
+                <div class="Next"><a href="/user/mygroup?currPage=${pageMaker.endPage + 1}">Next</a></div>
             </c:if>
            
           

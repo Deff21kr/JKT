@@ -12,14 +12,14 @@ import org.zerock.myapp.exception.DAOException;
 public interface UserGroupMapper {
 	
 		@Select("""
-				SELECT  /*+ index_desc(tbl_user_group) */  
+				SELECT  
 					a.appno, b.groupname, a.id,b.area, b.recruitstatus,a.outCome,b.membernum,b.currentmember,b.groupno
                 FROM TBL_USER_GROUP a
                 INNER JOIN tbl_groups b ON a.groupNo = b.groupNo
                 where b.postno IN (select c.postno from tbl_groups c , tbl_groupboard d where c.postno=d.postno and d.nickname=#{nickName})
-				OFFSET (#{currPage} -1) * #{amount} ROWS
-				FETCH NEXT #{amount} ROWS ONLY
-				ORDER BY a.appno desc
+                ORDER BY a.appno desc
+				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
+				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")
 		public abstract List<UserGroupDTO> selectList(String nickName,Criteria cri) throws DAOException;;
 		
@@ -38,8 +38,16 @@ public interface UserGroupMapper {
 		// 5. 수락및 거절 수락시 currentMember +1 
 		public abstract Integer update(UserGroupDTO dto) throws DAOException;;
 		
-		@Select("SELECT count(appno) FROM tbl_user_group WHERE appno > 0")
-		public abstract Integer getTotalAmount();
+		@Select("""
+				SELECT  
+				    count(a.appno)
+				FROM TBL_USER_GROUP a
+				INNER JOIN tbl_groups b ON a.groupNo = b.groupNo
+				where b.postno IN (select c.postno from tbl_groups c , tbl_groupboard d where c.postno=d.postno and d.nickname=#{nickName})
+				and a.appno>0
+				and a.outcome != '거절'
+				""")
+		public abstract Integer getTotalAmount(String nickName);
 
 
 }

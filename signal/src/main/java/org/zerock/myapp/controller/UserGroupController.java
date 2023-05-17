@@ -53,7 +53,7 @@ public class UserGroupController {
 			log.info("조인 : {}",list);
 			model.addAttribute("__GROUP__",list);
 			
-			PageDTO pageDTO = new PageDTO(cri,this.service.getTotal());
+			PageDTO pageDTO = new PageDTO(cri,this.service.getTotal(vo.getNickName()));
 			model.addAttribute("pageMaker",pageDTO);
 			
 			return "/user/mygroup";

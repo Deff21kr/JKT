@@ -102,11 +102,11 @@ try {
 	}
 
 	@Override
-	public Integer getTotal() throws ServiceException {
+	public Integer getTotal(String nickName) throws ServiceException {
 		
 log.trace("getTotal() invoked.");
 		
-		return this.dao.getTotalAmount();
+		return this.dao.getTotalAmount(nickName);
 	}
 
 

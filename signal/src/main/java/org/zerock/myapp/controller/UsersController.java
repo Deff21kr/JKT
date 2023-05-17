@@ -30,46 +30,46 @@ public class UsersController {
 	@Setter (onMethod_=@Autowired)
 	private UsersService service;
 	
-	// 1. 회원 목록 조회 (전부)
-	@GetMapping("/list")//리턴타입이 보이드이므로 리퀘스트 맵핑이 uri
-	void list(Model model) throws ControllerException {
-		log.trace("list({}) ㄲㄲ",model);
-		// model 상자 안에 담기만 하면 된다
-		// 비즈니스 수행결과인 list 를 model 상자에 담자
-		try {
-			
-			List<UsersVO> list;
-			list = this.service.getList();
-			
-			// 리퀘스트 스콥에다가 공유속성을 생성
-			model.addAttribute("__LIST__",list);
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		}
-
-	} // list : 전체회원조회가 있어야 돼나??
+//	// 1. 회원 목록 조회 (전부)
+//	@GetMapping("/list")//리턴타입이 보이드이므로 리퀘스트 맵핑이 uri
+//	void list(Model model) throws ControllerException {
+//		log.trace("list({}) ㄲㄲ",model);
+//		// model 상자 안에 담기만 하면 된다
+//		// 비즈니스 수행결과인 list 를 model 상자에 담자
+//		try {
+//			
+//			List<UsersVO> list;
+//			list = this.service.getList();
+//			
+//			// 리퀘스트 스콥에다가 공유속성을 생성
+//			model.addAttribute("__LIST__",list);
+//		} catch (Exception e) {
+//			throw new ControllerException(e);
+//		}
+//
+//	} // list : 전체회원조회가 있어야 돼나??
 	
 	
 	
 	
-	// 3. 특정회원 조회
-	@GetMapping(path={"/get"}, params = "ID")
-	void get(@RequestParam("ID") String ID ,Model model) 
-				throws ControllerException {
-		
-		log.trace("get() 인보크");
-		
-		try {
-			UsersVO vo = this.service.get(ID);
-			model.addAttribute("__BOARD__",vo);
-			
-//			return "뷰이름";
-		} catch(Exception e) {
-			throw new ControllerException(e);
-			
-		}
-		
-	} // 특정 회원의 모든 게시물 조회
+//	// 3. 특정회원 조회
+//	@GetMapping(path={"/get"}, params = "ID")
+//	void get(@RequestParam("ID") String ID ,Model model) 
+//				throws ControllerException {
+//		
+//		log.trace("get() 인보크");
+//		
+//		try {
+//			UsersVO vo = this.service.get(ID);
+//			model.addAttribute("__BOARD__",vo);
+//			
+////			return "뷰이름";
+//		} catch(Exception e) {
+//			throw new ControllerException(e);
+//			
+//		}
+//		
+//	} // 특정 회원의 모든 게시물 조회
 	
 	
 	@PostMapping(path="/mypage")
@@ -120,7 +120,7 @@ public class UsersController {
 	@GetMapping(path={"/mypage"})
 	String myGroupList() {
 		
-		return "user/mypage";
+		return "/user/mypage";
 		
 	}
 	

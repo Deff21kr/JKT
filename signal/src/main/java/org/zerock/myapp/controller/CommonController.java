@@ -63,7 +63,13 @@ public class CommonController {
 //				}
 				log.info("\n\n&&& re &&&& : {} \n\n",re);
 				log.info("\ndto : {} ,model : {}", dto,model);
-				return "redirect:"+re; 
+				
+				if(re != null) {
+					return "redirect:"+re; 
+				} else {
+					return "redirect:/";
+				}
+				
 			} else { // 로그인 실패
 					rttrs.addAttribute("__RESULT__","실패");
 					return "redirect:/common/loginPost"; // 다시 로그인 페이지로

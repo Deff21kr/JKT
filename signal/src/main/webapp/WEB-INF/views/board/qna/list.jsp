@@ -79,7 +79,6 @@
                         <div class="Next"><a href="/board/qna/list?currPage=${pageMaker.endPage + 1}">Next</a></div>
                     </c:if>
             </div>
-            
             <!-- bt : button -->
             <div class="bt_wrap"> 
                 <button type="button" id="regBtn">등록</button>

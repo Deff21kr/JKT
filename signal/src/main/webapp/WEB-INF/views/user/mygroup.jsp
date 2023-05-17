@@ -12,11 +12,22 @@
       <title>Travel Signal - Transfer Page</title>
 
       <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/transfer.css">
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
+
+    <script>
+            $('.pageNum').on('click', function(e) {
+                let selectedPageNum = e.currentTarget.textContent;
+                location = "/user/mygroup?currPage="+selectedPageNum;
+            });
+        });
+       
+    </script>
 
     </head>
 
     <body>
-
 
       <header>
         <jsp:include page="../header.jsp" />
@@ -125,11 +136,17 @@
           </div>
 
           <div class="board_page">
-            <a href="#" class="bt first">
-              < < </a> <a href="#" class="bt prev">
-                  < </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a> <a href="#" class="num">3</a> <a
-                      href="#" class="num">4</a> <a href="#" class="num">5</a> <a href="#" class="bt next">></a> <a
-                      href="#" class="bt last">> ></a>
+            <c:if test="${pageMaker.prev}">
+                 <div class="bt prev"><a href="/user/mygroup?currPage=${pageMaker.startPage - 1}">Prev</a></div>
+            </c:if>
+            <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                <div class="pageNum ${pageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+            </c:forEach>
+            <c:if test="${pageMaker.next}">
+                <div class="bt next"><a href="/user/mygroup?currPage=${pageMaker.endPage + 1}">Next</a></div>
+            </c:if>
+           
+          
 
           </div>
         </div>

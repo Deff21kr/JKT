@@ -124,6 +124,7 @@
 						data-comment-no="${comment.commentNo}"
 						data-post-no="${__GROUP__.postNo}"
 						data-content="${comment.content}">수정 제출</button>
+						
 				</div>
 			</div>
 		</c:forEach>

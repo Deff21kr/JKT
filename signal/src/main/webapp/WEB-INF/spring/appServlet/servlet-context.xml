@@ -31,7 +31,8 @@
 		<interceptor>
 			<mapping path="/board/**/*" />
 			<mapping path="/board/**/*?" />
-			<mapping path="/user/*" />
+			<mapping path="/user/**/*" />
+			<mapping path="/user/**/*?" />
 			<exclude-mapping path="/board/**/*list" />
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupsDTO;
+import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
@@ -40,18 +42,21 @@ public class UserGroupController {
 	
 	
 	@GetMapping("/mygroup")
-	public void uesrGroup(Model model,HttpServletRequest req) throws ControllerException {
+	public String uesrGroup(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
 		try {
 			log.trace("동행({} ) invoked.",model);
-			
 			HttpSession session = req.getSession();
 			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
 			log.info("유저 : {}",vo);
-			List<UserGroupDTO> list =this.service.getList(vo.getNickName());
+			
+			List<UserGroupDTO> list =this.service.getList(vo.getNickName(),cri);
 			log.info("조인 : {}",list);
 			model.addAttribute("__GROUP__",list);
 			
-//			return "/user/mygroup";
+			PageDTO pageDTO = new PageDTO(cri,this.service.getTotal());
+			model.addAttribute("pageMaker",pageDTO);
+			
+			return "/user/mygroup";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}

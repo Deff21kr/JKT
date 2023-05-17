@@ -26,6 +26,7 @@ import org.zerock.myapp.domain.QnACommentDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.QnABoardService;
 import org.zerock.myapp.service.QnACommentService;
 
@@ -93,7 +94,7 @@ public class QnABoardController {
 
 //	 3. 특정 게시물 상세조회
     @GetMapping(path={"/get*", "/modify*"},  params = "postNo")
-    void get(@RequestParam Integer postNo, Model model, Criteria cri) throws  ControllerException {
+    void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
         log.trace("get() invoked.");
 
         try{
@@ -103,10 +104,9 @@ public class QnABoardController {
             QnABoardVO vo = this.service.get(postNo);
             model.addAttribute("__BOARD__", vo);
             
-            List<QnACommentVO> commentList = this.commentService.getList(cri);
+            List<QnACommentVO> commentList = this.commentService.getList(postNo);
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
-            
         }catch (Exception e){
             throw new ControllerException(e);
         } // try-catch
@@ -170,6 +170,16 @@ public class QnABoardController {
 	
 	// ----------- 댓글 C/U/D ----------
 	
+//	 @PostMapping(path={"/get*", "/reply"},  params = "postNo")
+//	 void readReply(Model model, RedirectAttributes rttrs, Criteria cri) throws ServiceException {
+//		   List<QnACommentVO> commentList = this.commentService.getList(cri);
+//           model.addAttribute("__COMMENT_LIST__", commentList);
+//           log.info("\t+ 댓글 조회된다아아아아");
+//           
+//           PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
+//   			model.addAttribute("pageMaker", pageDTO);
+//	}
+	 
 		// 댓글 등록
 //			@RequestMapping(value = "/qnaReply", method= {RequestMethod.POST})
 			@PostMapping("/qnaReply")

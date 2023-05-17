@@ -14,7 +14,7 @@ public interface QnACommentService {
 	
 	
 	// 댓글 조회
-	public abstract List<QnACommentVO> getList(Criteria cri) throws ServiceException;
+	public abstract List<QnACommentVO> getList(Integer postNo) throws ServiceException;
 	
 	// 댓글 작성
 	public abstract Boolean insert(QnACommentDTO dto) throws ServiceException;
@@ -25,7 +25,5 @@ public interface QnACommentService {
 	// 댓글 업데이트
 	public abstract Boolean update(QnACommentDTO dto) throws ServiceException;
 	
-	// 총 댓글 갯수 반환
-	public abstract Integer getTotal() throws ServiceException;
 	
 } // end interface

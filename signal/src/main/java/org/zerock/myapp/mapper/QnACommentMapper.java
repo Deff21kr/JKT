@@ -12,18 +12,18 @@ import org.zerock.myapp.domain.QnACommentVO;
 public interface QnACommentMapper {
 
 	// 댓글 조회
-//	@Select("""
-//			SELECT * FROM TBL_QNACOMMENT WHERE postNo = #{postNo} ORDER BY
-//			MODFIYDATE DESC, REGIDATE DESC
-//				""")
 	@Select("""
-			SELECT 
-			/*+ index_desc(tbl_qnacomment) */ *
-			FROM TBL_QNACOMMENT
-			OFFSET (#{currPage} -1) * #{amount} ROWS
-			FETCH NEXT #{amount} ROWS ONLY
-			""")
-	public abstract List<QnACommentVO> selectList(Criteria cri);
+			SELECT * FROM TBL_QNACOMMENT WHERE postNo = #{postNo} ORDER BY
+			MODFIYDATE DESC, REGIDATE DESC
+				""")
+//	@Select("""
+//			SELECT 
+//			/*+ index_desc(tbl_qnacomment) */ *
+//			FROM TBL_QNACOMMENT
+//			OFFSET (#{currPage} -1) * #{amount} ROWS
+//			FETCH NEXT #{amount} ROWS ONLY
+//			""")
+	public abstract List<QnACommentVO> selectList(Integer postNo);
 
 	// 댓글 상세조회 업데이트 할때 필요함...
 	public abstract QnACommentVO select(Integer commentNo);

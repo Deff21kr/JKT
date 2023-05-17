@@ -25,11 +25,11 @@ public class QnACommentServiceImpl implements QnACommentService, InitializingBea
 
 	// 1. 게시판 목록을 얻어 반환해주는 기능 수행
 	@Override
-	public List<QnACommentVO> getList(Criteria cri) throws ServiceException {
+	public List<QnACommentVO> getList(Integer postNo) throws ServiceException {
 		log.trace("getList() invoked.");
 
 		try {
-			return this.dao.selectList(cri);
+			return this.dao.selectList(postNo);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
@@ -72,28 +72,18 @@ public class QnACommentServiceImpl implements QnACommentService, InitializingBea
 			throw new ServiceException(e);
 		} // try-catch
 
-	} // update
-
-//	====== IntitializingBean, DisposableBean ======
-
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		log.info("afterPropertiesSet() invoked.");
-
-	} // afterPropertiesSet
+	}
 
 	@Override
 	public void destroy() throws Exception {
-		log.info("destroy() invoked.");
-
+		log.trace("디스토로이이이이이");
+		
 	}
 
 	@Override
-	public Integer getTotal() throws ServiceException {
-		log.trace("getTotal() invoked.");
+	public void afterPropertiesSet() throws Exception {
+		log.trace("후처리이이이잉이ㅣ");
+	} // update
 
-		return this.dao.getTotalAmount();
-
-	}
 
 } // end class

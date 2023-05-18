@@ -192,7 +192,7 @@ public class QnABoardController {
 			    try {
 			    	commentService.insert(dto);
 			        rttrs.addAttribute("postNo", dto.getPostNo());
-			        return "redirect:/board/qna/get?currPage="+cri.getCurrPage();
+			        return "redirect:/board/qna/get?currPage"+cri.getCurrPage();
 			    } catch (Exception e) {
 			        throw new ControllerException(e);
 			    }

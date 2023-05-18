@@ -105,12 +105,17 @@
 
 	// 	alert("등록");
 	// }
+
+
 	$(function() {
 		$('.pageNum').on('click', function(e) {
 			let selectedPageNum = e.currentTarget.textContent;
-			location = "/board/qna/get?currPage=" + selectedPageNum +"&postNo=${__BOARD__.postNo}";
+			location = "/board/group/get?currPage=" + selectedPageNum +"&postNo=${__BOARD__.postNo}";
 		});
 	});
+
+	
+
 </script>
 
 </head>
@@ -150,7 +155,7 @@
 		</c:forEach>
 	</div>
 	
-	<div class="board_page">
+			<div class="board_page">
                     <c:if test="${__commentPage__.prev}">
                         <div class="Prev"><a href="/board/qna/get?currPage=${__commentPage__.startPage - 1}&postNo=${__BOARD__.postNo}">Prev</a></div>
                     </c:if>

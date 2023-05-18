@@ -6,11 +6,11 @@
 
     <mapper namespace="org.zerock.myapp.mapper.DetailPlanMapper">
     <insert id="insert">
-        <selectKey keyProperty="detailPlanNo" order="AFTER" resultType="int">
-            SELECT "ISEQ$$_77202".CURRVAL FROM dual  
-        </selectKey>
-            INSERT INTO TBL_DETAILPLAN (PLANNO, PLANDAY, PLANTIME, PLACE, DETAILPLAN) VALUES (#{planNo}, #{planDay}, #{planTime}, #{place}, #{detailPlan})
-    </insert>
+	        <selectKey keyProperty="detailPlanNo" order="AFTER" resultType="int">
+	            SELECT "ISEQ$$_77202".CURRVAL FROM dual  
+	        </selectKey>
+	            INSERT INTO TBL_DETAILPLAN (PLANNO, PLANDAY, PLANTIME, PLACE, DETAILPLAN) VALUES (#{planNo}, #{planDay}, #{planTime, jdbcType=DATE}, #{place}, #{detailPlan})
+	    </insert>
 
    
 

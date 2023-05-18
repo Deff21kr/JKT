@@ -20,7 +20,7 @@ public interface DetailPlanMapper {
 			WHERE 
 				PLANNO = #{planNo}
 			ORDER BY
-				planDay ASC, planTime ASC
+				planDay ASC, to_char(plantime, 'HH24:Mi') ASC
 			""")
 	public abstract List<DetailPlanVO> selectList(Integer planNo);
 	
@@ -48,6 +48,8 @@ public interface DetailPlanMapper {
 				PLANTIME = #{planTime},
 				PLACE = #{place},
 				DETAILPLAN = #{detailPlan}
+			WHERE
+				DETAILPLANNO = #{detailPlanNo}
 			""")
 	public abstract Integer update(DetailPlanDTO dto);
 }

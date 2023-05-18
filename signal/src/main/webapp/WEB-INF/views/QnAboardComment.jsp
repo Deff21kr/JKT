@@ -88,7 +88,28 @@
 				alert('댓글을 수정하는데 실패했습니다.');
 			}
 		}); // ajax
+	});
 
+	// var doubleSubmitFlag = false;
+	// function doubleSubmitCheck() {
+	// 	if (doubleSubmitFlag) {
+	// 		return doubleSubmitFlag;
+	// 	} else {
+	// 		doubleSubmitFlag = true;
+	// 		return false;
+	// 	}
+	// }
+
+	// function insert() {
+	// 	if (doubleSubmitCheck()) return;
+
+	// 	alert("등록");
+	// }
+	$(function() {
+		$('.pageNum').on('click', function(e) {
+			let selectedPageNum = e.currentTarget.textContent;
+			location = "/board/qna/get?currPage=" + selectedPageNum +"&postNo=${__BOARD__.postNo}";
+		});
 	});
 </script>
 
@@ -100,7 +121,7 @@
 		<div class="reply_title">댓글</div>
 		<c:forEach items="${__COMMENT_LIST__}" var="comment">
 			<div class="reply_list">
-				<div>
+				<div class="list">
 					<div class="nickname">${comment.nickName}</div>
 					<div class="date">${comment.regiDate}</div>
 					<div class="date">${comment.modifyDate}</div>
@@ -128,9 +149,21 @@
 			</div>
 		</c:forEach>
 	</div>
+	
+	<div class="board_page">
+                    <c:if test="${__commentPage__.prev}">
+                        <div class="Prev"><a href="/board/qna/get?currPage=${__commentPage__.startPage - 1}&postNo=${__BOARD__.postNo}">Prev</a></div>
+                    </c:if>
+                    <c:forEach var="pageNum" begin="${__commentPage__.startPage}" end="${__commentPage__.endPage}">
+                        <div class="pageNum ${__commentPage__.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+                    </c:forEach>
+                    <c:if test="${__commentPage__.next}">
+                        <div class="Next"><a href="/board/qna/get?currPage=${__commentPage__.endPage + 1}&postNo=${__BOARD__.postNo}">Next</a></div>
+                    </c:if>
+            </div>
 
 	<!-- 댓글 작성 -->
-	<form action="/board/qna/qnaReply" method="post">
+	<form action="/board/qna/qnaReply" method="POST">
 		<input type="hidden" name="postNo" value="${__BOARD__.postNo}">
 		<input type="hidden" name="nickName" value="${__AUTH__.nickName}">
 		<div class="reply_write">
@@ -140,11 +173,13 @@
 					<textarea id="content" name="content" placeholder="내용을 작성해주세요."></textarea>
 				</div>
 				<div class="writeButton">
-					<button type="submit" class="replyWriteBtn">등록</button>
+					<button type="submit" class="replyWriteBtn" id="replyBtn">등록</button>
 				</div>
 			</div>
 		</div>
 	</form>
+
+
 
 </body>
 

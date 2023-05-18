@@ -6,20 +6,13 @@
 
     <mapper namespace="org.zerock.myapp.mapper.MyPlanMapper">
    
-   <!-- 
-    <insert id="make">
-        <selectKey keyProperty="planNo" order="AFTER" resultType="int">
-            SELECT "ISEQ$$_74701".CURRVAL FROM dual  
-        </selectKey>
-            INSERT INTO TBL_MYPLAN (PLANNAME, STARTDATE, ENDDATE, NICKNAME, DURATION) VALUES (#{planName}, TO_DATE(#{startDate}, 'yyyy-MM-dd'), TO_DATE(#{endDate}, 'yyyy-MM-dd'), #{nickName}, (TO_DATE(#{endDate}, 'yyyy-MM-dd') - TO_DATE(#{startDate}, 'yyyy-MM-dd'))+1)
-    </insert>
-     -->
      <insert id="make" >
         <selectKey keyProperty="planNo" order="AFTER" resultType="int">
             SELECT "ISEQ$$_74701".CURRVAL FROM dual  
         </selectKey>
-            INSERT INTO TBL_MYPLAN (PLANNAME, STARTDATE, ENDDATE, NICKNAME, DURATION) 
-            VALUES (#{planName},#{startDate}, #{endDate}, #{nickName}, (to_date(#{endDate}, 'yyyy-MM-dd')-to_date(#{startDate}, 'yyyy-MM-dd')))
+        
+        INSERT INTO TBL_MYPLAN (PLANNAME, STARTDATE, ENDDATE, NICKNAME, DURATION) 
+        VALUES ( #{planName}, #{startDate}, #{endDate}, #{nickName}, #{endDate, jdbcType=DATE} - #{startDate, jdbcType=DATE} + 1)
     </insert>
 
 
@@ -29,9 +22,9 @@
     
     
     <select id="selectList" resultType="org.zerock.myapp.domain.MyPlanVO">
-   		SELECT * 
+   		SELECT *
 		FROM tbl_myplan 
-		WHERE nickName = #{nickName} 
+		WHERE nickName = #{nickName} AND endDate > current_date    
 		ORDER BY startDate ASC 
 		OFFSET ( #{cri.currPage} - 1 ) * #{cri.amount} ROWS 
 		FETCH NEXT #{cri.amount} ROWS ONLY

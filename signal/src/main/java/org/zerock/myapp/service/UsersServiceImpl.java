@@ -72,6 +72,19 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 			throw new ServiceException(e);
 		}
 	}
+	
+	@Override
+	public UsersVO getByNick(String nickName) throws ServiceException {
+		try {
+
+			return this.dao.selectByNick(nickName);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	
+	
 
 	@Override
 	public Boolean modify(UsersDTO dto) throws ServiceException {
@@ -121,6 +134,7 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		log.trace("\n*********************************************************\n			destroy() "
 				+ "\n********************************************************* ");
 	}
+
 
 
 //	======================================================

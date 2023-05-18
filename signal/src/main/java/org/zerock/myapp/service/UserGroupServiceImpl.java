@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupsDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.exception.ServiceException;
@@ -23,10 +24,10 @@ public class UserGroupServiceImpl implements UserGroupService {
 	private GroupMapper group;
 	
 	@Override
-	public List<UserGroupDTO> getList(String nickName) throws ServiceException {
+	public List<UserGroupDTO> getList(String nickName,Criteria cri) throws ServiceException {
 		
 		try {
-			return this.dao.selectList(nickName);
+			return this.dao.selectList(nickName,cri);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
@@ -89,7 +90,27 @@ public class UserGroupServiceImpl implements UserGroupService {
 			throw new ServiceException(e);
 		}
 	}
+	
+	@Override
+	public Boolean registerDefault(String ID, Integer groupNo) throws ServiceException {
+try {
+			log.info("글쓴이 등록됨");
+			return ( (this.dao.insertDefault(ID,groupNo) == 1));
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
 
+	@Override
+	public Integer getTotal(String nickName) throws ServiceException {
+		
+log.trace("getTotal() invoked.");
+		
+		return this.dao.getTotalAmount(nickName);
+	}
+
+
+	
 	
 
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.util.WebUtils;
+import org.zerock.myapp.domain.LoginDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.mapper.UsersMapper;
 import org.zerock.myapp.persistence.LoginDAO;
@@ -65,7 +66,6 @@ public class AuthInterceptor implements HandlerInterceptor {
     	  log.info("\n1. sessionId : {} ",sessionId);
 	      
 	      UsersVO vo = (UsersVO) session.getAttribute("__AUTH__");
-	      
 	      if(vo != null) { // 인증된 웹브라우저
     		  log.info("\n*******************************************************"
     		  		+ "\n******************** 인증완료 *************************"
@@ -125,8 +125,17 @@ public class AuthInterceptor implements HandlerInterceptor {
 //    	      * 자동로그인 설정이 안되어 있는 경우와, 위의 조건을 만족하지 못하는 경우
 //    	      	즉시, 로그인 창으로 밀어버림(리다이렉션)
     		  log.info("\t2. No credential found. Redirect to Login.");
-    		  req.getSession().setAttribute("redirectUri", req.getRequestURI());
-    		  res.sendRedirect(req.getContextPath() + "/common/loginPost?redirectURL=" + req.getRequestURL());
+    		 String query = req.getQueryString() ;
+    		 log.info("\n\nquery : {} ",query);
+    		 if(query != null) {
+    			 req.getSession().setAttribute("redirectUri", req.getRequestURI()+"?"+query);
+    			
+    		 } else {
+    			 req.getSession().setAttribute("redirectUri",req.getRequestURI());
+    		 }
+    		 
+    		 
+    		  res.sendRedirect("/common/loginPost?redirectURL=" + req.getRequestURL());
         	  return false; // 원래 요청을 처리하지 못하도록 함
     		  
     	  } // if- else

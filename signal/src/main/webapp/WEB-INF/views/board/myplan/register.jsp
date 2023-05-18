@@ -14,8 +14,23 @@
 		<script src="https://kit.fontawesome.com/7235c72187.js" crossorigin="anonymous"></script>
 
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
+		
+		<script defer>
+		    $(function () {
+		        $('#cancel').click(function () {
+		            location = "/board/myplan/get?planNo=${__PLANNO__}";
+		        });
+		        $('.place-search').click(function () {
+		            location = "/board/myplan/placeSerch";
+		        });
+		        
+		        
+		        
+		        
+		    });
+	    
+		</script>
+			
 		<style>
 			* {
 				margin: 0;
@@ -39,13 +54,15 @@
 
 			#sec {
 				width: 1200px;
-				height: 1000px;
-				border: 1px solid;
+				height: 800px;
 			}
 
 			fieldset {
-				width: 700px;
-				margin: auto;
+				left: 0px;
+			    width: 700px;
+			    margin: 50px auto;
+			    right: 0;
+			    position: fixed;
 			}
 
 			form {
@@ -160,11 +177,12 @@
 
 							<div class="detailplan" style="margin: 20px 0px 10px 0px;">
 								<p>상세계획</p>
-								<textarea name="detailplan" cols="70" rows="12" style="font-size: 17px;"></textarea>
+								<textarea name="detailplan" cols="66" rows="12" style="font-size: 17px;"></textarea>
 							</div>
 
 							<div class="submit-button">
-								<input type="submit" id="make" value="만들기"> <input type="button" id="cancel" value="취소">
+								<input type="submit" id="make" value="만들기">
+								<button type="button" id="cancel">취소</button>
 							</div>
 						</form>
 					</div>

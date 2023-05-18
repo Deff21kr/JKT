@@ -24,13 +24,15 @@
 	
 	<interceptors>
 <interceptor>
-			<mapping path="/common/loginPost"/>
+			<mapping path="/common/loginPost/**/*"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		
 		<interceptor>
 			<mapping path="/board/**/*" />
-			<mapping path="/user/*" />
+			<mapping path="/board/**/*?" />
+			<mapping path="/user/**/*" />
+			<mapping path="/user/**?" />
 			<exclude-mapping path="/board/**/*list" />
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>

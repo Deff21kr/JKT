@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -26,6 +27,7 @@ import org.zerock.myapp.domain.QnACommentDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.QnABoardService;
 import org.zerock.myapp.service.QnACommentService;
 
@@ -92,8 +94,8 @@ public class QnABoardController {
 	} // register
 
 //	 3. 특정 게시물 상세조회
-    @GetMapping(path={"/get", "/modify"},  params = "postNo")
-    void get(@RequestParam Integer postNo, Model model) throws  ControllerException {
+    @GetMapping(path={"/get*", "/modify*"},  params = "postNo")
+    void get(@RequestParam Integer postNo, Model model, Criteria cri) throws  ControllerException {
         log.trace("get() invoked.");
 
         try{
@@ -103,10 +105,12 @@ public class QnABoardController {
             QnABoardVO vo = this.service.get(postNo);
             model.addAttribute("__BOARD__", vo);
             
-            List<QnACommentVO> commentList = this.commentService.getList(postNo);
+            List<QnACommentVO> commentList = this.commentService.selectList(cri, postNo);
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
             
+            PageDTO pageDTO = new PageDTO(cri, this.commentService.getCommentTotal(postNo));
+    		model.addAttribute("__commentPage__", pageDTO);
         }catch (Exception e){
             throw new ControllerException(e);
         } // try-catch
@@ -170,6 +174,16 @@ public class QnABoardController {
 	
 	// ----------- 댓글 C/U/D ----------
 	
+//	 @PostMapping(path={"/get*", "/reply"},  params = "postNo")
+//	 void readReply(Model model, RedirectAttributes rttrs, Criteria cri) throws ServiceException {
+//		   List<QnACommentVO> commentList = this.commentService.getList(cri);
+//           model.addAttribute("__COMMENT_LIST__", commentList);
+//           log.info("\t+ 댓글 조회된다아아아아");
+//           
+//           PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
+//   			model.addAttribute("pageMaker", pageDTO);
+//	}
+	 
 		// 댓글 등록
 //			@RequestMapping(value = "/qnaReply", method= {RequestMethod.POST})
 			@PostMapping("/qnaReply")
@@ -178,22 +192,34 @@ public class QnABoardController {
 			    try {
 			    	commentService.insert(dto);
 			        rttrs.addAttribute("postNo", dto.getPostNo());
-			        return "redirect:/board/qna/get";
+			        return "redirect:/board/qna/get?currPage="+cri.getCurrPage();
 			    } catch (Exception e) {
 			        throw new ControllerException(e);
 			    }
 			} // addComment
 
+//			@GetMapping("/qnaReply")
+//			String Getinsert(@ModelAttribute QnACommentDTO dto, Criteria cri,RedirectAttributes rttrs) throws ControllerException {
+//			    log.trace("addComment({}) invoked.", dto);
+//			    try {
+//			    	commentService.insert(dto);
+//			        rttrs.addAttribute("postNo", dto.getPostNo());
+//			        return "redirect:/board/qna/get?currPage="+cri.getCurrPage();
+//			    } catch (Exception e) {
+//			        throw new ControllerException(e);
+//			    }
+//			} // addComment
+			
 			
 			// 댓글 수정
 			@PostMapping("/edit")
-			String editComment(QnACommentDTO dto, RedirectAttributes rttrs) throws ControllerException {
+			String editComment(QnACommentDTO dto, RedirectAttributes rttrs, Criteria cri) throws ControllerException {
 				log.trace("editComment({}) invoked.", dto);
 				
 				try {
 					commentService.update(dto);
 					rttrs.addAttribute("postNo", dto.getPostNo());
-					return "redirect:/board/qna/get";
+					return "redirect:/board/qna/get?currPage="+cri.getCurrPage();
 				} catch (Exception e) {
 					throw new ControllerException(e);
 				}

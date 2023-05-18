@@ -21,6 +21,19 @@
 					src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
 
 
+				<script >
+			        $(function () {
+			            $('.plannerlist-make').click(function () {
+			                location = "/board/myplan/makePlan";
+			            });
+			            $('.pageNum').on('click', function(e) {
+			                let selectedPageNum = e.currentTarget.textContent;
+			                location = "/board/myplan/main?currPage="+selectedPageNum;
+			            });
+			        });
+				</script>
+
+
 				<style>
 					* {
 						margin: 0;
@@ -84,9 +97,10 @@
 						color: white;
 						border: none;
 						border-radius: 17px;
+						cursor: pointer;
 					}
 
-					.plannerlist-make>a {
+					.plannerlist-make>span {
 						color: white;
 						font-weight: lighter;
 					}
@@ -195,17 +209,17 @@
 							</div>
 
 							<button class="plannerlist-make">
-								<a href="/board/myplan/makePlan">플래너 만들기</a>
+								<span>플래너 만들기</span>
 							</button>
 						</div>
 
 						<div class="maincontent"
-							style="border: 1px solid gainsboro; width: 1112px; min-height: 700px; margin: 0px auto 40px; border-radius: 20px; padding: 20px 0px;">
+							style="border: 1px solid gainsboro; width: 1113px; min-height: 700px; margin: 0px auto 40px; border-radius: 20px; padding: 20px 0px;">
 
 							<c:if test="${not empty __AUTH__.nickName}">
 								<c:forEach var="MyPlanVO" items="${__MYPLAN__}">
 
-									<a href="#" class="planContent">
+									<a href="/board/myplan/get?planNo=${MyPlanVO.planNo}" class="planContent">
 										<div class="title"
 											style="background: ghostwhite; width: 100%; height: 150px; border-bottom: 1px solid #dfdfdf; padding: 20px 20px; display: flex; flex-direction: column; justify-content: center;">
 											<div>
@@ -221,11 +235,8 @@
 
 
 													<p>
-														<!-- <fmt:formatDate value="${MyPlanVO.startDate}"
-															pattern="yyyy-MM-dd" />  -->
-															${MyPlanVO.startDate}~${MyPlanVO.endDate}
-														<!-- <fmt:formatDate value="${MyPlanVO.endDate}"
-															pattern="yyyy-MM-dd" /> -->
+														<fmt:formatDate value="${MyPlanVO.startDate}" pattern="yyyy-MM-dd" /> ~
+														<fmt:formatDate value="${MyPlanVO.endDate}" pattern="yyyy-MM-dd" />
 													</p>
 												</div>
 												<div
@@ -235,15 +246,17 @@
 												</div>
 											</div>
 										</div>
-
 										<div style="width: 348px; height: 230px; padding: 15px;">
 											<ul style="max-height: 180px; overflow: hidden;">
-												<h4 style="margin: 10px;">DAY 1</h4>
-												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
+												<h4 style="margin: 10px;">여행 일정</h4>
+
+													<c:forEach var="JoinDTO" items="${__JOINLIST__}" >
+		 												<c:if test="${MyPlanVO.planNo == JoinDTO.planNo}">
+															<li style="list-style: inside; margin: 10px;">${JoinDTO.place}</li>
+														</c:if>
+													</c:forEach>
+												
+												
 											</ul>
 										</div>
 									</a>

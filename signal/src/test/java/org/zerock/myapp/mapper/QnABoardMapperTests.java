@@ -60,7 +60,7 @@ public class QnABoardMapperTests {
         log.trace("testInsert() invoked.");
 
         QnABoardDTO dto = new QnABoardDTO();
-        dto.setNickname("NEW_NICKNAME");
+        dto.setNickName("NEW_NICKNAME");
         dto.setTitle("NEW_TITLE");
         dto.setContent("NEW_CONTENT");
         log.info("\t+ dto : {}", dto);

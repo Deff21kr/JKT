@@ -6,20 +6,22 @@ import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-//import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.DetailPlanVO;
+import org.zerock.myapp.domain.JoinMyPlanDTO;
 import org.zerock.myapp.domain.MyPlanDTO;
 import org.zerock.myapp.domain.MyPlanVO;
+import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
-import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.MyPlanService;
 
 import lombok.NoArgsConstructor;
@@ -49,16 +51,17 @@ public class MyPlanController {
 			List<MyPlanVO> list = this.service.getList(cri, nickName);
 			Objects.requireNonNull(list);
 			log.info("\t + list: {}", list);
-
 			model.addAttribute("__MYPLAN__", list);
 			
-		}catch(NumberFormatException e) {
-
-		} 
+			List<JoinMyPlanDTO> joinList = this.service.joinList(nickName);
+			model.addAttribute("__JOINLIST__" ,joinList);
+			
+			PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
+			model.addAttribute("pageMaker", pageDTO);
 		
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new ControllerException(e);
-		}
+		} // try-catch
 
 	} // planMain
 	
@@ -72,7 +75,7 @@ public class MyPlanController {
 	// 나의 플래너 등록
 	@PostMapping("/makePlan")
 	String makePlan(MyPlanDTO dto, RedirectAttributes rttrs) throws ControllerException {
-		log.info("/makePlan() invoked");
+		log.trace("makePlan({}, {}) invoked", dto, rttrs);
 		
 		try {
 			
@@ -90,11 +93,50 @@ public class MyPlanController {
 	} // makePlan
 	
 	
-	@GetMapping("/signalplan2")
-	void signalplan2() {
-		log.info("/signalplan2() invoked");
+	@GetMapping("/get")
+	void get(@RequestParam Integer planNo, Model model) throws ControllerException {
+		log.info("get({}) invoked", planNo);
+	
+		try {
+			List<DetailPlanVO> detailList = this.service.getDetailPlanList(planNo);
+			
+			Objects.requireNonNull(detailList);
+			log.info("\t + detailList : {}", detailList);
+			
+			model.addAttribute("__DETAILPLAN__" ,detailList);
+			
+			MyPlanVO vo = this.service.get(planNo);
+			Objects.requireNonNull(vo);
+			
+			model.addAttribute("__MYPLAN__" ,vo);
+			
+			
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
 		
-	} // signalplan2
+	} // get
+	
+	@GetMapping("/register")
+	void register(@RequestParam Integer planNo, Model model) throws ControllerException {
+		log.trace("register({}, {}) invoked", planNo, model);
+		
+		try {
+			Objects.requireNonNull(planNo);
+			
+			model.addAttribute("__PLANNO__", planNo);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
+
+	} // register
+	
+	
+	@PostMapping("/register")
+	void register() {
+		log.trace("register() invoked");
+	}
+	
 	
 	
 	

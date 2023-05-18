@@ -20,6 +20,16 @@
 		
 	</insert>
 	
+	<insert id="insertDefault">
+		<selectKey keyProperty="appNo" order="AFTER" resultType="int">
+			select "ISEQ$$_77353".CURRVAL from dual
+		</selectKey>
+		INSERT INTO tbl_user_group
+				(id,outcome, groupno)
+		VALUES (#{ID},'본인' ,#{groupNo} )
+		
+	</insert>
+	
 	<select id="select" resultType="org.zerock.myapp.domain.UserGroupDTO">
 		SELECT *
 		FROM tbl_user_group

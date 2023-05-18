@@ -107,7 +107,6 @@
             <form class="a" action="/user/mygroup" method="POST">
               <div>
                 <c:forEach var="group" items="${__GROUP__}">
-                  <c:if test="${group.outCome == '진행중' || group.outCome == '수락'}">
                     <div class="num">${group.appNo}</div>
                     
                     <div class="title">${group.groupName}</div>
@@ -122,13 +121,11 @@
                         <input type="hidden" name="groupNo" value="${group.groupNo}">
                       </div>
                     </c:if>
-                    <c:if test="${group.outCome == '수락'}">
-                      <div class="result">수락</div>
+                    <c:if test="${group.outCome != '진행중' }">
+                      <div class="result">${group.outCome}</div>
                     </c:if>
-                    
                     <div class="member">${group.memberNum}</div>
                     <div class="current">${group.currentMember}</div>
-                  </c:if>
                 </c:forEach>
 
 

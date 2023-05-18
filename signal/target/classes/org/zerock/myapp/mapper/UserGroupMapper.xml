@@ -26,7 +26,7 @@
 		</selectKey>
 		INSERT INTO tbl_user_group
 				(id,outcome, groupno)
-		VALUES (#{ID},'수락' ,#{groupNo} )
+		VALUES (#{ID},'본인' ,#{groupNo} )
 		
 	</insert>
 	

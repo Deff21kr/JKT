@@ -1,89 +1,196 @@
 @charset "utf8";
 
+/* 동행찾기 */
+.groupboard-menu {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.plusBtn {
+  position: relative;
+  width: 100px;
+  height: 100%;
+  left: 73%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2B65F8;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 1200px;
+  position: relative;
+  margin-bottom: 70px;
+  /* min-height: 100vh; */
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+}
+
+.container i {
+  top: 50%;
+  height: 45px;
+  width: 35px;
+  cursor: pointer;
+  position: absolute;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 45px;
+  background-color: skyblue;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.container i:first-child {
+  left: -23px;
+  display: none;
+}
+
+.container i:last-child {
+  right: -23px;
+}
+
+.container .content  {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  overflow: hidden;
+  /* 공백을 하나로 합침 */
+  white-space: nowrap; 
+  scroll-behavior: smooth;
+  font-size: 0px;
+}
+
+/* .content .card:first-child {
+  left: -23px; 
+  display: none; 
+} */
+
+.content .card:last-child {
+  right: -23px;
+  left: 0px;
+}
+
+.card {
+  position: relative;
+  display: inline-block;
+  background: #EFFBFB;
+  border-radius: 20px;
+  margin-left: 25px;
+  /* width: 70%; */
+  height: 200px;
+  width: calc(80% / 4);
+}
+
+.card .image {
+  height: 50%;
+  width: 100%;
+}
+
+.card .image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px 20px 0 0;
+}
+
+/* 동행현황 css */
+.card .recruit-status {
+  position: absolute;
+  display: flex;
+  top: 2px;
+  right: 5px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card .recruit-status button {
+  color: gray;
+  font-weight: bold;
+  border: 1px dotted gray;
+  border-radius: 10px;
+  opacity: 0.6;
+  margin: 10px;
+  padding: 2px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card .recruit-status button:hover {
+  font-weight: bold;
+  opacity: 1;
+}
+
+/* .card .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 20px;
+  height: 100px;
+  position: relative;
+  z-index: 100;
+} */
+
+/* 여행 모집 제목 및 내용 */
+.card .title {
+  padding: 10px;
+  /* padding-left: 10px;
+  padding-right: 10px; */
+  align-items: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.card .title:hover {
+  color: #2B65F8;
+}
+
+.profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.profile img {
+  border-radius: 50%;
+  /* width: 30%; */
+  height: 35px;
+  object-fit: contain;
+  border: 1px solid #2B65F8;
+}
+
+.profile .nickName {
+ padding-left: 10px;
+ font-size: 13px;
+}
+
+@media screen and (max-width: 900px) {
+  .content .card{
+      width: 50%;
+  }
+}   
+
+@media screen and (max-width: 550px) {
+  .content .card{
+      width: 100%;
+  }
+}
+/* ------------------------------------------ */
+
 /* main */
 main {
   height: fit-content;
-}
-
-/*** wrap style ***/
-/* 전체 풀 스크린 레이아웃 */
-.wrap {
-  width: 100%;
-  height: 80vh;
-  overflow: hidden;
-  position: relative;
-}
-
-/* 제목 */
-.wrap h1 {
-  font-weight: bold;
-  font-size: 1.7rem;
-  font-family: "orbitron";
-
-  color: var(--color-dark-gray);
-  letter-spacing: 1px;
-  position: absolute;
-  left: 10px;
-  top: 10px;
-}
-
-/* 자동 재생 버튼 */
-.wrap .auto {
-  position: absolute;
-  bottom: 60px;
-  left: 60px;
-  z-index: 20px;
-}
-.wrap .auto li {
-  float: left;
-  margin-right: 20px;
-  cursor: pointer;
-  color: var(--color-dark-gray);
-  font-size: 20px;
-  opacity: 0.9;
-  transition: all 0.5s;
-}
-.wrap .auto li:hover { /* 마우스 호버 시 진해지면서 1.4배 확대 */
-  opacity: 1;
-  transform: scale(1.4);
-}
-
-/* 기본 슬라이드 프레임 */
-.wrap .swiper-wrapper {
-  width: 100%;
-  height: 100%;
-}
-.wrap .swiper-wrapper .swiper-slide {
-  width: 400px;
-  height: 400px;
-  position: relative;
-  top: 50%;
-  margin-top: -230px;
-}
-.wrap .swiper-wrapper .swiper-slide .inner {
-  width: 100%;
-  height: 100%;
-  background: var(--color-gray);
-  padding: 30px;
-  opacity: 0.4;
-  transition: 1s;
-}
-/* 좌우 버튼 */
-.wrap .swiper-button-prev {
-  left: auto; /* 기존 left 값 초기화*/
-  right: 100px;
-  top: auto;
-  bottom: 50px;
-  filter: grayscale(100%) brightness(3); /* 버튼 색을 흰색으로 변경 */
-  transform: scale(0.5);
-}
-.wrap .swiper-button-next {
-  left: auto; /* 기존 left 값 초기화 */
-  right: 60px;
-  top: auto;
-  bottom: 50px;
-  filter: grayscale(100%) brightness(3); /* 버튼 색을 흰색으로 변경 */
-  transform: scale(0.5);
 }
 
 /* 페이지네이션 */
@@ -97,63 +204,6 @@ main {
   font-family: "orbitron";
   letter-spacing: 1px;
   color: var(--color-dark-gray);
-}
-.swiper-pagination-fraction span:nth-of-type(1) {
-  font-size: 30px;
-  color: var(--color-dark-gray);
-}
-
-.wrap .swiper-wrapper .swiper-slide-active .inner {
-  opacity: 1;
-  box-shadow: 0px 0px 50px rgba(255,255,255,0.8);
-  /* 가운데 패널을 강조
-  흰 색의 투명도를 불투명하게 바꾸고, 
-  흰 그림자를 집어넣어 빛이 나는 듯한 효과를 줌. */
-}
-.wrap .swiper-wrapper .swiper-slide .inner::before,
-.wrap .swiper-wrapper .swiper-slide .inner::after {
-  /* 좌우 패널 */
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  opacity: 0;
-  background: var(--color-gray);
-}
-.wrap .swiper-wrapper .swiper-slide-prev .inner,
-.wrap .swiper-wrapper .swiper-slide-next .inner {
-  opacity: 0.7;
-}
-@keyframes ani {
-  0% {
-    opacity: 0.1;
-    transform: scale(1);
-  }
-  1% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 0.1;
-    transform: scale(1.4);
-  }
-}
-.wrap .swiper-wrapper .swiper-slide-active .inner::before {
-  animation: ani 1s ease 1;
-}
-.wrap .swiper-wrapper .swiper-slide-active .inner::after {
-  animation: ani 0.3s ease 1;
-}
-.wrap .swiper-wrapper .swiper-slide .inner .con {
-  position: relative;
-  z-index: 10;
-}
-.wrap .swiper-wrapper .swiper-slide .inner .con img {
-  margin: 0 auto;
-  width: 100%;
-  transition: filter 2s;
 }
 
 main hr:nth-of-type(1) {
@@ -189,7 +239,7 @@ main hr:nth-of-type(1) {
   margin: 0px 0.4rem 0.6rem;
 }
 
-.plusBtn {
+/* .plusBtn {
   width: 100px;
   height: 100%;
   background-color: transparent;
@@ -197,7 +247,7 @@ main hr:nth-of-type(1) {
   cursor: pointer;
   font-size: 1rem;
   color: grey;
-}
+} */
 
 .place-main {
   height: 400px;

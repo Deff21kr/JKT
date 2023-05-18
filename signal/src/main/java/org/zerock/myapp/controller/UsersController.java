@@ -129,6 +129,18 @@ public class UsersController {
 //		
 //	}
 	
+	// 프로필 수정
+	@PostMapping("/edit")
+	String profil() {
+		
+		try {
+			
+			
+		} catch(Exception e) {
+			
+		}
+		return null;
+	}
 
 
 	

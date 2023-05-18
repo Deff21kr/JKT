@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.DetailPlanDTO;
 import org.zerock.myapp.domain.DetailPlanVO;
+import org.zerock.myapp.domain.JoinMyPlanDTO;
 import org.zerock.myapp.domain.MyPlanDTO;
 import org.zerock.myapp.domain.MyPlanVO;
 import org.zerock.myapp.exception.ServiceException;
@@ -176,4 +177,18 @@ public class MyPlanServiceTests {
 		log.info("\t + result = {}", result);
 		
 	} // removeDetailPlan
+	
+	@Test
+	public void testJoinList() throws ServiceException {
+		log.trace("testJoinList() invoked");
+		
+		String nickName = "hyeondae";
+		Criteria cri = new Criteria();
+		
+		List<JoinMyPlanDTO> dto = this.service.joinList(nickName);
+		assertNotNull(dto);
+		
+		log.info("dto : {}", dto);
+		
+	} // testJoinList
 }

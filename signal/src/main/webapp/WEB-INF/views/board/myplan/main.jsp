@@ -246,15 +246,17 @@
 												</div>
 											</div>
 										</div>
-
 										<div style="width: 348px; height: 230px; padding: 15px;">
 											<ul style="max-height: 180px; overflow: hidden;">
-												<h4 style="margin: 10px;">DAY 1</h4>
-												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
-												<li style="list-style: inside; margin: 10px;">KH 교육원</li>
+												<h4 style="margin: 10px;">여행 일정</h4>
+
+													<c:forEach var="JoinDTO" items="${__JOINLIST__}" >
+		 												<c:if test="${MyPlanVO.planNo == JoinDTO.planNo}">
+															<li style="list-style: inside; margin: 10px;">${JoinDTO.place}</li>
+														</c:if>
+													</c:forEach>
+												
+												
 											</ul>
 										</div>
 									</a>

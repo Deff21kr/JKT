@@ -5,6 +5,7 @@ import java.util.List;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.DetailPlanDTO;
 import org.zerock.myapp.domain.DetailPlanVO;
+import org.zerock.myapp.domain.JoinMyPlanDTO;
 import org.zerock.myapp.domain.MyPlanDTO;
 import org.zerock.myapp.domain.MyPlanVO;
 import org.zerock.myapp.exception.ServiceException;
@@ -36,4 +37,9 @@ public interface MyPlanService {
 	
 	// 5. 특정 상세계획 삭제 ( DELETE )
 	public abstract Boolean removeDetailPlan(Integer detailPlanNo) throws ServiceException;
-}
+	
+//	=========== Join MyPlan and DetailPlan ===================
+	public abstract List<JoinMyPlanDTO> joinList( String nickName) throws ServiceException;
+
+
+} // end class

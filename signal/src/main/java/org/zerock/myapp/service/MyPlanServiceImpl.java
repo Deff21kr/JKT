@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.DetailPlanDTO;
 import org.zerock.myapp.domain.DetailPlanVO;
+import org.zerock.myapp.domain.JoinMyPlanDTO;
 import org.zerock.myapp.domain.MyPlanDTO;
 import org.zerock.myapp.domain.MyPlanVO;
 import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.mapper.DetailPlanMapper;
+import org.zerock.myapp.mapper.JoinMyPlanMapper;
 import org.zerock.myapp.mapper.MyPlanMapper;
 
 import lombok.Setter;
@@ -28,6 +30,8 @@ public class MyPlanServiceImpl implements MyPlanService {
 	private MyPlanMapper mapper;
 	@Setter(onMethod_ = {@Autowired})
 	private DetailPlanMapper detailPlanMapper;
+	@Setter(onMethod_ = {@Autowired})
+	private JoinMyPlanMapper joinMapper;
 	
 
 	@Override
@@ -131,6 +135,19 @@ public class MyPlanServiceImpl implements MyPlanService {
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
+	}
+
+	@Override
+	public List<JoinMyPlanDTO> joinList(String nickName) throws ServiceException {
+		try {
+			log.trace("joinList({}) invoked", nickName);
+
+			return this.joinMapper.selectList(nickName);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}	
+		
+
 	} // removeDetailPlan
 
 

@@ -190,7 +190,7 @@ public class GroupBoardController {
 	    try {
 	    	commentService.insert(dto);
 	        rttrs.addAttribute("postNo", dto.getPostNo());
-	        return "redirect:/board/qna/get";
+	        return "redirect:/board/group/get";
 	    } catch (Exception e) {
 	        throw new ControllerException(e);
 	    }
@@ -205,7 +205,7 @@ public class GroupBoardController {
 		try {
 			commentService.update(dto);
 			rttrs.addAttribute("postNo", dto.getPostNo());
-			return "redirect:/board/qna/get";
+			return "redirect:/board/group/get";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}
@@ -219,7 +219,7 @@ public class GroupBoardController {
 		try {
 			commentService.delete(commentNo);
 			rttrs.addAttribute("postNo", postNo);
-			return "redirect:/board/qna/get";
+			return "redirect:/board/group/get";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}

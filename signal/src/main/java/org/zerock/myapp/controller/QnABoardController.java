@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -191,22 +192,34 @@ public class QnABoardController {
 			    try {
 			    	commentService.insert(dto);
 			        rttrs.addAttribute("postNo", dto.getPostNo());
-			        return "redirect:/board/qna/get";
+			        return "redirect:/board/qna/get?currPage"+cri.getCurrPage();
 			    } catch (Exception e) {
 			        throw new ControllerException(e);
 			    }
 			} // addComment
 
+//			@GetMapping("/qnaReply")
+//			String Getinsert(@ModelAttribute QnACommentDTO dto, Criteria cri,RedirectAttributes rttrs) throws ControllerException {
+//			    log.trace("addComment({}) invoked.", dto);
+//			    try {
+//			    	commentService.insert(dto);
+//			        rttrs.addAttribute("postNo", dto.getPostNo());
+//			        return "redirect:/board/qna/get?currPage="+cri.getCurrPage();
+//			    } catch (Exception e) {
+//			        throw new ControllerException(e);
+//			    }
+//			} // addComment
+			
 			
 			// 댓글 수정
 			@PostMapping("/edit")
-			String editComment(QnACommentDTO dto, RedirectAttributes rttrs) throws ControllerException {
+			String editComment(QnACommentDTO dto, RedirectAttributes rttrs, Criteria cri) throws ControllerException {
 				log.trace("editComment({}) invoked.", dto);
 				
 				try {
 					commentService.update(dto);
 					rttrs.addAttribute("postNo", dto.getPostNo());
-					return "redirect:/board/qna/get";
+					return "redirect:/board/qna/get?currPage="+cri.getCurrPage();
 				} catch (Exception e) {
 					throw new ControllerException(e);
 				}

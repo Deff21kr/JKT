@@ -85,7 +85,7 @@ public class UsersController {
 				rttrs.addAttribute("userno",dto.getID());
 			}
 			
-			return "redirect:/mypage";
+			return "redirect:/user/mypage";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}

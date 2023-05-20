@@ -1,5 +1,6 @@
 package org.zerock.myapp.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.DetailPlanDTO;
 import org.zerock.myapp.domain.DetailPlanVO;
 import org.zerock.myapp.domain.JoinMyPlanDTO;
 import org.zerock.myapp.domain.MyPlanDTO;
@@ -22,6 +24,7 @@ import org.zerock.myapp.domain.MyPlanVO;
 import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.MyPlanService;
 
 import lombok.NoArgsConstructor;
@@ -38,6 +41,7 @@ public class MyPlanController {
 	@Setter(onMethod_ = {@Autowired})
 	private MyPlanService service;
 
+	
 	@GetMapping("/main")
 	void planMain(Criteria cri ,HttpServletRequest req, Model model) throws ControllerException {
 		log.info("planMain() invoked");
@@ -92,7 +96,7 @@ public class MyPlanController {
 		
 	} // makePlan
 	
-	
+	// 플래너 페이지
 	@GetMapping("/get")
 	void get(@RequestParam Integer planNo, Model model) throws ControllerException {
 		log.info("get({}) invoked", planNo);
@@ -117,27 +121,91 @@ public class MyPlanController {
 		
 	} // get
 	
+	// 상세계획 플래너 페이지
 	@GetMapping("/register")
-	void register(@RequestParam Integer planNo, Model model) throws ControllerException {
-		log.trace("register({}, {}) invoked", planNo, model);
-		
-		try {
-			Objects.requireNonNull(planNo);
-			
-			model.addAttribute("__PLANNO__", planNo);
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		} // try-catch
+	void register() throws ControllerException {
 
 	} // register
 	
 	
+	// 상세계획 플래너 등록
 	@PostMapping("/register")
-	void register() {
-		log.trace("register() invoked");
-	}
+	String register(DetailPlanDTO dto ,RedirectAttributes rttrs) throws ControllerException {
+		log.trace("register({}) invoked", dto);
+		
+		try {
+			Objects.requireNonNull(dto);
+			Boolean result = this.service.registerDetailPlan(dto);
+			log.info("result : {}", result);
+			
+			rttrs.addAttribute("planNo", dto.getPlanNo());
+			
+			return "redirect:/board/myplan/get";
+			
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		} // register
+		
+	} // register
 	
+	// 장소 검색 페이지
+	@GetMapping("/placeSerch")
+	void placeSerch() {
+		log.trace("placeSerch() invoked");
+		
+	} // placeSerch
+
+	// 글 수정페이지
+	@GetMapping("/modify")
+	void modify(@RequestParam Integer detailPlanNo ,Model model) throws ControllerException {
+		log.trace("modify() invoked");
+		
+		try {
+			
+			DetailPlanVO vo = this.service.getDetailPlan(detailPlanNo);
+			model.addAttribute("__DETAILPLAN__" ,vo);
+			
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+
+	} // modify
 	
+	// 글 수정
+	@PostMapping("/modify")
+	String modify(@RequestParam Integer planNo, DetailPlanDTO dto, RedirectAttributes rttrs) throws ControllerException {
+		log.trace("modify() invoked");
+		
+		 try {
+			Boolean result = this.service.modifyDetailPlan(dto);
+			rttrs.addAttribute("result", result);
+			rttrs.addAttribute("planNo", planNo);
+			
+			return "redirect:/board/myplan/get";
+			
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	} // modify
+	
+	// 글 삭제
+	@PostMapping("/remove")
+	String remove(Integer planNo, Integer detailPlanNo, RedirectAttributes rttrs) throws ControllerException {
+		log.trace("remove({}) invoked", detailPlanNo);
+		
+		try {
+			
+			Boolean result = this.service.removeDetailPlan(detailPlanNo);
+			rttrs.addAttribute("result", result);
+			rttrs.addAttribute("planNo", planNo);
+			
+			return "redirect:/board/myplan/get";
+
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+		
+	} // remove
 	
 	
 }

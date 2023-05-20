@@ -13,8 +13,7 @@ public interface JoinMyPlanMapper {
 			SELECT *
 				FROM TBL_MYPLAN MY, TBL_DETAILPLAN DE
 				WHERE MY.PLANNO = DE.PLANNO AND to_date(ENDDATE,'yyyy-MM-dd') >= to_date(CURRENT_DATE ,'yyyy-MM-dd')AND NICKNAME = #{nickName}
-				ORDER BY PLANDAY, TO_CHAR(PLANTIME, 'HH24:MI')
-				FETCH FIRST 6 ROWS ONLY
+				ORDER BY MY.PLANNO ,PLANDAY, TO_CHAR(PLANTIME, 'HH24:MI')
 			""")
 	public abstract List<JoinMyPlanDTO> selectList(@Param("nickName") String nickName);
 

@@ -11,24 +11,24 @@ public class PageDTO {
 	private Criteria cri;
 	
 	private int totalAmount;		// 총 레코드 건수
-//	private int commentTotalAmount;
+	private int commentTotalAmount;
 
 	private int startPage;			// 한 페이지당 페이지목록의 시작번호
 	private int endPage;			// 한 패이지당 페이지목록의 끝번호
 	private int realEndPage;		// 총 레코드 건수에 기반한 총 페이지 수
 	
-//	private int startCommentPage;			// 한 페이지당 페이지목록의 시작번호
-//	private int endCommentPage;			// 한 패이지당 페이지목록의 끝번호
-//	private int realCommentEndPage;
+	private int startCommentPage;			// 한 페이지당 페이지목록의 시작번호
+	private int endCommentPage;			// 한 패이지당 페이지목록의 끝번호
+	private int realCommentEndPage;
 	
 	private int offset;				// 현재 페이지에 해당하는 레코드의 시작번호
-//	private int commentOffSet;
+	private int commentOffSet;
 	
 	private boolean prev;			// 다음 페이지목록의 존재여부
 	private boolean next;			// 이전 페이지목록의 존재여부
 	
-//	private boolean commentPrev;			// 다음 페이지목록의 존재여부
-//	private boolean commentNext;			// 이전 페이지목록의 존재여부
+	private boolean commentPrev;			// 다음 페이지목록의 존재여부
+	private boolean commentNext;			// 이전 페이지목록의 존재여부
 	
 	
 	
@@ -40,13 +40,13 @@ public class PageDTO {
 		//----------------------------------------------------------//
 		//--Step.0 : 페이징 처리를 위한 공통변수 생성하기
 		//----------------------------------------------------------//
-//		int commentPage = cri.getCommentPage();
+		int commentPage = cri.getCommentPage();
 		int currPage = cri.getCurrPage();
 		
-//		int commentAmount = cri.getAmount();
+		int commentAmount = cri.getAmount();
 		int amount = cri.getAmount();
 		
-//		int commentPagesPerPage = cri.getCommentPagesPerPage();
+		int commentPagesPerPage = cri.getCommentPagesPerPage();
 		int pagesPerPage = cri.getPagesPerPage();
 
 		//----------------------------------------------------------//
@@ -55,7 +55,7 @@ public class PageDTO {
 		// (공식) 끝페이지번호 = (int) Math.ceil( (double) 현재페이지번호 / 페이지목록길이 ) x 페이지목록길이
 		//----------------------------------------------------------//
 		this.endPage = (int) Math.ceil( (currPage * 1.0) / pagesPerPage ) * pagesPerPage;
-//		this.endCommentPage = (int) Math.ceil( (commentPage * 1.0) / commentPagesPerPage ) * commentPagesPerPage;
+		this.endCommentPage = (int) Math.ceil( (commentPage * 1.0) / commentPagesPerPage ) * commentPagesPerPage;
 
 		//----------------------------------------------------------//
 		//--Step.3 : 현재 페이지의 페이지번호목록의 시작번호 구하기
@@ -63,7 +63,7 @@ public class PageDTO {
 		// (공식) 시작페이지번호 = 끝페이지번호 - ( 페이지목록길이 - 1 )
 		//----------------------------------------------------------//
 		this.startPage = this.endPage - ( pagesPerPage - 1 );
-//		this.startCommentPage = this.endPage - ( commentPagesPerPage - 1 );
+		this.startCommentPage = this.endPage - ( commentPagesPerPage - 1 );
 
 		//----------------------------------------------------------//
 		//--Step.4 : 총페이지수 구하기
@@ -71,15 +71,15 @@ public class PageDTO {
 		// (공식) 총페이지수 = (int) Math.ceil( (double) 모든행의개수 / 한페이지당행의수 )
 		//----------------------------------------------------------//
 		this.realEndPage = (int) Math.ceil( (totalAmount * 1.0) / amount );
-//		this.realCommentEndPage = (int) Math.ceil( (commentTotalAmount * 1.0) / amount );
+		this.realCommentEndPage = (int) Math.ceil( (commentTotalAmount * 1.0) / amount );
 		
 		if(this.realEndPage < this.endPage) {
 			this.endPage = this.realEndPage;
 		} // if
 		
-//		if(this.realCommentEndPage < this.endCommentPage) {
-//			this.endCommentPage = this.realCommentEndPage;
-//		} // if
+		if(this.realCommentEndPage < this.endCommentPage) {
+			this.endCommentPage = this.realCommentEndPage;
+		} // if
 
 		//----------------------------------------------------------//
 		//--Step.5 : 이전 페이지번호목록으로 이동가능여부(prev) 구하기
@@ -87,7 +87,7 @@ public class PageDTO {
 		// (공식) 이전페이지목록이동가능여부 = 시작페이지번호 > 1
 		//----------------------------------------------------------//
 		this.prev = this.startPage > 1;
-//		this.commentPrev = this.startCommentPage > 1;
+		this.commentPrev = this.startCommentPage > 1;
 
 		//----------------------------------------------------------//
 		//--Step.6 : 다음 페이지번호목록으로 이동가능여부(next) 구하기
@@ -95,14 +95,14 @@ public class PageDTO {
 		// (공식) 다음페이지목록이동가능여부 = 끝페이지번호 < 총페이지수
 		//----------------------------------------------------------//
 		this.next = this.endPage < realEndPage;
-//		this.commentNext = this.endCommentPage < realCommentEndPage;
+		this.commentNext = this.endCommentPage < realCommentEndPage;
 		//----------------------------------------------------------//
 		//--Step.7 : 현재 페이지에 표시할 목록의 시작 offset 구하기
 		//----------------------------------------------------------//
 		// (공식) 시작 offset = (현재페이지번호 - 1) x 한페이지당행의수
 		//----------------------------------------------------------//
 		this.offset = ( currPage - 1 ) * amount;
-//		this.commentOffSet = (commentPage - 1) * commentAmount;
+		this.commentOffSet = (commentPage - 1) * commentAmount;
 	} // constructor
 	
 

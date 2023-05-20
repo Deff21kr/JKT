@@ -143,9 +143,9 @@
 				  $("#EMail").blur(function() {
 				    var EMail = $('#EMail').val();
 				    if (mailJ.test(EMail)) {
-				      $('#mail_check').text('합격!');
+				      $('#mail_check').text('인증번호를 입력해주세요!');
 				      $('#mail_check').css('color', 'yellowgreen');
-				      inval_Arr[4] = true;
+				      inval_Arr[4] = false;
 				    } else {
 				      $('#mail_check').text('이메일을 확인해주세요');
 				      $('#mail_check').css('color', 'red');
@@ -203,6 +203,44 @@
 				      });
 				    }
 				  });
+				//   ============ 이메일 인증 ===================
+                let code = ''; 
+				  $('#mail_Check_Btn').click(function() {
+						const EMail = $('#EMail').val(); // 이메일 주소값 얻어오기!
+						console.log('완성된 이메일 : ' + EMail); // 이메일 오는지 확인
+						const checkInput = $('#mail_Check_Input') // 인증번호 입력하는곳 
+			
+
+						$.ajax({
+							type : 'get',
+							url : "${pageContext.request.contextPath}/common/mailCheck?EMail="+EMail, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+                            
+							success : function (data) {
+								console.log("data : " +  data);
+								checkInput.attr('disabled',false);
+								code =data;
+								alert('인증번호가 전송되었습니다.')
+							}			
+						}); // end ajax
+					}); // end send eamil
+					
+					$('#mail_Check_Input').blur(function () {
+						const inputCode = $('#mail_Check_Input').val();
+						const $resultMsg = $('#mail_check_num');
+						
+						if(inputCode == code){
+							$resultMsg.html('인증번호가 일치합니다.');
+							$resultMsg.css('color','green');
+							$('#mail_Check_Btn').attr('disabled',true);
+							$('#EMail').attr('readonly',true);
+                            inval_Arr[4] = 'true';
+							
+						}else{
+							$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+							$resultMsg.css('color','red');
+						}
+					});
+				  
 
 				  $('#reg_submit').click(function() {
 					 
@@ -324,11 +362,15 @@
 					<!--전화번호-->
 
 
-					<label> <!-- <span>PW</span> -->
+					<label> 
 						<p style="text-align: left; font-size: 12px; color: #666">E-mail</p>
 						<input type="email" placeholder="이메일" class="size" id="EMail"
 						name="EMail" required>
+						<button type="button" id="mail_Check_Btn" >인증번호발송</button>
+						<input id="mail_Check_Input" disabled="disabled" placeholder="인증번호를 입력해주세요." >
+						
 						<div id="mail_check" style="font-size: 12px; padding-top: 5px;"></div>
+                        <div id="mail_check_num" style="font-size: 12px; padding-top: 5px;"></div>
 					</label>
 					<!--이메일-->
 

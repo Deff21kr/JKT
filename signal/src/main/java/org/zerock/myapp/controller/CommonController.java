@@ -18,7 +18,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.LoginService;
+import org.zerock.myapp.service.MailSendService;
 import org.zerock.myapp.service.UsersService;
 
 import lombok.NoArgsConstructor;
@@ -37,6 +39,8 @@ public class CommonController {
 	private UsersService service;
 	@Autowired
 	private LoginService login;
+	@Autowired
+	private MailSendService mailService;
 
 	@GetMapping("/loginPost")
 	void login(Model model) {
@@ -141,6 +145,19 @@ public class CommonController {
 			Objects.requireNonNull(nickName); // dto가 제대로 수집되어 널이 아니라면
 
 			return this.service.checkNickNameService(nickName);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+
+	}
+	@GetMapping("/mailCheck")
+	@ResponseBody
+	public String mailCheck(@RequestParam("EMail")String EMail) throws ControllerException {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + EMail);
+		try {
+			log.info("\n\n뭐가 들어옴? : {}\ntype : {}  ",this.mailService.joinEmail(EMail),this.mailService.joinEmail(EMail).getClass());
+			return this.mailService.joinEmail(EMail);
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}

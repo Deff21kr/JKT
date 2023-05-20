@@ -187,12 +187,13 @@ public class QnABoardController {
 		// 댓글 등록
 //			@RequestMapping(value = "/qnaReply", method= {RequestMethod.POST})
 			@PostMapping("/qnaReply")
-			String insert(@ModelAttribute QnACommentDTO dto, Criteria cri,RedirectAttributes rttrs) throws ControllerException {
+			String insert(@ModelAttribute QnACommentDTO dto,@RequestParam Integer currPage, Criteria cri,RedirectAttributes rttrs) throws ControllerException {
 			    log.trace("addComment({}) invoked.", dto);
 			    try {
 			    	commentService.insert(dto);
 			        rttrs.addAttribute("postNo", dto.getPostNo());
-			        return "redirect:/board/qna/get?currPage"+cri.getCurrPage();
+			        rttrs.addAttribute("currPage", currPage);
+			        return "redirect:/board/qna/get?";
 			    } catch (Exception e) {
 			        throw new ControllerException(e);
 			    }

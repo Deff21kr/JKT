@@ -113,7 +113,7 @@
 						</div>
 
 						<div class="bt_wrap">
-							<button type="button" id="modifyBtn">네이버로간다</button>
+							<button type="button" id="modifyBtn">수정</button>
 						</div>
 					</div>
 

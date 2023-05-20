@@ -172,6 +172,7 @@
 			<form action="/board/qna/qnaReply" method="POST">
 				<input type="hidden" name="postNo" value="${__BOARD__.postNo}">
 				<input type="hidden" name="nickName" value="${__AUTH__.nickName}">
+				<input type="hidden" name="currPage" value="${__pageMaker__.currPage}">
 				<div class="reply_write">
 					<div>
 						<div class="nickname">${__AUTH__.nickName}</div>

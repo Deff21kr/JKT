@@ -36,6 +36,13 @@
 		        });
 		    });
 		    
+            $(function () {
+          	  $('form').submit(function () {
+          	    $('#make').prop('disabled', true);
+          	  });
+          	});
+
+		    
 		  function modifyBtn() {
 			    alert('수정이 완료되었습니다.')
 			  } // removeBtn

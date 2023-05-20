@@ -11,6 +11,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+	<script>
+	    $(function () {
+	  	  $('form').submit(function () {
+	  	    $('#submit').prop('disabled', true);
+	  	  });
+	  	});
+
+	</script>
+
     <style>
     body {
         font-family: 'Roboto', sans-serif;
@@ -83,7 +92,7 @@
                 <label for="file">첨부파일:</label>
                 <input type="file" class="form-control-file border" id="file" name="file">
             </div>
-            <button type="submit" class="btn btn-primary">제출</button>
+            <button type="submit" id="submit" class="btn btn-primary">제출</button>
         </form>
     </div>
 </body>

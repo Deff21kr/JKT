@@ -27,6 +27,36 @@
 	type="image/x-icon">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
+
+<script type="text/javascript">
+// 플래너 삭제
+function remove() {
+
+} // remove
+
+// 플래너 수정
+$(function () {
+    $('#modify').click(function () {
+        location.href = "/board/myplan/modifyPlan?planNo=${__MYPLAN__.planNo}";
+    });
+    
+    $('#remove').click(function () {
+    	  if (confirm("플래너를 삭제하시겠습니까?")) {
+    		    var form = $("<form>");
+    		    form.attr("action", "/board/myplan/deletePlan");
+    		    form.attr("method", "POST");
+    		    form.append("<input type='hidden' name='planNo' value='" + ${__MYPLAN__.planNo} + "'>");
+    		    form.appendTo("body").submit();
+
+    		    alert("플래너가 삭제되었습니다.");
+    		  } // if
+    });    
+});
+
+
+</script>
 
 <style>
 /* 전체 스타일 */
@@ -284,14 +314,14 @@ p.quickmenu.on {
 					test="${sessionScope.__AUTH__.nickName == __MYPLAN__.nickName}">
 					<fmt:formatDate value="${__MYPLAN__.startDate}"
 						pattern="yyyy-MM-dd" /> ~
-									<fmt:formatDate value="${__MYPLAN__.endDate}"
+					<fmt:formatDate value="${__MYPLAN__.endDate}"
 						pattern="yyyy-MM-dd" />
 				</c:if>
 			</p>
 
 			<div class="dml" style="position: absolute; top: 20px; right: 180px;">
-				<button>수정</button>
-				<button>삭제</button>
+				<button id="modify" type="button" >수정</button>
+				<button id="remove" type="button" >삭제</button>
 			</div>
 		</div>
 
@@ -404,7 +434,7 @@ p.quickmenu.on {
 	<%@ include file="/WEB-INF/views/footer.jsp"%>
 
 
-	<script>
+	<script defer="defer">
 		jQuery('.plan-toggle').on('click', function(e) {
 			e.preventDefault();
 
@@ -417,25 +447,27 @@ p.quickmenu.on {
 				$plan.addClass('active');
 			}
 		});
+
 		
-		// 글 삭제
+		
+		// 상세계획 삭제
 		  function removeBtn(detailPlanNo) {
-		    if (confirm("글을 삭제하시겠습니까?")) {
+		    if (confirm("계획을 삭제하시겠습니까?")) {
 		      var form = $("<form>");
 		      form.attr("action", "/board/myplan/remove");
 		      form.attr("method", "POST");
 		      form.append("<input type='hidden' name='detailPlanNo' value='" + detailPlanNo + "'>");
-		      form.append("<input type='hidden' name='planNo' value='" + ${param.planNo} + "'>");
+		      form.append("<input type='hidden' name='planNo' value='" + ${__MYPLAN__.planNo} + "'>");
 		      form.appendTo("body").submit();
 		
-		      alert("글이 삭제되었습니다.");
+		      alert("계획이 삭제되었습니다.");
 		    } // if
 		  } // removeBtn
 
-		  // 글 수정
+		  // 상세계획 수정
 		  function modifyBtn(detailPlanNo) {
-			  if(confirm("글을 수정하시겠습니까?")) {
-			    location.href = "/board/myplan/modify?planNo=${param.planNo}&detailPlanNo=" + detailPlanNo;
+			  if(confirm("계획을 수정하시겠습니까?")) {
+			    location.href = "/board/myplan/modify?planNo=${__MYPLAN__.planNo}&detailPlanNo=" + detailPlanNo;
 			  } // if
 			} // function
 
@@ -458,7 +490,7 @@ p.quickmenu.on {
 			  });
 			});
 			
-			
+			// 스크롤 이동시마다 퀵메뉴 day 변경
 			window.addEventListener("scroll", function() {
 				  const scrollPosition = window.scrollY;
 				  
@@ -476,6 +508,21 @@ p.quickmenu.on {
 				    }
 				  });
 				});
+			
+			// 맨 위로 이동
+			$('.quicktop').click(function(){
+				  $('html, body').animate({scrollTop: 0}, 'slow');
+			})
+			
+			// 맨 아래로 이동
+			$('.quickbottom').click(function(){
+				$('html, body').animate({scrollTop: $(document).height()}, 'slow');
+			})
+
+			
+
+
+			
 
 
 	</script>

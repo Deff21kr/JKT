@@ -96,6 +96,36 @@ public class MyPlanController {
 		
 	} // makePlan
 	
+	// 플래너 삭제
+	@PostMapping("/deletePlan")
+	String deletePlan(Integer planNo, RedirectAttributes rttrs) throws ControllerException {
+		log.trace("deletePlan({}) invoked", planNo);
+		
+		try {
+			Boolean result = this.service.remove(planNo);
+			rttrs.addAttribute("result", result);
+			
+			return "redirect:/board/myplan/main";
+		} catch (Exception e) {
+			throw new ControllerException(e);   
+		} // try-catch
+	} // deletePlan
+
+	// 플래너 수정
+	@PostMapping("/modifyPlan")
+	String modifyPlan(String planName ,Integer planNo, RedirectAttributes rttrs) throws ControllerException {
+		log.trace("deletePlan({}, {}) invoked",planName, planNo);
+		
+		try {
+			Boolean result = this.service.modify(planName, planNo);
+			rttrs.addAttribute("result", result);
+			
+			return "redirect:/board/myplan/main";
+		} catch (Exception e) {
+			throw new ControllerException(e);   
+		} // try-catch
+	} // deletePlan
+	
 	// 플래너 페이지
 	@GetMapping("/get")
 	void get(@RequestParam Integer planNo, Model model) throws ControllerException {
@@ -114,12 +144,27 @@ public class MyPlanController {
 			
 			model.addAttribute("__MYPLAN__" ,vo);
 			
-			
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
 		
 	} // get
+	
+	@GetMapping("/modifyPlan")
+	void modifyPlan(Integer planNo, Model model) throws ControllerException {
+		log.trace("modifyPlan() invoked");
+		
+		try {
+			MyPlanVO vo = this.service.get(planNo);
+			Objects.requireNonNull(vo);
+			
+			model.addAttribute("__PLAN__", vo);
+			
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+		
+	} // modifyPlan
 	
 	// 상세계획 플래너 페이지
 	@GetMapping("/register")

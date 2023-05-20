@@ -114,6 +114,14 @@
 						location = "/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentCurrPage=" + selectedPageNum;
 					});
 				});
+				
+				
+		          $(function () {
+	            	  $('form').submit(function () {
+	            	    $('#replyBtn').prop('disabled', true);
+	            	  });
+	            	});
+				
 			</script>
 
 		</head>

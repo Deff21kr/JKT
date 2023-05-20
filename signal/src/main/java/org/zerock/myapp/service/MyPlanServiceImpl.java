@@ -67,6 +67,30 @@ public class MyPlanServiceImpl implements MyPlanService {
 		
 	}
 
+
+	@Override
+	public Boolean remove(Integer planNo) throws ServiceException {
+		try {
+
+			return this.mapper.delete(planNo) == 1;
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+
+	} // remove
+
+	@Override
+	public Boolean modify(String planName, Integer planNo) throws ServiceException {
+		try {
+
+			return this.mapper.update(planName, planNo) == 1;
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+ 
+	} // modify
+
+	
 	@Override
 	public Integer getTotal() throws ServiceException {
 		log.trace("getTotal() invoked");
@@ -148,7 +172,7 @@ public class MyPlanServiceImpl implements MyPlanService {
 		}	
 		
 
-	} // removeDetailPlan
+	}
 
 
 }

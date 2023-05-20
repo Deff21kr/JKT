@@ -190,7 +190,13 @@ public class QnABoardController {
 	// 댓글 등록
 //	@RequestMapping(value = "/qnaReply", method= {RequestMethod.POST})
 	@PostMapping("/qnaReply")
-	String insert(@ModelAttribute QnACommentDTO dto,@ModelAttribute CommentCriteria commentCri, Criteria cri,RedirectAttributes rttrs ,@RequestParam("currPage") Integer currPage) throws ControllerException {
+	String insert(
+			@ModelAttribute QnACommentDTO dto,
+			@ModelAttribute CommentCriteria commentCri, 
+			Criteria cri, 
+			RedirectAttributes rttrs,
+			@RequestParam("currPage") Integer currPage) 
+					throws ControllerException {
 	    log.trace("addComment({}) invoked.", dto);
 	    try {
 	    	rttrs.addAttribute("currPage", currPage);

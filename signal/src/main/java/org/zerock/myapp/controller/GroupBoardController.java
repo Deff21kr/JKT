@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.CommentCriteria;
+import org.zerock.myapp.domain.CommentPageDTO;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupBoardCriteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
@@ -107,7 +108,7 @@ public class GroupBoardController {
 	
 	// 3. 특정 게시물 상세조회
     @GetMapping(path={"/get", "/modify"},  params = "postNo")
-    void get(@RequestParam Integer postNo, Model model, Criteria cri, CommentCriteria commentCri) throws  ControllerException {
+    void get(@RequestParam Integer postNo, Model model, Criteria cri, CommentCriteria commentCri, RedirectAttributes rttrs, Integer currPage) throws  ControllerException {
         log.trace("get() invoked.");
 
         try{
@@ -118,8 +119,9 @@ public class GroupBoardController {
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
             
-            PageDTO pageDTO = new PageDTO(cri, this.commentService.getCommentTotal(postNo));
+            CommentPageDTO pageDTO = new CommentPageDTO(this.commentService.getCommentTotal(postNo), commentCri);
     		model.addAttribute("__commentPage__", pageDTO);
+    		rttrs.addAttribute("currPage", currPage);
         }catch (Exception e){
             throw new ControllerException(e);
         } // try-catch
@@ -186,12 +188,14 @@ public class GroupBoardController {
 	// 댓글 등록
 //	@RequestMapping(value = "/qnaReply", method= {RequestMethod.POST})
 	@PostMapping("/qnaReply")
-	String insert(@ModelAttribute QnACommentDTO dto, Criteria cri,RedirectAttributes rttrs) throws ControllerException {
+	String insert(@ModelAttribute QnACommentDTO dto, Criteria cri,RedirectAttributes rttrs, @RequestParam("currPage") Integer currPage, CommentCriteria commentCri) throws ControllerException {
 	    log.trace("addComment({}) invoked.", dto);
 	    try {
 	    	commentService.insert(dto);
+	    	rttrs.addAttribute("currPage", currPage);
 	        rttrs.addAttribute("postNo", dto.getPostNo());
-	        return "redirect:/board/group/get";
+	        rttrs.addAttribute("commentCurrPage", commentCri.getCommentCurrPage());
+	        return "redirect:/board/group/get?";
 	    } catch (Exception e) {
 	        throw new ControllerException(e);
 	    }

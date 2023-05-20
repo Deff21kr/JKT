@@ -387,10 +387,10 @@
                 <form method="post" action="/mypage">
 
                     <label for="name">이름</label>
-                    <input type="text" id="name" name="name" value="${sessionScope.dto.name}"><br>
+                    <input type="text" id="name" name="name" value="${__AUTH__.name}"><br>
 
                     <label for="email">이메일</label>
-                    <input type="text" id="email" name="Email" value="${sessionScope.dto.EMail}" ><br>
+                    <input type="text" id="email" name="Email" value="${__AUTH__.EMail}" ><br>
 
                     <!-- <button type="button" onclick="sendEmail()">이메일 인증<button><br> -->
                     <label for="emailAuth">인증번호</label>

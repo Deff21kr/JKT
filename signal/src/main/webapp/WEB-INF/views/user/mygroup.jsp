@@ -35,7 +35,7 @@
       </header>
 
 
-      <div class="board_wrap"></div>
+      <div class="board_wrap">
       <div class="board_title">
         <h2>
           <strong>동행</strong>
@@ -104,33 +104,34 @@
           </div>
 
           <div class="board_list_post">
-            <form class="a" action="/user/mygroup" method="POST">
               <div>
+              
                 <c:forEach var="group" items="${__GROUP__}">
                     <div class="num">${group.appNo}</div>
-                    
                     <div class="title">${group.groupName}</div>
                     <div class="writer">${group.ID}</div>
                     <div class="area">${group.area}</div>
                     <div class="status">${group.recruitStatus}</div>
                     <c:if test="${group.outCome == '진행중'}">
-                      <div class="result">
-                        <button class="accept-button" type="submit" name="outCome" value="수락">수락</button>
-                        <button class="reject-button" type="submit" name="outCome" value="거절">거절</button>
-                        <input type="hidden" name="appNo" value="${group.appNo}">
-                        <input type="hidden" name="groupNo" value="${group.groupNo}">
-                      </div>
+	                     <div class="result">
+	                      <form class="a" action="/user/mygroup" method="POST">
+		                        <button class="accept-button" type="submit" name="outCome" value="수락">수락</button>
+		                        <button class="reject-button" type="submit" name="outCome" value="거절">거절</button>
+		                        <input type="hidden" name="appNo" value="${group.appNo}">
+		                        <input type="hidden" name="groupNo" value="${group.groupNo}">
+	                        </form>
+	                     </div>
                     </c:if>
                     <c:if test="${group.outCome != '진행중' }">
-                      <div class="result">${group.outCome}</div>
+                    <div class="result">${group.outCome}</div>
                     </c:if>
+                    
                     <div class="member">${group.memberNum}</div>
                     <div class="current">${group.currentMember}</div>
                 </c:forEach>
 
-
               </div>
-            </form>
+            
           </div>
 
           <div class="board_page">
@@ -150,7 +151,7 @@
           </div>
         </div>
       </div>
-
+</div>
       <footer>
         <jsp:include page="../footer.jsp" />
       </footer>

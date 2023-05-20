@@ -2,6 +2,7 @@ package org.zerock.myapp.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ServiceException;
@@ -27,5 +28,8 @@ public interface UsersService {
 	// 5. 탈퇴
 	public abstract Boolean remove(String ID) throws ServiceException;
 	
+	public abstract Integer checkIdService(String ID) throws ServiceException;
+	
+	public abstract Integer checkNickNameService(String nickName) throws ServiceException;
 	
 } // end interface

@@ -6,6 +6,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zerock.myapp.domain.UsersDTO;
@@ -113,6 +114,36 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 			throw new ServiceException(e);
 		}
 	}
+	
+	@Override
+	public Integer checkIdService(String ID) throws ServiceException {
+		
+		try {
+			log.trace("\n*********************************************************\n			id 체크({}) "
+					+ "\n********************************************************* ",ID);
+			return this.dao.checkID(ID);
+
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
+	public Integer checkNickNameService(String checkNickName) throws ServiceException {
+		
+		try {
+			log.trace("\n*********************************************************\n			닉넴 체크({}) "
+					+ "\n********************************************************* ",checkNickName);
+
+			return this.dao.checkNickName(checkNickName);
+
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+
+
+
 
 //	====== InitializingBean, DisposalbleBean =====
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.myapp.domain.QnACommentVO;
+import org.zerock.myapp.domain.CommentCriteria;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.QnACommentDTO;
 
@@ -23,10 +24,10 @@ public interface QnACommentMapper {
 	/*+ index_desc(tbl_qnacomment) */ *
 	FROM TBL_QNACOMMENT
 	WHERE POSTNO = #{postNo}
-	OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
-	FETCH NEXT #{cri.amount} ROWS ONLY
+	OFFSET (#{commentCri.commentCurrPage} -1) * #{commentCri.commentAmount} ROWS
+	FETCH NEXT #{commentCri.commentAmount} ROWS ONLY
 	""")
-	public abstract List<QnACommentVO> selectList(@Param("cri") Criteria cri,@Param("postNo") Integer postNo);
+	public abstract List<QnACommentVO> selectList(@Param("commentCri") CommentCriteria cri,@Param("postNo") Integer postNo);
 	
 	// 댓글 상세조회 업데이트 할때 필요함...
 	public abstract QnACommentVO select(Integer commentNo);

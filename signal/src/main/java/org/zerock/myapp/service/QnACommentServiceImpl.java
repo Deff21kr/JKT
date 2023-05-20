@@ -6,6 +6,7 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.myapp.domain.CommentCriteria;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.QnACommentDTO;
 import org.zerock.myapp.domain.QnACommentVO;
@@ -24,11 +25,11 @@ public class QnACommentServiceImpl implements QnACommentService, InitializingBea
 
 	// 1. 게시판 목록을 얻어 반환해주는 기능 수행
 	@Override
-	public List<QnACommentVO> selectList(Criteria cri, Integer postNo) throws ServiceException {
+	public List<QnACommentVO> selectList(CommentCriteria commentCri, Integer postNo) throws ServiceException {
 		log.trace("getList() invoked.");
 
 		try {
-			return this.dao.selectList(cri, postNo);
+			return this.dao.selectList(commentCri, postNo);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch

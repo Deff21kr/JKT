@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.myapp.domain.CommentCriteria;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupBoardCriteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
@@ -106,14 +107,14 @@ public class GroupBoardController {
 	
 	// 3. 특정 게시물 상세조회
     @GetMapping(path={"/get", "/modify"},  params = "postNo")
-    void get(@RequestParam Integer postNo, Model model, Criteria cri) throws  ControllerException {
+    void get(@RequestParam Integer postNo, Model model, Criteria cri, CommentCriteria commentCri) throws  ControllerException {
         log.trace("get() invoked.");
 
         try{
             GroupBoardVO vo = this.service.get(postNo);
             model.addAttribute("__BOARD__", vo);
             
-            List<QnACommentVO> commentList = this.commentService.selectList(cri, postNo);
+            List<QnACommentVO> commentList = this.commentService.selectList(commentCri, postNo);
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
             

@@ -3,6 +3,7 @@ package org.zerock.myapp.service;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.zerock.myapp.domain.CommentCriteria;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.QnACommentDTO;
 import org.zerock.myapp.domain.QnACommentVO;
@@ -12,7 +13,7 @@ import org.zerock.myapp.exception.ServiceException;
 public interface QnACommentService {
 
 	// 댓글 조회
-	public abstract List<QnACommentVO> selectList(Criteria cri, Integer postNo) throws ServiceException;
+	public abstract List<QnACommentVO> selectList(CommentCriteria commentCri, Integer postNo) throws ServiceException;
 	
 	// 댓글 작성
 	public abstract Boolean insert(QnACommentDTO dto) throws ServiceException;

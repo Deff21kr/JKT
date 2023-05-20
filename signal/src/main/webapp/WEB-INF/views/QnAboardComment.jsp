@@ -111,7 +111,7 @@
 				$(function () {
 					$('.pageNum').on('click', function (e) {
 						let selectedPageNum = e.currentTarget.textContent;
-						location = "/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=" + selectedPageNum;
+						location = "/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentCurrPage=" + selectedPageNum;
 					});
 				});
 			</script>
@@ -151,32 +151,16 @@
 				</c:forEach>
 			</div>
 
-			<!-- <div class="board_page">
-				<c:if test="${__commentPage__.prev}">
-					<div class="Prev"><a
-							href="/board/qna/get?currPage=${__commentPage__.startPage - 1}&postNo=${__BOARD__.postNo}">Prev</a>
-					</div>
-				</c:if>
-				<c:forEach var="pageNum" begin="${__commentPage__.startPage}" end="${__commentPage__.endPage}">
-					<div class="pageNum ${__commentPage__.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
-				</c:forEach>
-				<c:if test="${__commentPage__.next}">
-					<div class="Next"><a
-							href="/board/qna/get?currPage=${__commentPage__.endPage + 1}&postNo=${__BOARD__.postNo}">Next</a>
-					</div>
-				</c:if>
-			</div> -->
-
 			<div class="board_page">
-				<c:if test="${__commentPage__.prev}">
+				<c:if test="${__commentPage__.commentPrev}">
 					<div class="Prev"><a
 							href="/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.startCommentPage - 1}">Prev</a>
 					</div>
 				</c:if>
-				<c:forEach var="pageNum" begin="${__commentPage__.startPage}" end="${__commentPage__.endPage}">
-					<div class="pageNum ${__commentPage__.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+				<c:forEach var="pageNum" begin="${__commentPage__.startCommentPage}" end="${__commentPage__.endCommentPage}">
+					<div class="pageNum ${__commentPage__.commentCri.commentCurrPage == pageNum? 'current':''}">${pageNum}</div>
 				</c:forEach>
-				<c:if test="${__commentPage__.next}">
+				<c:if test="${__commentPage__.commentNext}">
 					<div class="Next"><a
 							href="/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.endCommentPage + 1}">Next</a>
 					</div>

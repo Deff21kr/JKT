@@ -28,6 +28,80 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
 
+
+
+</head>
+
+<body>
+	<!-- 댓글 목록 -->
+	<div class="reply_wrap">
+		<div class="reply_title" id="reply_list"><i class="fas fa-comment-dots"></i>&nbsp;<i style="color: orangered;">${__commentPage__.commentTotalAmount}</i>&nbsp;댓글</div>
+		<c:forEach items="${__COMMENT_LIST__}" var="comment">
+			<div class="reply_list">
+				<div class="list">
+					<div class="nickname">${comment.nickName}</div>
+					<div class="date">${comment.regiDate}</div>
+					<div class="date">${comment.modifyDate}</div>
+
+					<div class="reply_bt_wrap" id="Clickbt">
+						<c:if test="${comment.nickName.equals(__AUTH__.nickName)}">
+							<button type="button" class="edit-btn">수정</button>
+						</c:if>
+						<c:if test="${comment.nickName.equals(__AUTH__.nickName)}">
+							<button type="submit" class="delete-comment"
+								data-comment-no="${comment.commentNo}">삭제</button>
+						</c:if>
+						<button type="submit" onclick="location.href='#';">신고</button>
+					</div>
+					<div class="content">${comment.content}</div>
+				</div>
+
+				<div class="edit-area" style="display: none;">
+					<textarea class="edit-content" placeholder="수정할 내용을 입력해라"></textarea>
+					<button type="button" class="submit-edit-btn"
+						data-comment-no="${comment.commentNo}"
+						data-post-no="${__BOARD__.postNo}"
+						data-content="${comment.content}">수정 제출</button>
+						
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+	
+	<div class="board_page">
+				<c:if test="${__commentPage__.commentPrev}">
+					<div class="Prev"><a
+							href="/board/gorup/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.startCommentPage - 1}">Prev</a>
+					</div>
+				</c:if>
+				<c:forEach var="pageNum" begin="${__commentPage__.startCommentPage}" end="${__commentPage__.endCommentPage}">
+					<div class="pageNum ${__commentPage__.commentCri.commentCurrPage == pageNum? 'current':''}">${pageNum}</div>
+				</c:forEach>
+				<c:if test="${__commentPage__.commentNext}">
+					<div class="Next"><a
+							href="/board/group/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.endCommentPage + 1}">Next</a>
+					</div>
+				</c:if>
+			</div>
+
+	<!-- 댓글 작성 -->
+	<form action="/board/group/qnaReply" method="POST">
+		<input type="hidden" name="postNo" value="${__BOARD__.postNo}">
+		<input type="hidden" name="nickName" value="${__AUTH__.nickName}">
+		<input type="hidden" name="currPage" value="${param.currPage}">
+		<div class="reply_write">
+			<div>
+				<div class="nickname">${__AUTH__.nickName}</div>
+				<div class="content">
+					<textarea id="content" name="content" placeholder="내용을 작성해주세요."></textarea>
+				</div>
+				<div class="writeButton">
+					<button type="submit" class="replyWriteBtn" id="replyBtn">등록</button>
+				</div>
+			</div>
+		</div>
+	</form>
+
 <script>
 	// 댓글 삭제 
 	$(document).on('click', '.delete-comment', function() {
@@ -105,6 +179,8 @@
 
 	// 	alert("등록");
 	// }
+	
+	// 페이지네이션
 	$(function() {
 		$('.pageNum').on('click', function(e) {
 			let selectedPageNum = e.currentTarget.textContent;
@@ -112,87 +188,16 @@
 		});
 	});
 	
-	$(document).ready(function(){
-		$('#replyBtn').on('click', function(){
-			alert('댓글이 작성되었습니다');
-			$('#replyBtn').unbind('click');
-		});
-	});
-</script>
-
-</head>
-
-<body>
-	<!-- 댓글 목록 -->
-	<div class="reply_wrap">
-		<div class="reply_title">댓글</div>
-		<c:forEach items="${__COMMENT_LIST__}" var="comment">
-			<div class="reply_list">
-				<div class="list">
-					<div class="nickname">${comment.nickName}</div>
-					<div class="date">${comment.regiDate}</div>
-					<div class="date">${comment.modifyDate}</div>
-
-					<div class="reply_bt_wrap" id="Clickbt">
-						<c:if test="${comment.nickName.equals(__AUTH__.nickName)}">
-							<button type="button" class="edit-btn">수정</button>
-						</c:if>
-						<c:if test="${comment.nickName.equals(__AUTH__.nickName)}">
-							<button type="submit" class="delete-comment"
-								data-comment-no="${comment.commentNo}">삭제</button>
-						</c:if>
-						<button type="submit" onclick="location.href='#';">신고</button>
-					</div>
-					<div class="content">${comment.content}</div>
-				</div>
-
-				<div class="edit-area" style="display: none;">
-					<textarea class="edit-content" placeholder="수정할 내용을 입력해라"></textarea>
-					<button type="button" class="submit-edit-btn"
-						data-comment-no="${comment.commentNo}"
-						data-post-no="${__BOARD__.postNo}"
-						data-content="${comment.content}">수정 제출</button>
-						
-				</div>
-			</div>
-		</c:forEach>
-	</div>
+	// 도배방지
+	  $(function () {
+          $('form').submit(function () {
+            $('#replyBtn').prop('disabled', true);
+          });
+        });
 	
-	<div class="board_page">
-				<c:if test="${__commentPage__.commentPrev}">
-					<div class="Prev"><a
-							href="/board/gorup/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.startCommentPage - 1}">Prev</a>
-					</div>
-				</c:if>
-				<c:forEach var="pageNum" begin="${__commentPage__.startCommentPage}" end="${__commentPage__.endCommentPage}">
-					<div class="pageNum ${__commentPage__.commentCri.commentCurrPage == pageNum? 'current':''}">${pageNum}</div>
-				</c:forEach>
-				<c:if test="${__commentPage__.commentNext}">
-					<div class="Next"><a
-							href="/board/group/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.endCommentPage + 1}">Next</a>
-					</div>
-				</c:if>
-			</div>
+	
 
-	<!-- 댓글 작성 -->
-	<form action="/board/group/qnaReply" method="POST">
-		<input type="hidden" name="postNo" value="${__BOARD__.postNo}">
-		<input type="hidden" name="nickName" value="${__AUTH__.nickName}">
-		<input type="hidden" name="currPage" value="${param.currPage}">
-		<div class="reply_write">
-			<div>
-				<div class="nickname">${__AUTH__.nickName}</div>
-				<div class="content">
-					<textarea id="content" name="content" placeholder="내용을 작성해주세요."></textarea>
-				</div>
-				<div class="writeButton">
-					<button type="submit" class="replyWriteBtn" id="replyBtn">등록</button>
-				</div>
-			</div>
-		</div>
-	</form>
-
-
+</script>
 
 </body>
 

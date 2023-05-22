@@ -98,7 +98,6 @@
 				// 	alert("등록");
 				// }
 
-
 				// $(function() {
 				// 	$('.pageNum').on('click', function(e) {
 				// 		let selectedPageNum2 = e.currentTarget.textContent;
@@ -106,31 +105,30 @@
 				// 	});
 				// });
 
-
+				$(function () {
+					$('.pageNum')
+						.on(
+							'click',
+							function (e) {
+								let selectedPageNum = e.currentTarget.textContent;
+								location = "/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentCurrPage="
+									+ selectedPageNum;
+							});
+				});
 
 				$(function () {
-					$('.pageNum').on('click', function (e) {
-						let selectedPageNum = e.currentTarget.textContent;
-						location = "/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentCurrPage=" + selectedPageNum;
+					$('.replyWriteBtn')
+						.on(
+							'click',
+							function () {
+								location = "/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentCurrPage=" + 1;
+							});
+				});
+				$(function () {
+					$('form').submit(function () {
+						$('#replyBtn').prop('disabled', true);
 					});
 				});
-<<<<<<< HEAD
-				
-				
-		          $(function () {
-	            	  $('form').submit(function () {
-	            	    $('#replyBtn').prop('disabled', true);
-	            	  });
-	            	});
-=======
-	
-				$(function() {
-					$('.replyWriteBtn').on('click', function(){
-						location = "/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentCurrPage=" + 1;
-					});
-				});
->>>>>>> 2e8fb15 (no message)
-				
 			</script>
 
 		</head>
@@ -138,7 +136,7 @@
 		<body>
 			<!-- 댓글 목록 -->
 			<div class="reply_wrap">
-				<div class="reply_title">댓글</div>
+				<div class="reply_title"> <i class="fas fa-comment-dots"></i>&nbsp;<i style="color: orangered;">${__commentPage__.commentTotalAmount}</i>&nbsp;댓글</div>
 				<c:forEach items="${__COMMENT_LIST__}" var="comment">
 					<div class="reply_list">
 						<div class="list">
@@ -170,21 +168,25 @@
 
 			<div class="board_page">
 				<c:if test="${__commentPage__.commentPrev}">
-					<div class="Prev"><a
+					<div class="Prev">
+						<a
 							href="/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.startCommentPage - 1}">Prev</a>
 					</div>
 				</c:if>
-				<c:forEach var="pageNum" begin="${__commentPage__.startCommentPage}" end="${__commentPage__.endCommentPage}">
-					<div class="pageNum ${__commentPage__.commentCri.commentCurrPage == pageNum? 'current':''}">${pageNum}</div>
+				<c:forEach var="pageNum" begin="${__commentPage__.startCommentPage}"
+					end="${__commentPage__.endCommentPage}">
+					<div class="pageNum ${__commentPage__.commentCri.commentCurrPage == pageNum? 'current':''}">
+						${pageNum}</div>
 				</c:forEach>
 				<c:if test="${__commentPage__.commentNext}">
-					<div class="Next"><a
+					<div class="Next">
+						<a
 							href="/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.endCommentPage + 1}">Next</a>
 					</div>
 				</c:if>
 			</div>
-			
-			
+
+
 			<!-- 댓글 작성 -->
 			<form action="/board/qna/qnaReply" method="POST">
 				<input type="hidden" name="postNo" value="${__BOARD__.postNo}">

@@ -24,12 +24,14 @@
 		$("#container").tabs();
 		heightStyle: "content"
 	});
-
+	
 	$(function() {
-		$("#modifyBtn").click(function() {
-			location = "http://naver.com"
+		$("#modifyBtn").click(function(){
+			location="/user/edit"
+			console.log("클리이이이이이익");
 		});
 	});
+	
 </script>
 </head>
 
@@ -89,7 +91,7 @@
 						<!-- 프로필 이미지 수정 -->
 
 					</div>
-
+					
 					<div class="profile_right">
 						<div>
 							<div class="right_top">닉네임</div>
@@ -111,12 +113,14 @@
 							<div class="right_top">MBTI</div>
 							<div class="right_contents">${__AUTH__.MBTI}</div>
 						</div>
-
+						
+						
 						<div class="bt_wrap">
-							<button type="button" id="modifyBtn">수정</button>
+							<button type="submit" id="modifyBtn">수정</button>
 						</div>
+						
 					</div>
-
+					
 
 
 

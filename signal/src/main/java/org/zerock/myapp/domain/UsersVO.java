@@ -26,7 +26,7 @@ public class UsersVO {
 	private String likeArea;
 	private Integer uno;
 	private Boolean enabled;
-	
+	private String statusMessage;
 	
 	public UsersDTO toDTO() {
 		
@@ -45,6 +45,7 @@ public class UsersVO {
 		dto.setUno(uno);
 		dto.setEnabled(enabled);
 		dto.setRememberMe(dto.getRememberMe());
+		dto.setStatusMessage(statusMessage);
 		return dto;
 	}
 	

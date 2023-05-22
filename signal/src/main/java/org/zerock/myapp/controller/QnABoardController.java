@@ -191,7 +191,7 @@ public class QnABoardController {
 	    log.trace("addComment({}) invoked.", dto);
 	    try {
 	    	rttrs.addAttribute("currPage", currPage);
-	    	commentService.insert(dto);
+	    	this.commentService.insert(dto);
 	        rttrs.addAttribute("postNo", dto.getPostNo());
 	        rttrs.addAttribute("commentCurrPage", commentCri.getCommentCurrPage());
 	        return "redirect:/board/qna/get?";
@@ -220,7 +220,7 @@ public class QnABoardController {
 				log.trace("editComment({}) invoked.", dto);
 				
 				try {
-					commentService.update(dto);
+					this.commentService.update(dto);
 					rttrs.addAttribute("postNo", dto.getPostNo());
 					return "redirect:/board/qna/get?currPage="+cri.getCurrPage();
 				} catch (Exception e) {
@@ -234,7 +234,7 @@ public class QnABoardController {
 				log.trace("deleteComment({}) invoked.", commentNo);
 				
 				try {
-					commentService.delete(commentNo);
+					this.commentService.delete(commentNo);
 					rttrs.addAttribute("postNo", postNo);
 					return "redirect:/board/qna/get";
 				} catch (Exception e) {

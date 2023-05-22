@@ -32,4 +32,7 @@ public interface UsersService {
 	
 	public abstract Integer checkNickNameService(String nickName) throws ServiceException;
 	
+	// 6. 회원 프로필 수정
+	public abstract Boolean profileEdit(UsersDTO dto) throws ServiceException;
+	
 } // end interface

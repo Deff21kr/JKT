@@ -141,6 +141,15 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 			throw new ServiceException(e);
 		}
 	}
+	@Override
+	public Boolean profileEdit(UsersDTO dto) throws ServiceException {
+		try {
+			return this.dao.profilEdit(dto);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		}
+		
+	}
 
 
 
@@ -166,6 +175,7 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 				+ "\n********************************************************* ");
 	}
 
+	
 
 
 //	======================================================

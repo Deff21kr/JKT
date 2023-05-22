@@ -36,6 +36,13 @@
 		WHERE appno = #{appNo}
 	</select>
 	
+	<select id="groupCheckID">
+		SELECT COUNT(id) 
+		FROM TBL_USER_GROUP
+		WHERE GROUPNO = (SELECT GROUPNO FROM tbl_groups WHERE POSTNO = #{postNo})
+		AND ID = #{ID}
+	</select>
+	
 	<update id="update">
 		UPDATE tbl_user_group
 		SET

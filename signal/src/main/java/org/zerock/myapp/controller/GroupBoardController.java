@@ -91,7 +91,7 @@ public class GroupBoardController {
 				rttrs.addFlashAttribute("postno", dto.getPostNo());
 				return "redirect:/board/group/list";
 			} else {
-				return null;
+				return"redirect:/board/group/list"; //에러페이지로 리턴
 			}
 			
 		} catch(Exception e) {

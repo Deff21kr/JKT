@@ -31,6 +31,9 @@ public interface UserGroupMapper {
 	
 		// 3. 상세조회
 		public abstract UserGroupDTO select(Integer appNo) throws DAOException;
+		
+		// 4. 이미 신청한 회원인지 중복체크
+		public abstract Integer groupCheckID(String ID,Integer postNo);
 	   
 		// 4. 거절시 삭제
 		public abstract Integer delete(Integer appNo) throws DAOException;

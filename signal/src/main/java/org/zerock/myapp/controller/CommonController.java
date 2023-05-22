@@ -107,10 +107,11 @@ public class CommonController {
 				}
 
 			}
+			return "redirect:/common/register";	//회원가입 실패
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}
-		return "redirect:/common/register";	//회원가입 실패
+		
 
 	} // 회원가입창으로 이동
 
@@ -153,10 +154,9 @@ public class CommonController {
 	@GetMapping("/mailCheck")
 	@ResponseBody
 	public String mailCheck(@RequestParam("EMail")String EMail) throws ControllerException {
-		System.out.println("이메일 인증 요청이 들어옴!");
-		System.out.println("이메일 인증 이메일 : " + EMail);
+		System.out.println("이메일 인증 요청");
+		System.out.println("인증 요청 이메일 : " + EMail);
 		try {
-			log.info("\n\n뭐가 들어옴? : {}\ntype : {}  ",this.mailService.joinEmail(EMail),this.mailService.joinEmail(EMail).getClass());
 			return this.mailService.joinEmail(EMail);
 		} catch (Exception e) {
 			throw new ControllerException(e);

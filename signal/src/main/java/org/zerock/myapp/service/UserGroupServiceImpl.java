@@ -104,9 +104,19 @@ try {
 	@Override
 	public Integer getTotal(String nickName) throws ServiceException {
 		
-log.trace("getTotal() invoked.");
+			log.trace("getTotal() invoked.");
 		
 		return this.dao.getTotalAmount(nickName);
+	}
+
+	@Override
+	public Integer groupCheckIDService(String ID, Integer postNo) throws ServiceException {
+		try {
+			log.info("동행 신청한 id 중복 판별 :{}, {} ",ID,postNo);
+			return this.dao.groupCheckID(ID,postNo);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
 	}
 
 

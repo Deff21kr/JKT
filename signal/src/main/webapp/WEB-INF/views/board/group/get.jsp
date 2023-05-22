@@ -23,6 +23,7 @@
         <script>
         var currPage = "${param.currPage}";
         var postNo = "${__BOARD__.postNo}";
+        var ID = "${__AUTH__.ID}";
         
             $(function () {
                 $('#listBtn').click(function () {
@@ -31,14 +32,47 @@
                 $('#modifyBtn').click(function () {
                     location = "/board/group/modify?currPage=${param.currPage}&postno=${__BOARD__.postNo}";
                 });
-                <!--
-                $('#applyBtn').click(function () {
-                    location.href = "/board/group/get?currPage=" + currPage + "&postno=" + postNo;
-                });
-              
-                -->
                
+                
+                $('#applyBtn').click(function () {
+                    
+                    
+                    $.ajax({
+    				      url: '/user/mygroup/register',
+    				      type: 'post',
+    				      data :{
+    				    	  ID : ID,
+    				    	  postNo : postNo,
+                              currPage : currPage
+    				      },
+    				      dataType: 'json',
+    				      success: function(data) {
+    				    	  var model = parseInt(data);
+    				        console.log("1 = 중복o / 0 = 중복x : " + model);
+							
+    				        if (model==1) { // id 이미 있음
+    				        	console.log('Data 1:', model);
+    				        	console.log(model);
+    				        	console.log(typeof(model));
+    				        	alert('이미 등록된 ID입니다.');
+    				        	 
+    				        } else {
+    				        	console.log('Data 2:', model);
+    				        	console.log(model);
+    				        	console.log(typeof(model));
+    				        	alert('신청이 완료되었습니다.');
+    				        }
+    				      },
+    				      
+    				      error: function() {
+    				        console.log("실패");
+    				      }
+    				    });
+                });
+                
             });
+
+           
         </script>
     </head>
 
@@ -81,10 +115,12 @@
                 <!-- bt : button -->
                 <div class="bt_wrap">
                 <c:if test="${not __BOARD__.nickName.equals(__AUTH__.nickName)}">
-	                <form action="/user/mygroup/register" method="post" >
+	                	<!-- 
+	                	 <form action="/user/mygroup/register" method="post" >
 	                	<input type="hidden" name="ID" value="${__AUTH__.ID }" >
 	                	<input type="hidden" name="postNo" value="${__BOARD__.postNo }" >
-	                	<input type="hidden" name="currPage" value="${param.currPage }" >
+	                	<input type="hidden" name="currPage" value="${param.currPage }" > 
+	                	-->
 						<button type="submit" id="applyBtn">신청</button> 	                
 	                </form>
             	</c:if>

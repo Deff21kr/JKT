@@ -10,8 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
        
         <title>Header</title>
-         <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
-   		 <link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+         <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon.ico" type="image/x-icon">
+   		 <link rel="icon" href="${pageContext.request.contextPath}/resources/favicon.ico" type="image/x-icon">
         
     
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
@@ -20,8 +20,8 @@
        <!-- fonts awesome -->
     <script src="https://kit.fontawesome.com/1486713bf1.js" crossorigin="anonymous"></script>
     <!-- swiper script -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <!-- script
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script defer src="${pageContext.request.contextPath }/js/script.js"></script>  -->
     </head>
     

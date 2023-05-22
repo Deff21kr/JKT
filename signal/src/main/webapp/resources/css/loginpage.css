@@ -1,17 +1,14 @@
 @charset "utf8";
 
 body {
-  height: 100vh;
 
-  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 main {
-  height: 50vh;
-
-  display: flex;
+	width: 30%;
+    margin: 100px auto;
   flex-direction: column;
   justify-content: center;
 }
@@ -26,7 +23,6 @@ form input[type=password] {
 }
 
 fieldset {
-  display: flex;
   flex-direction: column;
 
   padding: 2rem;
@@ -140,11 +136,6 @@ ul, li, ol {
 a {
   text-decoration: none;
   color: black;
-}
-
-body {
-  width: 1200px;
-  margin: auto;
 }
 
 button {

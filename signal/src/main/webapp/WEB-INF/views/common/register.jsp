@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 <meta charset="UTF-8">
@@ -10,8 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Document</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/registerStyle.css">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon.ico" type="image/x-icon">
+<link rel="icon" href="${pageContext.request.contextPath}/resources/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/registerStyle.css">
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -22,6 +23,11 @@
 </head>
 
 <body>
+
+	<header>
+      <jsp:include page="../header.jsp" />
+   	</header>
+
 	<div id="con">
 		<div id="login">
 			<div id="login_form">
@@ -267,23 +273,22 @@
 			
             </script>
 					<h3 class="login" style="letter-spacing: -1px;">회원가입</h3>
-					<hr>
+					
 
 					<label> <!-- <span>ID</span> -->
-						<p style="text-align: left; font-size: 12px; color: #666">ID</p> <input
-						type="text" placeholder="아이디" class="size" id="ID" name="ID"
-						maxlength="20" required>
+						<p style="text-align: left; font-size: 20px; color: #666">ID</p> 
+						<input type="text" placeholder="아이디" class="size" id="ID" name="ID"	maxlength="20" required>
 						<div id="id_check" style="font-size: 12px; padding-top: 5px;"></div>
 						<p></p>
 					</label>
 					<!--아이디-->
 
 					<label> <!-- <span>PW</span> -->
-						<p style="text-align: left; font-size: 12px; color: #666">Password
+						<p style="text-align: left; font-size: 20px; color: #666">Password
 						</p> <input type="password" placeholder="비밀번호" class="size"
 						id="password" name="password" required>
 						<div id="pw_check" style="font-size: 12px; padding-top: 5px;"></div>
-						<p style="text-align: left; font-size: 12px; color: #666">Password
+						<p style="text-align: left; font-size: 20px; color: #666">Password
 							Check</p> <input type="password" placeholder="비밀번호 확인" class="size"
 						id="password2" name="password2" required>
 						<div id="pw_check2" style="font-size: 12px; padding-top: 5px;"></div>
@@ -291,71 +296,78 @@
 					<!--비밀번호-->
 
 					<label>
-						<p style="text-align: left; font-size: 12px; color: #666;">NickName</p>
+						<p style="text-align: left; font-size: 20px; color: #666;">NickName</p>
 						<input type="text" placeholder="닉네임" class="size" id="nickName"
 						name="nickName" required>
 						<div id="nick_check" style="font-size: 12px; padding-top: 5px;"></div>
 					</label> <label>
-						<p style="text-align: left; font-size: 12px; color: #666;">Name</p>
+						<p style="text-align: left; font-size: 20px; color: #666;">Name</p>
 						<input type="text" placeholder="이름" class="size" id="name"
 						name="name" required>
 						<div id="name_check" style="font-size: 12px; padding-top: 5px;"></div>
 					</label>
 
+                    <label>
+                        <tr>
+                            <p style="text-align: left; font-size: 20px; color: #666;">생년월일</p>
+                            <td><input type="date" class="textform" id="birthDate"
+                                name="birthDate" required></td>
+                            <div id="birth_check" style="font-size: 12px; padding-top: 5px;"></div>
+                        </tr>
+                    </label>
 
-					<tr>
-						<p style="text-align: left; font-size: 12px; color: #666;">생년월일</p>
-						<td><input type="date" class="textform" id="birthDate"
-							name="birthDate" required></td>
-						<div id="birth_check" style="font-size: 12px; padding-top: 5px;"></div>
-					</tr>
 
 
-					<div>
+					
 						<label>
-							<p style="text-align: left; font-size: 12px; color: #666;">성별선택</p>
+							<p style="text-align: left; font-size: 20px; color: #666;">성별선택</p>
 							<input type="radio" name="gender" value="man" required>남성
 							<input type="radio" name="gender" value="woman" required>여성
 							<div id="gender_check" style="font-size: 12px; padding-top: 5px;"></div>
 						</label>
-					</div>
+					
+                        <label>
+                                <p style="text-align: left; font-size: 20px; color: #666;">MBTI</p>
+                                <select name="MBTI" required>
+                                    <option value="">MBTI유형</option>
+                                    <option value="ISTJ">ISTJ</option>
+                                    <option value="ISFJ">ISFJ</option>
+                                    <option value="ESTJ">ESTJ</option>
+                                    <option value="ESFJ">ESFJ</option>
+                                    <option value="ISTP">ISTP</option>
+                                    <option value="ISFP">ISFP</option>
+                                    <option value="ESFJ">ESFJ</option>
+                                    <option value="ESTP">ESTP</option>
+                                    <option value="INFJ">INFJ</option>
+                                    <option value="INFP">INFP</option>
+                                    <option value="ENFP">ENFP</option>
+                                    <option value="ENFJ">ENFJ</option>
+                                    <option value="INTJ">INTJ</option>
+                                    <option value="INTP">INTP</option>
+                                    <option value="ENTP">ENTP</option>
+                                    <option value="ENTJ">ENTJ</option>
+                                </select>
+                        </label>
+					
+                        <label>
+                            <p style="text-align: left; font-size: 20px; color: #666;" >좋아하는 지역</p> 
+                            <select id="likeArea" name="likeArea" required>
+                                <option value="">좋아하는 지역을 선택하세요</option>
+                                <option value="서울">서울</option>
+                                <option value="강원">강원</option>
+                                <option value="경기">경기</option>
+                                <option value="충청">충청</option>
+                                <option value="경상">경상</option>
+                                <option value="전라">전라</option>
+                                <option value="제주">제주</option>
+                            </select><br> 
 
-					<div>
-						<p style="text-align: left; font-size: 12px; color: #666;">MBTI</p>
-						<select name="MBTI" required>
-							<option value="">MBTI유형</option>
-							<option value="ISTJ">ISTJ</option>
-							<option value="ISFJ">ISFJ</option>
-							<option value="ESTJ">ESTJ</option>
-							<option value="ESFJ">ESFJ</option>
-							<option value="ISTP">ISTP</option>
-							<option value="ISFP">ISFP</option>
-							<option value="ESFJ">ESFJ</option>
-							<option value="ESTP">ESTP</option>
-							<option value="INFJ">INFJ</option>
-							<option value="INFP">INFP</option>
-							<option value="ENFP">ENFP</option>
-							<option value="ENFJ">ENFJ</option>
-							<option value="INTJ">INTJ</option>
-							<option value="INTP">INTP</option>
-							<option value="ENTP">ENTP</option>
-							<option value="ENTJ">ENTJ</option>
-						</select>
-					</div>
+                        </label>
 
-					<label for="likeArea">좋아하는 지역</label> <select id="likeArea"
-						name="likeArea" required>
-						<option value="">좋아하는 지역을 선택하세요</option>
-						<option value="서울">서울</option>
-						<option value="강원">강원</option>
-						<option value="경기">경기</option>
-						<option value="충청">충청</option>
-						<option value="경상">경상</option>
-						<option value="전라">전라</option>
-						<option value="제주">제주</option>
-					</select><br> <label> <!-- <span>PW</span> -->
-						<p style="text-align: left; font-size: 12px; color: #666">Mobile
-							Phone</p> <input placeholder="-빼고 숫자만 입력" class="size num2"
+                    
+                    <label> <!-- <span>PW</span> -->
+						<p style="text-align: left; font-size: 20px; color: #666">Mobile
+							Phone</p> <input placeholder="-빼고 숫자만 입력" class="size"
 						id="phoneNumber" name="phoneNumber" required>
 						<div id="phone_check" style="font-size: 12px; padding-top: 5px;"></div>
 					</label>
@@ -363,11 +375,14 @@
 
 
 					<label> 
-						<p style="text-align: left; font-size: 12px; color: #666">E-mail</p>
-						<input type="email" placeholder="이메일" class="size" id="EMail"
-						name="EMail" required>
-						<button type="button" id="mail_Check_Btn" >인증번호발송</button>
-						<input id="mail_Check_Input" disabled="disabled" placeholder="인증번호를 입력해주세요." >
+						<p style="text-align: left; font-size: 20px; color: #666">E-mail</p>
+						<div class="abc">
+						<input type="email" placeholder="이메일" class="size" id="EMail" name="EMail" required>
+						<button type="button" id="mail_Check_Btn" class="email_btn" />
+						</div>
+						
+						<p style="text-align: left; font-size: 20px; color: #666">인증번호</p>
+						<input type="text" class="size" id="mail_Check_Input" disabled="disabled" placeholder="인증번호를 입력해주세요." required >
 						
 						<div id="mail_check" style="font-size: 12px; padding-top: 5px;"></div>
                         <div id="mail_check_num" style="font-size: 12px; padding-top: 5px;"></div>
@@ -380,23 +395,18 @@
 					<br>
 					<p>
 						<input type="submit" value="회원가입" id="reg_submit" class="btn">
-
 					</p>
 				</form>
 
-				<hr>
-				<p class="find">
-					<span><a href="login.jsp">로그인 페이지로 이동</a></span>
-				</p>
+				
 			</div>
 			<div></div>
-			<!--con-->
-			<!-- 애니메이션을 담당하게 될 자바스크립트 참조 -->
-			<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-			<!-- 특정홈페이지에서 제이쿼리 호출 -->
-			<script src="js/bootstrap.js"></script>
 		</div>
 	</div>
+	
+	<footer>
+      <jsp:include page="../footer.jsp" />
+   	</footer>
 </body>
 
 </html>

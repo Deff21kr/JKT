@@ -125,7 +125,7 @@
 <body>
 	<!-- 댓글 목록 -->
 	<div class="reply_wrap">
-		<div class="reply_title">댓글</div>
+		<div class="reply_title"><i class="fas fa-comment-dots"></i>&nbsp;<i style="color: orangered;">${__commentPage__.commentTotalAmount}</i>&nbsp;댓글</div>
 		<c:forEach items="${__COMMENT_LIST__}" var="comment">
 			<div class="reply_list">
 				<div class="list">

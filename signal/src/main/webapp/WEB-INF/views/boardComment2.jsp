@@ -112,12 +112,12 @@
 		});
 	});
 	
-	$(document).ready(function(){
-		$('#replyBtn').on('click', function(){
-			alert('댓글이 작성되었습니다');
-			$('#replyBtn').unbind('click');
-		});
-	});
+	  $(function () {
+          $('form').submit(function () {
+            $('#replyBtn').prop('disabled', true);
+          });
+        });
+
 </script>
 
 </head>

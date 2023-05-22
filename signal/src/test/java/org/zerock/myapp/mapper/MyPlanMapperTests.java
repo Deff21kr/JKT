@@ -89,4 +89,30 @@ public class MyPlanMapperTests {
 		
 	} // testSelect
 	
+	@Test
+	public void testDelete() {
+		log.trace("testDelete() invoked");
+		
+		Integer planNo = 50;
+		
+		Integer affectedLines = this.mapper.delete(planNo);
+		assertNotNull(affectedLines);
+		log.info("affectedLines : {}", affectedLines);
+		
+	} // testDelete
+
+	@Test
+	public void testUpdate() {
+		log.trace("testUpdate() invoked");
+		
+		String planName = "경주 여행";
+		Integer planNo = 50;
+
+
+		Integer affectedLines = this.mapper.update(planName, planNo);
+		assertNotNull(affectedLines);
+		log.info("affectedLines : {}", affectedLines);
+	} // testUpdate
+
+	
 }

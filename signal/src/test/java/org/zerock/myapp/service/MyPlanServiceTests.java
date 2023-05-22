@@ -98,6 +98,30 @@ public class MyPlanServiceTests {
 		
 	} // testGet
 	
+	@Test
+	public void testRemove() throws ServiceException {
+		log.trace("testRemove() invoked");
+		
+		Integer planNo = 55;
+		
+		Boolean result = this.service.remove(planNo);
+		log.info("result : {}", result);
+	} // testRemove
+	
+	@Test
+	public void testModify() throws ServiceException {
+		log.trace("testModify() invoked");
+		
+		String planName = "경주 여행";
+		Integer planNo = 55;
+		
+		Boolean result = this.service.modify(planName, planNo);
+		assertNotNull(result);
+		
+		log.info("result : {}", result);
+		
+	} // testModify
+	
 	
 //	==============DETAIL PLAN TEST SERVICE =================
 	@Test

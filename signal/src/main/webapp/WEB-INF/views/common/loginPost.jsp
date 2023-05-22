@@ -11,7 +11,6 @@
   <link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/favicon.ico" type="image/x-icon">
   <link rel="icon" href="${pageContext.request.contextPath }/resources/favicon.ico" type="image/x-icon">
 
-  <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/loginpage.css">
   <!-- fonts awesome -->
   <script src="https://kit.fontawesome.com/1486713bf1.js" crossorigin="anonymous"></script>
@@ -27,6 +26,9 @@
     
 </head>
 <body>
+	<header>
+		<jsp:include page="../header.jsp" />
+	</header>
 
   <main>
     <form action="/common/loginPost" method="post">
@@ -75,5 +77,10 @@
       </button>
     </div>
   </main>
+  
+  <footer>
+	<jsp:include page="../footer.jsp" />
+  </<footer>>
+  
 </body>
 </html>

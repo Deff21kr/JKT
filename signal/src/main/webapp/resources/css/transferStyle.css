@@ -152,7 +152,7 @@ html {
 }
 
 
-.board_list_post  .a >div > div {
+.board_list_post  >div > div {
     display: inline-block;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -197,34 +197,34 @@ html {
 }
 
 /* ---------------------------- */
-.board_list_post .a .num {
+.board_list_post .num {
     width: 7%;
 }
 
-.board_list_post .a .title {
+.board_list_post .title {
     width: 20%;
     padding-left : 20px;
     text-align: left;
 }
 
 
-.board_list_post .a .writer {
+.board_list_post .writer {
     width: 10%;
 }
 
-.board_list_post .a  .area {
+.board_list_post .area {
     width: 7%;
 }
-.board_list_post .a  .status {
+.board_list_post  .status {
     width: 10%;
 }
-.board_list_post .a   .result {
+.board_list_post .result {
     width: 25%;
 }
-.board_list_post .a  .member {
+.board_list_post .member {
     width: 10%;
 }
-.board_list_post  .a  .current {
+.board_list_post .current {
     width: 10%;
 }
 

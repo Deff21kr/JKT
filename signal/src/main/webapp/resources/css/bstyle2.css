@@ -76,7 +76,7 @@
 /* 댓글 */
 .reply_wrap {
     width: 1000px;
-    margin: 100px auto;
+    margin: 10px auto;
 }
 .reply_title {
     margin-top : 10px;
@@ -166,10 +166,10 @@
 
 .reply_write > div {
    
-padding-top: 15px;
+padding-top: 12px;
 padding-right: 0;
 padding-bottom: 15px;
-padding-left: 0;
+padding-left: 35px;
 }
 
 .reply_write > div > div{

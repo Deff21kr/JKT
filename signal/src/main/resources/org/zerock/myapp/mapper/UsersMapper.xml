@@ -56,6 +56,14 @@
 			
 		WHERE id = #{ID}
 	</update>
+	
+	<select id="checkID" resultType="int">
+		SELECT count(id) FROM tbl_users where id = #{ID}
+	</select>
+	
+	<select id="checkNickName" resultType="int">
+		SELECT count(nickName) FROM tbl_users where nickName = #{nickName}
+	</select>
 
 
 

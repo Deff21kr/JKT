@@ -18,6 +18,11 @@ public interface MyPlanService {
 
 	public abstract MyPlanVO get(Integer planNo) throws ServiceException;
 	
+	public abstract Boolean remove(Integer planNo) throws ServiceException;
+	
+	public abstract Boolean modify(String planName, Integer planNo) throws ServiceException;
+	
+	
 	// 총 게시물 개수 반환
 	public abstract Integer getTotal() throws ServiceException;	
 	

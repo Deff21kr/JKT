@@ -85,7 +85,7 @@ public class UsersController {
 				rttrs.addAttribute("userno",dto.getID());
 			}
 			
-			return "redirect:/mypage";
+			return "redirect:/user/mypage";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}
@@ -131,7 +131,7 @@ public class UsersController {
 	
 	// 프로필 수정
 	@PostMapping("/edit")
-	String profil() throws ControllerException {
+	String profilModify() throws ControllerException {
 		
 		try {
 			

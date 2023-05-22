@@ -3,10 +3,6 @@ package org.zerock.myapp.controller;
 import java.util.List;
 import java.util.Objects;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,20 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.myapp.domain.CommentCriteria;
+import org.zerock.myapp.domain.CommentPageDTO;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
-import org.zerock.myapp.domain.QnACommentVO;
 import org.zerock.myapp.domain.QnABoardDTO;
 import org.zerock.myapp.domain.QnABoardVO;
 import org.zerock.myapp.domain.QnACommentDTO;
-import org.zerock.myapp.domain.UsersDTO;
-import org.zerock.myapp.domain.UsersVO;
+import org.zerock.myapp.domain.QnACommentVO;
 import org.zerock.myapp.exception.ControllerException;
-import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.QnABoardService;
 import org.zerock.myapp.service.QnACommentService;
 
@@ -95,7 +88,7 @@ public class QnABoardController {
 
 //	 3. 특정 게시물 상세조회
     @GetMapping(path={"/get*", "/modify*"},  params = "postNo")
-    void get(@RequestParam Integer postNo, Model model, Criteria cri) throws  ControllerException {
+    void get(@RequestParam Integer postNo, Model model, Criteria cri, Integer currPage, RedirectAttributes rttrs, CommentCriteria commentCri) throws  ControllerException {
         log.trace("get() invoked.");
 
         try{
@@ -105,12 +98,13 @@ public class QnABoardController {
             QnABoardVO vo = this.service.get(postNo);
             model.addAttribute("__BOARD__", vo);
             
-            List<QnACommentVO> commentList = this.commentService.selectList(cri, postNo);
+            List<QnACommentVO> commentList = this.commentService.selectList(commentCri, postNo);
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
             
-            PageDTO pageDTO = new PageDTO(cri, this.commentService.getCommentTotal(postNo));
+            CommentPageDTO pageDTO = new CommentPageDTO(this.commentService.getCommentTotal(postNo), commentCri);
     		model.addAttribute("__commentPage__", pageDTO);
+    		rttrs.addAttribute("currPage", currPage);
         }catch (Exception e){
             throw new ControllerException(e);
         } // try-catch
@@ -184,19 +178,28 @@ public class QnABoardController {
 //   			model.addAttribute("pageMaker", pageDTO);
 //	}
 	 
-		// 댓글 등록
-//			@RequestMapping(value = "/qnaReply", method= {RequestMethod.POST})
-			@PostMapping("/qnaReply")
-			String insert(@ModelAttribute QnACommentDTO dto, Criteria cri,RedirectAttributes rttrs) throws ControllerException {
-			    log.trace("addComment({}) invoked.", dto);
-			    try {
-			    	commentService.insert(dto);
-			        rttrs.addAttribute("postNo", dto.getPostNo());
-			        return "redirect:/board/qna/get?currPage"+cri.getCurrPage();
-			    } catch (Exception e) {
-			        throw new ControllerException(e);
-			    }
-			} // addComment
+	// 댓글 등록
+//	@RequestMapping(value = "/qnaReply", method= {RequestMethod.POST})
+	@PostMapping("/qnaReply")
+	String insert(
+			@ModelAttribute QnACommentDTO dto,
+			@ModelAttribute CommentCriteria commentCri, 
+			Criteria cri, 
+			RedirectAttributes rttrs,
+			@RequestParam("currPage") Integer currPage) 
+					throws ControllerException {
+	    log.trace("addComment({}) invoked.", dto);
+	    try {
+	    	rttrs.addAttribute("currPage", currPage);
+	    	commentService.insert(dto);
+	        rttrs.addAttribute("postNo", dto.getPostNo());
+	        rttrs.addAttribute("commentCurrPage", commentCri.getCommentCurrPage());
+	        return "redirect:/board/qna/get?";
+	    } catch (Exception e) {
+	        throw new ControllerException(e);
+	    }
+	} // addComment
+
 
 //			@GetMapping("/qnaReply")
 //			String Getinsert(@ModelAttribute QnACommentDTO dto, Criteria cri,RedirectAttributes rttrs) throws ControllerException {

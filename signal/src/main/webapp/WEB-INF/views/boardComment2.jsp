@@ -111,6 +111,13 @@
 			location = "/board/group/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentCurrPage="+selectedPageNum;
 		});
 	});
+	
+	$(document).ready(function(){
+		$('#replyBtn').on('click', function(){
+			alert('댓글이 작성되었습니다');
+			$('#replyBtn').unbind('click');
+		});
+	});
 </script>
 
 </head>

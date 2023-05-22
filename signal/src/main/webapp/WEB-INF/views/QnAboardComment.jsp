@@ -114,6 +114,7 @@
 						location = "/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentCurrPage=" + selectedPageNum;
 					});
 				});
+<<<<<<< HEAD
 				
 				
 		          $(function () {
@@ -121,6 +122,14 @@
 	            	    $('#replyBtn').prop('disabled', true);
 	            	  });
 	            	});
+=======
+	
+				$(function() {
+					$('.replyWriteBtn').on('click', function(){
+						location = "/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentCurrPage=" + 1;
+					});
+				});
+>>>>>>> 2e8fb15 (no message)
 				
 			</script>
 

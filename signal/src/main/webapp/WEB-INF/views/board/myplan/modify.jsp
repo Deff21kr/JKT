@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 	<!DOCTYPE html>
@@ -17,20 +18,13 @@
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		
 		<script>
-			function onSubmit() {
-				alert('hello')
-			}
-		
-			// function getPlace() {
-			//     var value = sessionStorage.getItem("info");
-			//     document.getElementsByName("place")[0].value = value;
-			// }
 		
 			window.onload = function () {
-				var value = sessionStorage.getItem("info");
-				document.getElementsByName("place")[0].value = value;
-				sessionStorage.removeItem("info");
-
+				if(sessionStorage.getItem("info")){
+					var value = sessionStorage.getItem("info");
+					document.getElementsByName("place")[0].value = value;
+					sessionStorage.removeItem("info");
+				}
 			};
 			
 		    $(function () {
@@ -48,7 +42,11 @@
           	  });
           	});
 
-   
+		    
+		  function modifyBtn() {
+			    alert('수정이 완료되었습니다.')
+			  } // removeBtn
+
 		</script>
 			
 		<style>
@@ -179,31 +177,32 @@
 					<div id="create-planner-page" style="width: 615px; margin: 20px auto;">
 						<h3>상세계획</h3>
 
-						<form action="/board/myplan/register" method="post">
-							<input type="hidden" name="planNo" value="${param.planNo}">
-							<input type="hidden" name="planDay" value="${param.planDay}">
+						<form action="/board/myplan/modify" method="post">
+							<input type="hidden" name="planNo" value="${__DETAILPLAN__.planNo}">
+							<input type="hidden" name="detailPlanNo" value="${__DETAILPLAN__.detailPlanNo}">
 							<div class="datetime" style="margin-top: 20px;">
 								<p>시간 설정</p>
-								<input type="time" name="planTime" value="00:00" required>
+								<input type="time" name="planTime" 
+								value="<fmt:formatDate value="${__DETAILPLAN__.planTime}" pattern="HH:mm" />" required>
 							</div>
 
 							<div style="margin-top: 20px;">
 								<div style="display: flex; justify-content: space-between;">
 									<p style="align-self: center;">여행지</p>
-									<button type="button" class="place-search" 
+									<button type="button" class="place-search"
 										style="width: 80px; height: 30px; background: aliceblue; border: 1px solid rgb(109, 182, 247); border-radius: 10px; cursor: pointer;">여행지검색</button>
 								</div>
-								<input type="text" name="place" style="width: 610px; height: 35px; font-size: 15px;"
+								<input type="text" id="place" name="place" value="${__DETAILPLAN__.place}" style="width: 610px; height: 35px; font-size: 15px;"
 									required>
 							</div>
 
 							<div class="detailPlan" style="margin: 20px 0px 10px 0px;">
 								<p>상세계획</p>
-								<textarea name="detailPlan" cols="66" rows="12" style="font-size: 17px;" required></textarea>
+								<textarea name="detailPlan" cols="66" rows="12" style="font-size: 17px;">${__DETAILPLAN__.detailPlan}</textarea>
 							</div>
-
+	
 							<div class="submit-button">
-								<input type="submit" id="make" value="만들기">
+								<input type="submit" id="make" onclick="modifyBtn()" value="수정">
 								<button type="button" id="cancel">취소</button>
 							</div>
 						</form>

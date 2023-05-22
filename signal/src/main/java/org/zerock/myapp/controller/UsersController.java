@@ -131,7 +131,7 @@ public class UsersController {
 	
 	// 프로필 수정
 	@PostMapping("/edit")
-	String profil() throws ControllerException {
+	String profilModify() throws ControllerException {
 		
 		try {
 			

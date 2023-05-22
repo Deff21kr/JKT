@@ -25,6 +25,15 @@
                     location.href = "/board/qna/list?currPage=${param.currPage}";
                 });
             });
+            
+
+            $(function () {
+            	  $('form').submit(function () {
+            	    $('#submitBtn').prop('disabled', true);
+            	  });
+            	});
+
+
         </script>
     </head>
 

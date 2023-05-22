@@ -32,6 +32,13 @@
                 });
             });
             
+            $(function () {
+          	  $('form').submit(function () {
+          	    $('#submitBtn').prop('disabled', true);
+          	  });
+          	});
+
+            
 
         </script>
     </head>

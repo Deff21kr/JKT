@@ -108,7 +108,14 @@
 	$(function() {
 		$('.pageNum').on('click', function(e) {
 			let selectedPageNum = e.currentTarget.textContent;
-			location = "/board/group/get?currPage=" + selectedPageNum +"&postNo=${__BOARD__.postNo}";
+			location = "/board/group/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentCurrPage="+selectedPageNum;
+		});
+	});
+	
+	$(document).ready(function(){
+		$('#replyBtn').on('click', function(){
+			alert('댓글이 작성되었습니다');
+			$('#replyBtn').unbind('click');
 		});
 	});
 </script>
@@ -152,21 +159,26 @@
 	</div>
 	
 	<div class="board_page">
-                    <c:if test="${__commentPage__.prev}">
-                        <div class="Prev"><a href="/board/group/get?currPage=${__commentPage__.startPage - 1}&postNo=${__BOARD__.postNo}">Prev</a></div>
-                    </c:if>
-                    <c:forEach var="pageNum" begin="${__commentPage__.startPage}" end="${__commentPage__.endPage}">
-                        <div class="pageNum ${__commentPage__.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
-                    </c:forEach>
-                    <c:if test="${__commentPage__.next}">
-                        <div class="Next"><a href="/board/group/get?currPage=${__commentPage__.endPage + 1}&postNo=${__BOARD__.postNo}">Next</a></div>
-                    </c:if>
-            </div>
+				<c:if test="${__commentPage__.commentPrev}">
+					<div class="Prev"><a
+							href="/board/gorup/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.startCommentPage - 1}">Prev</a>
+					</div>
+				</c:if>
+				<c:forEach var="pageNum" begin="${__commentPage__.startCommentPage}" end="${__commentPage__.endCommentPage}">
+					<div class="pageNum ${__commentPage__.commentCri.commentCurrPage == pageNum? 'current':''}">${pageNum}</div>
+				</c:forEach>
+				<c:if test="${__commentPage__.commentNext}">
+					<div class="Next"><a
+							href="/board/group/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.endCommentPage + 1}">Next</a>
+					</div>
+				</c:if>
+			</div>
 
 	<!-- 댓글 작성 -->
 	<form action="/board/group/qnaReply" method="POST">
 		<input type="hidden" name="postNo" value="${__BOARD__.postNo}">
 		<input type="hidden" name="nickName" value="${__AUTH__.nickName}">
+		<input type="hidden" name="currPage" value="${param.currPage}">
 		<div class="reply_write">
 			<div>
 				<div class="nickname">${__AUTH__.nickName}</div>

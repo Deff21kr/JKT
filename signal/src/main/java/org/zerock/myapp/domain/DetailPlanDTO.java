@@ -12,7 +12,7 @@ public class DetailPlanDTO {
 	private Integer detailPlanNo;
 	private Integer planNo;
 	private Integer planDay;
-	@DateTimeFormat(pattern = "HH24:Mi")
+	@DateTimeFormat(pattern = "HH:mm")
 	private Date planTime;
 	private String place;
 	private String detailPlan;

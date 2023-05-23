@@ -51,6 +51,7 @@
                 <div class="place">
 
                     <form action="/board/group/search">
+                        <input type="hidden" name="currPage" value="${SearchPageMaker.currPage}">
                         <div class="searchbox">
 
                             <div class="area">

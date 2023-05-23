@@ -28,7 +28,7 @@
 	<script defer>
 	    $(function () {
 	        $('#cancel').click(function () {
-	            location = "/board/myplan/main";
+	            location = "/board/myplan/main?plannerType=${param.plannerType}";
 	        });
 	    });
 	    

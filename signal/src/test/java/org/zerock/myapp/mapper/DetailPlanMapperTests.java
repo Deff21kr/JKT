@@ -42,7 +42,7 @@ public class DetailPlanMapperTests {
 	public void testSelectList() {
 		log.trace("testSelectList() invoked");
 		
-		List<DetailPlanVO> vo = this.mapper.selectList(39);
+		List<DetailPlanVO> vo = this.mapper.selectList(39, 0);
 		assertNotNull(vo);
 		
 		log.info("\t + vo : {}", vo);
@@ -67,6 +67,7 @@ public class DetailPlanMapperTests {
 		dto.setPlanTime(date);
 		dto.setPlace("인천");
 		dto.setDetailPlan("어디갈까요?");
+		dto.setPlannerType(0);
 
 		log.info("\t dto : {}", dto);
 		Integer affectedLines = this.mapper.insert(dto);
@@ -80,7 +81,7 @@ public class DetailPlanMapperTests {
 	public void testSelect() {
 		log.trace("testSelect() invoked");
 	
-		Integer detailPlanNo = 3;
+		Integer detailPlanNo = 46;
 		
 		DetailPlanVO vo = this.mapper.select(detailPlanNo);
 		assertNotNull(vo);
@@ -99,11 +100,14 @@ public class DetailPlanMapperTests {
 		ZoneId zoneId = ZoneId.systemDefault();
 		Date date = Date.from(localDateTime.atZone(zoneId).toInstant());
 		
+		Integer detailPlanNo = 46;
+		
 
 		DetailPlanDTO dto = new DetailPlanDTO();
 		dto.setPlace("뉴서울");
 		dto.setDetailPlan("새로운 계획");
 		dto.setPlanTime(date);
+		dto.setDetailPlanNo(detailPlanNo);
 		
 		log.info("\t dto : {}", dto);
 		Integer affectedLines = this.mapper.update(dto);

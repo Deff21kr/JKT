@@ -39,7 +39,9 @@ function remove() {
 // 플래너 수정
 $(function () {
     $('#modify').click(function () {
-        location.href = "/board/myplan/modifyPlan?planNo=${__MYPLAN__.planNo}";
+    	if(confirm("플래너를 수정하시겠습니까?")) {
+		    location.href = "/board/myplan/modifyPlan?plannerType=${param.plannerType}&planNo=${__MYPLAN__.planNo}";
+		  } // if
     });
     
     $('#remove').click(function () {
@@ -300,7 +302,7 @@ p.quickmenu.on {
 	<%-- 본인이 작성한 플래너가 아니면 플래너 메인으로 이동 --%>
 	<c:if test="${sessionScope.__AUTH__.nickName != __MYPLAN__.nickName}">
 		<script>
-			window.location.href = "http://localhost:8080/board/myplan/main";
+			window.location.href = "http://localhost:8080/board/myplan/main?plannerType=${param.plannerType}";
 		</script>
 	</c:if>
 
@@ -362,7 +364,7 @@ p.quickmenu.on {
 							</div>
 
 							<button class="planwrite"
-								onclick="location.href='/board/myplan/register?planNo=${__MYPLAN__.planNo}&planDay=${status.index}'">
+								onclick="location.href='/board/myplan/register?plannerType=${param.plannerType}&planNo=${__MYPLAN__.planNo}&planDay=${status.index}'">
 								플래너작성</button>
 						</div>
 
@@ -467,7 +469,7 @@ p.quickmenu.on {
 		  // 상세계획 수정
 		  function modifyBtn(detailPlanNo) {
 			  if(confirm("계획을 수정하시겠습니까?")) {
-			    location.href = "/board/myplan/modify?planNo=${__MYPLAN__.planNo}&detailPlanNo=" + detailPlanNo;
+			    location.href = "/board/myplan/modify?plannerType=${param.plannerType}&planNo=${__MYPLAN__.planNo}&detailPlanNo=" + detailPlanNo;
 			  } // if
 			} // function
 

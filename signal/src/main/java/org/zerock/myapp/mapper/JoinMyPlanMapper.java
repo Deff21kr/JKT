@@ -12,9 +12,9 @@ public interface JoinMyPlanMapper {
 	@Select("""
 			SELECT *
 				FROM TBL_MYPLAN MY, TBL_DETAILPLAN DE
-				WHERE MY.PLANNO = DE.PLANNO AND to_date(ENDDATE,'yyyy-MM-dd') >= to_date(CURRENT_DATE ,'yyyy-MM-dd')AND NICKNAME = #{nickName}
+				WHERE MY.PLANNO = DE.PLANNO AND to_date(ENDDATE,'yyyy-MM-dd') >= to_date(CURRENT_DATE ,'yyyy-MM-dd')AND NICKNAME = #{nickName} AND PLANNERTYPE = #{plannerType}
 				ORDER BY MY.PLANNO ,PLANDAY, TO_CHAR(PLANTIME, 'HH24:MI')
 			""")
-	public abstract List<JoinMyPlanDTO> selectList(@Param("nickName") String nickName);
+	public abstract List<JoinMyPlanDTO> selectList(@Param("nickName") String nickName, @Param("plannerType") Integer plannerType);
 
 }

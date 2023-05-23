@@ -129,8 +129,9 @@ public class MyPlanServiceTests {
 		log.trace("testGetDetailPlanList() invoked");
 		
 		Integer planNo = 39;
+		Integer plannerType = 0;
 		
-		List<DetailPlanVO> vo = this.service.getDetailPlanList(planNo);
+		List<DetailPlanVO> vo = this.service.getDetailPlanList(planNo, plannerType);
 		assertNotNull(vo);
 		log.info("\t + vo : {}", vo);
 		
@@ -149,6 +150,7 @@ public class MyPlanServiceTests {
 		dto.setPlace("강원도");
 		dto.setPlanTime(date);
 		dto.setDetailPlan("뭐 할까요?");
+		dto.setPlannerType(0);
 		
 		assertNotNull(dto);
 
@@ -207,9 +209,9 @@ public class MyPlanServiceTests {
 		log.trace("testJoinList() invoked");
 		
 		String nickName = "hyeondae";
-		Criteria cri = new Criteria();
+		Integer plannerType = 0;
 		
-		List<JoinMyPlanDTO> dto = this.service.joinList(nickName);
+		List<JoinMyPlanDTO> dto = this.service.joinList(nickName, plannerType);
 		assertNotNull(dto);
 		
 		log.info("dto : {}", dto);

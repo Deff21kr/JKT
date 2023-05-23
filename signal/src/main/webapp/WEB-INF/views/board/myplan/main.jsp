@@ -27,11 +27,11 @@
 <script>
 	$(function() {
 		$('.plannerlist-make').click(function() {
-			location = "/board/myplan/makePlan";
+			location = "/board/myplan/makePlan?plannerType=${param.plannerType}";
 		});
 		$('.pageNum').on('click', function(e) {
 			let selectedPageNum = e.currentTarget.textContent;
-			location = "/board/myplan/main?currPage=" + selectedPageNum;
+			location = "/board/myplan/main?currPage=" + selectedPageNum + "&plannerType=${param.plannerType}";
 		});
 	});
 </script>
@@ -217,7 +217,7 @@ div>ul>li {
 			<c:if test="${not empty __AUTH__.nickName}">
 				<c:forEach var="MyPlanVO" items="${__MYPLAN__}">
 
-					<a href="/board/myplan/get?planNo=${MyPlanVO.planNo}"
+					<a href="/board/myplan/get?planNo=${MyPlanVO.planNo}&plannerType=${param.plannerType}"
 						class="planContent">
 						<div class="title"
 							style="background: ghostwhite; width: 100%; height: 150px; border-bottom: 1px solid #dfdfdf; padding: 20px 20px; display: flex; flex-direction: column; justify-content: center;">

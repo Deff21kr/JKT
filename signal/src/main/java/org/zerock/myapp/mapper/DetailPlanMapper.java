@@ -3,6 +3,7 @@ package org.zerock.myapp.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
@@ -18,11 +19,12 @@ public interface DetailPlanMapper {
 			SELECT *
 			FROM TBL_DETAILPLAN
 			WHERE 
-				PLANNO = #{planNo}
+				PLANNO = #{planNo} AND
+				PLANNERTYPE = #{plannerType}
 			ORDER BY
 				planDay ASC, to_char(plantime, 'HH24:Mi') ASC
 			""")
-	public abstract List<DetailPlanVO> selectList(Integer planNo);
+	public abstract List<DetailPlanVO> selectList(@Param("planNo") Integer planNo, @Param("plannerType") Integer plannerType);
 	
 	// 플랜계획 등록
 	public abstract Integer insert(DetailPlanDTO dto);

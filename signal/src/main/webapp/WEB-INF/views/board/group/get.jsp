@@ -41,7 +41,7 @@
                 $('#applyBtn').click(function () {
                     
                     $.ajax({
-                          url: '/user/mygroup/register',
+                          url: '${pageContext.request.contextPath}/user/mygroup/register',
                           type: 'post',
                           data :{
                               ID : ID,
@@ -73,6 +73,7 @@
                         });
               
             });
+        });
         </script>
     </head>
 

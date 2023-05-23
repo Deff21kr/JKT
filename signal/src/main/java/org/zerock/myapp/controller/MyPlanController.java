@@ -1,6 +1,5 @@
 package org.zerock.myapp.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +23,6 @@ import org.zerock.myapp.domain.MyPlanVO;
 import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
-import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.MyPlanService;
 
 import lombok.NoArgsConstructor;
@@ -43,7 +41,7 @@ public class MyPlanController {
 
 	
 	@GetMapping("/main")
-	void planMain(Criteria cri ,HttpServletRequest req, Model model) throws ControllerException {
+	void planMain(Criteria cri ,@RequestParam Integer plannerType, HttpServletRequest req, Model model) throws ControllerException {
 		log.info("planMain() invoked");
 		
 		try {
@@ -57,7 +55,7 @@ public class MyPlanController {
 			log.info("\t + list: {}", list);
 			model.addAttribute("__MYPLAN__", list);
 			
-			List<JoinMyPlanDTO> joinList = this.service.joinList(nickName);
+			List<JoinMyPlanDTO> joinList = this.service.joinList(nickName, plannerType);
 			model.addAttribute("__JOINLIST__" ,joinList);
 			
 			PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
@@ -88,7 +86,7 @@ public class MyPlanController {
 			
 			log.info("\t + result : {}", result);
 
-			return "redirect:/board/myplan/main";
+			return "redirect:/board/myplan/main?plannerType=0";
 			
 		} catch (Exception e) {
 			throw new ControllerException(e);
@@ -105,7 +103,7 @@ public class MyPlanController {
 			Boolean result = this.service.remove(planNo);
 			rttrs.addAttribute("result", result);
 			
-			return "redirect:/board/myplan/main";
+			return "redirect:/board/myplan/main?plannerType=0";
 		} catch (Exception e) {
 			throw new ControllerException(e);   
 		} // try-catch
@@ -118,9 +116,10 @@ public class MyPlanController {
 		
 		try {
 			Boolean result = this.service.modify(planName, planNo);
+			rttrs.addAttribute("planNo", planNo);
 			rttrs.addAttribute("result", result);
 			
-			return "redirect:/board/myplan/main";
+			return "redirect:/board/myplan/main?plannerType=0";
 		} catch (Exception e) {
 			throw new ControllerException(e);   
 		} // try-catch
@@ -128,11 +127,11 @@ public class MyPlanController {
 	
 	// 플래너 페이지
 	@GetMapping("/get")
-	void get(@RequestParam Integer planNo, Model model) throws ControllerException {
+	void get(@RequestParam Integer planNo,@RequestParam Integer plannerType, Model model) throws ControllerException {
 		log.info("get({}) invoked", planNo);
 	
 		try {
-			List<DetailPlanVO> detailList = this.service.getDetailPlanList(planNo);
+			List<DetailPlanVO> detailList = this.service.getDetailPlanList(planNo, plannerType);
 			
 			Objects.requireNonNull(detailList);
 			log.info("\t + detailList : {}", detailList);
@@ -183,6 +182,7 @@ public class MyPlanController {
 			Boolean result = this.service.registerDetailPlan(dto);
 			log.info("result : {}", result);
 			
+			rttrs.addAttribute("plannerType", dto.getPlannerType());
 			rttrs.addAttribute("planNo", dto.getPlanNo());
 			
 			return "redirect:/board/myplan/get";
@@ -218,13 +218,15 @@ public class MyPlanController {
 	
 	// 글 수정
 	@PostMapping("/modify")
-	String modify(@RequestParam Integer planNo, DetailPlanDTO dto, RedirectAttributes rttrs) throws ControllerException {
+	String modify(DetailPlanDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		log.trace("modify() invoked");
 		
 		 try {
 			Boolean result = this.service.modifyDetailPlan(dto);
+			rttrs.addAttribute("plannerType", dto.getPlannerType());			
+			rttrs.addAttribute("planNo", dto.getPlanNo());
 			rttrs.addAttribute("result", result);
-			rttrs.addAttribute("planNo", planNo);
+
 			
 			return "redirect:/board/myplan/get";
 			
@@ -241,10 +243,10 @@ public class MyPlanController {
 		try {
 			
 			Boolean result = this.service.removeDetailPlan(detailPlanNo);
-			rttrs.addAttribute("result", result);
 			rttrs.addAttribute("planNo", planNo);
-			
-			return "redirect:/board/myplan/get";
+			rttrs.addAttribute("result", result);
+
+			return "redirect:/board/myplan/get?plannerType=0";
 
 		} catch (Exception e) {
 			throw new ControllerException(e);

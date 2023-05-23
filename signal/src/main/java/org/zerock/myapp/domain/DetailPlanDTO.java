@@ -16,5 +16,5 @@ public class DetailPlanDTO {
 	private Date planTime;
 	private String place;
 	private String detailPlan;
-	
+	private Integer plannerType;
 }

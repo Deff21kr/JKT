@@ -29,7 +29,7 @@ public interface MyPlanService {
 //	=========== DetailPlan ===================
 	
 	// 1. 상세계획 리스트( List )
-	public abstract List<DetailPlanVO> getDetailPlanList(Integer planNo) throws ServiceException;
+	public abstract List<DetailPlanVO> getDetailPlanList(Integer planNo, Integer plannerType) throws ServiceException;
 
 	// 2. 특정 상세계획 등록( CREATE )
 	public abstract Boolean registerDetailPlan(DetailPlanDTO dto) throws ServiceException;
@@ -44,7 +44,7 @@ public interface MyPlanService {
 	public abstract Boolean removeDetailPlan(Integer detailPlanNo) throws ServiceException;
 	
 //	=========== Join MyPlan and DetailPlan ===================
-	public abstract List<JoinMyPlanDTO> joinList( String nickName) throws ServiceException;
+	public abstract List<JoinMyPlanDTO> joinList( String nickName, Integer plannerType) throws ServiceException;
 
 
 } // end class

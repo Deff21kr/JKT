@@ -22,24 +22,27 @@ public interface GroupBoardMapper {
 			""")
 	public abstract List<GroupBoardVO> selectList(GroupBoardCriteria cri);
 	
+	// 2. 조건검색조회
+	public abstract List<GroupBoardVO> selectSearchList(GroupBoardCriteria cri);
 	
-	// 2. Create(Insert) - 새로운 게시물 등록
+	
+	// 3. Create(Insert) - 새로운 게시물 등록
 	public abstract Integer insert(GroupBoardDTO dto);
 	
-	// 3. 특정 게시물 상세조회
+	// 4. 특정 게시물 상세조회
 	public abstract GroupBoardVO select(Integer postno);
    
-	// 4. 특정 게시물 삭제
+	// 5. 특정 게시물 삭제
 	public abstract Integer delete(Integer postno) throws DAOException;
 	
-	// 5. 특정 게시물 업데이트(갱신)
+	// 6. 특정 게시물 업데이트(갱신)
 	public abstract Integer update(GroupBoardDTO dto);
 
-	// 6. 총 게시물 갯수 반환
-	@Select("SELECT count(postno) FROM TBL_GROUPBOARD WHERE postno > 0")
+	// 7. 총 게시물 갯수 반환
+	@Select("SELECT count(postNo) FROM TBL_GROUPBOARD WHERE postno > 0")
 	public abstract Integer getTotalAmount();
-	
-    // 7. 카테고리별 검색 기능
-    List<GroupBoardVO> searchList(GroupBoardCriteria cri);
+
+	// 8. 검색 조회된 게시물 갯수 반환
+	public abstract Integer getSearchTotalAmount(GroupBoardCriteria cri);
 	
 } // end interface

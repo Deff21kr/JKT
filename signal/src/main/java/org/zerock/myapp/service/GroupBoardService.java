@@ -12,21 +12,26 @@ public interface GroupBoardService {
 	// 1. 게시판 목록을 얻어 반환해주는 기능 수행
 	public abstract List<GroupBoardVO> getList(GroupBoardCriteria cri) throws ServiceException;
 	
-	// 2. 새로운 게시물 등록 기능 수행 (CREATE)
+	// 2. 조건검색조회
+	public abstract List<GroupBoardVO> getSearchList(GroupBoardCriteria cri) throws ServiceException;
+	
+	// 3. 새로운 게시물 등록 기능 수행 (CREATE)
 	public abstract Boolean register(GroupBoardDTO dto) throws ServiceException;
 	
-	// 3. 특정 게시물 상세 조회 기능 수행 (READ)
+	// 4. 특정 게시물 상세 조회 기능 수행 (READ)
 	public abstract GroupBoardVO get(Integer postno) throws ServiceException;
 	
-	// 4. 특정 게시물 업데이트 기능 수행 (UPDATE)
+	// 5. 특정 게시물 업데이트 기능 수행 (UPDATE)
 	public abstract Boolean modify(GroupBoardDTO dto) throws ServiceException;
 	
-	// 5. 특정 게시물 삭제 기능 수행 (DELETE)
+	// 6. 특정 게시물 삭제 기능 수행 (DELETE)
 	public abstract Boolean remove(Integer postno) throws ServiceException;
 
-	// 6. 총 게시물 갯수 반환
+	// 7. 총 게시물 갯수 반환
 	public abstract Integer getTotal() throws ServiceException;
 	
-	// 7. 카테고리별 검색 기능
-	public abstract List<GroupBoardVO> searchList(GroupBoardCriteria cri) throws ServiceException;
+	// 7. 검색 조회된 게시물 갯수 반환
+	public abstract Integer getSearchTotal(GroupBoardCriteria cri) throws ServiceException;
+
+
 } // end interface

@@ -13,16 +13,16 @@
                 <title>동행찾기게시판</title>
 
 
-                <!-- style -->
+ 
                 <link rel="stylesheet" href="../../resources/css/style.css">
                 <link rel="stylesheet" href="../../resources/css/style2.css">
                 <link rel="stylesheet" href="../../resources/css/groupboard.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle1.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle3.css">
-                <!-- fonts awesome -->
+
                 <script src="https://kit.fontawesome.com/1b2c39c9c4.js" crossorigin="anonymous"></script>
-                <!-- script -->
+
                 <script defer src="js/script.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
                 <script
@@ -30,16 +30,35 @@
             </head>
 
             <script>
-                $(function () {
-                    $('#regBtn').click(function () {
-                        let currPage = "${pageMaker.cri.currPage}";
-                        location = "/board/group/register?currPage=" + currPage;
-                    });
-                    $('.pageNum').on('click', function (e) {
-                        let selectedPageNum = e.currentTarget.textContent;
-                        location = "/board/group/list?currPage=" + selectedPageNum;
-                    });
-                });
+            $(function () {
+            	  $('#regBtn').click(function () {
+            	    let currPage = "${SearchPageMaker.cri.currPage}";
+            	    location = "/board/group/register?currPage=" + currPage;
+            	  });
+            	  $('.pageNum').on('click', function (e) {
+            		    let selectedPageNum = e.currentTarget.textContent;
+            		    let url = "/board/group/searchList?currPage=" + selectedPageNum;
+
+            		    // area 파라미터를 추가
+            		    url += "&area=" + encodeURIComponent('${SearchPageMaker.cri.area}');
+
+            		    // startDate 파라미터를 추가
+            		    url += "&startDate=" + encodeURIComponent('${SearchPageMaker.cri.startDate}');
+
+            		    // endDate 파라미터를 추가
+            		    url += "&endDate=" + encodeURIComponent('${SearchPageMaker.cri.endDate}');
+
+            		    // memberNum 파라미터를 추가
+            		    url += "&memberNum=" + encodeURIComponent('${SearchPageMaker.cri.memberNum}');
+
+            		    // recruitStatus 파라미터를 추가
+            		    url += "&recruitStatus=" + encodeURIComponent('${SearchPageMaker.cri.recruitStatus}');
+
+            		    location.href = url;
+            		});
+
+                  });
+
             </script>
 
 
@@ -63,7 +82,7 @@
 		                        	<label>
 									  	<input type="radio" name="area" value="" checked>
 									  	전체
-									</label>                                	
+									</label>                                
                                     <label>
                                         <input type="radio" name="area" value="서울">
                                         서울
@@ -136,7 +155,7 @@
                                 </div>
 
                                 <div>		                        	
-                                	<label><input type="radio" name="recruitStatus" value="" checked>전체</label>  
+                                	<label><input type="radio" name="recruitStatus" value="" checked>전체</label>   
                                     <label><input type="radio" name="recruitStatus" value="모집중">모집중</label>
                                     <label><input type="radio" name="recruitStatus" value="모집완료">모집 완료</label>
                                     <label><input type="radio" name="recruitStatus" value="환승중">환승중</label>
@@ -155,7 +174,7 @@
 
                     <div class="place-main">
 
-                        <c:forEach var="groupBoardVO" items="${__LIST__}">
+                        <c:forEach var="groupBoardVO" items="${__SEARCH__}">
                             <div class="main">
 
                                 <div class="main-pic">
@@ -202,18 +221,19 @@
                 </div>
 
                 <div class="board_page">
-                    <c:if test="${pageMaker.prev}">
-                        <div class="Prev"><a href="/board/group/list?currPage=${pageMaker.startPage - 1}">Prev</a>
+                    <c:if test="${SearchPageMaker.prev}">
+                        <div class="Prev"><a href="/board/group/searchList?currPage=${SearchPageMaker.startPage - 1}">Prev</a>
                         </div>
                     </c:if>
-                    <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-                        <div class="pageNum ${pageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+                    <c:forEach var="pageNum" begin="${SearchPageMaker.startPage}" end="${SearchPageMaker.endPage}">
+                        <div class="pageNum ${SearchPageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
                     </c:forEach>
-                    <c:if test="${pageMaker.next}">
-                        <div class="Next"><a href="/board/group/list?currPage=${pageMaker.endPage + 1}">Next</a>
+                    <c:if test="${SearchPageMaker.next}">
+                        <div class="Next"><a href="/board/group/searchList?currPage=${SearchPageMaker.endPage + 1}">Next</a>
                         </div>
                     </c:if>
                 </div>
+
 
                 <div class="bottom">
                     <div class="searching">

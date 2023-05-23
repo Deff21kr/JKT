@@ -21,58 +21,19 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
         
         <script>
-        var currPage = "${param.currPage}";
-        var postNo = "${__BOARD__.postNo}";
-        var ID = "${__AUTH__.ID}";
-        
             $(function () {
                 $('#listBtn').click(function () {
-                    location = "/board/group/list?currPage=${param.currPage}";
+                    // location = "/board/group/list?currPage=${param.currPage}";
+                    // 이전 페이지로 이동
+                    history.go(-1);
+                    // 이전 페이지로 이동한 후에 새로고침
+                    window.location.replace(document.referrer);
                 });
                 $('#modifyBtn').click(function () {
-                    location = "/board/group/modify?currPage=${param.currPage}&postno=${__BOARD__.postNo}";
+                    location = "/board/group/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";
                 });
-               
-                
-                $('#applyBtn').click(function () {
-                    
-                    
-                    $.ajax({
-    				      url: '/user/mygroup/register',
-    				      type: 'post',
-    				      data :{
-    				    	  ID : ID,
-    				    	  postNo : postNo,
-                              currPage : currPage
-    				      },
-    				      dataType: 'json',
-    				      success: function(data) {
-    				    	  var model = parseInt(data);
-    				        console.log("1 = 중복o / 0 = 중복x : " + model);
-							
-    				        if (model==1) { // id 이미 있음
-    				        	console.log('Data 1:', model);
-    				        	console.log(model);
-    				        	console.log(typeof(model));
-    				        	alert('이미 등록된 ID입니다.');
-    				        	 
-    				        } else {
-    				        	console.log('Data 2:', model);
-    				        	console.log(model);
-    				        	console.log(typeof(model));
-    				        	alert('신청이 완료되었습니다.');
-    				        }
-    				      },
-    				      
-    				      error: function() {
-    				        console.log("실패");
-    				      }
-    				    });
-                });
-                
+              
             });
-
-           
         </script>
     </head>
 
@@ -109,20 +70,59 @@
                 </div>
 
                 <!-- 댓글 목록 -->
-              	<%@include file="../../boardComment2.jsp" %>
-              	 
+                <div class="reply_wrap">
+                    <div class="reply_title">댓글</div>
+                        <div class="reply_list">
+                            <div>
+                                <div class="nickname">서울이좋아</div>
+                                <div class="date">(2023-04-18)</div>
+                                <div class="reply_bt_wrap" id="Clickbt">
+                                    <button type="submit" onclick="location.href='#';">신고</button>
+                                </div>
+                                <div class="content">남산타워 가보셨나요?</div>
+                            </div>
+                            <div>
+                                <div class="nickname">서잘알</div>
+                                <div class="date">(2023-04-18)</div>
+                                <div class="reply_bt_wrap" id="Clickbt">
+                                    <!-- <a href="#" class="modify">수정</a> -->
+                                    <!-- <a href="#">삭제</a> -->
+                                    <button type="submit" onclick="location.href='#';">신고</button>
+                                </div>
+                                <div class="content">홍대가보세요</div>
+                            </div>
+                            <div>
+                                <div class="nickname">hyeonna</div>
+                                <div class="date">(2023-04-18)</div>
+                                <div class="reply_bt_wrap" id="Clickbt">
+                                    <button type="submit" onclick="location.href='replyEdit';">수정</button>
+                                    <button type="submit" onclick="location.href='#';">삭제</button>
+                                    <!-- <a href="replyEdit" class="modify">수정</a> -->
+                                    <!-- <a href="#">삭제</a> -->
+                                    <!-- <a href="#">신고</a> -->
+                                </div>
+                                <div class="content">댓글 달아주셔서 감사합니다!</div>
+                            </div>
+                        </div>
+
+                        <!-- 댓글 작성 -->
+                        <div class="reply_write">
+                            <div>
+                                <div class="nickname">hyeonna</div>
+                                <div class="content">
+                                <textarea placeholder="내용을 작성해주세요."></textarea>
+                                </div>
+                                <div class="writeButton">
+                                    <button type="submit" onclick="location.href='#';">등록</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
 
                 <!-- bt : button -->
                 <div class="bt_wrap">
                 <c:if test="${not __BOARD__.nickName.equals(__AUTH__.nickName)}">
-	                	<!-- 
-	                	 <form action="/user/mygroup/register" method="post" >
-	                	<input type="hidden" name="ID" value="${__AUTH__.ID }" >
-	                	<input type="hidden" name="postNo" value="${__BOARD__.postNo }" >
-	                	<input type="hidden" name="currPage" value="${param.currPage }" > 
-	                	-->
-						<button type="submit" id="applyBtn">신청</button> 	                
-	                </form>
+	               <button type="button" id="applyBtn">신청</button> 
             	</c:if>
                 	
                     <button type="button" id="listBtn">목록</button> 

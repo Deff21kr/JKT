@@ -65,6 +65,22 @@
 		SELECT count(nickName) FROM tbl_users where nickName = #{nickName}
 	</select>
 
+	<update id="profileModify">
+	UPDATE tbl_users
+		SET
+			<if test="statusMessage != null">
+			statusMessage = #{statusMessage}
+			</if>
+			<if test="MBTI != null">
+				,MBTI=#{MBTI}
+			</if>
+			<if test="likeArea != null">
+				,likeArea=#{likeArea}
+			</if>
+			
+		WHERE id = #{ID}
+	</update>
+	
 
 
 

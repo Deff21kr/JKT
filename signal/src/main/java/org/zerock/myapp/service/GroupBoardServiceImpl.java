@@ -42,9 +42,21 @@ public class GroupBoardServiceImpl
 			throw new ServiceException(e);
 		} // try-catch
 	} // getList
+	
+	// 2. 조건검색조회
+	@Override
+	public List<GroupBoardVO> getSearchList(GroupBoardCriteria cri) throws ServiceException {
+		log.trace("getList() invoekd.");
+		
+		try {
+			return this.dao.selectSearchList(cri);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	} // getList
 
 	
-	// 2. 게시물 등록
+	// 3. 게시물 등록
 	@Override
 	public Boolean register(GroupBoardDTO dto) throws ServiceException {
 		log.trace("register({}) invoked.", dto);
@@ -57,7 +69,7 @@ public class GroupBoardServiceImpl
 	} // register
 
 	
-	// 3. 게시물 상세조회
+	// 4. 게시물 상세조회
 	@Override
 	public GroupBoardVO get(Integer postno) throws ServiceException {
 		log.trace("get({}) invoked.", postno);
@@ -70,7 +82,7 @@ public class GroupBoardServiceImpl
 	} // get
 
 	
-	// 4. 게시물 업데이트
+	// 5. 게시물 업데이트
 	@Override
 	public Boolean modify(GroupBoardDTO dto) throws ServiceException {
 		log.trace("modify({}) invoked.", dto);
@@ -83,7 +95,7 @@ public class GroupBoardServiceImpl
 	} // modify
 
 	
-	// 5. 게시물 삭제
+	// 6. 게시물 삭제
 	@Override
 	public Boolean remove(Integer postno) throws ServiceException {
 		log.trace("remove({}) invoked.", postno);
@@ -96,7 +108,7 @@ public class GroupBoardServiceImpl
 	} // remove
 
 	
-	
+	// 7. 총 게시물 갯수 반환
 	@Override
 	public Integer getTotal() throws ServiceException {
 		log.trace("getTotal() invoked.");
@@ -105,17 +117,16 @@ public class GroupBoardServiceImpl
 	} // getTotal
 	
 	
-	// 7. 카테고리별 검색 기능
+	// 8. 검색 조회된 게시물 갯수 반환
 	@Override
-	public List<GroupBoardVO> searchList(GroupBoardCriteria cri) throws ServiceException {
-	    log.trace("searchList() invoked.");
+	public Integer getSearchTotal(GroupBoardCriteria cri) throws ServiceException {
+		log.trace("getSearchTotal() invoked.");
+		
+		return this.dao.getSearchTotalAmount(cri);
+	} // getSearchTotal
+	
 
-	    try {
-	        return this.dao.searchList(cri);
-	    } catch (Exception e) {
-	        throw new ServiceException(e);
-	    } // try-catch
-	} // searchList
+
 	
 	
 //	====== IntitializingBean, DisposableBean ======

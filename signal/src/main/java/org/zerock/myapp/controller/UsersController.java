@@ -131,18 +131,28 @@ public class UsersController {
 	
 	// 프로필 수정
 	@PostMapping("/edit")
-	String profilModify() throws ControllerException {
+	String profilModify(UsersDTO dto, RedirectAttributes rttrs, Model model,String ID,String MBTI,
+	String likeArea) throws ControllerException {
 		
 		try {
-			
+			this.service.profileEdit(dto);
+			log.info("\t+ dto: {}", dto);
 			
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		}
-		return null;
+		return "redirect:/user/mypage";
 	}
 
-
+	// 프로필 수정
+		@GetMapping("/edit")
+		void myPageModify() throws ControllerException {
+			try {
+				
+			} catch(Exception e) {
+				throw new ControllerException(e);
+			}
+		}
 	
 	
    

@@ -1,53 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
     <!DOCTYPE html>
     <html lang="ko">
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>동행찾기 게시판 게시글 작성</title>
-
+        <title>QnA 게시물 수정</title>
+        
         <!-- <link rel="stylesheet" href="../../resources/css/css.css"> -->
-        <link rel="stylesheet" href="../../resources/css/style1.css">
-        <link rel="stylesheet" href="../../resources/css/style2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle1.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle2.css">
-        <link rel="stylesheet" href="../../resources/css/bstyle3.css">
-        <link rel="stylesheet" href="../../resources/css/groupboardRegister.css">
-
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style1.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle1.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle3.css">
+        <link rel="stylesheet" href="../../resources/css/groupboard.css">
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
-
+        
         <script>
             $(function () {
                 $('#listBtn').click(function () {
-                    // location.href = "/board/group/list?currPage=<%=request.getParameter("currPage")%>";
-                    // 이전 페이지로 이동
-                    history.back();
-                    // 이전 페이지로 이동한 후에 새로고침
-                    window.location.replace(document.referrer);
+                    location = "/board/group/list?currPage=${param.currPage}";
+                });
+                $('#removeBtn').click(function () {
+                    let formObj = $("form");
+                    formObj.attr("action", "/board/group/remove");
+                    formObj.attr("method", "POST");
+                    formObj.submit();
                 });
             });
         </script>
     </head>
-
     <body>
-        <header>
-            <%@include file="../../header.jsp" %>
-        </header>
-
-
+    	<%@include file="../../header.jsp" %>
+        
+        <!-- QnA 글쓰기 수정 -->
         <div class="board_wrap">
-            <!-- <input type="hidden" name="nickname" value="${__BOARD__.nickname}"> -->
-            <div class="board_title">
-                <strong>동행찾기</strong>
-            </div>
-
-
-            <form action="/board/group/register" method="POST">
-                <div class="searchbox">
+            <form action="/board/group/modify" method="POST">
+                            <div class="searchbox">
 
                     <div class="area">
 
@@ -105,7 +98,7 @@
                         </div>
 
                         <div>
-                            <select name="memberNum" required>
+                            <select name="memberNum">
                                 <option value="1">제한 없음</option>
                                 <option value="2">2명</option>
                                 <option value="3">3명</option>
@@ -129,52 +122,56 @@
 
                         <div>
                             <label><input type="radio" name="recruitStatus" value="모집중">모집중</label>
-                            <label><input type="radio" name="recruitStatus" value="모집완료">모집 완료</label>
-                            <label><input type="radio" name="recruitStatus" value="환승중">환승중</label>
-                            <label><input type="radio" name="recruitStatus" value="여행완료">여행 완료</label>
+							<label><input type="radio" name="recruitStatus" value="모집완료">모집 완료</label>
+							<label><input type="radio" name="recruitStatus" value="환승중">환승중</label>
+							<label><input type="radio" name="recruitStatus" value="여행완료">여행 완료</label>
                         </div>
                     </div>
 
 
                 </div>
-
-
+                
+                <input type="hidden" name="currPage" value="${param.currPage}">
+                <input type="hidden" name="postNo" value="${__BOARD__.postNo}">
+                <input type="hidden" name="nickname" value="${__AUTH__.nickName}">
+                <input type="hidden" name="postNo" value="${__BOARD__.postNo}">
+                <input type="hidden" name="nickName" value="${__AUTH__.nickName}">
+                <div class="board_title">
+                    <strong>동행 찾기</strong>
+                </div>
                 <div class="board_write_wrap">
                     <div class="board_write">
                         <div class="title">
                             <dl>
                                 <dt>제목</dt>
-                                <dd><input type="text" name="title" placeholder="제목 입력" required></dd>
+                                <dd><input input type="text" name="title" value="${__BOARD__.title}" required></dd>
                                 <dt>동행이름</dt>
-                                <dd><input type="text" name="groupName" placeholder="동행이름" required></dd>
+                                <dd><input type="text" name="groupName" value="${__BOARD__.groupName}" required></dd>
                             </dl>
                         </div>
                         <div class="info">
                             <dl>
                                 <dt>작성자</dt>
-                                <dd><input type="hidden" name="nickName" value="${__AUTH__.nickName }" required>
-                                    ${__AUTH__.nickName }</dd>
-                                <!-- <dd>${__BOARD__.nickName}</dd> -->
+                                <dd>${__AUTH__.nickName}</dd>
                             </dl>
                         </div>
                         <div class="content">
-                            <textarea placeholder="내용을 작성해주세요." name="content" required></textarea>
+                            <textarea cols="60" rows="10" name="content">${__BOARD__.content}</textarea>
                         </div>
                     </div>
-
+                    
                     <!-- bt : button -->
-                    <div class="bt_wrap">
-                        <button type="submit" id="submitBtn">등록</button>
-                        <button type="button" id="listBtn">취소</button>
-                        <!-- <a href="view" class="on">등록</a>
-                    <a href="list">취소</a> -->
+                    <div class="bt_wrap"> 
+                        <button type="submit" id="submitBtn">수정</button>
+                        <button type="button" id="removeBtn">삭제</button>
+                        <button type="button" id="listBtn">취소</button>  
                     </div>
                 </div>
             </form>
         </div>
-
+        
         <%@include file="../../footer.jsp" %>
 
     </body>
-
+    
     </html>

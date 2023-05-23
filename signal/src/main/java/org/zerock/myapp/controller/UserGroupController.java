@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupsDTO;
@@ -81,7 +82,8 @@ public class UserGroupController {
 	}
 	
 	@PostMapping("/mygroup/register")
-	public String register(@RequestParam("ID") String ID,@RequestParam("postNo") Integer postNo,Integer currPage,
+	@ResponseBody
+	public int register(@RequestParam("ID") String ID,@RequestParam("postNo") Integer postNo,Integer currPage,
 			RedirectAttributes rttrs) throws ControllerException {
 		try {
 			log.trace("유저ID ({} ) invoked.",ID);
@@ -93,10 +95,12 @@ public class UserGroupController {
 			rttrs.addAttribute("currPage", currPage);
 			rttrs.addAttribute("postNo",postNo);
 			
-				
-			this.service.register(ID,dto.getGroupNo());
-			//?currPage="+currPage+"&postno="+postNo;
-			return "redirect:/board/group/get";
+			if(this.service.groupCheckIDService(ID, postNo)==0) {
+				this.service.register(ID,dto.getGroupNo());
+				return 0;
+			}else {
+				return 1;
+			}
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}

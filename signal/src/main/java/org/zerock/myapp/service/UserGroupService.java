@@ -20,6 +20,8 @@ public interface UserGroupService {
 //		
 		// 4. GroupMapper 에서
 		public abstract Boolean modify(UserGroupDTO dto) throws ServiceException;
+		
+		public abstract Integer groupCheckIDService(String ID,Integer postNo) throws ServiceException;
 //		
 //		// 5. 특정 게시물 삭제 기능 수행 (DELETE)
 //		public abstract Boolean remove(Integer appNo) throws ServiceException;

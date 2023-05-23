@@ -26,6 +26,7 @@ public class UsersDTO {
 	private Integer uno;
 	private Boolean enabled;
 	private Boolean rememberMe;
+	private String statusMessage;
 	
 
 }

@@ -51,15 +51,7 @@ public class GroupBoardController {
     @Setter(onMethod_ = @Autowired)
     private UsersService user;
 	@Setter(onMethod_ = @Autowired)
-	private UserGroupService mapping;
-	@Setter(onMethod_ = @Autowired)
-	private UsersService user;
-	@Setter(onMethod_ = @Autowired)
 	private QnACommentService commentService;
-	@Setter(onMethod_ = @Autowired)
-	private UsersService user;
-	@Setter(onMethod_ = @Autowired)
-	private UserGroupService mapping;
 //	// 1. 게시판 목록 조회
 	@GetMapping("/list")
 	void list(GroupBoardCriteria cri, Model model) throws ControllerException {

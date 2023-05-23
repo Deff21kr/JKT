@@ -3,6 +3,7 @@ package org.zerock.myapp.controller;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -131,7 +132,7 @@ public class UsersController {
 	
 	// 프로필 수정
 	@PostMapping("/edit")
-	String profilModify(UsersDTO dto, RedirectAttributes rttrs, Model model,@RequestParam("ID") String ID,String MBTI,
+	String profilModify(UsersDTO dto, RedirectAttributes rttrs, Model model,@Param("ID") String ID,String MBTI,
 	String likeArea) throws ControllerException {
 		
 		try {

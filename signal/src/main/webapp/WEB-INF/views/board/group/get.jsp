@@ -21,6 +21,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
         
         <script>
+        var currPage = "${param.currPage}";
+        var postNo = "${__BOARD__.postNo}";
+        var ID = "${__AUTH__.ID}";
+        
+        
             $(function () {
                 $('#listBtn').click(function () {
                     // location = "/board/group/list?currPage=${param.currPage}";
@@ -32,6 +37,40 @@
                 $('#modifyBtn').click(function () {
                     location = "/board/group/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";
                 });
+                
+                $('#applyBtn').click(function () {
+                    
+                    $.ajax({
+                          url: '/user/mygroup/register',
+                          type: 'post',
+                          data :{
+                              ID : ID,
+                              postNo : postNo,
+                              currPage : currPage
+                          },
+                          dataType: 'json',
+                          success: function(data) {
+                              var model = parseInt(data);
+                            console.log("1 = 중복o / 0 = 중복x : " + model);
+                            
+                            if (model==1) { // id 이미 있음
+                                console.log('Data 1:', model);
+                                console.log(model);
+                                console.log(typeof(model));
+                                alert('이미 등록된 ID입니다.');
+                                 
+                            } else {
+                                console.log('Data 2:', model);
+                                console.log(model);
+                                console.log(typeof(model));
+                                alert('신청이 완료되었습니다.');
+                            }
+                          },
+                          
+                          error: function() {
+                            console.log("실패");
+                          }
+                        });
               
             });
         </script>

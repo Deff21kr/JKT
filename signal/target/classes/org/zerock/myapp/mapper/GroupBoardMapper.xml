@@ -15,19 +15,19 @@
         <!-- INSERT INTO tbl_qnaboard (title, content) 
         VALUES (#{title}, #{content}) -->
 
-        INSERT INTO tbl_groupboard (nickName, title, content, area, memberNum, recruitStatus, startDate, endDate) 
-        VALUES (#{nickName}, #{title}, #{content}, #{area}, #{memberNum}, #{recruitStatus}, #{startDate}, #{endDate})
+        INSERT INTO tbl_groupboard (nickName, title, content, area, memberNum, recruitStatus, startDate, endDate, groupName) 
+        VALUES (#{nickName}, #{title}, #{content}, #{area}, #{memberNum}, #{recruitStatus}, #{startDate}, #{endDate}, #{groupName})
     </insert>
 
     <select id="select" resultType="org.zerock.myapp.domain.GroupBoardVO">
         SELECT * 
         FROM tbl_groupboard
-        WHERE postno = #{postNo}
+        WHERE postNo = #{postNo}
     </select>
 
     <delete id="delete">
         DELETE FROM tbl_groupboard
-        WHERE postno = #{postNo}
+        WHERE postNo = #{postNo}
     </delete>
 
     <update id="update">
@@ -41,35 +41,54 @@
             recruitStatus = #{recruitStatus}, 
             startDate = #{startDate}, 
             endDate = #{endDate}
-        WHERE postno = #{postNo}
+        WHERE postNo = #{postNo}
     </update>
     
-    <!-- 7. 카테고리별 검색 기능 -->
-	<select id="searchList" resultType="org.zerock.myapp.domain.GroupBoardVO">
-	    SELECT 
-	    /*+ index_desc(tbl_groupboard) */ *
-	    FROM TBL_GROUPBOARD
-	    <where>
-	        <if test="area != null">
-	            AND area = #{area}
-	        </if>
-	        <if test="memberNum != null">
-	            AND memberNum = #{memberNum}
-	        </if>
-	        <if test="recruitStatus != null">
-	            AND recruitStatus = #{recruitStatus}
-	        </if>
-	        <if test="startDate != null">
-	            AND startDate = #{startDate}
-	        </if>
-	        <if test="endDate != null">
-	            AND endDate = #{endDate}
-	        </if>
-	    </where>
-	    OFFSET (#{cri.currPage} - 1) * #{cri.amount} ROWS
-	    FETCH NEXT #{cri.amount} ROWS ONLY
-	</select>
+    <select id="selectSearchList" resultType="org.zerock.myapp.domain.GroupBoardVO">
+      SELECT 
+      /*+ index_desc(tbl_groupboard) */ *
+      FROM tbl_groupboard
+      WHERE 1=1
+        <if test="area != null and !area.isEmpty()">
+          AND area in #{area}
+        </if>
+        <if test="memberNum != null">
+          AND memberNum in #{memberNum}
+        </if>
+        <if test="startDate != null">
+          AND startDate &gt;= #{startDate}
+        </if>
+        <if test="endDate != null">
+          AND endDate &lt;= #{endDate}
+        </if>
+        <if test="recruitStatus != null and !recruitStatus.isEmpty()">
+          AND recruitStatus in #{recruitStatus}
+        </if>
+        OFFSET (#{currPage} -1) * #{amount} ROWS
+        FETCH NEXT #{amount} ROWS ONLY
+    </select>
 	
-	<!-- ... -->
+	<select id="getSearchTotalAmount" resultType="java.lang.Integer">
+	    SELECT COUNT(postNo)
+	    FROM tbl_groupboard
+	    WHERE 1=1
+	    <if test="area != null and !area.isEmpty()">
+	        AND area = #{area}
+	    </if>
+	    <if test="memberNum != null">
+	        AND memberNum = #{memberNum}
+	    </if>
+	    <if test="startDate != null">
+	        AND startDate &gt;= #{startDate}
+	    </if>
+	    <if test="endDate != null">
+	        AND endDate &lt;= #{endDate}
+	    </if>
+	    <if test="recruitStatus != null and !recruitStatus.isEmpty()">
+	        AND recruitStatus = #{recruitStatus}
+	    </if>
+	</select>
+
+
 
 </mapper>

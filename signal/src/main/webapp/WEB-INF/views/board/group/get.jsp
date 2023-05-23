@@ -70,54 +70,8 @@
                 </div>
 
                 <!-- 댓글 목록 -->
-                <div class="reply_wrap">
-                    <div class="reply_title">댓글</div>
-                        <div class="reply_list">
-                            <div>
-                                <div class="nickname">서울이좋아</div>
-                                <div class="date">(2023-04-18)</div>
-                                <div class="reply_bt_wrap" id="Clickbt">
-                                    <button type="submit" onclick="location.href='#';">신고</button>
-                                </div>
-                                <div class="content">남산타워 가보셨나요?</div>
-                            </div>
-                            <div>
-                                <div class="nickname">서잘알</div>
-                                <div class="date">(2023-04-18)</div>
-                                <div class="reply_bt_wrap" id="Clickbt">
-                                    <!-- <a href="#" class="modify">수정</a> -->
-                                    <!-- <a href="#">삭제</a> -->
-                                    <button type="submit" onclick="location.href='#';">신고</button>
-                                </div>
-                                <div class="content">홍대가보세요</div>
-                            </div>
-                            <div>
-                                <div class="nickname">hyeonna</div>
-                                <div class="date">(2023-04-18)</div>
-                                <div class="reply_bt_wrap" id="Clickbt">
-                                    <button type="submit" onclick="location.href='replyEdit';">수정</button>
-                                    <button type="submit" onclick="location.href='#';">삭제</button>
-                                    <!-- <a href="replyEdit" class="modify">수정</a> -->
-                                    <!-- <a href="#">삭제</a> -->
-                                    <!-- <a href="#">신고</a> -->
-                                </div>
-                                <div class="content">댓글 달아주셔서 감사합니다!</div>
-                            </div>
-                        </div>
-
-                        <!-- 댓글 작성 -->
-                        <div class="reply_write">
-                            <div>
-                                <div class="nickname">hyeonna</div>
-                                <div class="content">
-                                <textarea placeholder="내용을 작성해주세요."></textarea>
-                                </div>
-                                <div class="writeButton">
-                                    <button type="submit" onclick="location.href='#';">등록</button>
-                                </div>
-                            </div>
-                        </div>
-                </div>
+                <%@include file="../../boardComment2.jsp" %>
+               
 
                 <!-- bt : button -->
                 <div class="bt_wrap">

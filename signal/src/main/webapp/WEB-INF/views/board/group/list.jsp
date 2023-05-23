@@ -14,9 +14,9 @@
 
 
                 <!-- style -->
-                <link rel="stylesheet" href="../../resources/css/style.css">
-                <link rel="stylesheet" href="../../resources/css/style2.css">
-                <link rel="stylesheet" href="../../resources/css/groupboard.css">
+                <link rel="stylesheet" href="../../../../resources/css/style.css">
+                <link rel="stylesheet" href="../../../../resources/css/style2.css">
+                <link rel="stylesheet" href="../../../../resources/css/groupboard.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle1.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle3.css">

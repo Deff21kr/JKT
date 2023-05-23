@@ -144,7 +144,7 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 	@Override
 	public Boolean profileEdit(UsersDTO dto) throws ServiceException {
 		try {
-			return this.dao.profilEdit(dto);
+			return this.dao.profileEdit(dto);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		}

@@ -25,13 +25,14 @@
 	<div class="edit_write">
 		<div class="profile_right">
 			<form action="/user/edit" method="post">
+				<input type="hidden" name="ID" value="${__LIST__.ID}">
 				<div>
 					<div class="right_top">닉네임</div>
 					<div class="right_contents">${__AUTH__.nickName}</div>
 				</div>
 				<div>
 					<div class="right_top">상태메시지</div>
-					<div class="right_contents">${__AUTH__.statusMessage}</div>
+					<textarea name="statusMessage" cols="30" rows="10" placeholder="상태메세지를 입력해주세요."></textarea>
 				</div>
 				<div>
 					<div class="right_top">평점</div>

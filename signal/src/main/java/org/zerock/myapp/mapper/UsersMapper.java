@@ -28,5 +28,5 @@ public interface UsersMapper {
 	// 6. nick 중복체크
 	public abstract Integer checkNickName(String nickName);
 	// 7. 회원 프로필 수정
-	public abstract Boolean profilEdit(UsersDTO dto);
+	public abstract Boolean profileEdit(UsersDTO dto);
 }

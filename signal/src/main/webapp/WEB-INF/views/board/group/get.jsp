@@ -28,11 +28,11 @@
         
             $(function () {
                 $('#listBtn').click(function () {
-                    // location = "/board/group/list?currPage=${param.currPage}";
+                    location = "/board/group/list?currPage=${param.currPage}&postNo=${param.postNo}";
                     // 이전 페이지로 이동
-                    history.go(-1);
+                    // history.go(-1);
                     // 이전 페이지로 이동한 후에 새로고침
-                    window.location.replace(document.referrer);
+                    // window.location.replace(document.referrer);
                 });
                 $('#modifyBtn').click(function () {
                     location = "/board/group/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";

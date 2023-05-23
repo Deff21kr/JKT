@@ -70,6 +70,7 @@
                 <div class="place">
 
                     <form action="/board/group/searchList">
+                    <input type="hidden" name="currPage" value="${searchPageMaker.cri.currPage}">
                         <div class="searchbox">
 
                             <div class="area">
@@ -198,7 +199,7 @@
 
                                         <div class="title">
                                             <a
-                                                href="/board/group/get?currPage=${pageMaker.cri.currPage}&postNo=${groupBoardVO.postNo}">${groupBoardVO.title}</a>
+                                                href="/board/group/get?currPage=${searchPageMaker.cri.currPage}&postNo=${groupBoardVO.postNo}">${groupBoardVO.title}</a>
                                         </div>
 
                                     </a>

@@ -131,12 +131,16 @@ public class UsersController {
 	
 	// 프로필 수정
 	@PostMapping("/edit")
-	String profilModify(UsersDTO dto, RedirectAttributes rttrs, Model model,String ID,String MBTI,
+	String profilModify(UsersDTO dto, RedirectAttributes rttrs, Model model,@RequestParam("ID") String ID,String MBTI,
 	String likeArea) throws ControllerException {
 		
 		try {
+			List<UsersVO> list = this.service.getList();
 			this.service.profileEdit(dto);
-			log.info("\t+ dto: {}", dto);
+			rttrs.addAttribute("ID", dto.getID());
+			model.addAttribute("__LIST__", list);
+			log.info("\t+ dto: ({}, {})", dto, dto.getID());
+			
 			
 		} catch(Exception e) {
 			throw new ControllerException(e);
@@ -146,7 +150,7 @@ public class UsersController {
 
 	// 프로필 수정
 		@GetMapping("/edit")
-		void myPageModify() throws ControllerException {
+		void myPageModify(UsersDTO dto, RedirectAttributes rttrs, Model model, String ID, String MBTI) throws ControllerException {
 			try {
 				
 			} catch(Exception e) {

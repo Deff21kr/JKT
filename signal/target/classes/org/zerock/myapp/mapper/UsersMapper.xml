@@ -65,7 +65,7 @@
 		SELECT count(nickName) FROM tbl_users where nickName = #{nickName}
 	</select>
 
-	<update id="profileModify">
+	<update id="profileEdit">
 	UPDATE tbl_users
 		SET
 			<if test="statusMessage != null">
@@ -78,7 +78,7 @@
 				,likeArea=#{likeArea}
 			</if>
 			
-		WHERE id = #{ID}
+		WHERE ID = #{ID}
 	</update>
 	
 

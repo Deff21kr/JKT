@@ -23,23 +23,27 @@
         <script>
             $(function () {
                 $('#listBtn').click(function () {
-                    location.href = "/board/group/list?currPage=<%=request.getParameter("currPage")%>";
+                    // location.href = "/board/group/list?currPage=<%=request.getParameter("currPage")%>";
+                    // 이전 페이지로 이동
+                    history.back();
+                    // 이전 페이지로 이동한 후에 새로고침
+                    window.location.replace(document.referrer);
                 });
             });
         </script>
     </head>
 
     <body>
-    <header>
-    	<%@include file="../../header.jsp" %>
-    </header>
-        
+        <header>
+            <%@include file="../../header.jsp" %>
+        </header>
 
-                <div class="board_wrap">
-                    <!-- <input type="hidden" name="nickname" value="${__BOARD__.nickname}"> -->
-                    <div class="board_title">
-                        <strong>동행찾기</strong>
-                    </div>
+
+        <div class="board_wrap">
+            <!-- <input type="hidden" name="nickname" value="${__BOARD__.nickname}"> -->
+            <div class="board_title">
+                <strong>동행찾기</strong>
+            </div>
 
 
             <form action="/board/group/register" method="POST">
@@ -101,7 +105,7 @@
                         </div>
 
                         <div>
-                            <select name="memberNum">
+                            <select name="memberNum" required>
                                 <option value="1">제한 없음</option>
                                 <option value="2">2명</option>
                                 <option value="3">3명</option>
@@ -125,9 +129,9 @@
 
                         <div>
                             <label><input type="radio" name="recruitStatus" value="모집중">모집중</label>
-							<label><input type="radio" name="recruitStatus" value="모집완료">모집 완료</label>
-							<label><input type="radio" name="recruitStatus" value="환승중">환승중</label>
-							<label><input type="radio" name="recruitStatus" value="여행완료">여행 완료</label>
+                            <label><input type="radio" name="recruitStatus" value="모집완료">모집 완료</label>
+                            <label><input type="radio" name="recruitStatus" value="환승중">환승중</label>
+                            <label><input type="radio" name="recruitStatus" value="여행완료">여행 완료</label>
                         </div>
                     </div>
 
@@ -135,40 +139,41 @@
                 </div>
 
 
-                    <div class="board_write_wrap">
-                        <div class="board_write">
-                            <div class="title">
-                                <dl>
-                                    <dt>제목</dt>
-                                    <dd><input type="text" name="title" placeholder="제목 입력" required></dd>
-                                    <dt>동행이름</dt>
-                                    <dd><input type="text" name="groupName" placeholder="동행이름" required></dd>
-                                </dl>
-                            </div>
-                            <div class="info">
-                                <dl>
-                                    <dt>작성자</dt>
-                                    <dd><input type="hidden" name="nickName" value ="${__AUTH__.nickName }" required> ${__AUTH__.nickName }</dd>
-                                    <!-- <dd>${__BOARD__.nickName}</dd> -->
-                                </dl>
-                            </div>
-                            <div class="content">
-                                <textarea placeholder="내용을 작성해주세요." name="content" required></textarea>
-                            </div>
+                <div class="board_write_wrap">
+                    <div class="board_write">
+                        <div class="title">
+                            <dl>
+                                <dt>제목</dt>
+                                <dd><input type="text" name="title" placeholder="제목 입력" required></dd>
+                                <dt>동행이름</dt>
+                                <dd><input type="text" name="groupName" placeholder="동행이름" required></dd>
+                            </dl>
                         </div>
-
-                        <!-- bt : button -->
-                        <div class="bt_wrap">
-                            <button type="submit" id="submitBtn">등록</button>
-                            <button type="button" id="listBtn">취소</button>
-                            <!-- <a href="view" class="on">등록</a>
-                    <a href="list">취소</a> -->
+                        <div class="info">
+                            <dl>
+                                <dt>작성자</dt>
+                                <dd><input type="hidden" name="nickName" value="${__AUTH__.nickName }" required>
+                                    ${__AUTH__.nickName }</dd>
+                                <!-- <dd>${__BOARD__.nickName}</dd> -->
+                            </dl>
+                        </div>
+                        <div class="content">
+                            <textarea placeholder="내용을 작성해주세요." name="content" required></textarea>
                         </div>
                     </div>
-            </form>
-            </div>
 
-            <%@include file="../../footer.jsp" %>
+                    <!-- bt : button -->
+                    <div class="bt_wrap">
+                        <button type="submit" id="submitBtn">등록</button>
+                        <button type="button" id="listBtn">취소</button>
+                        <!-- <a href="view" class="on">등록</a>
+                    <a href="list">취소</a> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <%@include file="../../footer.jsp" %>
 
     </body>
 

@@ -14,9 +14,9 @@
 
 
                 <!-- style -->
-                <link rel="stylesheet" href="../../resources/css/style.css">
-                <link rel="stylesheet" href="../../resources/css/style2.css">
-                <link rel="stylesheet" href="../../resources/css/groupboard.css">
+                <link rel="stylesheet" href="../../../../resources/css/style.css">
+                <link rel="stylesheet" href="../../../../resources/css/style2.css">
+                <link rel="stylesheet" href="../../../../resources/css/groupboard.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle1.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle3.css">
@@ -50,7 +50,7 @@
                 </header>
                 <div class="place">
 
-                    <form action="/board/group/search">
+                    <form action="/board/group/searchList">
                         <div class="searchbox">
 
                             <div class="area">
@@ -60,6 +60,10 @@
                                 </div>
 
                                 <div>
+		                        	<label>
+									  	<input type="radio" name="area" value="" checked>
+									  	전체
+									</label>                                	
                                     <label>
                                         <input type="radio" name="area" value="서울">
                                         서울
@@ -110,7 +114,7 @@
 
                                 <div>
                                     <select name="memberNum">
-                                        <option value="1">제한 없음</option>
+                                        <option value="">제한 없음</option>
                                         <option value="2">2명</option>
                                         <option value="3">3명</option>
                                         <option value="4">4명</option>
@@ -131,7 +135,8 @@
                                     <span><strong>동행 현황</strong></span>
                                 </div>
 
-                                <div>
+                                <div>		                        	
+                                	<label><input type="radio" name="recruitStatus" value="" checked>전체</label>  
                                     <label><input type="radio" name="recruitStatus" value="모집중">모집중</label>
                                     <label><input type="radio" name="recruitStatus" value="모집완료">모집 완료</label>
                                     <label><input type="radio" name="recruitStatus" value="환승중">환승중</label>

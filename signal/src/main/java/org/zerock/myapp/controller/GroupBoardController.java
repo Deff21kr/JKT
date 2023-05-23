@@ -27,7 +27,6 @@ import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.service.GroupBoardService;
 import org.zerock.myapp.service.GroupService;
-import org.zerock.myapp.service.QnABoardService;
 import org.zerock.myapp.service.QnACommentService;
 import org.zerock.myapp.service.UserGroupService;
 import org.zerock.myapp.service.UsersService;
@@ -47,6 +46,14 @@ public class GroupBoardController {
 	private GroupBoardService service;
 	@Setter(onMethod_ = @Autowired)
 	private GroupService group;
+    @Setter(onMethod_ = @Autowired)
+    private UserGroupService mapping;
+    @Setter(onMethod_ = @Autowired)
+    private UsersService user;
+	@Setter(onMethod_ = @Autowired)
+	private UserGroupService mapping;
+	@Setter(onMethod_ = @Autowired)
+	private UsersService user;
 	@Setter(onMethod_ = @Autowired)
 	private QnACommentService commentService;
 	@Setter(onMethod_ = @Autowired)

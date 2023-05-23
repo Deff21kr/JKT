@@ -51,6 +51,7 @@
                 <div class="place">
 
                     <form action="/board/group/searchList">
+                    <input type="hidden" name="currPage" value="1">
                         <div class="searchbox">
 
                             <div class="area">

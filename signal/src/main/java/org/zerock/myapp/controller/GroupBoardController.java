@@ -46,6 +46,10 @@ public class GroupBoardController {
 	private GroupBoardService service;
 	@Setter(onMethod_ = @Autowired)
 	private GroupService group;
+    @Setter(onMethod_ = @Autowired)
+    private UserGroupService mapping;
+    @Setter(onMethod_ = @Autowired)
+    private UsersService user;
 	@Setter(onMethod_ = @Autowired)
 	private UserGroupService mapping;
 	@Setter(onMethod_ = @Autowired)

@@ -24,7 +24,7 @@ public interface QnACommentMapper {
 	/*+ index_desc(tbl_qnacomment) */ *
 	FROM TBL_QNACOMMENT
 	WHERE POSTNO = #{postNo}
-	OFFSET (#{commentCri.commentCurrPage} -1) * #{commentCri.commentAmount} ROWS
+	OFFSET (#{commentCri.commentCurrPage} -1) * #{commentCri.commentA	mount} ROWS
 	FETCH NEXT #{commentCri.commentAmount} ROWS ONLY
 	""")
 	public abstract List<QnACommentVO> selectList(@Param("commentCri") CommentCriteria cri,@Param("postNo") Integer postNo);

@@ -86,6 +86,7 @@ public class UserGroupController {
 	public int register(@RequestParam("nickName") String nickName,@RequestParam("postNo") Integer postNo,Integer currPage,
 			RedirectAttributes rttrs) throws ControllerException {
 		try {
+			log.trace("유저ID ({} ) invoked.",nickName);
 			log.trace("유저nickName ({} ) invoked.",nickName);
 			log.trace("postNo ({} ) invoked.",postNo);
 			log.trace("currPage ({} ) invoked.",currPage);

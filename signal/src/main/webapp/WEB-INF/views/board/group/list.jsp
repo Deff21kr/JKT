@@ -219,7 +219,7 @@
                 <div class="bottom">
                     <div class="searching">
 
-                    </div>
+                </div>
 
 
                     <div class="bt_wrap">
@@ -234,9 +234,6 @@
 
 
             </body>
-
-
-
 
 
             </html>

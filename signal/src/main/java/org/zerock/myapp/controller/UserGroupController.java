@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupsDTO;
 import org.zerock.myapp.domain.PageDTO;
+import org.zerock.myapp.domain.QnABoardVO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
@@ -56,6 +57,27 @@ public class UserGroupController {
 			
 			PageDTO pageDTO = new PageDTO(cri,this.service.getTotal(vo.getNickName()));
 			model.addAttribute("pageMaker",pageDTO);
+			
+			return "/user/mygroup";
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	}
+	
+	// 내가 신청한 동행 조회
+	@GetMapping("/myapp")
+	public String userApp(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
+		
+		try {
+			log.trace("동행({} ) invoked.",model);
+			HttpSession session = req.getSession();
+			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
+			List<UserGroupDTO> list = this.service.getMyAppList( vo.getNickName() );
+			// Request Scope  공유속성 생성
+			model.addAttribute("__APPLIST__", list);
+			
+//			PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
+//			model.addAttribute("pageMaker", pageDTO);
 			
 			return "/user/mygroup";
 		} catch (Exception e) {

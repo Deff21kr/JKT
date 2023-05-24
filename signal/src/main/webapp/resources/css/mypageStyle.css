@@ -157,7 +157,7 @@ html {
 	padding-top: 15px;
 }
 
-#tabs-3 .board_list .top .title {
+#tabs-3 .board_list .top .group {
 	width: 20%;
 	display: inline-block;
 	font-size: 2rem;
@@ -174,7 +174,7 @@ html {
 	padding-bottom: 15px;
 }
 
-#tabs-3 .board_list .post div .title {
+#tabs-3 .board_list .post div .group {
 	width: 20%;
 	display: inline-block;
 	font-size: 1.5rem;

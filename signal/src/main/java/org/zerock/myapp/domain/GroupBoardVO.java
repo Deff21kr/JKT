@@ -15,7 +15,6 @@ public class GroupBoardVO {
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private Integer views;
-	private Integer pins;
 	private Timestamp regiDate;
 	private Timestamp modifyDate;
 	private String nickName;

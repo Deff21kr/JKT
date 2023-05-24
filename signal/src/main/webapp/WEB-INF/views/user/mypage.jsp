@@ -172,74 +172,29 @@
 				<div class="board_list">
 
 					<div class="top">
-						<div class="group">동행이름</div>
-						<div class="title">제목</div>
-						<div class="writer">작성자</div>
 						<div class="area">장소</div>
+						<div class="group">동행이름</div>
+						<div class="writer">작성자</div>
+						<div class="status">상태</div>
 						<div class="startDate">동행시작</div>
 						<div class="enDate">동행종료</div>
 					</div>
 					<!-- 불러올 동행내역 대략 10개정도 -->
 					<div class="post">
-						<div>
-							<div class="group">우리동행</div>
-							<div class="title">
-								<a href="#">1번글 제목</a>
-							</div>
-							<div class="writer">강대수</div>
-							<div class="area">서울</div>
-							<div class="startDate">2022-01-01</div>
-							<div class="enDate">2022-01-03</div>
-						</div>
-						<div>
-							<div class="group">
-								<a href="#">얘네동행</a>
-							</div>
-							<div class="title">
-								<a href="#">2번글 제목</a>
-							</div>
-							<div class="writer">최재균</div>
-							<div class="area">대전</div>
-							<div class="startDate">2022-06-05</div>
-							<div class="enDate">2022-0103</div>
-						</div>
-						<div>
-							<div class="group">
-								<a href="#">얘네동행</a>
-							</div>
-							<div class="title">
-								<a href="#">3번글 제목</a>
-							</div>
-							<div class="writer">조현대</div>
-							<div class="area">대구</div>
-							<div class="startDate">2022-09-09</div>
-							<div class="enDate">2022-11-05</div>
-						</div>
-						<div>
-							<div class="group">
-								<a href="#">남의동행</a>
-							</div>
-							<div class="title">
-								<a href="#">4번글 제목</a>
-							</div>
-							<div class="writer">신현나</div>
-							<div class="area">부산</div>
-							<div class="startDate">2023-01-01</div>
-							<div class="enDate">2023-01-01</div>
-						</div>
-						<div>
-							<div class="group">
-								<a href="#">바보동행</a>
-							</div>
-							<div class="title">
-								<a href="#">5번글 제목</a>
-							</div>
-							<div class="writer">위영선</div>
-							<div class="area">일본</div>
-							<div class="startDate">2023-01-03</div>
-							<div class="enDate">2023-02-02</div>
-						</div>
 
+					<c:forEach var="applist" items="${__APPLIST__}">
+
+						<div>
+							<div class="area">${applist.area}</div>
+							<div class="group">${applist.groupName}</div>
+							<div class="writer">${applist.groupName}</div>
+							<div class="status">${applist.recruitStatus}</div>
+							<div class="startDate">${applist.startDate}</div>
+							<div class="enDate">${applist.startDate}</div>
+						</div>
+                        
+                    </c:forEach>
+						
 					</div>
 
 					<div class="board_page">

@@ -142,41 +142,18 @@
 						<div class="date">작성일</div>
 					</div>
 					<!-- 불러올 작성글 대략 10개정도 -->
+					<c:forEach var="board" items="${__BOARD__}">
 					<div class="post">
+						
 						<div>
-							<div class="board">동행구하기</div>
-							<div class="title">
-								<a href="#">1번글</a>
+							<div class="board">게시판 이름</div>
+							<div class="title">글 제목
 							</div>
 							<div class="writer">작성자</div>
 							<div class="date">작성일</div>
 						</div>
-						<div>
-							<div class="num">1:1문의</div>
-							<div class="title">
-								<a href="#">2번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<div class="date">작성일</div>
-						</div>
-						<div>
-							<div class="num">후기게시판</div>
-							<div class="title">
-								<a href="#">3번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<div class="date">작성일</div>
-						</div>
-						<div>
-							<div class="num">QNA</div>
-							<div class="title">
-								<a href="#">4번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<div class="date">작성일</div>
-						</div>
-
 					</div>
+					</c:forEach>
 
 					<div class="board_page">
 						<a href="#" class="bt first">< <</a> <a href="#" class="bt prev">

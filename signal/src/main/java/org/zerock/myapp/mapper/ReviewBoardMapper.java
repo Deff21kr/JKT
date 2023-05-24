@@ -3,36 +3,39 @@ package org.zerock.myapp.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
-import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.ReviewBoardDTO;
 import org.zerock.myapp.domain.ReviewBoardVO;
+import org.zerock.myapp.domain.ReviewBoardCriteria;
 
 public interface ReviewBoardMapper {
 	
-	// 게시판 목록 조회 
-		@Select("""
-				SELECT /*+ index_desc(tbl_reviewboard) */ *
-				FROM tbl_reviewboard
-				OFFSET (#{currPage} -1) * #{amount} ROWS
-				FETCH NEXT #{amount} ROWS ONLY
-				""") // 스키마 테이블 명 변경 필요하다잉 ex:) Review_board 
-	public abstract List<ReviewBoardVO> selectList(Criteria cri);
+	
+//	@Select("SELECT  /*+ index_desc(tbl_board_review) */  * FROM tbl_board_review")
+//	@Select("""
+//			SELECT 
+//			/*+ index_desc(tbl_board_review) */ *
+//			FROM tbl_board_review
+//			OFFSET (#{currPage} -1) * #{amount} ROWS
+//			FETCH NEXT #{amount} ROWS ONLY
+//			""")
+	//1. 게시판 목록 조회
+	public abstract List<ReviewBoardVO> selectList(ReviewBoardCriteria cri);
 		
-	// 게시물 등록 
+	//2. 게시물 등록 
 	public abstract Integer insert(ReviewBoardDTO dto);
 
-	// 게시물 조회 
-	public abstract ReviewBoardVO select(Integer postno);
+	//3. 게시물 상세 조회 
+	public abstract ReviewBoardVO select(Integer postNo);
 
-	// 게시물 삭제 
-	public abstract Integer delete(Integer postno);
+	//4. 게시물 삭제 
+	public abstract Integer delete(Integer postNo);
 
-	// 게시물 업데이트(갱신)
+	//5. 게시물 수정(갱신)
 	public abstract Integer update(ReviewBoardDTO dto);
 
-	// 총 게시물 갯수 반환 
-	@Select("SELECT count(postno) FROM tbl_reviewboard WHERE postno > 0")
+	//6. 총 게시물 갯수 반환 
+	@Select("SELECT count(postNo) FROM tbl_board_review WHERE postno > 0")
 	public abstract Integer getTotalAmount();
 
 
-}
+}//end class

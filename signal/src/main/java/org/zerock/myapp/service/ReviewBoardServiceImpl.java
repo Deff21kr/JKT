@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.zerock.myapp.domain.AttachFileDTO;
 import org.zerock.myapp.domain.ReviewBoardDTO;
 import org.zerock.myapp.domain.ReviewBoardVO;
-import org.zerock.myapp.domain.reviewBoardCriteria;
+import org.zerock.myapp.domain.ReviewBoardCriteria;
 import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.mapper.BoardAttachMapper;
 import org.zerock.myapp.mapper.ReviewBoardMapper;
@@ -36,7 +36,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService, InitializingB
 	
 	// 1. 게시판 목록을 얻어 반환해주는 기능 수행 (페이징 처리O)
 	@Override
-	public List<ReviewBoardVO> getList(reviewBoardCriteria cri) throws ServiceException {
+	public List<ReviewBoardVO> getList(ReviewBoardCriteria cri) throws ServiceException {
 		log.trace("getList() invoked.");
 
 		try {
@@ -174,6 +174,8 @@ public class ReviewBoardServiceImpl implements ReviewBoardService, InitializingB
 		log.trace("destroy() invoked.");
 
 	}
+
+
 
 
 

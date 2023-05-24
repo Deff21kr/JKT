@@ -6,7 +6,7 @@ import org.zerock.myapp.domain.AttachFileDTO;
 import org.zerock.myapp.domain.ReviewBoardCriteria;
 import org.zerock.myapp.domain.ReviewBoardDTO;
 import org.zerock.myapp.domain.ReviewBoardVO;
-import org.zerock.myapp.domain.reviewBoardCriteria;
+import org.zerock.myapp.domain.ReviewBoardCriteria;
 import org.zerock.myapp.exception.ServiceException;
 
 public interface ReviewBoardService {

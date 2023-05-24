@@ -64,8 +64,7 @@
 			<div class="board_page">
 				<c:if test="${__commentPage__.commentPrev}">
 					<div class="Prev">
-						<a
-							href="/board/gorup/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.startCommentPage - 1}">Prev</a>
+						<a href="/board/gorup/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentPage=${__commentPage__.startCommentPage - 1}">Prev</a>
 					</div>
 				</c:if>
 				<c:forEach var="pageNum" begin="${__commentPage__.startCommentPage}"

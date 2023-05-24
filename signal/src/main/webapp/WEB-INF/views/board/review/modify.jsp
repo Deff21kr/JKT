@@ -36,7 +36,7 @@
                 </div>
             </section>
             
-            <form action="/board/review/modify" method="post">
+            <form name="modifyform" action="/board/review/modify" method="post">
                 <section class="title">
                     <input type="hidden" name="postNo" value="${ __REVIEW__.postNo }">
                     <input type="hidden" name="nickname" value="${ __REVIEW__.nickname }">
@@ -66,17 +66,25 @@
 
                 	location = "/board/review/list?currPage=${param.currPage}";
                 }); //onclick
+				
+                
+                $("button[type='submit']").on("click", function (e) {
+                	let formObj = $("form[name='modifyform']");
+                	
+                	e.preventDefault();
+                    console.log("submit clicked.");
 
-                $('.removeBtn').click(function () {
-
-                    let formObj = $("form");
-
-                    // 폼태그의 속성을 변경
-                    formObj.attr("action","/board/review/remove");
-                    formObj.attr("method","POST");
                     formObj.submit();
-                    
-                }); //onclick
+                    console.log("수정반영!!!!");
+                });//onclick
+
+                
+                $('.removeBtn').click(function () {
+                    let formObj = $("form[name='modifyform']");
+                    formObj.attr("action", "/board/review/remove");
+                    formObj.attr("method", "POST");
+                    formObj.submit();	
+                });//onclick
 
             }); // .jq
         </script>

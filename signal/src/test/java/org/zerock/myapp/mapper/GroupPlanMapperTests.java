@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.zerock.myapp.domain.GroupPlanDTO;
 import org.zerock.myapp.domain.GroupsDTO;
 
 import lombok.NoArgsConstructor;
@@ -36,8 +37,8 @@ public class GroupPlanMapperTests {
 	public void testGroupNameList() {
 		log.trace("testgroupNameList invoked");
 		
-		String id = "123123";
-		List<GroupsDTO> dto = this.mapper.groupNameList(id);
+		String id = "asdasd";
+		List<String> dto = this.mapper.groupNameList(id);
 		assertNotNull(dto);
 		
 		log.info("\t + id : {}", id);

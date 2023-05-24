@@ -2,6 +2,7 @@ package org.zerock.myapp.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.QnABoardDTO;
@@ -27,7 +28,7 @@ public interface UserGroupMapper {
 		public abstract Integer insert(String ID,Integer groupNo) throws DAOException;
 		
 		// 2. 글 등록시 본인 자동등록
-		public abstract Integer insertDefault(String ID,Integer groupNo) throws DAOException;
+		public abstract Integer insertDefault(@Param("ID") String ID,@Param("groupNo")Integer groupNo) throws DAOException;
 	
 		// 3. 상세조회
 		public abstract UserGroupDTO select(Integer appNo) throws DAOException;

@@ -41,12 +41,20 @@ public interface UserGroupMapper {
 		
 		// 2. 글 등록시 본인 자동등록
 		public abstract Integer insertDefault(String nickName,Integer groupNo) throws DAOException;
+		public abstract List<UserGroupDTO> selectList(@Param("nickName") String nickName,@Param("cri") Criteria cri) throws DAOException;;
+		
+		// 2. 신청시 생성
+		public abstract Integer insert(@Param("nickName") String nickName,@Param("groupNo") Integer groupNo) throws DAOException;
+		
+		// 2. 글 등록시 본인 자동등록
+		public abstract Integer insertDefault(@Param("nickName") String nickName,@Param("groupNo")Integer groupNo) throws DAOException;
 	
 		// 3. 상세조회
 		public abstract UserGroupDTO select(Integer appNo) throws DAOException;
 		
 		// 4. 이미 신청한 회원인지 중복체크
 		public abstract Integer groupCheckID(String nickName,Integer postNo);
+		public abstract Integer groupCheckID(@Param("nickName") String nickName,@Param("postNo") Integer postNo);
 	   
 		// 4. 거절시 삭제
 		public abstract Integer delete(Integer appNo) throws DAOException;

@@ -14,8 +14,12 @@ import org.zerock.myapp.domain.GroupsDTO;
 public interface GroupPlanMapper {
 	@Select("""
    		SELECT *
-		FROM tbl_groupplan  
-		WHERE groupNo = #{groupNo} AND endDate > current_date    
+		FROM tbl_groupplan gp,(
+			SELECT *
+			FROM TBL_USER_GROUP U, TBL_GROUPS G, TBL_USERS US
+			WHERE G.GROUPNO=U.GROUPNO AND U.ID=US.ID AND U.OUTCOME IN ('수락', '본인') AND US.NICKNAME = #{nickName};
+		) as a
+		WHERE groupNo = #{groupNo} AND endDate > current_date AND NICK(S)    
 		ORDER BY startDate ASC 
 		OFFSET ( #{cri.currPage} - 1 ) * #{cri.amount} ROWS 
 		FETCH NEXT #{cri.amount} ROWS ONLY
@@ -41,13 +45,13 @@ public interface GroupPlanMapper {
 	@Select("SELECT count(planno) FROM tbl_groupplan WHERE planno > 0 AND endDate > current_date")
 	public abstract Integer getTotalAmount();
 	
-	// 가입되어있는 동행이름 리스트 출력
+	// 사용자가 가입되어있는 동행이름 리스트 출력
 	@Select("""
-			SELECT G.GROUPNAME
+			SELECT G.GROUPNAME 
 			FROM TBL_USER_GROUP U, TBL_GROUPS G
 			WHERE U.GROUPNO = G.GROUPNO AND U.OUTCOME IN ('수락', '본인') AND U.ID = #{id}
 			""")
-	public abstract List<GroupsDTO> groupNameList (String id);
+	public abstract List<String> groupNameList (String id);
 	
 	
 	

@@ -87,6 +87,7 @@ public class UserGroupController {
 			RedirectAttributes rttrs) throws ControllerException {
 		try {
 			log.trace("유저ID ({} ) invoked.",nickName);
+			log.trace("유저nickName ({} ) invoked.",nickName);
 			log.trace("postNo ({} ) invoked.",postNo);
 			log.trace("currPage ({} ) invoked.",currPage);
 			GroupsDTO dto = this.group.getPost(postNo);

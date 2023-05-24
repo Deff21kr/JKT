@@ -108,6 +108,7 @@ public class GroupBoardController {
 				rttrs.addFlashAttribute("postno", dto.getPostNo());
 			    UsersVO one = this.user.getByNick(dto.getNickName());
 			    this.mapping.registerDefault(one.getID(), dh.getGroupNo());
+			    
 				
 				
 				return "redirect:/board/group/list";
@@ -139,6 +140,8 @@ public class GroupBoardController {
             List<QnACommentVO> commentList = this.commentService.selectList(commentCri, postNo);
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
+            
+            
             
             CommentPageDTO pageDTO = new CommentPageDTO(this.commentService.getCommentTotal(postNo), commentCri);
     		model.addAttribute("__commentPage__", pageDTO);

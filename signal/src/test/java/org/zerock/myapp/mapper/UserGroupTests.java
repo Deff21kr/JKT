@@ -43,27 +43,37 @@ public class UserGroupTests {
 //		log.info("\tthis.authMapper : {}", this.authMapper);
 	
 	}
+//	@Test
+//	public void selectList() throws DAOException {
+//	        String nickName = "123123";
+//	        List<UserGroupDTO> groups = this.mapper.selectList(nickName);
+//	        
+//	        Objects.requireNonNull(groups);
+//	        groups.forEach(log::info);
+//		
+//	}
+	
 	@Test
-	public void selectList() throws DAOException {
+	public void selectMyGroupList() throws DAOException {
 	        String nickName = "123123";
-	        List<UserGroupDTO> groups = this.mapper.selectList(nickName);
+	        List<UserGroupDTO> groups = this.mapper.selectMyList(nickName);
 	        
 	        Objects.requireNonNull(groups);
 	        groups.forEach(log::info);
 		
 	}
 	
-	@Test
-	public void insert() throws DAOException {
-		
-		UserGroupDTO dto = new UserGroupDTO();
-		dto.setID("2222");
-		dto.setGroupNo(8);
-		
-		Integer aff = this.mapper.insert(dto);
-		assert aff != null;
-		log.info("\t+ aff: {} \n\tdto : {} ", (aff == 1), dto);
-	}
+//	@Test
+//	public void insert() throws DAOException {
+//		
+//		UserGroupDTO dto = new UserGroupDTO();
+//		dto.setID("2222");
+//		dto.setGroupNo(8);
+//		
+//		Integer aff = this.mapper.insert(dto);
+//		assert aff != null;
+//		log.info("\t+ aff: {} \n\tdto : {} ", (aff == 1), dto);
+//	}
 	
 	@Test
 	public void update() throws DAOException {

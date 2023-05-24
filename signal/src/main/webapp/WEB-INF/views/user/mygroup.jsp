@@ -109,7 +109,7 @@
                 <c:forEach var="group" items="${__GROUP__}">
                     <div class="num">${group.appNo}</div>
                     <div class="title">${group.groupName}</div>
-                    <div class="writer">${group.ID}</div>
+                    <div class="writer">${group.nickName}</div>
                     <div class="area">${group.area}</div>
                     <div class="status">${group.recruitStatus}</div>
                     <c:if test="${group.outCome == '진행중'}">

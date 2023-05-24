@@ -23,7 +23,7 @@
         <script>
         var currPage = "${param.currPage}";
         var postNo = "${__BOARD__.postNo}";
-        var ID = "${__AUTH__.ID}";
+        var nickName = "${__AUTH__.nickName}";
         var area = encodeURIComponent("${searchPageMaker.cri.area}");
         var startDate = encodeURIComponent("${searchPageMaker.cri.startDate}");
         var endDate = encodeURIComponent("${searchPageMaker.cri.endDate}");
@@ -57,7 +57,7 @@
                           url: '${pageContext.request.contextPath}/user/mygroup/register',
                           type: 'post',
                           data :{
-                              ID : ID,
+                        	  nickName : nickName,
                               postNo : postNo,
                               currPage : currPage
                           },

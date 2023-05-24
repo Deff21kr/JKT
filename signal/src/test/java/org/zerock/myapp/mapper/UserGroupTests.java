@@ -55,7 +55,7 @@ public class UserGroupTests {
 	
 	@Test
 	public void selectMyGroupList() throws DAOException {
-	        String nickName = "123123";
+	        String nickName = "강대수";
 	        List<UserGroupDTO> groups = this.mapper.selectMyList(nickName);
 	        
 	        Objects.requireNonNull(groups);

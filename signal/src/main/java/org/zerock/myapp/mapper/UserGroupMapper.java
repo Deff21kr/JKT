@@ -2,10 +2,9 @@ package org.zerock.myapp.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.myapp.domain.Criteria;
-import org.zerock.myapp.domain.QnABoardDTO;
-import org.zerock.myapp.domain.QnABoardVO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.exception.DAOException;
 
@@ -32,16 +31,9 @@ public interface UserGroupMapper {
                 where b.postno IN (select c.postno from tbl_groups c , tbl_groupboard d where c.postno=d.postno and d.nickname=#{nickName})
                 ORDER BY b.groupno desc
 				""")
-		public abstract List<UserGroupDTO> selectMyList(String nickName
-//														,Criteria cri
-														) throws DAOException;
-		
-		// 2. 신청시 생성
-		public abstract Integer insert(String nickName,Integer groupNo) throws DAOException;
-		
-		// 2. 글 등록시 본인 자동등록
-		public abstract Integer insertDefault(String nickName,Integer groupNo) throws DAOException;
-		public abstract List<UserGroupDTO> selectList(@Param("nickName") String nickName,@Param("cri") Criteria cri) throws DAOException;;
+		public abstract List<UserGroupDTO> selectMyAppList(@Param("nickName") String nickName
+//														,@Param("cri") Criteria cri
+														) throws DAOException;;
 		
 		// 2. 신청시 생성
 		public abstract Integer insert(@Param("nickName") String nickName,@Param("groupNo") Integer groupNo) throws DAOException;
@@ -53,7 +45,6 @@ public interface UserGroupMapper {
 		public abstract UserGroupDTO select(Integer appNo) throws DAOException;
 		
 		// 4. 이미 신청한 회원인지 중복체크
-		public abstract Integer groupCheckID(String nickName,Integer postNo);
 		public abstract Integer groupCheckID(@Param("nickName") String nickName,@Param("postNo") Integer postNo);
 	   
 		// 4. 거절시 삭제

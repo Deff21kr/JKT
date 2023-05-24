@@ -107,7 +107,7 @@ public class GroupBoardController {
 				rttrs.addFlashAttribute("result", "true");
 				rttrs.addFlashAttribute("postno", dto.getPostNo());
 			    UsersVO one = this.user.getByNick(dto.getNickName());
-			    this.mapping.registerDefault(one.getID(), dh.getGroupNo());
+			    this.mapping.registerDefault(one.getNickName(), dh.getGroupNo());
 			    
 				
 				

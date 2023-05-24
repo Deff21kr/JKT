@@ -12,13 +12,14 @@ public class GroupBoardDTO {
 	
 	private Integer postNo;
 	private String title;
-	private String nickName;
 	private String content;
 	private String area;
 	private Integer memberNum;
 	private String recruitStatus;
 	@DateTimeFormat(pattern="yyyy-MM-dd")private LocalDate startDate;
 	@DateTimeFormat(pattern="yyyy-MM-dd")private LocalDate endDate;
+	private String nickName;
 	private String groupName;
+	
 
 } // end class

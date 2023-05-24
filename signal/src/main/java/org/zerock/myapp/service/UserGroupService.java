@@ -11,6 +11,8 @@ public interface UserGroupService {
 		// 1. 내 동행에 신청한 유저 보여줌
 		public abstract List<UserGroupDTO> getList(String nickName,Criteria cri) throws ServiceException;
 		
+		public abstract List<UserGroupDTO> getMyAppList(String nickName) throws ServiceException;
+		
 		public abstract Boolean register(String nickName,Integer groupNo) throws ServiceException;
 		
 		public abstract Boolean registerDefault(String nickName,Integer groupNo) throws ServiceException;

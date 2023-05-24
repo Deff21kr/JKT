@@ -34,6 +34,15 @@ public class UserGroupServiceImpl implements UserGroupService {
 	}
 
 	@Override
+	public List<UserGroupDTO> getMyAppList(String nickName) throws ServiceException {
+		try {
+			return this.dao.selectMyAppList(nickName);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	}
+
+	@Override
 	public UserGroupDTO get(Integer appNo) throws ServiceException {
 		try {
 			return this.dao.select(appNo);
@@ -119,8 +128,4 @@ try {
 		}
 	}
 
-
-	
-	
-
-}
+} // end class

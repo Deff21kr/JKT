@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class UserGroupDTO {
 	private Integer appNo;
-	private String ID;
+	private String nickName;
 	private Integer groupNo;
 	private String groupName;
 	private String area;

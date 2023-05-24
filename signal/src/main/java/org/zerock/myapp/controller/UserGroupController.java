@@ -83,10 +83,10 @@ public class UserGroupController {
 	
 	@PostMapping("/mygroup/register")
 	@ResponseBody
-	public int register(@RequestParam("ID") String ID,@RequestParam("postNo") Integer postNo,Integer currPage,
+	public int register(@RequestParam("nickName") String nickName,@RequestParam("postNo") Integer postNo,Integer currPage,
 			RedirectAttributes rttrs) throws ControllerException {
 		try {
-			log.trace("유저ID ({} ) invoked.",ID);
+			log.trace("유저nickName ({} ) invoked.",nickName);
 			log.trace("postNo ({} ) invoked.",postNo);
 			log.trace("currPage ({} ) invoked.",currPage);
 			GroupsDTO dto = this.group.getPost(postNo);
@@ -95,8 +95,8 @@ public class UserGroupController {
 			rttrs.addAttribute("currPage", currPage);
 			rttrs.addAttribute("postNo",postNo);
 			
-			if(this.service.groupCheckIDService(ID, postNo)==0) {
-				this.service.register(ID,dto.getGroupNo());
+			if(this.service.groupCheckIDService(nickName, postNo)==0) {
+				this.service.register(nickName,dto.getGroupNo());
 				return 0;
 			}else {
 				return 1;

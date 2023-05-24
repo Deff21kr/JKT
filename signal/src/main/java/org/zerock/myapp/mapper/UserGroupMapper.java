@@ -14,7 +14,7 @@ public interface UserGroupMapper {
 	
 		@Select("""
 				SELECT  
-					a.appno, b.groupname, a.id,b.area, b.recruitstatus,a.outCome,b.membernum,b.currentmember,b.groupno
+					a.appno, b.groupname, a.nickName,b.area, b.recruitstatus,a.outCome,b.membernum,b.currentmember,b.groupno
                 FROM TBL_USER_GROUP a
                 INNER JOIN tbl_groups b ON a.groupNo = b.groupNo
                 where b.postno IN (select c.postno from tbl_groups c , tbl_groupboard d where c.postno=d.postno and d.nickname=#{nickName})
@@ -22,19 +22,19 @@ public interface UserGroupMapper {
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")
-		public abstract List<UserGroupDTO> selectList(String nickName,Criteria cri) throws DAOException;;
+		public abstract List<UserGroupDTO> selectList(@Param("nickName") String nickName,@Param("cri") Criteria cri) throws DAOException;;
 		
 		// 2. 신청시 생성
-		public abstract Integer insert(String ID,Integer groupNo) throws DAOException;
+		public abstract Integer insert(@Param("nickName") String nickName,@Param("groupNo") Integer groupNo) throws DAOException;
 		
 		// 2. 글 등록시 본인 자동등록
-		public abstract Integer insertDefault(@Param("ID") String ID,@Param("groupNo")Integer groupNo) throws DAOException;
+		public abstract Integer insertDefault(@Param("nickName") String nickName,@Param("groupNo")Integer groupNo) throws DAOException;
 	
 		// 3. 상세조회
 		public abstract UserGroupDTO select(Integer appNo) throws DAOException;
 		
 		// 4. 이미 신청한 회원인지 중복체크
-		public abstract Integer groupCheckID(String ID,Integer postNo);
+		public abstract Integer groupCheckID(@Param("nickName") String nickName,@Param("postNo") Integer postNo);
 	   
 		// 4. 거절시 삭제
 		public abstract Integer delete(Integer appNo) throws DAOException;

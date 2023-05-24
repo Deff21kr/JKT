@@ -81,21 +81,21 @@ public class UserGroupServiceImpl implements UserGroupService {
 //	}
 
 	@Override
-	public Boolean register(String ID,Integer groupNo) throws ServiceException {
+	public Boolean register(String nickName,Integer groupNo) throws ServiceException {
 		
 		try {
 			
-			return ( (this.dao.insert(ID,groupNo) == 1));
+			return ( (this.dao.insert(nickName,groupNo) == 1));
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}
 	}
 	
 	@Override
-	public Boolean registerDefault(String ID, Integer groupNo) throws ServiceException {
+	public Boolean registerDefault(String nickName, Integer groupNo) throws ServiceException {
 try {
 			log.info("글쓴이 등록됨");
-			return ( (this.dao.insertDefault(ID,groupNo) == 1));
+			return ( (this.dao.insertDefault(nickName,groupNo) == 1));
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}
@@ -110,10 +110,10 @@ try {
 	}
 
 	@Override
-	public Integer groupCheckIDService(String ID, Integer postNo) throws ServiceException {
+	public Integer groupCheckIDService(String nickName, Integer postNo) throws ServiceException {
 		try {
-			log.info("동행 신청한 id 중복 판별 :{}, {} ",ID,postNo);
-			return this.dao.groupCheckID(ID,postNo);
+			log.info("동행 신청한 id 중복 판별 :{}, {} ",nickName,postNo);
+			return this.dao.groupCheckID(nickName,postNo);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}

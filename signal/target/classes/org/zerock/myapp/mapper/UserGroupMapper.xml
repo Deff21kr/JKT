@@ -15,8 +15,8 @@
 		</selectKey>
 
 		INSERT INTO tbl_user_group
-				(id, groupno)
-		VALUES (#{ID}, #{groupNo} )
+				(nickName, groupno)
+		VALUES (#{nickName}, #{groupNo} )
 		
 	</insert>
 	
@@ -25,8 +25,8 @@
 			select "ISEQ$$_77353".CURRVAL from dual
 		</selectKey>
 		INSERT INTO tbl_user_group
-				(id,outcome, groupno)
-		VALUES (#{ID},'본인' ,#{groupNo} )
+				(nickName,outcome, groupno)
+		VALUES (#{nickName},'본인' ,#{groupNo} )
 		
 	</insert>
 	

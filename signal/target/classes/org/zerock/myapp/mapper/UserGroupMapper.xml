@@ -37,10 +37,10 @@
 	</select>
 	
 	<select id="groupCheckID">
-		SELECT COUNT(id) 
+		SELECT COUNT(nickName) 
 		FROM TBL_USER_GROUP
 		WHERE GROUPNO = (SELECT GROUPNO FROM tbl_groups WHERE POSTNO = #{postNo})
-		AND ID = #{ID}
+		AND nickName = #{nickName}
 	</select>
 	
 	<update id="update">

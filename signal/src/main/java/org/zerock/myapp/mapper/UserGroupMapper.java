@@ -24,12 +24,7 @@ public interface UserGroupMapper {
 		
 		// 내 동행
 		@Select("""
-				SELECT  
-					b.groupno, b.groupname, a.nickname,b.area, b.recruitstatus,a.outCome,b.membernum,b.currentmember
-                FROM TBL_USER_GROUP a
-                INNER JOIN tbl_groups b ON a.groupNo = b.groupNo
-                where b.postno IN (select c.postno from tbl_groups c , tbl_groupboard d where c.postno=d.postno and d.nickname=#{nickName})
-                ORDER BY b.groupno desc
+				SELECT * FROM tbl_user_group u, tbl_groups g WHERE u.groupno=g.groupno and u.nickname=#{nickName};
 				""")
 		public abstract List<UserGroupDTO> selectMyAppList(@Param("nickName") String nickName
 //														,@Param("cri") Criteria cri

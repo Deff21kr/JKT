@@ -51,12 +51,7 @@ public class GroupBoardController {
     @Setter(onMethod_ = @Autowired)
     private UsersService user;
 	@Setter(onMethod_ = @Autowired)
-	private UserGroupService mapping;
-	@Setter(onMethod_ = @Autowired)
-	private UsersService user;
-	@Setter(onMethod_ = @Autowired)
 	private QnACommentService commentService;
-	
 //	// 1. 게시판 목록 조회
 	@GetMapping("/list")
 	void list(GroupBoardCriteria cri, Model model) throws ControllerException {
@@ -112,6 +107,7 @@ public class GroupBoardController {
 				rttrs.addFlashAttribute("postno", dto.getPostNo());
 			    UsersVO one = this.user.getByNick(dto.getNickName());
 			    this.mapping.registerDefault(one.getID(), dh.getGroupNo());
+			    
 				
 				
 				return "redirect:/board/group/list";
@@ -143,6 +139,8 @@ public class GroupBoardController {
             List<QnACommentVO> commentList = this.commentService.selectList(commentCri, postNo);
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
+            
+            
             
             CommentPageDTO pageDTO = new CommentPageDTO(this.commentService.getCommentTotal(postNo), commentCri);
     		model.addAttribute("__commentPage__", pageDTO);

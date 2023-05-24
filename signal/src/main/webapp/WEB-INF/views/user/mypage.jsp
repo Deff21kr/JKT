@@ -99,7 +99,7 @@
 						</div>
 						<div>
 							<div class="right_top">상태메시지</div>
-							<div class="right_contents">일이삼사오육칠팔구공일이삼사오육칠팔구공일이삼사오육칠팔구공일이삼사오육칠팔구공일이삼사오육칠팔구공일이삼사오육칠팔구공</div>
+							<div class="right_contents">${__AUTH__.statusMessage}</div>
 						</div>
 						<div>
 							<div class="right_top">평점</div>

@@ -142,7 +142,6 @@ public class GroupBoardController {
             log.info("\t+ 댓글 조회된다아아아아");
             
             
-            
             CommentPageDTO pageDTO = new CommentPageDTO(this.commentService.getCommentTotal(postNo), commentCri);
     		model.addAttribute("__commentPage__", pageDTO);
         }catch (Exception e){

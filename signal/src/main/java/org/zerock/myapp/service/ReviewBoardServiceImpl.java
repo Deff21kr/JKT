@@ -80,8 +80,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService, InitializingB
 					attachMapper.insert(attach);
 					
 				});// forEach
-				//insert완료
-				return (this.dao.insert(dto) == 1);
+				return true;
 			} // if-else
 		} catch (Exception e) {
 			throw new ServiceException(e);

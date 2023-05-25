@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
-import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.LoginService;
 import org.zerock.myapp.service.UserGroupService;
 import org.zerock.myapp.service.UsersService;
@@ -130,17 +131,24 @@ public class UsersController {
 //	}
 	
 	@GetMapping(path={"/mypage"})
-	void myGroupList(Model model,HttpServletRequest req) throws ControllerException {
+	String myGroupList(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
 		try {
 			HttpSession session = req.getSession();
 			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
 			log.info("\n\nvo : {}",vo);
-			List<UserGroupDTO> list = this.group.getMyAppList( vo.getNickName() );
+			
+			List<UserGroupDTO> list = this.group.getMyAppList( vo.getNickName(),cri );
 			log.info("\n\nlist : {}",list);
 			// Request Scope  공유속성 생성
 			model.addAttribute("__APPLIST__", list);
+			
 			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName());
 			model.addAttribute("_LIST_", dto);
+			
+			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
+			model.addAttribute("pageMaker", pageDTO);
+			
+			return "/user/mypage";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}

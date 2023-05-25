@@ -70,6 +70,7 @@
 				</a></li>
 			</ul>
 
+			
 			<!-- 프로필-->
 			<div id="tabs-1">
 
@@ -390,9 +391,6 @@
 						type="submit" value="수정">
 				</form>
 			</div>
-
-
-
 
 
 

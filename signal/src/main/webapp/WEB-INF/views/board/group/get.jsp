@@ -27,29 +27,28 @@
 
         $(function () {
             $('#listBtn').click(function () {
-    		    let selectedPageNum = e.currentTarget.textContent;
-    		    let url = "/board/group/searchList?currPage=" + selectedPageNum;
-
+            	
+    		    let url = "/board/group/searchList?currPage="+currPage
     		    // area 파라미터를 추가
-    		    url += "&area=" + encodeURIComponent('${searchPageMaker.cri.area}');
-
+    		    url += "&area=" + encodeURIComponent('${param.area}');
+                
     		    // startDate 파라미터를 추가
-    		    url += "&startDate=" + encodeURIComponent('${searchPageMaker.cri.startDate}');
+    		    url += "&startDate=" + encodeURIComponent('${param.searchPageMaker.cri.startDate}');
 
     		    // endDate 파라미터를 추가
-    		    url += "&endDate=" + encodeURIComponent('${searchPageMaker.cri.endDate}');
+    		    url += "&endDate=" + encodeURIComponent('${param.searchPageMaker.cri.endDate}');
 
     		    // memberNum 파라미터를 추가
-    		    url += "&memberNum=" + encodeURIComponent('${searchPageMaker.cri.memberNum}');
+    		    url += "&memberNum=" + encodeURIComponent('${param.searchPageMaker.cri.memberNum}');
 
     		    // recruitStatus 파라미터를 추가
-    		    url += "&recruitStatus=" + encodeURIComponent('${searchPageMaker.cri.recruitStatus}');
-
-    		    location.href = url;
+    		    url += "&recruitStatus=" + encodeURIComponent('${param.searchPageMaker.cri.recruitStatus}');
+    		    console.log("url : "+url);
+    		    //location.href = url;
             });
 
 
-                $('#modifyBtn').click(function () {
+                $('#modifyBtn').click(function () {n
                     location = "/board/group/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";
                 });
                 

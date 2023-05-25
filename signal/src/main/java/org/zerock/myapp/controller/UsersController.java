@@ -3,6 +3,9 @@ package org.zerock.myapp.controller;
 import java.util.List;
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.LoginService;
+import org.zerock.myapp.service.UserGroupService;
 import org.zerock.myapp.service.UsersService;
 
 import lombok.NoArgsConstructor;
@@ -32,6 +38,8 @@ public class UsersController {
 	private UsersService service;
 	@Setter (onMethod_=@Autowired)
 	private LoginService user;
+	@Setter (onMethod_=@Autowired)
+	private UserGroupService group;
 	
 	// 1. 회원 목록 조회 (전부)
 	@GetMapping("/list")//리턴타입이 보이드이므로 리퀘스트 맵핑이 uri
@@ -122,7 +130,18 @@ public class UsersController {
 //	}
 	
 	@GetMapping(path={"/mypage"})
-	void myGroupList() {
+	void myGroupList(Model model,HttpServletRequest req) throws ControllerException {
+		try {
+			HttpSession session = req.getSession();
+			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
+			log.info("\n\nvo : {}",vo);
+			List<UserGroupDTO> list = this.group.getMyAppList( vo.getNickName() );
+			log.info("\n\nlist : {}",list);
+			// Request Scope  공유속성 생성
+			model.addAttribute("__APPLIST__", list);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
 		
 		
 	}

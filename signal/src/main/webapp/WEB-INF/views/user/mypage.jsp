@@ -174,7 +174,7 @@
 						<div class="area">장소</div>
 						<div class="group">동행이름</div>
 						<div class="writer">작성자</div>
-						<div class="status">상태</div>
+						<div class="status">결과</div>
 						<div class="startDate">동행시작</div>
 						<div class="enDate">동행종료</div>
 					</div>
@@ -186,11 +186,18 @@
 						<div>
 							<div class="area">${applist.area}</div>
 							<div class="group">${applist.groupName}</div>
-							<div class="writer">${applist.groupName}</div>
-							<div class="status">${applist.recruitStatus}</div>
-							<div class="startDate">${applist.startDate}</div>
-							<div class="enDate">${applist.startDate}</div>
+							<div class="writer">${applist.writer}</div>
+							<div class="status">${applist.outCome}</div>
+							<div class="startDate">
+								<fmt:formatDate value="${applist.startDate}"
+											pattern="yyyy-MM-dd" />
+							</div>
+							<div class="enDate">
+								<fmt:formatDate value="${applist.endDate}"
+											pattern="yyyy-MM-dd" />
+							</div>
 						</div>
+                        
                         
                     </c:forEach>
 						

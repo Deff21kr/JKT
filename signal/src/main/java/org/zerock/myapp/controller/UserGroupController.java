@@ -72,14 +72,16 @@ public class UserGroupController {
 			log.trace("동행({} ) invoked.",model);
 			HttpSession session = req.getSession();
 			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
+			log.info("\n\nvo : {}",vo);
 			List<UserGroupDTO> list = this.service.getMyAppList( vo.getNickName() );
+			log.info("\n\nlist : {}",list);
 			// Request Scope  공유속성 생성
 			model.addAttribute("__APPLIST__", list);
 			
 //			PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
 //			model.addAttribute("pageMaker", pageDTO);
 			
-			return "/user/mygroup";
+			return "redirect:/user/mypage";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}

@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
+import org.zerock.myapp.domain.CommentCriteria;
+import org.zerock.myapp.domain.CommentPageDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.service.LoginService;
+import org.zerock.myapp.service.QnACommentService;
 import org.zerock.myapp.service.UserGroupService;
 import org.zerock.myapp.service.UsersService;
 
@@ -41,6 +44,8 @@ public class UsersController {
 	private LoginService user;
 	@Setter (onMethod_=@Autowired)
 	private UserGroupService group;
+	@Setter (onMethod_ = @Autowired)
+	private QnACommentService ser;
 	
 	// 1. 회원 목록 조회 (전부)
 	@GetMapping("/list")//리턴타입이 보이드이므로 리퀘스트 맵핑이 uri
@@ -155,7 +160,6 @@ public class UsersController {
 		
 		
 	}
-	
 //	@PostMapping(path={"/mypage/group/{동행명}/evaluate"}, params = "ID")
 //	void partnerEvaluate() {
 //		

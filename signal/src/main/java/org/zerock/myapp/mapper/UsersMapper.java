@@ -29,6 +29,6 @@ public interface UsersMapper {
 	public abstract Integer checkNickName(String nickName);
 	// 7. 회원 프로필 수정
 	public abstract Boolean profileEdit(UsersDTO dto);
-	// 8. 회원 글쓰기 내역
+	// 8. 글쓴 내역보기
 	public abstract List<UsersDTO> selectWriteList(String nickName);
 }

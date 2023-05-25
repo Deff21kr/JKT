@@ -24,14 +24,13 @@
 		$("#container").tabs();
 		heightStyle: "content"
 	});
-	
+
 	$(function() {
-		$("#modifyBtn").click(function(){
-			location="/user/edit"
+		$("#modifyBtn").click(function() {
+			location = "/user/edit"
 			console.log("클리이이이이이익");
 		});
 	});
-	
 </script>
 </head>
 
@@ -91,7 +90,7 @@
 						<!-- 프로필 이미지 수정 -->
 
 					</div>
-					
+
 					<div class="profile_right">
 						<div>
 							<div class="right_top">닉네임</div>
@@ -113,14 +112,14 @@
 							<div class="right_top">MBTI</div>
 							<div class="right_contents">${__AUTH__.MBTI}</div>
 						</div>
-						
-						
+
+
 						<div class="bt_wrap">
 							<button type="submit" id="modifyBtn">수정</button>
 						</div>
-						
+
 					</div>
-					
+
 
 
 
@@ -142,17 +141,18 @@
 						<div class="date">작성일</div>
 					</div>
 					<!-- 불러올 작성글 대략 10개정도 -->
-					<c:forEach var="WRITER" items="${__WRITER__}">
-					<div class="post">
-						<div>
-							<div class="board">${WRITER.boardName}</div>
-							<div class="title">${WRITER.title}
+
+					<c:forEach var="item" items="${_LIST_}">
+						<div class="post">
+							<div>
+								<div class="board">${item.boardName}</div>
+								<div class="title">${item.title}</div>
+								<div class="writer">${item.writer}</div>
+								<div class="date">${item.regiDate}</div>
 							</div>
-							<div class="writer">${WRITER.writer}</div>
-							<div class="date">${WRITER.regiDate}</div>
 						</div>
-					</div>
 					</c:forEach>
+
 
 					<div class="board_page">
 						<a href="#" class="bt first">< <</a> <a href="#" class="bt prev">
@@ -181,7 +181,18 @@
 					<!-- 불러올 동행내역 대략 10개정도 -->
 					<div class="post">
 
-					<c:forEach var="applist" items="${__APPLIST__}">
+						<c:forEach var="applist" items="${__APPLIST__}">
+
+							<div>
+								<div class="area">${applist.area}</div>
+								<div class="group">${applist.groupName}</div>
+								<div class="writer">${applist.groupName}</div>
+								<div class="status">${applist.recruitStatus}</div>
+								<div class="startDate">${applist.startDate}</div>
+								<div class="enDate">${applist.startDate}</div>
+							</div>
+
+						</c:forEach>
 
 						<div>
 							<div class="area">${applist.area}</div>

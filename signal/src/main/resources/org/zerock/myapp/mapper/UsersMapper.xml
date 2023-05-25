@@ -30,9 +30,11 @@
 		(id, nickname, name,
 		password, gender, email,
 		phonenumber, birthdate, MBTI, likeArea )
-		VALUES (#{ID}, #{nickName}, #{name},
+		VALUES (#{ID}, #{nickName},
+		#{name},
 		#{password}, #{gender}, #{EMail},
-		#{phoneNumber}, #{birthDate}, #{MBTI}, #{likeArea} )
+		#{phoneNumber}, #{birthDate},
+		#{MBTI}, #{likeArea} )
 
 	</insert>
 
@@ -86,14 +88,14 @@
 	</update>
 
 	<select id="selectWriteList">
-		SELECT #{__BOARD__.nickName}, #{__BOARD__.title}, #{__BOARD__.content}, #{__BOARD__.regiDate}, #{__BOARD__.boardName} 
-		FROM TBL_QNABOARD WHERE NICKNAME = #{__AUTH__.nickName}
-		UNION
-		SELECT #{__LIST__.nickName}, #{__LIST__.title}, #{__LIST__.content}, #{__LIST__.regiDate}, #{__LIST__.boardName} 
-		FROM TBL_REVIEWBOARD WHERE NICKNAME = #{__AUTH__.nickName}
-		UNION
-		SELECT #{__BOARD__.nickName}, #{__BOARD__.title}, #{__BOARD__.content}, #{__BOARD__.regiDate}, #{__BOARD__.boardName} 
-		FROM TBL_GROUPBOARD WHERE NICKNAME = #{__AUTH__.nickName}
+			SELECT NICKNAME, TITLE, CONTENT, REGIDATE, BOARDNAME
+			FROM TBL_QNABOARD WHERE NICKNAME = #{nickName}
+			UNION
+			<!-- SELECT NICKNAME, TITLE, CONTENT, REGIDATE, BOARDNAME
+			FROM TBL_REVIEWBOARD WHERE NICKNAME = #{nickName}
+			UNION -->
+			SELECT NICKNAME, TITLE, CONTENT, REGIDATE, BOARDNAME
+			FROM TBL_GROUPBOARD WHERE NICKNAME = #{nickName}
 	</select>
 
 

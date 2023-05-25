@@ -37,5 +37,5 @@ public interface UsersService {
 	public abstract Boolean profileEdit(UsersDTO dto) throws ServiceException;
 	
 	// 7. 마이프로필 글쓴내역보기
-	public abstract UsersVO selectWriteList(String nickName) throws ControllerException;
+	public abstract List<UsersVO> selectWriteList(String nickName) throws ControllerException;
 } // end interface

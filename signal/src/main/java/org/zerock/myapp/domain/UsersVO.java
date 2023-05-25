@@ -28,6 +28,9 @@ public class UsersVO {
 	private Boolean enabled;
 	private String statusMessage;
 	private String boardName;
+	private String title;
+	private String content;
+	private Timestamp regiDate;
 	
 	public UsersDTO toDTO() {
 		

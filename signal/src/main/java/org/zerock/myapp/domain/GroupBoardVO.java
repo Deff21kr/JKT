@@ -19,6 +19,7 @@ public class GroupBoardVO {
 	private Timestamp modifyDate;
 	private String nickName;
 	private String groupName;
+	private String boardName;
 	
 	
 }

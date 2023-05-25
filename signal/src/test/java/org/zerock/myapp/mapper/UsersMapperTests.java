@@ -125,5 +125,16 @@ public class UsersMapperTests {
 		log.info("\tbno : {}, affectedLines : {} \nisSucces ", dto.getID(), affectedLines, (affectedLines == 1));
 
 	} // cpmtext:pads
+	@Test(timeout = 1000*10)
+	public void testList() {
+		log.trace("글쓴내역 테스트응느은으은");
+		
+		String nickName = "강대수";
+		List<UsersVO> vo = this.mapper.selectWriteList(nickName);
+		
+		
+		log.info("vovovovovovovovovovovovovo:{}", vo);
+	
+	}
 
 } // end class

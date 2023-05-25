@@ -34,6 +34,7 @@ public interface UserGroupMapper {
 				    JOIN tbl_groupboard b ON g.postno = b.postno
 				) j ON u.groupno = j.groupno
 				WHERE u.nickname = #{nickName}
+				ORDER BY u.appdate desc
 				""")
 		public abstract List<UserGroupDTO> selectMyAppList(@Param("nickName") String nickName
 //														,@Param("cri") Criteria cri

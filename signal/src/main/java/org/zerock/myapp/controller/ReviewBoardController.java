@@ -168,23 +168,21 @@ public class ReviewBoardController {
 
 	// 게시물 삭제
 	@PostMapping("/remove")
-//	String remove(Integer postNo, RedirectAttributes rttrs)
 	String remove(Integer currPage, Integer postNo, RedirectAttributes rttrs)
 			throws ControllerException {
 		log.trace("remove({}, {}) invoked.", currPage, postNo);
-//		log.trace("remove({}) invoked.", postNo);
-
+		
 		try {
-			 rttrs.addAttribute("currPage", currPage);
+//			 rttrs.addAttribute("currPage", currPage);
 
 			if (this.service.remove(postNo)) {
-
+				rttrs.addAttribute("currPage", currPage);
 				rttrs.addAttribute("result", "true");
 				rttrs.addAttribute("postNo", postNo);
 			} // if
-
-			return "redirect:board/review/list";
-
+			
+			return "redirect:/board/review/list";
+			
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch

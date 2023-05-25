@@ -84,17 +84,17 @@ public class UsersController {
 	
 	// 특정 회원의 모든 게시물 조회
 	@PostMapping(path="/mypage")
-	String modify(UsersDTO dto,RedirectAttributes rttrs) 
+	String modify(UsersDTO dto,RedirectAttributes rttrs, Model model) 
 			throws ControllerException {
 		log.trace("modify({}) invoked.",dto);
 		
 		try {
 			Objects.requireNonNull(dto);
-			
 			if( this.service.modify(dto) ) {
+				
 				rttrs.addAttribute("result","true");
 				rttrs.addAttribute("userno",dto.getID());
-				rttrs.addAttribute("__WRITER__", dto.getNickName());
+
 			}
 			
 			return "redirect:/user/mypage";
@@ -139,6 +139,8 @@ public class UsersController {
 			log.info("\n\nlist : {}",list);
 			// Request Scope  공유속성 생성
 			model.addAttribute("__APPLIST__", list);
+			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName());
+			model.addAttribute("_LIST_", dto);
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}
@@ -184,6 +186,23 @@ public class UsersController {
 				throw new ControllerException(e);
 			}
 		}
+		
+		// 프로필 글쓴 내역 보기
+//		@PostMapping(path = "/mypage/writeList")
+//		void myPageWriterList(UsersDTO dto, Model model) throws ControllerException {
+//			log.info("mypageWriterList 호추ㅜ루룰우룽루ㅜ :({})", dto);
+//			try {
+//				UsersVO vo = this.service.selectWriteList(dto.getNickName());
+//				model.addAttribute("_LIST_", vo);
+//			} catch(Exception e) {
+//				throw new ControllerException(e);
+//			}
+//		}
+//		
+//		@GetMapping(path="mypage")
+//		void myPageWriterListMapping() {
+//			
+//		}
 	
 		
 	

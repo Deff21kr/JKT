@@ -28,6 +28,9 @@ public class UsersVO {
 	private Boolean enabled;
 	private String statusMessage;
 	private String boardName;
+	private String title;
+	private String content;
+	private Timestamp regiDate;
 	
 	public UsersDTO toDTO() {
 		
@@ -48,6 +51,9 @@ public class UsersVO {
 		dto.setRememberMe(dto.getRememberMe());
 		dto.setStatusMessage(statusMessage);
 		dto.setBoardName(boardName);
+		dto.setTitle(title);
+		dto.setContent(content);
+		dto.setRegiDate(regiDate);
 		return dto;
 	}
 	

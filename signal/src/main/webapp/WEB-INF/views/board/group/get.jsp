@@ -24,28 +24,30 @@
         var currPage = "${param.currPage}";
         var postNo = "${__BOARD__.postNo}";
         var nickName = "${__AUTH__.nickName}";
-        var area = encodeURIComponent("${searchPageMaker.cri.area}");
-        var startDate = encodeURIComponent("${searchPageMaker.cri.startDate}");
-        var endDate = encodeURIComponent("${searchPageMaker.cri.endDate}");
-        var memberNum = encodeURIComponent("${searchPageMaker.cri.memberNum}");
-        var recruitStatus = encodeURIComponent("${searchPageMaker.cri.recruitStatus}");
-        
-        
-            $(function () {
 
+        $(function () {
+            $('#listBtn').click(function () {
+    		    let selectedPageNum = e.currentTarget.textContent;
+    		    let url = "/board/group/searchList?currPage=" + selectedPageNum;
 
-                $('#listBtn').click(function () {
-                    location = "/board/group/searchList?currPage=" + currPage +
-                                "&area=" + area +
-                                "&startDate=" + startDate +
-                                "&endDate=" + endDate +
-                                "&memberNum=" + memberNum +
-                                "&recruitStatus=" + recruitStatus;
-                    // 이전 페이지로 이동
-                    // history.go(-1);
-                    // 이전 페이지로 이동한 후에 새로고침
-                    // window.location.replace(document.referrer);
-                });
+    		    // area 파라미터를 추가
+    		    url += "&area=" + encodeURIComponent('${searchPageMaker.cri.area}');
+
+    		    // startDate 파라미터를 추가
+    		    url += "&startDate=" + encodeURIComponent('${searchPageMaker.cri.startDate}');
+
+    		    // endDate 파라미터를 추가
+    		    url += "&endDate=" + encodeURIComponent('${searchPageMaker.cri.endDate}');
+
+    		    // memberNum 파라미터를 추가
+    		    url += "&memberNum=" + encodeURIComponent('${searchPageMaker.cri.memberNum}');
+
+    		    // recruitStatus 파라미터를 추가
+    		    url += "&recruitStatus=" + encodeURIComponent('${searchPageMaker.cri.recruitStatus}');
+
+    		    location.href = url;
+            });
+
 
                 $('#modifyBtn').click(function () {
                     location = "/board/group/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";

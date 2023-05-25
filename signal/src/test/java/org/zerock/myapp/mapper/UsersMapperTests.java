@@ -130,7 +130,7 @@ public class UsersMapperTests {
 		log.trace("글쓴내역 테스트응느은으은");
 		
 		String nickName = "강대수";
-		List<UsersVO> vo = this.mapper.selectWriteList(nickName);
+		List<UsersDTO> vo = this.mapper.selectWriteList(nickName);
 		
 		
 		log.info("vovovovovovovovovovovovovo:{}", vo);

@@ -94,8 +94,7 @@ public class UsersController {
 				
 				rttrs.addAttribute("result","true");
 				rttrs.addAttribute("userno",dto.getID());
-				List<UsersVO> vo = this.service.selectWriteList(dto.getNickName());
-				model.addAttribute("_LIST_", vo);
+
 			}
 			
 			return "redirect:/user/mypage";
@@ -140,6 +139,8 @@ public class UsersController {
 			log.info("\n\nlist : {}",list);
 			// Request Scope  공유속성 생성
 			model.addAttribute("__APPLIST__", list);
+			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName());
+			model.addAttribute("_LIST_", dto);
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}

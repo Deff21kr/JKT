@@ -51,6 +51,9 @@ public class UsersVO {
 		dto.setRememberMe(dto.getRememberMe());
 		dto.setStatusMessage(statusMessage);
 		dto.setBoardName(boardName);
+		dto.setTitle(title);
+		dto.setContent(content);
+		dto.setRegiDate(regiDate);
 		return dto;
 	}
 	

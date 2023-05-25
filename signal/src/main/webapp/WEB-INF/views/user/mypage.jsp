@@ -142,16 +142,19 @@
 					</div>
 					<!-- 불러올 작성글 대략 10개정도 -->
 
-					<c:forEach var="item" items="${_LIST_}">
-						<div class="post">
+
+					<div class="post">
+						<c:forEach var="item" items="${_LIST_}">
 							<div>
 								<div class="board">${item.boardName}</div>
 								<div class="title">${item.title}</div>
-								<div class="writer">${item.writer}</div>
-								<div class="date">${item.regiDate}</div>
+								<div class="writer">${item.nickName}</div>
+								<div class="date"><fmt:formatDate value="${item.regiDate}"
+									pattern="yyyy-MM-dd" /></div>
 							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
+					</div>
+
 
 
 					<div class="board_page">
@@ -181,19 +184,9 @@
 					<!-- 불러올 동행내역 대략 10개정도 -->
 					<div class="post">
 
+
+
 						<c:forEach var="applist" items="${__APPLIST__}">
-
-							<div>
-								<div class="area">${applist.area}</div>
-								<div class="group">${applist.groupName}</div>
-								<div class="writer">${applist.groupName}</div>
-								<div class="status">${applist.recruitStatus}</div>
-								<div class="startDate">${applist.startDate}</div>
-								<div class="enDate">${applist.startDate}</div>
-							</div>
-
-						</c:forEach>
-
 						<div>
 							<div class="area">${applist.area}</div>
 							<div class="group">${applist.groupName}</div>
@@ -201,17 +194,16 @@
 							<div class="status">${applist.outCome}</div>
 							<div class="startDate">
 								<fmt:formatDate value="${applist.startDate}"
-											pattern="yyyy-MM-dd" />
+									pattern="yyyy-MM-dd" />
 							</div>
 							<div class="enDate">
-								<fmt:formatDate value="${applist.endDate}"
-											pattern="yyyy-MM-dd" />
+								<fmt:formatDate value="${applist.endDate}" pattern="yyyy-MM-dd" />
 							</div>
 						</div>
-                        
-                        
-                    </c:forEach>
-						
+						</c:forEach>
+
+
+
 					</div>
 
 					<div class="board_page">

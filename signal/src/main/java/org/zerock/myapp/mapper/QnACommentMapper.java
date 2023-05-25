@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.myapp.domain.QnACommentVO;
 import org.zerock.myapp.domain.CommentCriteria;
-import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.QnACommentDTO;
 
 public interface QnACommentMapper {

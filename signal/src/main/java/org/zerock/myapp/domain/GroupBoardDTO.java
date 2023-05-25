@@ -20,6 +20,6 @@ public class GroupBoardDTO {
 	@DateTimeFormat(pattern="yyyy-MM-dd")private LocalDate endDate;
 	private String nickName;
 	private String groupName;
-	
+	private String boardName;
 
 } // end class

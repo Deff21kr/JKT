@@ -11,5 +11,6 @@ public class QnABoardDTO {
 	private String title;
 	private String content;
 	private Integer readCnt;
+	private String boardName;
 	
 } // end class

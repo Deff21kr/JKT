@@ -27,6 +27,7 @@ public class UsersVO {
 	private Integer uno;
 	private Boolean enabled;
 	private String statusMessage;
+	private String boardName;
 	
 	public UsersDTO toDTO() {
 		
@@ -46,6 +47,7 @@ public class UsersVO {
 		dto.setEnabled(enabled);
 		dto.setRememberMe(dto.getRememberMe());
 		dto.setStatusMessage(statusMessage);
+		dto.setBoardName(boardName);
 		return dto;
 	}
 	

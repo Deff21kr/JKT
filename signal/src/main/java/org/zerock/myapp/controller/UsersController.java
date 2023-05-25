@@ -86,6 +86,7 @@ public class UsersController {
 			if( this.service.modify(dto) ) {
 				rttrs.addAttribute("result","true");
 				rttrs.addAttribute("userno",dto.getID());
+				rttrs.addAttribute("__WRITER__", dto.getNickName());
 			}
 			
 			return "redirect:/user/mypage";
@@ -165,6 +166,7 @@ public class UsersController {
 			}
 		}
 	
+		
 	
    
 } // end class

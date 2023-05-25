@@ -27,6 +27,7 @@ public class UsersDTO {
 	private Boolean enabled;
 	private Boolean rememberMe;
 	private String statusMessage;
+	private String boardName;
 	
 
 }

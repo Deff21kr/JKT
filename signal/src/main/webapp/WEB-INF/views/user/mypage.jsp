@@ -142,15 +142,14 @@
 						<div class="date">작성일</div>
 					</div>
 					<!-- 불러올 작성글 대략 10개정도 -->
-					<c:forEach var="board" items="${__BOARD__}">
+					<c:forEach var="WRITER" items="${__WRITER__}">
 					<div class="post">
-						
 						<div>
-							<div class="board">게시판 이름</div>
-							<div class="title">글 제목
+							<div class="board">${WRITER.boardName}</div>
+							<div class="title">${WRITER.title}
 							</div>
-							<div class="writer">작성자</div>
-							<div class="date">작성일</div>
+							<div class="writer">${WRITER.writer}</div>
+							<div class="date">${WRITER.regiDate}</div>
 						</div>
 					</div>
 					</c:forEach>

@@ -60,11 +60,7 @@ public class CommonController {
 			if (vo != null) { // 로그인을 성공했다면 (why? 영속성까지 들어가서 객체를 반환한다는건 데이터가 맞게 들어갔다는 뜻)
 				model.addAttribute("__AUTH__", vo); // Request Scope
 				String re = (String) req.getSession().getAttribute("redirectUri");
-//				log.info("\n\ncurrPage : {}" ,sign.getCurrPage());
-//				log.info("\n\npostNo : {}" ,sign.getPostNo());
-//				if(currPage != null & postNo != null ) {
-//					return re+currPage+postNo;
-//				}
+		
 				log.info("\n\n&&& re &&&& : {} \n\n", re);
 				log.info("\ndto : {} ,model : {}", dto, model);
 

@@ -3,6 +3,9 @@ package org.zerock.myapp.controller;
 import java.util.List;
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.exception.ServiceException;
+import org.zerock.myapp.service.LoginService;
+import org.zerock.myapp.service.UserGroupService;
 import org.zerock.myapp.service.UsersService;
 
 import lombok.NoArgsConstructor;
@@ -29,6 +36,10 @@ public class UsersController {
    
 	@Setter (onMethod_=@Autowired)
 	private UsersService service;
+	@Setter (onMethod_=@Autowired)
+	private LoginService user;
+	@Setter (onMethod_=@Autowired)
+	private UserGroupService group;
 	
 	// 1. 회원 목록 조회 (전부)
 	@GetMapping("/list")//리턴타입이 보이드이므로 리퀘스트 맵핑이 uri
@@ -69,9 +80,9 @@ public class UsersController {
 			
 		}
 		
-	} // 특정 회원의 모든 게시물 조회
+	} 
 	
-	
+	// 특정 회원의 모든 게시물 조회
 	@PostMapping(path="/mypage")
 	String modify(UsersDTO dto,RedirectAttributes rttrs) 
 			throws ControllerException {
@@ -83,6 +94,7 @@ public class UsersController {
 			if( this.service.modify(dto) ) {
 				rttrs.addAttribute("result","true");
 				rttrs.addAttribute("userno",dto.getID());
+				rttrs.addAttribute("__WRITER__", dto.getNickName());
 			}
 			
 			return "redirect:/user/mypage";
@@ -118,9 +130,19 @@ public class UsersController {
 //	}
 	
 	@GetMapping(path={"/mypage"})
-	String myGroupList() {
+	void myGroupList(Model model,HttpServletRequest req) throws ControllerException {
+		try {
+			HttpSession session = req.getSession();
+			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
+			log.info("\n\nvo : {}",vo);
+			List<UserGroupDTO> list = this.group.getMyAppList( vo.getNickName() );
+			log.info("\n\nlist : {}",list);
+			// Request Scope  공유속성 생성
+			model.addAttribute("__APPLIST__", list);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
 		
-		return "user/mypage";
 		
 	}
 	
@@ -131,21 +153,25 @@ public class UsersController {
 	
 	// 프로필 수정
 	@PostMapping("/edit")
-	String profilModify(UsersDTO dto, RedirectAttributes rttrs, Model model,@RequestParam("ID") String ID,String MBTI,
-	String likeArea) throws ControllerException {
-		
+	String profilModify(UsersDTO dto, RedirectAttributes rttrs, Model model) throws ControllerException {
+		log.info("\n\ndto : {}",dto);
 		try {
-			List<UsersVO> list = this.service.getList();
-			this.service.profileEdit(dto);
-			rttrs.addAttribute("ID", dto.getID());
-			model.addAttribute("__LIST__", list);
+			
+			if(this.service.profileEdit(dto)) {
+				UsersVO vo = this.service.get(dto.getID());
+				log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
+//				this.user.authenticate(vo.toDTO());
+				
+				model.addAttribute("__AUTH__", vo); // Request Scope
+				
+			}
 			log.info("\t+ dto: ({}, {})", dto, dto.getID());
 			
-			
+			return "/user/mypage";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		}
-		return "redirect:/user/mypage";
+		
 	}
 
 	// 프로필 수정
@@ -153,11 +179,13 @@ public class UsersController {
 		void myPageModify(UsersDTO dto, RedirectAttributes rttrs, Model model, String ID, String MBTI) throws ControllerException {
 			try {
 				
+				
 			} catch(Exception e) {
 				throw new ControllerException(e);
 			}
 		}
 	
+		
 	
    
 } // end class

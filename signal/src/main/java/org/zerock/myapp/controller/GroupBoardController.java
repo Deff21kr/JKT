@@ -23,11 +23,13 @@ import org.zerock.myapp.domain.GroupBoardVO;
 import org.zerock.myapp.domain.GroupsDTO;
 import org.zerock.myapp.domain.QnACommentDTO;
 import org.zerock.myapp.domain.QnACommentVO;
+import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.service.GroupBoardService;
 import org.zerock.myapp.service.GroupService;
-import org.zerock.myapp.service.QnABoardService;
 import org.zerock.myapp.service.QnACommentService;
+import org.zerock.myapp.service.UserGroupService;
+import org.zerock.myapp.service.UsersService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -44,6 +46,10 @@ public class GroupBoardController {
 	private GroupBoardService service;
 	@Setter(onMethod_ = @Autowired)
 	private GroupService group;
+    @Setter(onMethod_ = @Autowired)
+    private UsersService user;
+	@Setter(onMethod_ = @Autowired)
+	private UserGroupService mapping;
 	@Setter(onMethod_ = @Autowired)
 	private QnACommentService commentService;
 	
@@ -101,7 +107,8 @@ public class GroupBoardController {
 				rttrs.addFlashAttribute("result", "true");
 				rttrs.addFlashAttribute("postno", dto.getPostNo());
 			    UsersVO one = this.user.getByNick(dto.getNickName());
-			    this.mapping.registerDefault(one.getID(), dh.getGroupNo());
+			    this.mapping.registerDefault(one.getNickName(), dh.getGroupNo());
+			    
 				
 				
 				return "redirect:/board/group/list";
@@ -133,6 +140,7 @@ public class GroupBoardController {
             List<QnACommentVO> commentList = this.commentService.selectList(commentCri, postNo);
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
+            
             
             CommentPageDTO pageDTO = new CommentPageDTO(this.commentService.getCommentTotal(postNo), commentCri);
     		model.addAttribute("__commentPage__", pageDTO);

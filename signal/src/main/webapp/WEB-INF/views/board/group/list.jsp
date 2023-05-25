@@ -51,6 +51,7 @@
                 <div class="place">
 
                     <form action="/board/group/searchList">
+                    <input type="hidden" name="currPage" value="1">
                         <div class="searchbox">
 
                             <div class="area">
@@ -218,7 +219,7 @@
                 <div class="bottom">
                     <div class="searching">
 
-                    </div>
+                </div>
 
 
                     <div class="bt_wrap">
@@ -233,9 +234,6 @@
 
 
             </body>
-
-
-
 
 
             </html>

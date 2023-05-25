@@ -25,7 +25,7 @@
 	<div class="edit_write">
 		<div class="profile_right">
 			<form action="/user/edit" method="post">
-				<input type="hidden" name="ID" value="${__LIST__.ID}">
+				<input type="hidden" name="ID" value="${__AUTH__.ID}">
 				<div>
 					<div class="right_top">닉네임</div>
 					<div class="right_contents">${__AUTH__.nickName}</div>
@@ -81,13 +81,7 @@
 		</div>
 	</div>
 
-	<script>
-		$(function() {
-			$('#modifyBtn').click(function() {
-				location = "/user/mypage";
-			});
-		});
-	</script>
+	
 </body>
 
 </html>

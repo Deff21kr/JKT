@@ -23,17 +23,32 @@
         <script>
         var currPage = "${param.currPage}";
         var postNo = "${__BOARD__.postNo}";
-        var ID = "${__AUTH__.ID}";
-        
-        
-            $(function () {
-                $('#listBtn').click(function () {
-                    location = "/board/group/list?currPage=${param.currPage}&postNo=${param.postNo}";
-                    // 이전 페이지로 이동
-                    // history.go(-1);
-                    // 이전 페이지로 이동한 후에 새로고침
-                    // window.location.replace(document.referrer);
-                });
+        var nickName = "${__AUTH__.nickName}";
+
+        $(function () {
+            $('#listBtn').click(function () {
+    		    let selectedPageNum = e.currentTarget.textContent;
+    		    let url = "/board/group/searchList?currPage=" + selectedPageNum;
+
+    		    // area 파라미터를 추가
+    		    url += "&area=" + encodeURIComponent('${searchPageMaker.cri.area}');
+
+    		    // startDate 파라미터를 추가
+    		    url += "&startDate=" + encodeURIComponent('${searchPageMaker.cri.startDate}');
+
+    		    // endDate 파라미터를 추가
+    		    url += "&endDate=" + encodeURIComponent('${searchPageMaker.cri.endDate}');
+
+    		    // memberNum 파라미터를 추가
+    		    url += "&memberNum=" + encodeURIComponent('${searchPageMaker.cri.memberNum}');
+
+    		    // recruitStatus 파라미터를 추가
+    		    url += "&recruitStatus=" + encodeURIComponent('${searchPageMaker.cri.recruitStatus}');
+
+    		    location.href = url;
+            });
+
+
                 $('#modifyBtn').click(function () {
                     location = "/board/group/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";
                 });
@@ -44,7 +59,7 @@
                           url: '${pageContext.request.contextPath}/user/mygroup/register',
                           type: 'post',
                           data :{
-                              ID : ID,
+                        	  nickName : nickName,
                               postNo : postNo,
                               currPage : currPage
                           },

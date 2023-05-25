@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
+import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.mapper.UsersMapper;
 
@@ -173,6 +174,16 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		// 자원해제(후처리)
 		log.trace("\n*********************************************************\n			destroy() "
 				+ "\n********************************************************* ");
+	}
+
+	@Override
+	public UsersVO selectWriteList(String nickName) throws ControllerException {
+		try {
+			return this.dao.selectWriteList(nickName);
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		}
+		
 	}
 
 	

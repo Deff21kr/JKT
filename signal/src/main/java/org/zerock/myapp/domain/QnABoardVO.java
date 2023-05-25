@@ -16,6 +16,7 @@ public class QnABoardVO {
 	private Timestamp regiDate;
 	private Timestamp modifyDate;
 	private Integer readCnt;
+	private String boardName;
 	
 	public QnABoardDTO toDTO() {
 		log.trace("toDTO() invoked.");
@@ -25,7 +26,7 @@ public class QnABoardVO {
 		dto.setNickName(nickName);
 		dto.setTitle(title);
 		dto.setContent(content);
-		
+		dto.setBoardName(boardName);
 		log.info("\t + dto:{}", dto);
 		
 		return dto;

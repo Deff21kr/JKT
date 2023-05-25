@@ -10,10 +10,12 @@
 	<select id="select" resultType="org.zerock.myapp.domain.UsersVO">
 		SELECT *
 		FROM tbl_users
-		WHERE id = #{ID}
+		WHERE id =
+		#{ID}
 	</select>
-	
-	<select id="selectByNick" resultType="org.zerock.myapp.domain.UsersVO">
+
+	<select id="selectByNick"
+		resultType="org.zerock.myapp.domain.UsersVO">
 		SELECT *
 		FROM tbl_users
 		WHERE nickname = #{nickName}
@@ -24,14 +26,14 @@
 			select "ISEQ$$_74653".CURRVAL from dual
 		</selectKey>
 
-		INSERT INTO tbl_users 
-				(id, nickname, name, 
-				password, gender, email, 
-				phonenumber, birthdate, MBTI, likeArea )
+		INSERT INTO tbl_users
+		(id, nickname, name,
+		password, gender, email,
+		phonenumber, birthdate, MBTI, likeArea )
 		VALUES (#{ID}, #{nickName}, #{name},
-			#{password}, #{gender}, #{EMail},
-			#{phoneNumber}, #{birthDate}, #{MBTI}, #{likeArea} )
-		
+		#{password}, #{gender}, #{EMail},
+		#{phoneNumber}, #{birthDate}, #{MBTI}, #{likeArea} )
+
 	</insert>
 
 
@@ -43,44 +45,57 @@
 	<update id="update">
 		UPDATE tbl_users
 		SET
-			name = #{name},
-			password=#{password},
-			email=#{EMail},
-			phoneNumber=#{phoneNumber}
-			<if test="MBTI != null">
-				,MBTI=#{MBTI}
-			</if>
-			<if test="likeArea != null">
-				,likeArea=#{likeArea}
-			</if>
-			
+		name = #{name},
+		password=#{password},
+		email=#{EMail},
+		phoneNumber=#{phoneNumber}
+		<if test="MBTI != null">
+			,MBTI=#{MBTI}
+		</if>
+		<if test="likeArea != null">
+			,likeArea=#{likeArea}
+		</if>
+
 		WHERE id = #{ID}
 	</update>
-	
+
 	<select id="checkID" resultType="int">
-		SELECT count(id) FROM tbl_users where id = #{ID}
+		SELECT count(id) FROM tbl_users
+		where id = #{ID}
 	</select>
-	
+
 	<select id="checkNickName" resultType="int">
-		SELECT count(nickName) FROM tbl_users where nickName = #{nickName}
+		SELECT count(nickName)
+		FROM tbl_users where nickName = #{nickName}
 	</select>
 
 	<update id="profileEdit">
-	UPDATE tbl_users
+		UPDATE tbl_users
 		SET
-			<if test="statusMessage != null">
+		<if test="statusMessage != null">
 			statusMessage = #{statusMessage}
-			</if>
-			<if test="MBTI != null">
-				,MBTI=#{MBTI}
-			</if>
-			<if test="likeArea != null">
-				,likeArea=#{likeArea}
-			</if>
-			
+		</if>
+		<if test="MBTI != null">
+			,MBTI=#{MBTI}
+		</if>
+		<if test="likeArea != null">
+			,likeArea=#{likeArea}
+		</if>
+
 		WHERE ID = #{ID}
 	</update>
-	
+
+	<select id="selectWriteList">
+		SELECT #{__BOARD__.nickName}, #{__BOARD__.title}, #{__BOARD__.content}, #{__BOARD__.regiDate}, #{__BOARD__.boardName} 
+		FROM TBL_QNABOARD WHERE NICKNAME = #{__AUTH__.nickName}
+		UNION
+		SELECT #{__LIST__.nickName}, #{__LIST__.title}, #{__LIST__.content}, #{__LIST__.regiDate}, #{__LIST__.boardName} 
+		FROM TBL_REVIEWBOARD WHERE NICKNAME = #{__AUTH__.nickName}
+		UNION
+		SELECT #{__BOARD__.nickName}, #{__BOARD__.title}, #{__BOARD__.content}, #{__BOARD__.regiDate}, #{__BOARD__.boardName} 
+		FROM TBL_GROUPBOARD WHERE NICKNAME = #{__AUTH__.nickName}
+	</select>
+
 
 
 

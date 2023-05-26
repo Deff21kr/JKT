@@ -21,98 +21,78 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
         
         <script>
+
         var currPage = "${param.currPage}";
         var postNo = "${__BOARD__.postNo}";
         var nickName = "${__AUTH__.nickName}";
 
-        $(function () {
-            $('#listBtn').click(function () {
-        	    var currPage = "${searchPageMaker.cri.currPage}";
-        	    var area = "${searchPageMaker.cri.area}";
-        	    var startDate = "${searchPageMaker.cri.startDate}";
-        	    var endDate = "${searchPageMaker.cri.endDate}";
-        	    var memberNum = "${searchPageMaker.cri.memberNum}";
-        	    var recruitStatus = "${searchPageMaker.cri.recruitStatus}";
 
-        	    var encodedCurrPage = encodeURIComponent(currPage);
-        	    var encodedArea = encodeURIComponent(area);
-        	    var encodedStartDate = encodeURIComponent(startDate);
-        	    var encodedEndDate = encodeURIComponent(endDate);
-        	    var encodedMemberNum = encodeURIComponent(memberNum);
-        	    var encodedRecruitStatus = encodeURIComponent(recruitStatus);
+        $(function() {
+        	$('#listBtn').click(function() {
+        		var searchParam = location.search
+                var params = new URLSearchParams(searchParam);
+                var getCurrPage= params.get('currPage');
+                var getArea= params.get('area');
+                var getStartDate= params.get('startDate');
+                var getEndDate= params.get('endDate');
+                var getMemberNum= params.get('memberNum');
+                var getRecruitStatus= params.get('recruitStatus');
+        		
+        		  var queryParams = "?currPage=" + getCurrPage +
+        		                    "&area=" + getArea +
+        		                    "&startDate=" + getStartDate +
+        		                    "&endDate=" + getEndDate +
+        		                    "&memberNum=" + getMemberNum +
+        		                    "&recruitStatus=" + getRecruitStatus;
+					    console.log(getCurrPage);
+					    console.log(getArea);
+					    console.log(getStartDate);
+					    console.log(getEndDate);
+					    console.log(getMemberNum);
+					    console.log(getRecruitStatus);
+        		  location.href = "/board/group/searchList" + queryParams;
+              });
 
-        	    var queryParams = "/board/group/searchList?currPage=" + encodedCurrPage +
-        	                      "&area=" + encodedArea +
-        	                      "&startDate=" + encodedStartDate +
-        	                      "&endDate=" + encodedEndDate +
-        	                      "&memberNum=" + encodedMemberNum +
-        	                      "&recruitStatus=" + encodedRecruitStatus;
+          $('#modifyBtn').click(function() {
+            location.href = "/board/group/modify?currPage=" + currPage + "&postNo=" + postNo;
+          });
 
-        	    location = queryParams;
-=======
-            	
-    		    let url = "/board/group/searchList?currPage="+currPage
-    		    // area 파라미터를 추가
-    		    url += "&area=" + encodeURIComponent('${param.area}');
-                
-    		    // startDate 파라미터를 추가
-    		    url += "&startDate=" + encodeURIComponent('${param.searchPageMaker.cri.startDate}');
+          $('#applyBtn').click(function() {
+            $.ajax({
+              url: '${pageContext.request.contextPath}/user/mygroup/register',
+              type: 'post',
+              data: {
+                nickName: nickName,
+                postNo: postNo,
+                currPage: currPage
+              },
+              dataType: 'json',
+              success: function(data) {
+                var model = parseInt(data);
+                console.log("1 = 중복o / 0 = 중복x : " + model);
 
-    		    // endDate 파라미터를 추가
-    		    url += "&endDate=" + encodeURIComponent('${param.searchPageMaker.cri.endDate}');
+                if (model == 1) { // id 이미 있음
+                  console.log('Data 1:', model);
+                  console.log(model);
+                  console.log(typeof(model));
+                  alert('이미 등록된 ID입니다.');
 
-    		    // memberNum 파라미터를 추가
-    		    url += "&memberNum=" + encodeURIComponent('${param.searchPageMaker.cri.memberNum}');
+                } else {
+                  console.log('Data 2:', model);
+                  console.log(model);
+                  console.log(typeof(model));
+                  alert('신청이 완료되었습니다.');
+                }
+              },
 
-    		    // recruitStatus 파라미터를 추가
-    		    url += "&recruitStatus=" + encodeURIComponent('${param.searchPageMaker.cri.recruitStatus}');
-    		    console.log("url : "+url);
-    		    //location.href = url;
->>>>>>> 5a9f72ae30400abb36c6c54d0700e34bcbde3503
+              error: function() {
+                console.log("실패");
+              }
             });
-
-
-                $('#modifyBtn').click(function () {n
-                    location = "/board/group/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";
-                });
-                
-                $('#applyBtn').click(function () {
-                    
-                    $.ajax({
-                          url: '${pageContext.request.contextPath}/user/mygroup/register',
-                          type: 'post',
-                          data :{
-                        	  nickName : nickName,
-                              postNo : postNo,
-                              currPage : currPage
-                          },
-                          dataType: 'json',
-                          success: function(data) {
-                              var model = parseInt(data);
-                            console.log("1 = 중복o / 0 = 중복x : " + model);
-                            
-                            if (model==1) { // id 이미 있음
-                                console.log('Data 1:', model);
-                                console.log(model);
-                                console.log(typeof(model));
-                                alert('이미 등록된 ID입니다.');
-                                 
-                            } else {
-                                console.log('Data 2:', model);
-                                console.log(model);
-                                console.log(typeof(model));
-                                alert('신청이 완료되었습니다.');
-                            }
-                          },
-                          
-                          error: function() {
-                            console.log("실패");
-                          }
-                        });
-              
-            });
+          });
         });
-        </script>
+      </script>
+
     </head>
 
     <body>

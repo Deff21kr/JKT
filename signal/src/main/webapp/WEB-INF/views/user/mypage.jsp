@@ -37,7 +37,7 @@
 	$(function() {
 		$('.pageNum').on('click', function(e) {
 			let selectedPageNum = e.currentTarget.textContent;
-			location = "/user/mypage?#currPage="+selectedPageNum+"tabs-2";
+			location = "/user/mypage?currPage="+selectedPageNum+"#tabs-2";
 		});
 	});
 

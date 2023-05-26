@@ -27,25 +27,28 @@
 
         $(function () {
             $('#listBtn').click(function () {
-    		    let selectedPageNum = e.currentTarget.textContent;
-    		    let url = "/board/group/searchList?currPage=" + selectedPageNum;
+        	    var currPage = "${searchPageMaker.cri.currPage}";
+        	    var area = "${searchPageMaker.cri.area}";
+        	    var startDate = "${searchPageMaker.cri.startDate}";
+        	    var endDate = "${searchPageMaker.cri.endDate}";
+        	    var memberNum = "${searchPageMaker.cri.memberNum}";
+        	    var recruitStatus = "${searchPageMaker.cri.recruitStatus}";
 
-    		    // area 파라미터를 추가
-    		    url += "&area=" + encodeURIComponent('${searchPageMaker.cri.area}');
+        	    var encodedCurrPage = encodeURIComponent(currPage);
+        	    var encodedArea = encodeURIComponent(area);
+        	    var encodedStartDate = encodeURIComponent(startDate);
+        	    var encodedEndDate = encodeURIComponent(endDate);
+        	    var encodedMemberNum = encodeURIComponent(memberNum);
+        	    var encodedRecruitStatus = encodeURIComponent(recruitStatus);
 
-    		    // startDate 파라미터를 추가
-    		    url += "&startDate=" + encodeURIComponent('${searchPageMaker.cri.startDate}');
+        	    var queryParams = "/board/group/searchList?currPage=" + encodedCurrPage +
+        	                      "&area=" + encodedArea +
+        	                      "&startDate=" + encodedStartDate +
+        	                      "&endDate=" + encodedEndDate +
+        	                      "&memberNum=" + encodedMemberNum +
+        	                      "&recruitStatus=" + encodedRecruitStatus;
 
-    		    // endDate 파라미터를 추가
-    		    url += "&endDate=" + encodeURIComponent('${searchPageMaker.cri.endDate}');
-
-    		    // memberNum 파라미터를 추가
-    		    url += "&memberNum=" + encodeURIComponent('${searchPageMaker.cri.memberNum}');
-
-    		    // recruitStatus 파라미터를 추가
-    		    url += "&recruitStatus=" + encodeURIComponent('${searchPageMaker.cri.recruitStatus}');
-
-    		    location.href = url;
+        	    location = queryParams;
             });
 
 

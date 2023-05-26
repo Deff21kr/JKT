@@ -29,6 +29,7 @@
 
         $(function() {
         	$('#listBtn').click(function() {
+        		
         		var searchParam = location.search
                 var params = new URLSearchParams(searchParam);
                 var getCurrPage= params.get('currPage');
@@ -38,7 +39,7 @@
                 var getMemberNum= params.get('memberNum');
                 var getRecruitStatus= params.get('recruitStatus');
         		
-        		  var queryParams = "?currPage=" + getCurrPage +
+        		var queryParams = "?currPage=" + getCurrPage +
         		                    "&area=" + getArea +
         		                    "&startDate=" + getStartDate +
         		                    "&endDate=" + getEndDate +
@@ -70,14 +71,6 @@
               success: function(data) {
                 var model = parseInt(data);
                 console.log("1 = 중복o / 0 = 중복x : " + model);
-        	    location = queryParams;
-            	
-    		    let url = "/board/group/searchList?currPage="+currPage
-    		    // area 파라미터를 추가
-    		    url += "&area=" + encodeURIComponent('${param.area}');
-                
-    		    // startDate 파라미터를 추가
-    		    url += "&startDate=" + encodeURIComponent('${param.searchPageMaker.cri.startDate}');
 
                 if (model == 1) { // id 이미 있음
                   console.log('Data 1:', model);
@@ -96,10 +89,7 @@
               error: function() {
                 console.log("실패");
               }
-    		    // recruitStatus 파라미터를 추가
-    		    url += "&recruitStatus=" + encodeURIComponent('${param.searchPageMaker.cri.recruitStatus}');
-    		    console.log("url : "+url);
-    		    //location.href = url;
+
             });
 
 

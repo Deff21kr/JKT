@@ -49,10 +49,30 @@
         	                      "&recruitStatus=" + encodedRecruitStatus;
 
         	    location = queryParams;
+=======
+            	
+    		    let url = "/board/group/searchList?currPage="+currPage
+    		    // area 파라미터를 추가
+    		    url += "&area=" + encodeURIComponent('${param.area}');
+                
+    		    // startDate 파라미터를 추가
+    		    url += "&startDate=" + encodeURIComponent('${param.searchPageMaker.cri.startDate}');
+
+    		    // endDate 파라미터를 추가
+    		    url += "&endDate=" + encodeURIComponent('${param.searchPageMaker.cri.endDate}');
+
+    		    // memberNum 파라미터를 추가
+    		    url += "&memberNum=" + encodeURIComponent('${param.searchPageMaker.cri.memberNum}');
+
+    		    // recruitStatus 파라미터를 추가
+    		    url += "&recruitStatus=" + encodeURIComponent('${param.searchPageMaker.cri.recruitStatus}');
+    		    console.log("url : "+url);
+    		    //location.href = url;
+>>>>>>> 5a9f72ae30400abb36c6c54d0700e34bcbde3503
             });
 
 
-                $('#modifyBtn').click(function () {
+                $('#modifyBtn').click(function () {n
                     location = "/board/group/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";
                 });
                 

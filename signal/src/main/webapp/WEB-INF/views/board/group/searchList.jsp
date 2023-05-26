@@ -37,6 +37,7 @@
             	  });
             	  $('.pageNum').on('click', function (e) {
             		    let selectedPageNum = e.currentTarget.textContent;
+            		    colsole.log(selectedPageNum);
             		    let url = "/board/group/searchList?currPage=" + selectedPageNum;
 
             		    // area 파라미터를 추가
@@ -53,8 +54,8 @@
 
             		    // recruitStatus 파라미터를 추가
             		    url += "&recruitStatus=" + encodeURIComponent('${searchPageMaker.cri.recruitStatus}');
-
-            		    location.href = url;
+            		    colsole.log(url);
+        //    		    location.href = url;
             		});
 
                   });

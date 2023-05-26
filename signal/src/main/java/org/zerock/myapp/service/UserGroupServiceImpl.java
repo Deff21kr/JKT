@@ -34,9 +34,9 @@ public class UserGroupServiceImpl implements UserGroupService {
 	}
 
 	@Override
-	public List<UserGroupDTO> getMyAppList(String nickName) throws ServiceException {
+	public List<UserGroupDTO> getMyAppList(String nickName,Criteria cri) throws ServiceException {
 		try {
-			return this.dao.selectMyAppList(nickName);
+			return this.dao.selectMyAppList(nickName,cri);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
@@ -116,6 +116,13 @@ try {
 			log.trace("getTotal() invoked.");
 		
 		return this.dao.getTotalAmount(nickName);
+	}
+	@Override
+	public Integer getTotalAppList(String nickName) throws ServiceException {
+		
+			log.trace("getTotalAppList() invoked.");
+		
+		return this.dao.getTotalAmountAppList(nickName);
 	}
 
 	@Override

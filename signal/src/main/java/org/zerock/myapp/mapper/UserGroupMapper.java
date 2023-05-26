@@ -34,9 +34,12 @@ public interface UserGroupMapper {
 				    JOIN tbl_groupboard b ON g.postno = b.postno
 				) j ON u.groupno = j.groupno
 				WHERE u.nickname = #{nickName}
+				ORDER BY u.appdate desc
+				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
+				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")
 		public abstract List<UserGroupDTO> selectMyAppList(@Param("nickName") String nickName
-//														,@Param("cri") Criteria cri
+														,@Param("cri") Criteria cri
 														) throws DAOException;;
 		
 		// 2. 신청시 생성
@@ -67,6 +70,21 @@ public interface UserGroupMapper {
 				and a.outcome != '거절'
 				""")
 		public abstract Integer getTotalAmount(String nickName);
+		
+		// 6. 총 게시물 갯수 반환
+		@Select("""
+				SELECT 
+				    count(u.appno)
+				FROM tbl_user_group u
+				JOIN (
+				    SELECT g.groupno, g.groupname, g.recruitstatus, g.membernum, g.currentmember, g.area, b.postno,
+				           b.title, b.content, b.startdate, b.enddate, b.views, b.regidate, b.modifydate, b.nickname writer
+				    FROM tbl_groups g
+				    JOIN tbl_groupboard b ON g.postno = b.postno
+				) j ON u.groupno = j.groupno
+				WHERE u.nickname = #{nickName}
+				""")
+		public abstract Integer getTotalAmountAppList(String nickName);
 
 
 }

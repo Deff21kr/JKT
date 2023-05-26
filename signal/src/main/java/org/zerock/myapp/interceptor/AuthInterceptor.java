@@ -125,6 +125,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 //    	      * 자동로그인 설정이 안되어 있는 경우와, 위의 조건을 만족하지 못하는 경우
 //    	      	즉시, 로그인 창으로 밀어버림(리다이렉션)
     		  log.info("\t2. No credential found. Redirect to Login.");
+    		  
+    		  
     		 String query = req.getQueryString() ;
     		 log.info("\n\nquery : {} ",query);
     		 if(query != null) {

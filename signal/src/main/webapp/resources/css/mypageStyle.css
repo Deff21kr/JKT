@@ -263,41 +263,75 @@ html {
 }
 
 /* =========== paging =========== */
-.board_page {
-	margin-top: 30px;
-	text-align: center;
-	font-size: 0;
-}
-
-.board_page a {
-	display: inline-block;
-	width: 32px;
-	height: 32px;
-	box-sizing: border-box;
-	border: 1px solid #ddd;
-	border-left: 0;
-	vertical-align: middle;
-	line-height: 100%;
-}
-
-.board_page a.bt {
-	padding-top: 10px;
-	font-size: 1.2rem;
-	letter-spacing: -10px;
-}
-
-.board_page a.num {
-	padding-top: 9px;
-	font-size: 1.4rem;
-}
-
-.board_page a:first-child {
-	border-left: 1px solid #ddd;
-}
 
 .board_page {
-	margin-bottom: 30px;
+    /* 위로 여백 떨어짐 */
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0;
 }
+
+.board_page .Prev,
+.board_page .pageNum,
+.board_page .Next {
+    display: inline-block;
+    width: 32px;
+    height: 35px;
+    box-sizing: border-box;
+    border: 1px solid rgb(208, 207, 207) ;
+    border-left: 0;
+    vertical-align: middle;
+    line-height: 100%;
+}
+
+/* .board_page a {
+    display: inline-block;
+    width: 32px;
+    height: 35px;
+    box-sizing: border-box;
+    border: 1px solid rgb(208, 207, 207) ;
+    border-left: 0;
+    vertical-align: middle;
+    line-height: 100%;
+} */
+
+.board_page .Prev,
+.board_page .Next {
+    width: 40px;
+    padding-top: 10px;
+    font-size: 1.2rem;
+    /* << 사이 조정 */
+    letter-spacing: -1px;
+    cursor: pointer;
+}
+
+.board_page .pageNum {
+    padding-top: 9px;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+/* .board_page a.num.on {
+    border-color: #2B65F8;
+    background: #2B65F8 ;
+    color: #fff;
+} */
+
+.current {
+    border-color: #2B65F8;
+    background: #2B65F8 ;
+    color: #fff;
+}
+
+.board_page .Prev {
+    border-left: 1px solid rgb(208, 207, 207) ;
+}
+
+.board_page .pageNum {
+    border-left: 1px solid rgb(208, 207, 207) ;
+}
+
+
 /* =========== 마이프로필 수정버튼 =========== */
 .profile_right .bt_wrap {
 	margin-top: 30px;

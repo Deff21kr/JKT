@@ -53,20 +53,22 @@
 
 
                 // 파일 확장자 및 파일 크기 유효성 검사
-                var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|txt|pdf|csv|jar|docx)$");
+                //var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|txt|pdf|csv|jar|docx)$");
                 var maxSize = 5242880; //5MB
 
+                
                 function checkExtension(fileName, fileSize) {
                     if (fileSize >= maxSize) {
                         alert("파일 사이즈가 초과되었습니다.");
+                        $('#image-upload').val(''); // 사용자가 등록한 file의 value를 지움
                         return false;
                     }
 
-                    if (regex.test(fileName)) {
-                        alert("이미지파일만 업로드할 수 없습니다.");
-                        return false;
-                    }
-
+					if (fileName !== 'jpg' && fileName !== 'png' && fileName !== 'jpeg' && fileName !== 'bmp'){
+    					alert("이미지파일만 업로드 가능합니다.");
+    					$('#image-upload').val(''); // 사용자가 등록한 file의 value를 지움 
+    					return false;
+    				}
                     return true;//위의 if문에 해당하지 않을시 통과
                 }//checkExtension
 

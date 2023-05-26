@@ -27,6 +27,28 @@
 
         $(function () {
             $('#listBtn').click(function () {
+        	    var currPage = "${searchPageMaker.cri.currPage}";
+        	    var area = "${searchPageMaker.cri.area}";
+        	    var startDate = "${searchPageMaker.cri.startDate}";
+        	    var endDate = "${searchPageMaker.cri.endDate}";
+        	    var memberNum = "${searchPageMaker.cri.memberNum}";
+        	    var recruitStatus = "${searchPageMaker.cri.recruitStatus}";
+
+        	    var encodedCurrPage = encodeURIComponent(currPage);
+        	    var encodedArea = encodeURIComponent(area);
+        	    var encodedStartDate = encodeURIComponent(startDate);
+        	    var encodedEndDate = encodeURIComponent(endDate);
+        	    var encodedMemberNum = encodeURIComponent(memberNum);
+        	    var encodedRecruitStatus = encodeURIComponent(recruitStatus);
+
+        	    var queryParams = "/board/group/searchList?currPage=" + encodedCurrPage +
+        	                      "&area=" + encodedArea +
+        	                      "&startDate=" + encodedStartDate +
+        	                      "&endDate=" + encodedEndDate +
+        	                      "&memberNum=" + encodedMemberNum +
+        	                      "&recruitStatus=" + encodedRecruitStatus;
+
+        	    location = queryParams;
             	
     		    let url = "/board/group/searchList?currPage="+currPage
     		    // area 파라미터를 추가

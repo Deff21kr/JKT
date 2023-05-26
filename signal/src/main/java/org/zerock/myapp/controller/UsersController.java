@@ -160,6 +160,7 @@ public class UsersController {
 		
 		
 	}
+	
 //	@PostMapping(path={"/mypage/group/{동행명}/evaluate"}, params = "ID")
 //	void partnerEvaluate() {
 //		

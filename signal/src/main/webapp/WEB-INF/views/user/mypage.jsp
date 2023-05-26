@@ -18,24 +18,47 @@
 				<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 				<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 				<script>
-					$(function () {
-						$("#container").tabs();
-						heightStyle: "content"
+				  let tabId = ''; // 탭 ID 변수를 선언합니다.
+
+				$(document).ready(function() {
+
+					  $('ul li a').on('click', function(e) {
+					    e.preventDefault();
+					    tabId = $(this).attr('href'); // 탭 ID 값을 업데이트합니다.
+					    let url = window.location.href.split('#')[0]; // 현재 URL에서 # 이전 부분만 가져옵니다.
+					    console.log("ID: " + tabId);
+					    console.log("URL: " + url);
+					    window.location.href = url + tabId; // 현재 URL과 탭의 ID를 합쳐서 새로운 URL로 이동합니다.
+					  });
+
+					  $('.pageNum').on('click', function(e) {
+						tabId =  window.location.hash;
+					    e.preventDefault();
+					    let selectedPageNum = e.currentTarget.textContent;
+					    console.log("ID2: " + tabId);
+					    window.location.href ="/user/mypage?currPage=" + selectedPageNum + tabId; // 현재 URL과 탭 ID, 페이지 번호를 합쳐서 새로운 URL로 이동합니다.
+					  });
 					});
 
-	$(function() {
-		$("#modifyBtn").click(function() {
-			location = "/user/edit"
-			console.log("클리이이이이이익");
-		});
-	});
+				
+			
+				
+				
+				$(function () {
+					$("#container").tabs();
+					heightStyle: "content"
+				});
+
+				$(function() {
+					$("#modifyBtn").click(function() {
+						location = "/user/edit"
+						console.log("클리이이이이이익");
+					});
+				});
 	
-	$(function () {
-        $('.pageNum').on('click', function(e) {
-            let selectedPageNum = e.currentTarget.textContent;
-            location = "/user/mypage?currPage="+selectedPageNum;
-        });
-    });
+	
+	
+	
 </script>
 </head>
 

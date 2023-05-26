@@ -40,16 +40,16 @@ function remove() {
 $(function () {
     $('#modify').click(function () {
     	if(confirm("플래너를 수정하시겠습니까?")) {
-		    location.href = "/board/myplan/modifyPlan?planNo=${__MYPLAN__.planNo}";
+		    location.href = "/board/groupplan/modifyPlan?planNo=${__GROUPPLAN__.planNo}";
 		  } // if
     });
     
     $('#remove').click(function () {
     	  if (confirm("플래너를 삭제하시겠습니까?")) {
     		    var form = $("<form>");
-    		    form.attr("action", "/board/myplan/deletePlan");
+    		    form.attr("action", "/board/groupplan/deletePlan");
     		    form.attr("method", "POST");
-    		    form.append("<input type='hidden' name='planNo' value='" + ${__MYPLAN__.planNo} + "'>");
+    		    form.append("<input type='hidden' name='planNo' value='" + ${__GROUPPLAN__.planNo} + "'>");
     		    form.appendTo("body").submit();
 
     		    alert("플래너가 삭제되었습니다.");
@@ -299,26 +299,16 @@ p.quickmenu.on {
 
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 
-	<%-- 본인이 작성한 플래너가 아니면 플래너 메인으로 이동 --%>
-	<c:if test="${sessionScope.__AUTH__.nickName != __MYPLAN__.nickName}">
-		<script>
-			window.location.href = "http://localhost:8080/board/myplan/main";
-		</script>
-	</c:if>
 
 	<section id="sec">
 
 		<div class="plannerlist">
 			<p style="font-size: 13px; font-weight: bold;">
 				여행기간<br>
-				<%-- 본인이 작성한 플래너만 볼수있게 --%>
-				<c:if
-					test="${sessionScope.__AUTH__.nickName == __MYPLAN__.nickName}">
-					<fmt:formatDate value="${__MYPLAN__.startDate}"
+					<fmt:formatDate value="${__GROUPPLAN__.startDate}"
 						pattern="yyyy-MM-dd" /> ~
-					<fmt:formatDate value="${__MYPLAN__.endDate}"
+					<fmt:formatDate value="${__GROUPPLAN__.endDate}"
 						pattern="yyyy-MM-dd" />
-				</c:if>
 			</p>
 
 			<div class="dml" style="position: absolute; top: 20px; right: 180px;">
@@ -329,29 +319,25 @@ p.quickmenu.on {
 
 
 		<div class="plannav">
-			<%-- 본인이 작성한 플래너만 볼수있게 --%>
-			<c:if test="${sessionScope.__AUTH__.nickName == __MYPLAN__.nickName}">
 				<p class="quicktop">
 					<i class="fas fa-chevron-up"></i>
 				</p>
 				<hr style="width:80px" margin="3px 0px">
-				<c:forEach begin="1" end="${__MYPLAN__.duration}" varStatus="step">
+				<c:forEach begin="1" end="${__GROUPPLAN__.duration}" varStatus="step">
 					<p class="quickmenu" data-day="${step.index}">DAY ${step.index}</p>
 				</c:forEach>
 				<hr style="width:80px" margin="3px 0px">
 				<p class="quickbottom">
 					<i class="fas fa-chevron-down"></i>
 				</p>
-			</c:if>
 		</div>
 
 
 
-		<c:if test="${sessionScope.__AUTH__.nickName == __MYPLAN__.nickName}">
 
 
 
-			<c:forEach begin="1" end="${__MYPLAN__.duration}" varStatus="status">
+			<c:forEach begin="1" end="${__GROUPPLAN__.duration}" varStatus="status">
 				<div class="maincontent day${status.index}"
 					style="width: 1112px; min-height: 500px; margin: auto; position: relative; border-top: 1px solid lightgrey; margin-top: 25px;">
 
@@ -364,7 +350,7 @@ p.quickmenu.on {
 							</div>
 
 							<button class="planwrite"
-								onclick="location.href='/board/myplan/register?planNo=${__MYPLAN__.planNo}&planDay=${status.index}'">
+								onclick="location.href='/board/groupplan/register?planNo=${__GROUPPLAN__.planNo}&planDay=${status.index}'">
 								플래너작성</button>
 						</div>
 
@@ -428,7 +414,6 @@ p.quickmenu.on {
 				</div>
 			</c:forEach>
 
-		</c:if>
 
 
 	</section>
@@ -456,10 +441,10 @@ p.quickmenu.on {
 		  function removeBtn(detailPlanNo) {
 		    if (confirm("계획을 삭제하시겠습니까?")) {
 		      var form = $("<form>");
-		      form.attr("action", "/board/myplan/remove");
+		      form.attr("action", "/board/groupplan/remove");
 		      form.attr("method", "POST");
 		      form.append("<input type='hidden' name='detailPlanNo' value='" + detailPlanNo + "'>");
-		      form.append("<input type='hidden' name='planNo' value='" + ${__MYPLAN__.planNo} + "'>");
+		      form.append("<input type='hidden' name='planNo' value='" + ${__GROUPPLAN__.planNo} + "'>");
 		      form.appendTo("body").submit();
 		
 		      alert("계획이 삭제되었습니다.");
@@ -469,7 +454,7 @@ p.quickmenu.on {
 		  // 상세계획 수정
 		  function modifyBtn(detailPlanNo) {
 			  if(confirm("계획을 수정하시겠습니까?")) {
-			    location.href = "/board/myplan/modify?planNo=${__MYPLAN__.planNo}&detailPlanNo=" + detailPlanNo;
+			    location.href = "/board/groupplan/modify?planNo=${__GROUPPLAN__.planNo}&detailPlanNo=" + detailPlanNo;
 			  } // if
 			} // function
 

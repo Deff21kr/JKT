@@ -135,8 +135,9 @@ public class UsersController {
 //		
 //	}
 	
+	
 	@GetMapping(path={"/mypage"})
-	void myGroupList(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
+	String myGroupList(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
 		try {
 			HttpSession session = req.getSession();
 			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
@@ -147,13 +148,16 @@ public class UsersController {
 			// Request Scope  공유속성 생성
 			model.addAttribute("__APPLIST__", list);
 			
-			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName());
+			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName(), cri);
 			model.addAttribute("_LIST_", dto);
 			
 			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
 			model.addAttribute("pageMaker", pageDTO);
 			
-//			return "/user/mypage";
+			PageDTO writeListDTO = new PageDTO(cri, this.service.getWriterList(vo.getNickName()));
+			model.addAttribute("writePageMaker", writeListDTO);
+			
+			return "/user/mypage";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}

@@ -27,11 +27,11 @@
 <script>
 	$(function() {
 		$('.plannerlist-make').click(function() {
-			location = "/board/myplan/makePlan";
+			location = "/board/groupplan/makePlan";
 		});
 		$('.pageNum').on('click', function(e) {
 			let selectedPageNum = e.currentTarget.textContent;
-			location = "/board/myplan/main?currPage=" + selectedPageNum ;
+			location = "/board/groupplan/main?currPage=" + selectedPageNum;
 		});
 	});
 </script>
@@ -83,7 +83,7 @@ div>ul>li {
 
 .plannerlist {
 	/* margin: 50px 0px 20px 50px; */
-	width: 140px;
+	width: 180px;
 	height: 50px;
 	display: flex;
 	justify-content: center;
@@ -201,7 +201,7 @@ div>ul>li {
 
 		<div class="topmain">
 			<div class="plannerlist">
-				<strong> <span> 플래너 리스트 </span>
+				<strong> <span>동행 플래너 리스트 </span>
 				</strong>
 
 			</div>
@@ -215,14 +215,14 @@ div>ul>li {
 			style="border: 1px solid gainsboro; width: 1113px; min-height: 700px; margin: 0px auto 40px; border-radius: 20px; padding: 20px 0px;">
 
 			<c:if test="${not empty __AUTH__.nickName}">
-				<c:forEach var="MyPlanVO" items="${__MYPLAN__}">
+				<c:forEach var="GroupPlanVO" items="${__GROUPPLAN__}">
 
-					<a href="/board/myplan/get?planNo=${MyPlanVO.planNo}"
+					<a href="/board/groupplan/get?planNo=${GroupPlanVO.planNo}"
 						class="planContent">
 						<div class="title"
 							style="background: ghostwhite; width: 100%; height: 150px; border-bottom: 1px solid #dfdfdf; padding: 20px 20px; display: flex; flex-direction: column; justify-content: center;">
 							<div>
-								<p>플래너명 : ${MyPlanVO.planName}</p>
+								<p>동행이름 : ${GroupPlanVO.groupName}</p>
 								<br>
 							</div>
 
@@ -234,10 +234,10 @@ div>ul>li {
 
 
 									<p>
-										<fmt:formatDate value="${MyPlanVO.startDate}"
+										<fmt:formatDate value="${GroupPlanVO.startDate}"
 											pattern="yyyy-MM-dd" />
 										~
-										<fmt:formatDate value="${MyPlanVO.endDate}"
+										<fmt:formatDate value="${GroupPlanVO.endDate}"
 											pattern="yyyy-MM-dd" />
 									</p>
 								</div>
@@ -257,7 +257,7 @@ div>ul>li {
 								<c:set var="count" value="0" />
 
 								<c:forEach var="JoinDTO" items="${__JOINLIST__}">
-									<c:if test="${MyPlanVO.planNo == JoinDTO.planNo}">
+									<c:if test="${GroupPlanVO.planNo == JoinDTO.planNo}">
 										<c:set var="count" value="${count + 1}" />
 										<c:if test="${count <= 5}">
 											<li style="list-style: inside; margin: 10px;">${JoinDTO.place}</li>

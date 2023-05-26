@@ -199,8 +199,7 @@
                                         <div class="place-state">${groupBoardVO.recruitStatus}</div>
 
                                         <div class="title">
-                                            <a
-                                                href="/board/group/get?currPage=${searchPageMaker.cri.currPage}&postNo=${groupBoardVO.postNo}">${groupBoardVO.title}</a>
+                                            <a href="/board/group/get?currPage=${searchPageMaker.cri.currPage}&area=${searchPageMaker.cri.area}&startDate=${searchPageMaker.cri.startDate}&endDate=${searchPageMaker.cri.endDate}&memberNum=${searchPageMaker.cri.memberNum}&recruitStatus=${searchPageMaker.cri.recruitStatus}&postNo=${searchPageMaker.cri.currPage}">${groupBoardVO.title}</a>
                                         </div>
 
                                     </a>

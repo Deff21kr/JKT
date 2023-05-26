@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
   <!DOCTYPE html>
   <html lang="ko">
 
@@ -28,7 +30,7 @@
 	<script defer>
 	    $(function () {
 	        $('#cancel').click(function () {
-	            location = "/board/myplan/main";
+	            location = "/board/groupplan/main";
 	        });
 	    });
 	    
@@ -38,7 +40,14 @@
       	  });
       	});
 
-    
+        $(function() {
+        	  $('#groupNo').change(function() {
+        	    var groupName = $(this).find('option:selected').text();
+        	    $('#groupName').val(groupName);
+        	  });
+        	});
+
+    	
 	</script>
 
 
@@ -113,7 +122,8 @@
       }
 
       input[type="text"],
-      input[type="date"] {
+      input[type="date"],
+      select {
         width: 100%;
         padding: 8px;
         border-radius: 5px;
@@ -154,15 +164,23 @@
       <section id="sec">
 
         <fieldset>
-          <h1>나만의 플래너 생성</h1>
+          <h1>동행 플래너 생성</h1>
 
-          <form action="/board/myplan/makePlan" method="POST">
+          <form action="/board/groupplan/makePlan" method="POST">
             <input type="hidden" name="nickName" value="${sessionScope.__AUTH__.nickName}">
+            <input type="hidden" name="groupName" id="groupName" value="">
+            
             <div>
-              <label for="planName">플래너 이름:</label>
-              <input type="text" id="planName" name="planName" required>
-            </div>
+	            <label for="groupNo">동행 이름:</label>
+	            <select name="groupNo" id="groupNo" required>
+	              <option value="" selected disabled>선택</option>
+					<c:forEach var="nameList" items="${__LIST__}">
+					    <option value="${nameList['GROUPNO']}">${nameList['GROUPNAME']}</option>
+					</c:forEach>
 
+	            </select>
+			</div>
+			
             <div>
               <label for="startDate">여행 출발:</label>
               <input type="date" id="startDate" name="startDate" placeholder="여행 시작 날짜를 입력해주세요" required>

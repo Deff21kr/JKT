@@ -35,7 +35,7 @@
 			
 		    $(function () {
 		        $('#cancel').click(function () {
-		            location = "/board/myplan/get?planNo=${param.planNo}&plannerType=${param.plannerType}";
+		            location = "/board/myplan/get?planNo=${param.planNo}";
 		        });
 		        $('.place-search').click(function () {
 		            location = "/board/myplan/placeSerch";
@@ -182,7 +182,6 @@
 						<form action="/board/myplan/register" method="post">
 							<input type="hidden" name="planNo" value="${param.planNo}">
 							<input type="hidden" name="planDay" value="${param.planDay}">
-							<input type="hidden" name="plannerType" value="${param.plannerType}">
 							<div class="datetime" style="margin-top: 20px;">
 								<p>시간 설정</p>
 								<input type="time" name="planTime" value="00:00" required>

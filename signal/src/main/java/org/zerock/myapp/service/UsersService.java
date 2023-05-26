@@ -3,6 +3,7 @@ package org.zerock.myapp.service;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
@@ -37,5 +38,8 @@ public interface UsersService {
 		public abstract Boolean profileEdit(UsersDTO dto) throws ServiceException;
 		
 		// 7. 마이프로필 글쓴내역보기
-		public abstract List<UsersDTO> selectWriteList(String nickName) throws ControllerException;
+		public abstract List<UsersDTO> selectWriteList(String nickName, Criteria cri) throws ControllerException;
+		
+		// 8. 마이프로필 글쓴내역 개수 반환
+		public abstract Integer getWriterList(String nickName) throws ControllerException;
 } // end interface

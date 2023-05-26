@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
   <!DOCTYPE html>
   <html lang="ko">
 
@@ -28,7 +30,7 @@
 	<script defer>
 	    $(function () {
 	        $('#cancel').click(function () {
-	            location = "/board/myplan/main";
+	            location = "/board/groupplan/get?planNo=${param.planNo}";
 	        });
 	    });
 	    
@@ -37,6 +39,13 @@
       	    $('#make').prop('disabled', true);
       	  });
       	});
+
+		
+        $(function () {
+       	    $('#startDate').prop('disabled', true);
+       	    $('#endDate').prop('disabled', true);
+        });
+
 
     
 	</script>
@@ -156,25 +165,26 @@
         <fieldset>
           <h1>나만의 플래너 생성</h1>
 
-          <form action="/board/myplan/makePlan" method="POST">
+          <form action="/board/groupplan/modifyPlan" method="POST">
             <input type="hidden" name="nickName" value="${sessionScope.__AUTH__.nickName}">
+            <input type="hidden" name="planNo" value="${__PLAN__.planNo }">
             <div>
-              <label for="planName">플래너 이름:</label>
-              <input type="text" id="planName" name="planName" required>
+              <label for="groupName">동행이름:</label>
+              <input type="text" id="groupName" name="groupName" value="${__PLAN__.groupName}" required>
             </div>
 
             <div>
               <label for="startDate">여행 출발:</label>
-              <input type="date" id="startDate" name="startDate" placeholder="여행 시작 날짜를 입력해주세요" required>
+              <input type="date" id="startDate" name="startDate" value="<fmt:formatDate value="${__PLAN__.startDate}" pattern="yyyy-MM-dd" />">
             </div>
 
             <div>
               <label for="endDate">여행 종료:</label>
-              <input type="date" id="endDate" name="endDate" placeholder="여행 종료 날짜를 입력해주세요" required>
+              <input type="date" id="endDate" name="endDate" value="<fmt:formatDate value="${__PLAN__.endDate}" pattern="yyyy-MM-dd" />">
             </div>
 
             <div class="submit-button">
-              <input type="submit" id="make" value="만들기">
+              <input type="submit" id="make" value="수정하기">
               <button type="button" id="cancel">취소</button>
             </div>
 
@@ -208,6 +218,7 @@
 			    minDate: 'today', // 현재 날짜부터 선택 가능하도록 설정
 			  });
 			});
+		
 
 	</script>
   </body>

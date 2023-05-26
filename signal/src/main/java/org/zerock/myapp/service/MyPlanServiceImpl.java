@@ -102,11 +102,11 @@ public class MyPlanServiceImpl implements MyPlanService {
 	
 //	====== DETAIL PLAN SERVICE IMPL ===========
 	@Override
-	public List<DetailPlanVO> getDetailPlanList(Integer planNo, Integer plannerType) throws ServiceException {
+	public List<DetailPlanVO> getDetailPlanList(Integer planNo) throws ServiceException {
 		try {
 			log.trace("getDetailPlanList({}) invoked",planNo);
 			
-			return this.detailPlanMapper.selectList(planNo, plannerType);
+			return this.detailPlanMapper.selectList(planNo);
 			
 		} catch (Exception e) {
 			throw new ServiceException(e);
@@ -162,11 +162,11 @@ public class MyPlanServiceImpl implements MyPlanService {
 	}
 
 	@Override
-	public List<JoinMyPlanDTO> joinList(String nickName, Integer plannerType) throws ServiceException {
+	public List<JoinMyPlanDTO> joinList(String nickName) throws ServiceException {
 		try {
-			log.trace("joinList({}, {}) invoked", nickName, plannerType);
+			log.trace("joinList({}, {}) invoked", nickName);
 
-			return this.joinMapper.selectList(nickName, plannerType);
+			return this.joinMapper.selectList(nickName);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}	

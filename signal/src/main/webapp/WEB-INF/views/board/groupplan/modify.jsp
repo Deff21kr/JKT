@@ -29,10 +29,10 @@
 			
 		    $(function () {
 		        $('#cancel').click(function () {
-		            location = "/board/myplan/get?planNo=${param.planNo}";
+		            location = "/board/groupplan/get?planNo=${param.planNo}";
 		        });
 		        $('.place-search').click(function () {
-		            location = "/board/myplan/placeSerch";
+		            location = "/board/groupplan/placeSerch";
 		        });
 		    });
 		    
@@ -177,7 +177,7 @@
 					<div id="create-planner-page" style="width: 615px; margin: 20px auto;">
 						<h3>상세계획</h3>
 
-						<form action="/board/myplan/modify" method="post">
+						<form action="/board/groupplan/modify" method="post">
 							<input type="hidden" name="planNo" value="${__DETAILPLAN__.planNo}">
 							<input type="hidden" name="detailPlanNo" value="${__DETAILPLAN__.detailPlanNo}">
 							

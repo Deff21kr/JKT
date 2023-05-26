@@ -41,7 +41,7 @@ public class MyPlanController {
 
 	
 	@GetMapping("/main")
-	void planMain(Criteria cri ,@RequestParam Integer plannerType, HttpServletRequest req, Model model) throws ControllerException {
+	void planMain(Criteria cri, HttpServletRequest req, Model model) throws ControllerException {
 		log.info("planMain() invoked");
 		
 		try {
@@ -55,7 +55,7 @@ public class MyPlanController {
 			log.info("\t + list: {}", list);
 			model.addAttribute("__MYPLAN__", list);
 			
-			List<JoinMyPlanDTO> joinList = this.service.joinList(nickName, plannerType);
+			List<JoinMyPlanDTO> joinList = this.service.joinList(nickName);
 			model.addAttribute("__JOINLIST__" ,joinList);
 			
 			PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
@@ -86,7 +86,7 @@ public class MyPlanController {
 			
 			log.info("\t + result : {}", result);
 
-			return "redirect:/board/myplan/main?plannerType=0";
+			return "redirect:/board/myplan/main";
 			
 		} catch (Exception e) {
 			throw new ControllerException(e);
@@ -103,7 +103,7 @@ public class MyPlanController {
 			Boolean result = this.service.remove(planNo);
 			rttrs.addAttribute("result", result);
 			
-			return "redirect:/board/myplan/main?plannerType=0";
+			return "redirect:/board/myplan/main";
 		} catch (Exception e) {
 			throw new ControllerException(e);   
 		} // try-catch
@@ -119,7 +119,7 @@ public class MyPlanController {
 			rttrs.addAttribute("planNo", planNo);
 			rttrs.addAttribute("result", result);
 			
-			return "redirect:/board/myplan/main?plannerType=0";
+			return "redirect:/board/myplan/main";
 		} catch (Exception e) {
 			throw new ControllerException(e);   
 		} // try-catch
@@ -127,11 +127,11 @@ public class MyPlanController {
 	
 	// 플래너 페이지
 	@GetMapping("/get")
-	void get(@RequestParam Integer planNo,@RequestParam Integer plannerType, Model model) throws ControllerException {
+	void get(@RequestParam Integer planNo, Model model) throws ControllerException {
 		log.info("get({}) invoked", planNo);
 	
 		try {
-			List<DetailPlanVO> detailList = this.service.getDetailPlanList(planNo, plannerType);
+			List<DetailPlanVO> detailList = this.service.getDetailPlanList(planNo);
 			
 			Objects.requireNonNull(detailList);
 			log.info("\t + detailList : {}", detailList);
@@ -182,7 +182,6 @@ public class MyPlanController {
 			Boolean result = this.service.registerDetailPlan(dto);
 			log.info("result : {}", result);
 			
-			rttrs.addAttribute("plannerType", dto.getPlannerType());
 			rttrs.addAttribute("planNo", dto.getPlanNo());
 			
 			return "redirect:/board/myplan/get";
@@ -223,7 +222,6 @@ public class MyPlanController {
 		
 		 try {
 			Boolean result = this.service.modifyDetailPlan(dto);
-			rttrs.addAttribute("plannerType", dto.getPlannerType());			
 			rttrs.addAttribute("planNo", dto.getPlanNo());
 			rttrs.addAttribute("result", result);
 
@@ -246,7 +244,7 @@ public class MyPlanController {
 			rttrs.addAttribute("planNo", planNo);
 			rttrs.addAttribute("result", result);
 
-			return "redirect:/board/myplan/get?plannerType=0";
+			return "redirect:/board/myplan/get";
 
 		} catch (Exception e) {
 			throw new ControllerException(e);

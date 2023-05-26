@@ -84,11 +84,9 @@ public class ReviewBoardController {
 				return "redirect:/board/review/list";
 
 			} else {	//첨부파일이 없을 시
-				if(this.service.register(dto)) {
-					rttrs.addAttribute("result", "true");
-					rttrs.addAttribute("postNo", dto.getPostNo());
-				}
-				return "redirect:/board/review/list";
+				log.info("첨부파일을 추가하지 않았습니다.");
+				
+				return "redirect:/board/review/register";
 			} // if-else
 
 		} catch (Exception e) {

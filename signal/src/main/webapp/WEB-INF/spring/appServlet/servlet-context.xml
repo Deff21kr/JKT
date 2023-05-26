@@ -35,6 +35,7 @@
          <mapping path="/user/**/*" />
          <mapping path="/user/**?" />
          <exclude-mapping path="/board/**/*list" />
+         <exclude-mapping path="/board/review/get*" />
          <beans:ref bean="authInterceptor"/>
       </interceptor>
 

@@ -29,6 +29,7 @@ public interface QnACommentService {
 	
 	// 6. 총 댓글 갯수 반환
 	public abstract Integer getCommentTotal(Integer postNo) throws ServiceException;
+
 	
 
 } // end interface

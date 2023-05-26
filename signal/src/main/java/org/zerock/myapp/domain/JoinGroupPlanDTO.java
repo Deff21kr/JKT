@@ -8,9 +8,10 @@ import lombok.Data;
 import lombok.Value;
 
 @Data
-public class JoinMyPlanDTO {
+public class JoinGroupPlanDTO {
 	
 	private Integer planNo;
+	private Integer groupNo;
 	private String planName;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;

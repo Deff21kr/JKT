@@ -4,12 +4,12 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-    <mapper namespace="org.zerock.myapp.mapper.DetailPlanMapper">
+    <mapper namespace="org.zerock.myapp.mapper.GroupDetailPlanMapper">
     <insert id="insert">
 	        <selectKey keyProperty="detailPlanNo" order="AFTER" resultType="int">
-	            SELECT "ISEQ$$_77202".CURRVAL FROM dual  
+	            SELECT "ISEQ$$_82778".CURRVAL FROM dual  
 	        </selectKey>
-	            INSERT INTO TBL_DETAILPLAN (PLANNO, PLANDAY, PLANTIME, PLACE, DETAILPLAN) VALUES (#{planNo}, #{planDay}, #{planTime, jdbcType=DATE}, #{place}, #{detailPlan})
+	            INSERT INTO TBL_GROUP_DETAILPLAN (PLANNO, PLANDAY, PLANTIME, PLACE, DETAILPLAN) VALUES (#{planNo}, #{planDay}, #{planTime, jdbcType=DATE}, #{place}, #{detailPlan})
 	    </insert>
 
    

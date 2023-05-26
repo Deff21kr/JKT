@@ -16,6 +16,5 @@ public class DetailPlanVO {
 	private Date planTime;
 	private String place;
 	private String detailPlan;
-	private Integer plannerType;
 
 }

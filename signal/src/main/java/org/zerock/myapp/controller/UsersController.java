@@ -136,7 +136,7 @@ public class UsersController {
 //	}
 	
 	@GetMapping(path={"/mypage"})
-	String myGroupList(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
+	void myGroupList(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
 		try {
 			HttpSession session = req.getSession();
 			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
@@ -153,7 +153,7 @@ public class UsersController {
 			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
 			model.addAttribute("pageMaker", pageDTO);
 			
-			return "/user/mypage";
+//			return "/user/mypage";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}

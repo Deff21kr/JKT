@@ -406,8 +406,6 @@
 
 
 
-
-
 					</div>
 
 				</div>
@@ -416,23 +414,7 @@
 					<jsp:include page="../footer.jsp" />
 				</footer>
 
-				<script>
-					$(function () {
-					$('.pageNum')
-						.on(
-							'click',
-							function (e) {
-								let selectedPageNum = e.currentTarget.textContent;
-								location = "/board/qna/get?currPage=${param.currPage}&postNo=${__BOARD__.postNo}&commentCurrPage="
-									+ selectedPageNum;
-							});
-				});
-
-				</script>
-			
-
 				
-
 	
 </body>
 

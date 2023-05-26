@@ -169,6 +169,7 @@
 										href="#" class="bt last"> > > </a>
 							</div>
 						</div>
+					</div>
 						
 						
 
@@ -212,13 +213,17 @@
 								</div>
 
 								<div class="board_page">
-									<a href="#" class="bt first">
-										< < </a> <a href="#" class="bt prev">
-												< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-													<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-														href="#" class="num">5</a> <a href="#" class="bt next"> > </a>
-													<a href="#" class="bt last"> > > </a>
-
+									<c:if test="${pageMaker.prev}">
+										  <div class="Prev"><a href="/user/mypage?currPage=${pageMaker.startPage - 1}">Prev</a></div>
+										 </c:if>
+										 
+										 <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+											 <div class="pageNum ${pageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+										 </c:forEach>
+										 
+										 <c:if test="${pageMaker.next}">
+											 <div class="Next"><a href="/user/mypage?currPage=${pageMaker.endPage + 1}">Next</a></div>
+										 </c:if>
 								</div>
 							</div>
 						</div>
@@ -424,284 +429,11 @@
 				});
 
 				</script>
-			</body>
+			
 
-					<div class="top">
-						<div class="board">게시판</div>
-						<div class="title">제목</div>
-						<div class="writer">작성자</div>
-						<div class="date">작성일</div>
-					</div>
-					<!-- 불러올 작성글 대략 10개정도 -->
+				
 
-
-					<div class="post">
-						<c:forEach var="item" items="${_LIST_}">
-							<div>
-								<div class="board">${item.boardName}</div>
-								<div class="title">${item.title}</div>
-								<div class="writer">${item.nickName}</div>
-								<div class="date"><fmt:formatDate value="${item.regiDate}"
-									pattern="yyyy-MM-dd" /></div>
-							</div>
-						</c:forEach>
-					</div>
-
-
-
-					<div class="board_page">
-						<a href="#" class="bt first">< <</a> <a href="#" class="bt prev">
-							< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-						<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-							href="#" class="num">5</a> <a href="#" class="bt next">></a> <a
-							href="#" class="bt last">> > </a>
-
-					</div>
-				</div>
-			</div>
-
-			<!-- 마이동행 -->
-			<div id="tabs-3">
-				<!-- <h3>동행내역</h3> -->
-				<div class="board_list">
-
-					<div class="top">
-						<div class="area">장소</div>
-						<div class="group">동행이름</div>
-						<div class="writer">작성자</div>
-						<div class="status">결과</div>
-						<div class="startDate">동행시작</div>
-						<div class="enDate">동행종료</div>
-					</div>
-					<!-- 불러올 동행내역 대략 10개정도 -->
-					<div class="post">
-
-
-
-						<c:forEach var="applist" items="${__APPLIST__}">
-						<div>
-							<div class="area">${applist.area}</div>
-							<div class="group">${applist.groupName}</div>
-							<div class="writer">${applist.writer}</div>
-							<div class="status">${applist.outCome}</div>
-							<div class="startDate">
-								<fmt:formatDate value="${applist.startDate}"
-									pattern="yyyy-MM-dd" />
-							</div>
-							<div class="enDate">
-								<fmt:formatDate value="${applist.endDate}" pattern="yyyy-MM-dd" />
-							</div>
-						</div>
-						</c:forEach>
-
-
-
-					</div>
-
-					<div class="board_page">
-						<c:if test="${pageMaker.prev}">
-                 		<div class="Prev"><a href="/user/mypage?currPage=${pageMaker.startPage - 1}">Prev</a></div>
-			            </c:if>
-			            
-			            <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-			                <div class="pageNum ${pageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
-			            </c:forEach>
-			            
-			            <c:if test="${pageMaker.next}">
-			                <div class="Next"><a href="/user/mypage?currPage=${pageMaker.endPage + 1}">Next</a></div>
-			            </c:if>
-           
-
-					</div>
-				</div>
-			</div>
-
-			<!-- 찜한 글 -->
-			<div id="tabs-4">
-				<!-- <h3>찜한글</h3> -->
-
-				<div class="wish_list">
-
-					<div class="top">
-						<div class="group">동행이름</div>
-						<div class="title">제목</div>
-						<div class="area">지역</div>
-						<div class="startDate">동행시작</div>
-						<div class="endDate">동행끝</div>
-						<div class="status">현황</div>
-					</div>
-					<!-- 불러올 작성글 대략 10개정도 -->
-					<div class="post">
-						<div>
-							<div class="group">우리동행</div>
-							<div class="title">
-								<a href="#">서울ㄲㄲ?</a>
-							</div>
-							<div class="area">서울</div>
-							<div class="startDate">2022-01-01</div>
-							<div class="endDate">2022-01-03</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">쟤네동행</div>
-							<div class="title">
-								<a href="#">나랑ㄲㄲ?</a>
-							</div>
-							<div class="area">대전</div>
-							<div class="startDate">2022-06-05</div>
-							<div class="endDate">2022-0103</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">얘네동행</div>
-							<div class="title">
-								<a href="#">현댂ㄲ?</a>
-							</div>
-							<div class="area">대구</div>
-							<div class="startDate">2022-09-09</div>
-							<div class="endDate">2022-11-05</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">남의동행</div>
-							<div class="title">
-								<a href="#">부산ㄲㄲ?</a>
-							</div>
-							<div class="area">부산</div>
-							<div class="startDate">2023-01-01</div>
-							<div class="endDate">2023-01-01</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">바보동행</div>
-							<div class="title">
-								<a href="#">바보임</a>
-							</div>
-							<div class="area">일본</div>
-							<div class="startDate">2023-01-03</div>
-							<div class="endDate">2023-02-02</div>
-							<div class="status">현황</div>
-						</div>
-
-					</div>
-
-					<div class="board_page">
-						<a href="#" class="bt first">< <</a> <a href="#" class="bt prev">
-							< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-						<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-							href="#" class="num">5</a> <a href="#" class="bt next"> > </a> <a
-							href="#" class="bt last"> > > </a>
-
-					</div>
-				</div>
-			</div>
-
-			<!-- 좋아요한 글 -->
-			<div id="tabs-5">
-				<!-- <h3>좋아요한글</h3> -->
-
-				<div class="like_list">
-
-					<div class="top">
-						<div class="title">제목</div>
-						<div class="writer">작성자</div>
-						<!-- <div class="area">지역</div> -->
-						<div class="date">작성일</div>
-						<!-- <div class="like">좋아요 여부</div> -->
-						<!-- 토글로 클릭시 바로 좋아요 해제 가능 -->
-					</div>
-					<!-- 불러올 작성글 대략 10개정도 -->
-					<div class="post">
-						<div>
-							<div class="title">
-								<a href="#">1번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<!-- <div class="area">지역</div> -->
-							<div class="date">작성일</div>
-							<!-- <div class="like">좋아요</div> -->
-						</div>
-						<div>
-							<div class="title">
-								<a href="#">2번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<!-- <div class="area">지역</div> -->
-							<div class="date">작성일</div>
-							<!-- <div class="like">좋아요</div> -->
-						</div>
-						<div>
-							<div class="title">
-								<a href="#">3번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<!-- <div class="area">지역</div> -->
-							<div class="date">작성일</div>
-							<!-- <div class="like">좋아요</div> -->
-						</div>
-						<div>
-							<div class="title">
-								<a href="#">41번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<!-- <div class="area">지역</div> -->
-							<div class="date">작성일</div>
-							<!-- <div class="like">좋아요</div> -->
-						</div>
-						<div>
-							<div class="title">
-								<a href="#">51번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<!-- <div class="area">지역</div> -->
-							<div class="date">작성일</div>
-							<!-- <div class="like">좋아요</div> -->
-						</div>
-					</div>
-
-					<div class="board_page">
-						<a href="#" class="bt first"> < < </a> <a href="#" class="bt prev">
-							< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-						<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-							href="#" class="num">5</a> <a href="#" class="bt next"> > </a> <a
-							href="#" class="bt last"> > > </a>
-
-					</div>
-				</div>
-			</div>
-
-			<!-- 회원정보 수정 -->
-			<div id="tabs-6">
-				<!-- <h3>회원정보수정</h3> -->
-				<form method="post" action="/mypage">
-
-					<label for="name">이름</label> <input type="text" id="name"
-						name="name" value="${__AUTH__.name}"><br> <label
-						for="email">이메일</label> <input type="text" id="email" name="Email"
-						value="${__AUTH__.EMail}"><br>
-
-					<!-- <button type="button" onclick="sendEmail()">이메일 인증<button><br> -->
-					<label for="emailAuth">인증번호</label> <input type="text"
-						id="emailAuth" name="emailAuth" disabled><br> <label
-						for="password">현재 비밀번호</label> <input type="password"
-						id="password" name="password" required><br> <label
-						for="newPassword">새 비밀번호</label> <input type="password"
-						id="newPassword" name="password"><br> <label
-						for="confirmPassword">새 비밀번호 확인</label> <input type="password"
-						id="confirmPassword" name="password"><br> <input
-						type="submit" value="수정">
-				</form>
-			</div>
-
-
-
-		</div>
-
-	</div>
-
-	<footer>
-		<jsp:include page="../footer.jsp" />
-	</footer>
+	
 </body>
 
 </html>

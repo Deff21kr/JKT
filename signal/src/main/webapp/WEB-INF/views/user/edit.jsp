@@ -19,6 +19,8 @@
 	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+	
 </head>
 
 <body>
@@ -76,6 +78,13 @@
 
 				<div class="bt_wrap">
 					<button type="submit" id="modifyBtn">수정</button>
+					<script>
+						$(function() {
+						    $("#modifyBtn").click(function() {
+						        window.location.href="/user/mypage";
+						    });
+						});
+					</script>
 				</div>
 			</form>
 		</div>

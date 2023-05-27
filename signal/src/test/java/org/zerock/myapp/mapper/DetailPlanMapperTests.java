@@ -42,7 +42,9 @@ public class DetailPlanMapperTests {
 	public void testSelectList() {
 		log.trace("testSelectList() invoked");
 		
-		List<DetailPlanVO> vo = this.mapper.selectList(39, 0);
+		Integer planNo =39;
+		
+		List<DetailPlanVO> vo = this.mapper.selectList(planNo);
 		assertNotNull(vo);
 		
 		log.info("\t + vo : {}", vo);
@@ -67,7 +69,6 @@ public class DetailPlanMapperTests {
 		dto.setPlanTime(date);
 		dto.setPlace("인천");
 		dto.setDetailPlan("어디갈까요?");
-		dto.setPlannerType(0);
 
 		log.info("\t dto : {}", dto);
 		Integer affectedLines = this.mapper.insert(dto);

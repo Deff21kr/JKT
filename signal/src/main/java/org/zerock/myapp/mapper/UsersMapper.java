@@ -2,6 +2,7 @@ package org.zerock.myapp.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.http.ResponseEntity;
 import org.zerock.myapp.domain.Criteria;
@@ -55,7 +56,7 @@ public interface UsersMapper {
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")
-	public abstract List<UsersDTO> selectWriteList(String nickName, Criteria cri);
+	public abstract List<UsersDTO> selectWriteList(@Param("nickName") String nickName, @Param("cri") Criteria cri);
 
 	// 9. 글쓴 내역의 게시글 총 개수
 	@Select("SELECT count(nickName) \r\n" + "FROM\r\n"

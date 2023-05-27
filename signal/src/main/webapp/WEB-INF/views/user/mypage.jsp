@@ -56,7 +56,47 @@
 						console.log("클리이이이이이익");
 					});
 				});
+				$(function() {
+					$('.pageNum').on('click', function(e) {
+						let selectedPageNum = e.currentTarget.textContent;
+						location = "/user/mypage?#currPage=" + selectedPageNum + "tabs-2";
+					});
+				});
+
+				$(function() {
+					$('.myGroup').on('click', function(e) {
+						var content = $(this).next('.content');
+						if (content.css('display') === 'none') {
+							content.css('display', 'block');
+						} else {
+							content.css('display', 'none');
+						}
+					});
+				});
 				</script>
+
+
+<style>
+.hide {
+	display: none;
+}
+
+#tabs-3 .board_list .post .content div {
+	width: 15.5%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post .content .group {
+	width: 20%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+</style>
 
 </head>
 
@@ -220,29 +260,66 @@
 						<div class="writer">작성자</div>
 						<div class="status">결과</div>
 						<div class="startDate">동행시작</div>
-						<div class="enDate">동행종료</div>
+						<div class="endDate">동행종료</div>
 					</div>
 					<!-- 불러올 동행내역 대략 10개정도 -->
 					<div class="post">
 
+						<c:set var="count" value="0" />
+
+						<c:forEach var="applist" items="${__APPLIST__}" varStatus="numNo">
+
+							<c:if test="${__AUTH__.nickName == applist.nickName}">
+								<c:set var="count" value="0" />
+
+								<div class="myGroup">
+									<div class="area">${applist.area}</div>
+									<div class="group">${applist.groupName}</div>
+									<div class="writer">${applist.writer}</div>
+									<div class="status">${applist.outCome}</div>
+									<div class="startDate">
+										<fmt:formatDate value="${applist.startDate}"
+											pattern="yyyy-MM-dd" />
+									</div>
+									<div class="endDate">
+										<fmt:formatDate value="${applist.endDate}"
+											pattern="yyyy-MM-dd" />
+									</div>
+								</div>
+
+							</c:if>
 
 
-						<c:forEach var="applist" items="${__APPLIST__}">
-							<div>
-								<div class="area">${applist.area}</div>
-								<div class="group">${applist.groupName}</div>
-								<div class="writer">${applist.writer}</div>
-								<div class="status">${applist.outCome}</div>
-								<div class="startDate">
-									<fmt:formatDate value="${applist.startDate}"
-										pattern="yyyy-MM-dd" />
+							<c:if test="${applist.outCome eq '수락'}">
+								<c:set var="count" value="${count + 1}" />
+
+								<div class="content hide">
+									<!-- 숨겨진 내용 -->
+									<div class="num">번호</div>
+									<div class="group">동행이름</div>
+									<div class="nick">닉네임</div>
+									<div class="rate">평점</div>
+									<div class="startDate">동행시작</div>
+									<div class="endDate">동행종료</div>
 								</div>
-								<div class="enDate">
-									<fmt:formatDate value="${applist.endDate}" pattern="yyyy-MM-dd" />
+								<div class="">
+									<div class="num">${count}</div>
+									<div class="group">${applist.groupName}</div>
+									<div class="nick">${applist.nickName}</div>
+									<div class="rate">${applist.outCome}</div>
+									<div class="startDate">
+										<fmt:formatDate value="${applist.startDate}"
+											pattern="yyyy-MM-dd" />
+									</div>
+									<div class="endDate">
+										<fmt:formatDate value="${applist.endDate}"
+											pattern="yyyy-MM-dd" />
+									</div>
 								</div>
-							</div>
+							</c:if>
+
+
 						</c:forEach>
-
 
 
 					</div>

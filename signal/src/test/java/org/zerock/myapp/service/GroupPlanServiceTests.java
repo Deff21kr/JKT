@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.myapp.domain.Criteria;
-import org.zerock.myapp.domain.DetailPlanDTO;
-import org.zerock.myapp.domain.DetailPlanVO;
+import org.zerock.myapp.domain.GroupDetailPlanDTO;
+import org.zerock.myapp.domain.GroupDetailPlanVO;
 import org.zerock.myapp.domain.GroupPlanDTO;
 import org.zerock.myapp.domain.GroupPlanVO;
 import org.zerock.myapp.domain.JoinGroupPlanDTO;
@@ -71,7 +72,7 @@ public class GroupPlanServiceTests {
 		GroupPlanDTO dto = new GroupPlanDTO();
 		dto.setGroupNo(50);
 		dto.setNickName("hyeondae");
-		dto.setPlanName("askdlasdk");
+		dto.setGroupName("askdlasdk");
 		dto.setStartDate(startdate);
 		dto.setEndDate(enddate);
 		
@@ -127,7 +128,7 @@ public class GroupPlanServiceTests {
 		
 		String nickName = "hyeondae";
 		
-		List<String> list = this.service.nameList(nickName);
+		List<Map<String, Integer>> list = this.service.nameList(nickName);
 		assertNotNull(list);
 		
 		log.info("\t List : {}", list);
@@ -140,9 +141,8 @@ public class GroupPlanServiceTests {
 		log.trace("testGetDetailPlanList() invoked");
 		
 		Integer planNo = 39;
-		Integer plannerType = 0;
 		
-		List<DetailPlanVO> vo = this.service.getDetailPlanList(planNo, plannerType);
+		List<GroupDetailPlanVO> vo = this.service.getDetailPlanList(planNo);
 		assertNotNull(vo);
 		log.info("\t + vo : {}", vo);
 		
@@ -155,13 +155,12 @@ public class GroupPlanServiceTests {
 		java.util.Date date = new java.util.Date();
 		
 		
-		DetailPlanDTO dto = new DetailPlanDTO();
+		GroupDetailPlanDTO dto = new GroupDetailPlanDTO();
 		dto.setPlanNo(39);
 		dto.setPlanDay(2);
 		dto.setPlace("강원도");
 		dto.setPlanTime(date);
 		dto.setDetailPlan("뭐 할까요?");
-		dto.setPlannerType(0);
 		
 		assertNotNull(dto);
 
@@ -176,7 +175,7 @@ public class GroupPlanServiceTests {
 		
 		Integer detailPlanNo = 10;
 		
-		DetailPlanVO vo = this.service.getDetailPlan(detailPlanNo);
+		GroupDetailPlanVO vo = this.service.getDetailPlan(detailPlanNo);
 		assertNotNull(vo);
 		log.info("\t + vo: {}", vo);
 		
@@ -190,7 +189,7 @@ public class GroupPlanServiceTests {
 		java.util.Date date = new java.util.Date();
 
 		
-		DetailPlanDTO dto = new DetailPlanDTO();
+		GroupDetailPlanDTO dto = new GroupDetailPlanDTO();
 		dto.setDetailPlanNo(10);
 		dto.setDetailPlan("수정 완료");
 		dto.setPlace("일산");
@@ -220,9 +219,8 @@ public class GroupPlanServiceTests {
 		log.trace("testJoinList() invoked");
 		
 		String nickName = "hyeondae";
-		Integer plannerType = 0;
 		
-		List<JoinGroupPlanDTO> dto = this.service.joinList(nickName, plannerType);
+		List<JoinGroupPlanDTO> dto = this.service.joinList(nickName);
 		assertNotNull(dto);
 		
 		log.info("dto : {}", dto);

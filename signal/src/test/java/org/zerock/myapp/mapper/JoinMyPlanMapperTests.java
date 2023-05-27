@@ -40,9 +40,8 @@ public class JoinMyPlanMapperTests {
 		log.trace("testSelectList()  invoked");
 		
 		String nickName = "hyeondae";
-		Integer plannerType = 0;
 	
-		List<JoinMyPlanDTO> vo = this.mapper.selectList(nickName, plannerType);
+		List<JoinMyPlanDTO> vo = this.mapper.selectList(nickName);
 		assertNotNull(vo);
 		
 		log.info("\t + vo : {}", vo);

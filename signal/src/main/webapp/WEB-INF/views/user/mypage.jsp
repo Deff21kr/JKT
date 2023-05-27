@@ -22,24 +22,37 @@
 				<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 				<script>
 				  let tabId = ''; // 탭 ID 변수를 선언합니다.
-
 				$(document).ready(function() {
 
-					  $('ul li a').on('click', function(e) {
+					  $('.tabs').on('click', function(e) {
 					    e.preventDefault();
 					    tabId = $(this).attr('href'); // 탭 ID 값을 업데이트합니다.
 					    let url = window.location.href.split('#')[0]; // 현재 URL에서 # 이전 부분만 가져옵니다.
+					    let url2 = window.location.href.split('?')[0];
+					    let queryString = window.location.search; // 쿼리 문자열을 가져옵니다.
+					    console.log("queryString : " + queryString);
 					    console.log("ID: " + tabId);
 					    console.log("URL: " + url);
-					    window.location.href = url + tabId; // 현재 URL과 탭의 ID를 합쳐서 새로운 URL로 이동합니다.
+					    console.log("URL2: " + url2);
+					    
+					    // 쿼리 문자열에 'currPage'가 있는지 확인합니다.
+					    if (queryString.includes('currPage')) {
+					      window.location.href = url2 + tabId; // 현재 URL과 탭의 ID를 합쳐서 새로운 URL로 이동합니다.
+					    } else {
+					      window.location.href = url + tabId; // 현재 URL과 탭의 ID를 합쳐서 새로운 URL로 이동합니다.
+					    }
 					  });
 
 					  $('.pageNum').on('click', function(e) {
 						tabId =  window.location.hash;
+						 let url = window.location.href.split('#')[0];
 					    e.preventDefault();
 					    let selectedPageNum = e.currentTarget.textContent;
 					    console.log("ID2: " + tabId);
-					    window.location.href ="/user/mypage?currPage=" + selectedPageNum + tabId; // 현재 URL과 탭 ID, 페이지 번호를 합쳐서 새로운 URL로 이동합니다.
+					    console.log("페이지: " + ${pageMaker.cri.currPage});
+					    window.location.href ="/user/mypage"+"?currPage="+selectedPageNum+ tabId;
+					    
+				
 					  });
 					});
 
@@ -116,22 +129,22 @@
 		<div id="container">
 
 			<ul>
-				<li><a href="#tabs-1">
+				<li><a href="#tabs-1" class="tabs">
 						<div class="c">프로필</div>
 				</a></li>
-				<li><a href="#tabs-2">
+				<li><a href="#tabs-2" class="tabs">
 						<div class="c">작성글</div>
 				</a></li>
-				<li><a href="#tabs-3">
+				<li><a href="#tabs-3" class="tabs">
 						<div class="c">마이동행</div>
 				</a></li>
-				<li><a href="#tabs-4">
+				<li><a href="#tabs-4" class="tabs">
 						<div class="c">찜한 글</div>
 				</a></li>
-				<li><a href="#tabs-5">
+				<li><a href="#tabs-5" class="tabs">
 						<div class="c">좋아요한 글</div>
 				</a></li>
-				<li><a href="#tabs-6">
+				<li><a href="#tabs-6" class="tabs">
 						<div class="c">개인 정보 수정</div>
 				</a></li>
 			</ul>

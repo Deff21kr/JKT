@@ -78,6 +78,14 @@
 				</label>
 
 				<div class="bt_wrap">
+					<button type="submit" id="modifyBtn">수정</button>
+					<script>
+						$(function() {
+						    $("#modifyBtn").click(function() {
+						        window.location.assign="/user/mypage";
+						    });
+						});
+					</script>
 					<button type="submit" id="modifyBtn" class="modify">수정</button>
 				</div>
 			</form>

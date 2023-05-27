@@ -181,23 +181,22 @@ public class UsersController {
 //		
 //	}
 	
+	
+	
 	// 프로필 수정
 	@PostMapping("/edit")
-	String profilModify(UsersDTO dto, RedirectAttributes rttrs, Model model) throws ControllerException {
+	String profilModify(UsersDTO dto, HttpServletRequest req, Model model) throws ControllerException {
 		log.info("\n\ndto : {}",dto);
 		try {
-			
 			if(this.service.profileEdit(dto)) {
+				HttpSession session = req.getSession();
 				UsersVO vo = this.service.get(dto.getID());
 				log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
-//				this.user.authenticate(vo.toDTO());
-				
-				model.addAttribute("__AUTH__", vo); // Request Scope
+				session.setAttribute("__AUTH__", vo);
 				
 			}
 			log.info("\t+ dto: ({}, {})", dto, dto.getID());
-			
-			return "/user/mypage";
+			return "redirect:/user/mypage";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		}
@@ -206,8 +205,11 @@ public class UsersController {
 
 	// 프로필 수정
 		@GetMapping("/edit")
-		void myPageModify(UsersDTO dto, RedirectAttributes rttrs, Model model, String ID, String MBTI) throws ControllerException {
+		void myPageModify(HttpServletRequest req,Model model) throws ControllerException {
 			try {
+				HttpSession session = req.getSession();
+				UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
+				log.info("\n\nvo : {}",vo);
 				
 				
 			} catch(Exception e) {

@@ -55,7 +55,7 @@ public class GroupBoardController {
 	
 //	// 1. 게시판 목록 조회
 	@GetMapping("/list")
-	void list(GroupBoardCriteria cri, Model model) throws ControllerException {
+	String list(GroupBoardCriteria cri, Model model) throws ControllerException {
 		log.trace("list({}, {}) invoked.", cri, model);
 		
 		try {
@@ -65,6 +65,7 @@ public class GroupBoardController {
 		
 		GroupBoardPageDTO pageDTO = new GroupBoardPageDTO(cri, this.service.getTotal());
 		model.addAttribute("pageMaker", pageDTO);
+		return "/board/group/list";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch

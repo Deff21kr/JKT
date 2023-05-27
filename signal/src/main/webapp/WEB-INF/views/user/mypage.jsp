@@ -168,7 +168,7 @@
 						</div>
 						<div>
 							<div class="right_top">평점</div>
-							<div class="right_contents">3.0</div>
+							<div class="right_contents">${__AUTH__.rating}</div>
 						</div>
 						<div>
 							<div class="right_top">선호여행지</div>

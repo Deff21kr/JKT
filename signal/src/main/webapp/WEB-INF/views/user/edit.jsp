@@ -34,7 +34,8 @@
 				</div>
 				<div>
 					<div class="right_top">상태메시지</div>
-					<textarea name="statusMessage" cols="30" rows="10" placeholder="상태메세지를 입력해주세요."></textarea>
+					<textarea name="statusMessage" cols="30" rows="10"
+						placeholder="상태메세지를 입력해주세요."></textarea>
 				</div>
 				<div>
 					<div class="right_top">평점</div>
@@ -77,20 +78,19 @@
 				</label>
 
 				<div class="bt_wrap">
-					<button type="submit" id="modifyBtn">수정</button>
-					<script>
-						$(function() {
-						    $("#modifyBtn").click(function() {
-						        window.location.href="/user/mypage";
-						    });
-						});
-					</script>
+					<button type="submit" id="modifyBtn" class="modify">수정</button>
 				</div>
 			</form>
 		</div>
 	</div>
 
-	
+	<script>
+		$(function() {
+			$('.modify').on('click', function() {
+				location = "/user/mypage";
+			});
+		});
+	</script>
 </body>
 
 </html>

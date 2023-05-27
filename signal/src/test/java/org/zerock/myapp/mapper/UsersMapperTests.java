@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.RatingsDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 
@@ -35,6 +37,8 @@ public class UsersMapperTests {
 	private UsersMapper mapper;
 	@Setter(onMethod_ = { @Autowired })
 	private BCryptPasswordEncoder pw;
+	@Setter(onMethod_ = @Autowired)
+	private RatingsMapper map;
 
 	@Before
 	public void setup() {
@@ -126,15 +130,28 @@ public class UsersMapperTests {
 
 	} // cpmtext:pads
 	@Test(timeout = 1000*10)
-	public void testList() {
+	public void testList(Criteria cri) {
 		log.trace("글쓴내역 테스트응느은으은");
 		
 		String nickName = "강대수";
-		List<UsersDTO> vo = this.mapper.selectWriteList(nickName);
+		List<UsersDTO> vo = this.mapper.selectWriteList(nickName, cri);
 		
 		
 		log.info("vovovovovovovovovovovovovo:{}", vo);
 	
+	}
+	
+	@Test(timeout = 1000*5)
+	public void testRating() {
+		log.trace("점수 주고받고 조회까지 키야아아아아앙");
+		String nickName2 = "한글";
+		String nickName = "강대수";
+		Integer rating = 2;
+		Integer vo = this.map.setRaterUserNickName(nickName, nickName2,rating);
+		
+		Double dto = this.map.getRatedUserNickName(nickName);
+		
+		log.info("\t+ 점수우우무너ㅜ엄ㄴ웜눠웜누: ({}, {})", vo, dto);
 	}
 
 } // end class

@@ -156,10 +156,10 @@ public class UsersController {
 			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName(), cri);
 			model.addAttribute("_LIST_", dto);
 			
-//			// 점수 조회
-//			Double ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
-//			log.info("ratingDTO: {}", ratingDTO);
-//			model.addAttribute("rating", ratingDTO);
+			// 점수 조회
+			Double ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
+			log.info("ratingDTO: {}", ratingDTO);
+			model.addAttribute("rating", ratingDTO);
 			
 			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
 			model.addAttribute("pageMaker", pageDTO);

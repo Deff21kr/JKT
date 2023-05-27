@@ -5,7 +5,7 @@ import lombok.Value;
 @Value
 public class RatingsVO {
 	private Integer ID;
-	private String raterUserID;
-	private String ratedUserID;
+	private String raterUserNickName;
+	private String ratedUserNickName;
 	private Integer rating;
 }

@@ -31,6 +31,7 @@ public class UsersDTO {
 	private String title;
 	private String content;
 	private Timestamp regiDate;
+	private Double rating;
 	
 
 }

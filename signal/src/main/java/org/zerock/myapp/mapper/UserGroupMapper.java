@@ -20,7 +20,7 @@ public interface UserGroupMapper {
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")
-		public abstract List<UserGroupDTO> selectList(String nickName,Criteria cri) throws DAOException;
+		public abstract List<UserGroupDTO> selectList(@Param("nickName") String nickName,@Param("cri") Criteria cri) throws DAOException;
 		
 		// 내 동행
 		@Select("""
@@ -33,8 +33,13 @@ public interface UserGroupMapper {
 				    FROM tbl_groups g
 				    JOIN tbl_groupboard b ON g.postno = b.postno
 				) j ON u.groupno = j.groupno
-				WHERE u.nickname = #{nickName}
-				ORDER BY u.appdate desc
+				WHERE u.groupno IN (
+	                SELECT GROUPNO
+	                FROM
+	                    TBL_USER_GROUP
+	                WHERE nickname = #{nickName}
+	                )
+				ORDER BY u.groupno, u.outcome ,u.appdate desc
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")

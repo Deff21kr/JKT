@@ -64,6 +64,17 @@ p {
 
 div>ul>li {
 	font-size: 15px;
+	background : url(/resources/img/line_leftobj.png) 0 0 repeat-y;
+	line-height: 1.8;
+}
+
+div>ul>li>span {
+    display: block;
+    margin-left: -5px;
+    padding-left: 20px;
+    background: url(/resources/img/ico_leftobj.png) 0 50% no-repeat;
+    color: #000;
+    font-size: 16px;
 }
 
 /* #sec {
@@ -250,8 +261,9 @@ div>ul>li {
 							</div>
 						</div>
 						<div style="width: 348px; height: 230px; padding: 15px;">
-							<ul style="max-height: 180px; overflow: hidden;">
-								<h4 style="margin: 10px;">여행 일정</h4>
+							<ul style="max-height: 190px; overflow: hidden;">
+								<h4 style="margin: 10px;"><i class="fas fa-flag
+								" style="color: mediumpurple;"></i> 여행 일정</h4>
 
 
 								<c:set var="count" value="0" />
@@ -260,7 +272,7 @@ div>ul>li {
 									<c:if test="${GroupPlanVO.planNo == JoinDTO.planNo}">
 										<c:set var="count" value="${count + 1}" />
 										<c:if test="${count <= 5}">
-											<li style="list-style: inside; margin: 10px;">${JoinDTO.place}</li>
+											<li style=" margin-left: 10px;"><span>${JoinDTO.place}</span></li>
 										</c:if>
 									</c:if>
 								</c:forEach>

@@ -131,7 +131,7 @@ public class MyPlanServiceTests {
 		Integer planNo = 39;
 		Integer plannerType = 0;
 		
-		List<DetailPlanVO> vo = this.service.getDetailPlanList(planNo, plannerType);
+		List<DetailPlanVO> vo = this.service.getDetailPlanList(planNo);
 		assertNotNull(vo);
 		log.info("\t + vo : {}", vo);
 		
@@ -150,7 +150,6 @@ public class MyPlanServiceTests {
 		dto.setPlace("강원도");
 		dto.setPlanTime(date);
 		dto.setDetailPlan("뭐 할까요?");
-		dto.setPlannerType(0);
 		
 		assertNotNull(dto);
 
@@ -211,7 +210,7 @@ public class MyPlanServiceTests {
 		String nickName = "hyeondae";
 		Integer plannerType = 0;
 		
-		List<JoinMyPlanDTO> dto = this.service.joinList(nickName, plannerType);
+		List<JoinMyPlanDTO> dto = this.service.joinList(nickName);
 		assertNotNull(dto);
 		
 		log.info("dto : {}", dto);

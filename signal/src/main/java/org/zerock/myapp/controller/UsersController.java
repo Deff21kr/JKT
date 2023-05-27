@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
+import org.zerock.myapp.domain.RatingsDTO;
+import org.zerock.myapp.domain.CommentCriteria;
+import org.zerock.myapp.domain.CommentPageDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.service.LoginService;
 import org.zerock.myapp.service.QnACommentService;
+import org.zerock.myapp.service.RatingsService;
 import org.zerock.myapp.service.UserGroupService;
 import org.zerock.myapp.service.UsersService;
 
@@ -44,6 +48,9 @@ public class UsersController {
 	private UserGroupService group;
 	@Setter (onMethod_ = @Autowired)
 	private QnACommentService ser;
+	@Setter (onMethod_ = @Autowired)
+	private RatingsService ratingService;
+	
 	
 	// 1. 회원 목록 조회 (전부)
 	@GetMapping("/list")//리턴타입이 보이드이므로 리퀘스트 맵핑이 uri
@@ -149,11 +156,17 @@ public class UsersController {
 			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName(), cri);
 			model.addAttribute("_LIST_", dto);
 			
+//			// 점수 조회
+//			Double ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
+//			log.info("ratingDTO: {}", ratingDTO);
+//			model.addAttribute("rating", ratingDTO);
+			
 			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
 			model.addAttribute("pageMaker", pageDTO);
 			
 			PageDTO writeListDTO = new PageDTO(cri, this.service.getWriterList(vo.getNickName()));
 			model.addAttribute("writePageMaker", writeListDTO);
+			
 			
 			return "/user/mypage";
 		} catch (Exception e) {
@@ -202,6 +215,7 @@ public class UsersController {
 			} catch(Exception e) {
 				throw new ControllerException(e);
 			}
+			
 		}
 		
 		// 프로필 글쓴 내역 보기
@@ -220,6 +234,8 @@ public class UsersController {
 //		void myPageWriterListMapping() {
 //			
 //		}
+		
+		
 	
 		
 	

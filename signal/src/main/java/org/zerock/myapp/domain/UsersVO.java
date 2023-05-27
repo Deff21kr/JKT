@@ -31,6 +31,7 @@ public class UsersVO {
 	private String title;
 	private String content;
 	private Timestamp regiDate;
+	private Double rating;
 	
 	public UsersDTO toDTO() {
 		
@@ -54,6 +55,7 @@ public class UsersVO {
 		dto.setTitle(title);
 		dto.setContent(content);
 		dto.setRegiDate(regiDate);
+		dto.setRating(rating);
 		return dto;
 	}
 	

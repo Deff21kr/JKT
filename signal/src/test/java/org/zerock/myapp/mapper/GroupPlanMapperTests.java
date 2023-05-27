@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,7 +67,6 @@ public class GroupPlanMapperTests {
 		GroupPlanDTO dto = new GroupPlanDTO();
 		dto.setGroupNo(50);
 		dto.setNickName("hyeondae");
-		dto.setPlanName("askdlasdk");
 		dto.setStartDate(startdate);
 		dto.setEndDate(enddate);
 		
@@ -122,7 +122,7 @@ public class GroupPlanMapperTests {
 		log.trace("testgroupNameList invoked");
 		
 		String nickName = "hyeondae";
-		List<String> dto = this.mapper.groupNameList(nickName);
+		List<Map<String, Integer>> dto = this.mapper.groupNameList(nickName);
 		assertNotNull(dto);
 		
 		log.info("\t + nickName : {}", nickName);

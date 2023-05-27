@@ -83,7 +83,6 @@
 		<if test="likeArea != null">
 			,likeArea=#{likeArea}
 		</if>
-
 		WHERE ID = #{ID}
 	</update>
 

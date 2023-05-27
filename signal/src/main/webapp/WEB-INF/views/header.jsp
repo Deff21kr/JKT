@@ -49,8 +49,8 @@
 
       <ul class="category">
         <li><a href="/" target="_self"><img src="${pageContext.request.contextPath }/resources/img/travelsignal2.png" alt="여행시그널로고"></a> </li>
-        <li><a href="/board/group/list" target="_self">동행 찾기</a> </li>
-        <li><a href="/board/qna/list" target="_self">QnA</a> </li>
+        <li><a href="${pageContext.request.contextPath }/board/group/list" target="_self">동행 찾기</a> </li>
+        <li><a href="/board/qna/list" >QnA</a> </li>
         <li><a href="/user/mygroup" target="_self">동행현황</a> </li>
         <li><a href="/board/myplan/main" target="_self">플래너</a> </li>
         <li><a href="/board/review/list" target="_self">여행후기</a> </li>

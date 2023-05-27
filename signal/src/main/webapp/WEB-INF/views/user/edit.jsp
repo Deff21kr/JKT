@@ -81,7 +81,7 @@
 					<script>
 						$(function() {
 						    $("#modifyBtn").click(function() {
-						        window.location.href="/user/mypage";
+						        window.location.assign="/user/mypage";
 						    });
 						});
 					</script>

@@ -10,7 +10,7 @@ public interface RatingsService {
 	public abstract List<RatingsDTO> selectRating(String nickName) throws ServiceException;
 	
 	// 점수를 주기
-	public abstract Integer setRaterRating(String nickName, Integer rating) throws ServiceException;
+	public abstract Integer setRaterRating(String nickName,String setNickName ,Integer rating) throws ServiceException;
 	
 	// 점수 받기(조회)
 	public abstract Double getRatedRating(String nickName) throws ServiceException;

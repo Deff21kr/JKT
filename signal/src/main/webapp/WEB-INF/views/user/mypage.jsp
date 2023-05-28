@@ -92,6 +92,7 @@
 <style>
 .hide {
 	display: none;
+	
 }
 
 #tabs-3 .board_list .post .content div {
@@ -319,7 +320,7 @@
 									<div class="num">${count}</div>
 									<div class="group">${applist.groupName}</div>
 									<div class="nick">${applist.nickName}</div>
-									<div class="rate">${applist.outCome}</div>
+									<div class="rate">${rating.ratedUserNickName}</div>
 									<div class="startDate">
 										<fmt:formatDate value="${applist.startDate}"
 											pattern="yyyy-MM-dd" />

@@ -7,15 +7,22 @@ import org.apache.ibatis.annotations.Select;
 import org.zerock.myapp.domain.RatingsDTO;
 
 public interface RatingsMapper {
-	// 점수 단순 조회
+//	// 점수 단순 조회
+	@Select("""
+			select *
+			from tbl_ratings
+			where ratedUserNickName = #{ratedUserNickName}
+			""")
 	public abstract List<RatingsDTO> selectRating(String nickName);
 	
 	// 점수를 주자
-	public abstract Integer setRaterUserNickName(@Param("raterUserNickName")String nickName,@Param("ratedUserNickName")String setNickName,@Param("rating") Integer rating);
+	public abstract Integer setRaterUserNickName(@Param("ratedUserNickName")String nickName,@Param("raterUserNickName")String setNickName,@Param("rating") Integer rating);
 	
-	// 점수를 받자
-	@Select("select avg(rating)\r\n"
-			+ "from tbl_ratings\r\n"
-			+ "where ratedUserNickName = #{ratedUserNickName}")
-	public abstract Double getRatedUserNickName(@Param("ratedUserNickName")String nickName);
+	// 점수를 받고 조회하기
+	@Select("""
+			select avg(rating)
+			from tbl_ratings
+			where ratedUserNickName = #{ratedUserNickName}
+			""")
+	public abstract Double getRatedUserNickName(@Param("ratedUserNickName")String ratedUserNickName);
 }

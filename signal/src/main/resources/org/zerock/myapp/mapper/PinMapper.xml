@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.myapp.mapper.PinMapper">
+
+    <insert id="insert">
+        INSERT into tbl_pin(postNo, nickName)
+        VALUES (#{postNo}, #{nickName})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM tbl_pin WHERE pinNo = #{pinNo}
+    </delete>
+
+    <!-- 목록 -->
+    <select id="select" resultType="org.zerock.myapp.domain.PinDTO">
+        SELECT a.pinNo, a.postNo, a.nickName
+        FROM tbl_pin a LEFT OUTER JOIN tbl_groupboard b
+        ON a.postNo = b.postNo
+        WHERE a.nickName = #{nickName}
+    </select>
+
+    <!-- 찜 목록 확인 -->
+    <select id="checkPin" resultType="org.zerock.myapp.domain.PinDTO">
+        SELECT *
+        FROM tbl_pin
+        WHERE postNo = #{postNo}
+        and nickName = #{nickName}
+    </select>
+    
+    
+</mapper>

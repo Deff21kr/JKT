@@ -144,6 +144,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			return obj != null;
 		} else {
 			session=req.getSession(true);
+			session.setAttribute("__RESULT__","비회원");
 			Object obj = session.getAttribute("__RESULT__");
 			log.info("\t+ obj: {}", obj);
 			return obj != null;
@@ -156,6 +157,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		log.trace("checkRememberMeOption(req) invoked.");
 		
 		String rememberMe = req.getParameter("rememberMe");		// if checkbox checked, return "on"
+		log.info("\n\nrememberMe : {} ",rememberMe);
 		return rememberMe != null;
 	} // checkRememberMeOption
 	

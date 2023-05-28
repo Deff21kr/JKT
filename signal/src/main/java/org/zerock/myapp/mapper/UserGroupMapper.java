@@ -16,7 +16,7 @@ public interface UserGroupMapper {
                 FROM TBL_USER_GROUP a
                 INNER JOIN tbl_groups b ON a.groupNo = b.groupNo
                 where b.postno IN (select c.postno from tbl_groups c , tbl_groupboard d where c.postno=d.postno and d.nickname=#{nickName})
-                ORDER BY a.appno desc
+                ORDER BY b.groupno desc, a.appno desc
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")

@@ -24,5 +24,5 @@ public interface RatingsMapper {
 			from tbl_ratings
 			where ratedUserNickName = #{ratedUserNickName}
 			""")
-	public abstract Double getRatedUserNickName(@Param("ratedUserNickName")String ratedUserNickName);
+	public abstract RatingsDTO getRatedUserNickName(@Param("ratedUserNickName")String ratedUserNickName);
 }

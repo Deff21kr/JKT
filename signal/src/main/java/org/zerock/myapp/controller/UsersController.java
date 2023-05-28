@@ -158,7 +158,7 @@ public class UsersController {
 			model.addAttribute("_LIST_", dto);
 			
 			// 점수 조회
-			Double ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
+			RatingsDTO ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
 			log.info("ratingDTO: {}", ratingDTO);
 			model.addAttribute("rating", ratingDTO);
 			

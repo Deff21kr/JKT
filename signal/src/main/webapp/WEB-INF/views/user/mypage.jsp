@@ -430,7 +430,7 @@
 									<form action="#" method="post" class="rateresult">
 										<div class="rate" style="padding:5px 0px;">
 											<input type="hidden" name="raterUserNickName" value="${__AUTH__.nickName}">
-											<input type="hidden" name="ratedUserNickName" value="${applist.nickName}">
+											<input type="hidden" name="ratedUserNickName" value="${rating.nickName}">
 											
 											<c:forEach begin="1" end="5" step="1" varStatus="numA">
 												<c:set var="counter" value="${counter + 1}" />

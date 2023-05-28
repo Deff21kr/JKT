@@ -40,7 +40,7 @@ public class RatingsServiceImpl implements RatingsService{
 //	}
 	
 	@Override
-	public Double getRatedRating(String ratedUserNickName) throws ServiceException {
+	public RatingsDTO getRatedRating(String ratedUserNickName) throws ServiceException {
 	    try {
 	        return this.rat.getRatedUserNickName(ratedUserNickName);
 	    }catch(Exception e) {

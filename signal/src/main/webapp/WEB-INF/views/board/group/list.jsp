@@ -14,9 +14,9 @@
 
 
                 <!-- style -->
-                <link rel="stylesheet" href="../../resources/css/style.css">
-                <link rel="stylesheet" href="../../resources/css/style2.css">
-                <link rel="stylesheet" href="../../resources/css/groupboard.css">
+                <link rel="stylesheet" href="../../../../resources/css/style.css">
+                <link rel="stylesheet" href="../../../../resources/css/style2.css">
+                <link rel="stylesheet" href="../../../../resources/css/groupboard.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle1.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bstyle3.css">
@@ -51,6 +51,7 @@
                 <div class="place">
 
                     <form action="/board/group/searchList">
+                    <input type="hidden" name="currPage" value="1">
                         <div class="searchbox">
 
                             <div class="area">
@@ -218,7 +219,7 @@
                 <div class="bottom">
                     <div class="searching">
 
-                    </div>
+                </div>
 
 
                     <div class="bt_wrap">
@@ -233,9 +234,6 @@
 
 
             </body>
-
-
-
 
 
             </html>

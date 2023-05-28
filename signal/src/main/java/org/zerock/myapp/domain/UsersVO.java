@@ -27,6 +27,11 @@ public class UsersVO {
 	private Integer uno;
 	private Boolean enabled;
 	private String statusMessage;
+	private String boardName;
+	private String title;
+	private String content;
+	private Timestamp regiDate;
+	private Double rating;
 	
 	public UsersDTO toDTO() {
 		
@@ -46,6 +51,11 @@ public class UsersVO {
 		dto.setEnabled(enabled);
 		dto.setRememberMe(dto.getRememberMe());
 		dto.setStatusMessage(statusMessage);
+		dto.setBoardName(boardName);
+		dto.setTitle(title);
+		dto.setContent(content);
+		dto.setRegiDate(regiDate);
+		dto.setRating(rating);
 		return dto;
 	}
 	

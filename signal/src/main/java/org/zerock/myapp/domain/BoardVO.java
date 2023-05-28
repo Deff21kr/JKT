@@ -12,4 +12,5 @@ public class BoardVO {
 	private String writer;
 	private Timestamp insert_ts;
 	private Timestamp update_ts;
+	private String boardName;
 }

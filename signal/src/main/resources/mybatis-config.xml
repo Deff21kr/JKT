@@ -6,9 +6,11 @@
 
 <configuration>
 
-   
-
- <mappers>
+  <typeHandlers>
+    <typeHandler handler="org.zerock.myapp.handler.ListTypeHandler"/>
+  </typeHandlers>
+  
+  <mappers>
     <mapper resource="org/zerock/myapp/persistence/LoginDAO.xml" />
   </mappers>
 

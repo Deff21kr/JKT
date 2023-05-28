@@ -27,6 +27,11 @@ public class UsersDTO {
 	private Boolean enabled;
 	private Boolean rememberMe;
 	private String statusMessage;
+	private String boardName;
+	private String title;
+	private String content;
+	private Timestamp regiDate;
+	private Double rating;
 	
 
 }

@@ -59,23 +59,8 @@
   		${msg}
 	</div>
   
-    <div id="hr-line">
-      <div class="hr-line"></div>
-      <div class="hr-txt">또는</div>
-      <div class="hr-line"></div>
-    </div>
+ 
   
-    <div class="sns-signin">
-      <button id="google-signin">
-        <img src="img/google.png" alt="구글 로고">
-      </button>
-      <button id="naver-signin">
-        <img src="img/naver.png" alt="네이버 로고">
-      </button>
-      <button id="kakao-signin">
-        <img src="img/kakao.png" alt="카카오 로고">
-      </button>
-    </div>
   </main>
   
   <footer>

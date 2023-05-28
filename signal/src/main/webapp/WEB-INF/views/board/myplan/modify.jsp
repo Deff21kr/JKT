@@ -180,6 +180,7 @@
 						<form action="/board/myplan/modify" method="post">
 							<input type="hidden" name="planNo" value="${__DETAILPLAN__.planNo}">
 							<input type="hidden" name="detailPlanNo" value="${__DETAILPLAN__.detailPlanNo}">
+							
 							<div class="datetime" style="margin-top: 20px;">
 								<p>시간 설정</p>
 								<input type="time" name="planTime" 

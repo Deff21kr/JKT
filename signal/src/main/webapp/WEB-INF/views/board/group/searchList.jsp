@@ -32,29 +32,30 @@
             <script>
             $(function () {
             	  $('#regBtn').click(function () {
-            	    let currPage = "${SearchPageMaker.cri.currPage}";
+            	    let currPage = "${searchPageMaker.cri.currPage}";
             	    location = "/board/group/register?currPage=" + currPage;
             	  });
             	  $('.pageNum').on('click', function (e) {
             		    let selectedPageNum = e.currentTarget.textContent;
+            		    colsole.log(selectedPageNum);
             		    let url = "/board/group/searchList?currPage=" + selectedPageNum;
 
             		    // area 파라미터를 추가
-            		    url += "&area=" + encodeURIComponent('${SearchPageMaker.cri.area}');
+            		    url += "&area=" + encodeURIComponent('${searchPageMaker.cri.area}');
 
             		    // startDate 파라미터를 추가
-            		    url += "&startDate=" + encodeURIComponent('${SearchPageMaker.cri.startDate}');
+            		    url += "&startDate=" + encodeURIComponent('${searchPageMaker.cri.startDate}');
 
             		    // endDate 파라미터를 추가
-            		    url += "&endDate=" + encodeURIComponent('${SearchPageMaker.cri.endDate}');
+            		    url += "&endDate=" + encodeURIComponent('${searchPageMaker.cri.endDate}');
 
             		    // memberNum 파라미터를 추가
-            		    url += "&memberNum=" + encodeURIComponent('${SearchPageMaker.cri.memberNum}');
+            		    url += "&memberNum=" + encodeURIComponent('${searchPageMaker.cri.memberNum}');
 
             		    // recruitStatus 파라미터를 추가
-            		    url += "&recruitStatus=" + encodeURIComponent('${SearchPageMaker.cri.recruitStatus}');
-
-            		    location.href = url;
+            		    url += "&recruitStatus=" + encodeURIComponent('${searchPageMaker.cri.recruitStatus}');
+            		    colsole.log(url);
+        //    		    location.href = url;
             		});
 
                   });
@@ -70,6 +71,7 @@
                 <div class="place">
 
                     <form action="/board/group/searchList">
+                    <input type="hidden" name="currPage" value="1">
                         <div class="searchbox">
 
                             <div class="area">
@@ -197,8 +199,7 @@
                                         <div class="place-state">${groupBoardVO.recruitStatus}</div>
 
                                         <div class="title">
-                                            <a
-                                                href="/board/group/get?currPage=${pageMaker.cri.currPage}&postNo=${groupBoardVO.postNo}">${groupBoardVO.title}</a>
+                                            <a href="/board/group/get?currPage=${searchPageMaker.cri.currPage}&area=${searchPageMaker.cri.area}&startDate=${searchPageMaker.cri.startDate}&endDate=${searchPageMaker.cri.endDate}&memberNum=${searchPageMaker.cri.memberNum}&recruitStatus=${searchPageMaker.cri.recruitStatus}&postNo=${searchPageMaker.cri.currPage}">${groupBoardVO.title}</a>
                                         </div>
 
                                     </a>
@@ -221,15 +222,15 @@
                 </div>
 
                 <div class="board_page">
-                    <c:if test="${SearchPageMaker.prev}">
-                        <div class="Prev"><a href="/board/group/searchList?currPage=${SearchPageMaker.startPage - 1}">Prev</a>
+                    <c:if test="${searchPageMaker.prev}">
+                        <div class="Prev"><a href="/board/group/searchList?currPage=${searchPageMaker.startPage - 1}">Prev</a>
                         </div>
                     </c:if>
-                    <c:forEach var="pageNum" begin="${SearchPageMaker.startPage}" end="${SearchPageMaker.endPage}">
-                        <div class="pageNum ${SearchPageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+                    <c:forEach var="pageNum" begin="${searchPageMaker.startPage}" end="${searchPageMaker.endPage}">
+                        <div class="pageNum ${searchPageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
                     </c:forEach>
-                    <c:if test="${SearchPageMaker.next}">
-                        <div class="Next"><a href="/board/group/searchList?currPage=${SearchPageMaker.endPage + 1}">Next</a>
+                    <c:if test="${searchPageMaker.next}">
+                        <div class="Next"><a href="/board/group/searchList?currPage=${searchPageMaker.endPage + 1}">Next</a>
                         </div>
                     </c:if>
                 </div>

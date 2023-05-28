@@ -1,6 +1,5 @@
 package org.zerock.myapp.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +23,6 @@ import org.zerock.myapp.domain.MyPlanVO;
 import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
-import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.MyPlanService;
 
 import lombok.NoArgsConstructor;
@@ -43,7 +41,7 @@ public class MyPlanController {
 
 	
 	@GetMapping("/main")
-	void planMain(Criteria cri ,HttpServletRequest req, Model model) throws ControllerException {
+	void planMain(Criteria cri, HttpServletRequest req, Model model) throws ControllerException {
 		log.info("planMain() invoked");
 		
 		try {
@@ -118,6 +116,7 @@ public class MyPlanController {
 		
 		try {
 			Boolean result = this.service.modify(planName, planNo);
+			rttrs.addAttribute("planNo", planNo);
 			rttrs.addAttribute("result", result);
 			
 			return "redirect:/board/myplan/main";
@@ -218,13 +217,14 @@ public class MyPlanController {
 	
 	// 글 수정
 	@PostMapping("/modify")
-	String modify(@RequestParam Integer planNo, DetailPlanDTO dto, RedirectAttributes rttrs) throws ControllerException {
+	String modify(DetailPlanDTO dto, RedirectAttributes rttrs) throws ControllerException {
 		log.trace("modify() invoked");
 		
 		 try {
 			Boolean result = this.service.modifyDetailPlan(dto);
+			rttrs.addAttribute("planNo", dto.getPlanNo());
 			rttrs.addAttribute("result", result);
-			rttrs.addAttribute("planNo", planNo);
+
 			
 			return "redirect:/board/myplan/get";
 			
@@ -241,9 +241,9 @@ public class MyPlanController {
 		try {
 			
 			Boolean result = this.service.removeDetailPlan(detailPlanNo);
-			rttrs.addAttribute("result", result);
 			rttrs.addAttribute("planNo", planNo);
-			
+			rttrs.addAttribute("result", result);
+
 			return "redirect:/board/myplan/get";
 
 		} catch (Exception e) {

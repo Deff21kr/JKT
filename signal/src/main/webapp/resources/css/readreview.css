@@ -39,11 +39,37 @@ h1 {
     overflow: hidden;
 }
 
+/* .right carousel-control, .left carousel-control{
+    background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 0%);
+    background-image: -webkit-linear-gradient(left,rgba(0,0,0,0) 0,rgba(0,0,0,0) 0%);
+} */
 
+
+.carousel-control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0);
+
+    &.left {
+      #gradient > .horizontal(@start-color: rgba(0, 0, 0, .5); @end-color: rgba(0, 0, 0, .0001));
+    }
+    &.right {
+      right: 0;
+      left: auto;
+      #gradient > .horizontal(@start-color: rgba(0, 0, 0, .0001); @end-color: rgba(0, 0, 0, .5));
+    }
 
 
 
 /* 헤드영역 */
+
+.post-No {
+    display: none;
+    margin: 0px;
+}
 
 
 .user-info{
@@ -75,6 +101,7 @@ h1 {
     width: fit-content;
     text-decoration: none;
     color: black;
+    margin-left: 3px;
     /* margin-bottom: px auto; */
     /* display: inline-block; */
     /* position: absolute; */
@@ -116,6 +143,7 @@ h1 {
     background-color: #5e8cff;
 }
 
+/* 더보기 버튼 */
 .morebtn {
     position: absolute;
     right: 25px;
@@ -123,7 +151,6 @@ h1 {
     font-size: 25px;
     margin: 5px;
 }
-
 
 
 /* 사진 영역 */
@@ -172,4 +199,14 @@ img {
     text-align: center;
     font-size: 20px;
     padding: 50px;
+}
+
+
+/* 버튼메뉴들 */
+
+.btn-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px 30px;
 }

@@ -1,6 +1,8 @@
 package org.zerock.myapp.domain;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -8,7 +10,7 @@ import lombok.Data;
 @Data
 public class UserGroupDTO {
 	private Integer appNo;
-	private String ID;
+	private String nickName;
 	private Integer groupNo;
 	private String groupName;
 	private String area;
@@ -17,6 +19,14 @@ public class UserGroupDTO {
 	private Integer memberNum;
 	private Integer currentMember;
 	private String postNo;
+	
+    private String title;
+    private String content;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date startDate;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date endDate;
+    private String writer;
 	
 	
 }

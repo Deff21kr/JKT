@@ -129,6 +129,7 @@ public class MyPlanServiceTests {
 		log.trace("testGetDetailPlanList() invoked");
 		
 		Integer planNo = 39;
+		Integer plannerType = 0;
 		
 		List<DetailPlanVO> vo = this.service.getDetailPlanList(planNo);
 		assertNotNull(vo);
@@ -207,7 +208,7 @@ public class MyPlanServiceTests {
 		log.trace("testJoinList() invoked");
 		
 		String nickName = "hyeondae";
-		Criteria cri = new Criteria();
+		Integer plannerType = 0;
 		
 		List<JoinMyPlanDTO> dto = this.service.joinList(nickName);
 		assertNotNull(dto);

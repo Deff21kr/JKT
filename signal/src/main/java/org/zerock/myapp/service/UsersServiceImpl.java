@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
+import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.mapper.UsersMapper;
 
@@ -144,7 +146,7 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 	@Override
 	public Boolean profileEdit(UsersDTO dto) throws ServiceException {
 		try {
-			return this.dao.profilEdit(dto);
+			return this.dao.profileEdit(dto);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		}
@@ -173,6 +175,21 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		// 자원해제(후처리)
 		log.trace("\n*********************************************************\n			destroy() "
 				+ "\n********************************************************* ");
+	}
+
+	@Override
+	public List<UsersDTO> selectWriteList(String nickName, Criteria cri) throws ControllerException {
+		try {
+			return this.dao.selectWriteList(nickName, cri);
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		}
+		
+	}
+
+	@Override
+	public Integer getWriterList(String nickName) throws ControllerException {
+		return this.dao.getWriteList(nickName);
 	}
 
 	

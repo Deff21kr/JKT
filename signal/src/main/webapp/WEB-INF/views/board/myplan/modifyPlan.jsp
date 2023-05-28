@@ -30,7 +30,7 @@
 	<script defer>
 	    $(function () {
 	        $('#cancel').click(function () {
-	            location = "/board/myplan/main";
+	            location = "/board/myplan/get?planNo=${param.planNo}";
 	        });
 	    });
 	    

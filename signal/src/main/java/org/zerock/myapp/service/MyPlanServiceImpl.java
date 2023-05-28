@@ -164,7 +164,7 @@ public class MyPlanServiceImpl implements MyPlanService {
 	@Override
 	public List<JoinMyPlanDTO> joinList(String nickName) throws ServiceException {
 		try {
-			log.trace("joinList({}) invoked", nickName);
+			log.trace("joinList({}, {}) invoked", nickName);
 
 			return this.joinMapper.selectList(nickName);
 		} catch (Exception e) {

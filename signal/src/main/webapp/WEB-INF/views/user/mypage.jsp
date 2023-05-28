@@ -14,25 +14,195 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/mypageStyle.css">
-
 <link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#container").tabs();
-		heightStyle: "content"
-	});
+	href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
+
+				<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+				<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+				<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+				<script>
+				  let tabId = ''; // 탭 ID 변수를 선언합니다.
+				$(document).ready(function() {
+
+					  $('.tabs').on('click', function(e) {
+					    e.preventDefault();
+					    tabId = $(this).attr('href'); // 탭 ID 값을 업데이트합니다.
+					    let url = window.location.href.split('#')[0]; // 현재 URL에서 # 이전 부분만 가져옵니다.
+					    let url2 = window.location.href.split('?')[0];
+					    let queryString = window.location.search; // 쿼리 문자열을 가져옵니다.
+					    console.log("queryString : " + queryString);
+					    console.log("ID: " + tabId);
+					    console.log("URL: " + url);
+					    console.log("URL2: " + url2);
+					    
+					    // 쿼리 문자열에 'currPage'가 있는지 확인합니다.
+					    if (queryString.includes('currPage')) {
+					      window.location.href = url2 + tabId; // 현재 URL과 탭의 ID를 합쳐서 새로운 URL로 이동합니다.
+					    } else {
+					      window.location.href = url + tabId; // 현재 URL과 탭의 ID를 합쳐서 새로운 URL로 이동합니다.
+					    }
+					  });
+
+					  $('.pageNum').on('click', function(e) {
+						tabId =  window.location.hash;
+						 let url = window.location.href.split('#')[0];
+					    e.preventDefault();
+					    let selectedPageNum = e.currentTarget.textContent;
+					    console.log("ID2: " + tabId);
+					    console.log("페이지: " + ${pageMaker.cri.currPage});
+					    window.location.href ="/user/mypage"+"?currPage="+selectedPageNum+ tabId;
+					    
+				
+					  });
+					});
+
+				
+				
+				$(function () {
+					$("#container").tabs();
+					heightStyle: "content"
+				});
+
+				$(function() {
+					$("#modifyBtn").click(function() {
+						location = "/user/edit"
+						console.log("클리이이이이이익");
+					});
+				});
+				$(function() {
+					$('.pageNum').on('click', function(e) {
+						let selectedPageNum = e.currentTarget.textContent;
+						location = "/user/mypage?#currPage=" + selectedPageNum + "tabs-2";
+					});
+				});
+
+				$(function() {
+					$('.myGroup').on('click', function(e) {
+						var content = $(this).nextUntil('.myGroup');
+						if (content.css('display') === 'none') {
+							content.css('display', 'block');
+							content.last().css('border-bottom', '1px solid');
+							content.css('border-left', '1px solid');
+							content.css('border-right', '1px solid')
+						} else {
+							content.css('display', 'none');
+						}
+					});
+				});
+				
+				$(document).ready(function() {
+					  $('.rateresult').submit(function(e) {
+					    e.preventDefault(); // 폼 기본 제출 동작 막기
+
+					    // AJAX 요청 생성
+					    $.ajax({
+					      url: $(this).attr('action'), // 폼의 action 속성 값
+					      type: $(this).attr('method'), // 폼의 method 속성 값
+					      data: $(this).serialize(), // 폼 데이터 직렬화
+					      success: function(response) {
+					        // 성공적으로 요청을 보냈을 때 수행할 작업
+					        console.log('AJAX 요청 성공');
+					        console.log(response); // 서버로부터의 응답 출력
+					      },
+					      error: function(xhr, status, error) {
+					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
+					        console.error('AJAX 요청 오류');
+					        console.log('상태:', status);
+					        console.log('오류:', error);
+					      }
+					    });
+					  });
+					});
+
+				</script>
+
+
+<style>
+.hide {
+	display: none;
 	
-	$(function() {
-		$("#modifyBtn").click(function(){
-			location="/user/edit"
-			console.log("클리이이이이이익");
-		});
-	});
-	
-</script>
+}
+
+#tabs-3 .board_list .post .content div {
+	width: 20%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post .content2 div {
+	width: 20%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post .content .rateresult {
+	width: 40%;
+	display: inline-flex;
+	font-size: 2rem;
+	text-align: center;
+	padding: 0px;
+}
+
+#tabs-3 .board_list .post .content2 .rateresult {
+	width: 40%;
+	display: inline-flex;
+	font-size: 1.5rem;
+	text-align: center;
+	padding: 0px;
+}
+
+#tabs-3 .board_list .post .content .rateresult > div{
+	width: 50%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post .content2 .rateresult > div{
+	width: 50%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+.myGroup {
+	cursor: pointer;
+}
+
+.content {
+	border: 1px solid
+}
+
+.rate {
+	display: inline-block;
+}
+
+.rate input[type="radio"] {
+  display: none;
+}
+
+.rate label {
+  cursor: pointer;
+  color: #ccc;
+  font-size: 32px;
+}
+
+.rate input[type="radio"]:checked ~ label {
+  color: #ffcc00;
+}
+
+.result>button[type="submit"]{
+	cursor: pointer;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -50,22 +220,22 @@
 		<div id="container">
 
 			<ul>
-				<li><a href="#tabs-1">
+				<li><a href="#tabs-1" class="tabs">
 						<div class="c">프로필</div>
 				</a></li>
-				<li><a href="#tabs-2">
+				<li><a href="#tabs-2" class="tabs">
 						<div class="c">작성글</div>
 				</a></li>
-				<li><a href="#tabs-3">
+				<li><a href="#tabs-3" class="tabs">
 						<div class="c">마이동행</div>
 				</a></li>
-				<li><a href="#tabs-4">
+				<li><a href="#tabs-4" class="tabs">
 						<div class="c">찜한 글</div>
 				</a></li>
-				<li><a href="#tabs-5">
+				<li><a href="#tabs-5" class="tabs">
 						<div class="c">좋아요한 글</div>
 				</a></li>
-				<li><a href="#tabs-6">
+				<li><a href="#tabs-6" class="tabs">
 						<div class="c">개인 정보 수정</div>
 				</a></li>
 			</ul>
@@ -91,7 +261,7 @@
 						<!-- 프로필 이미지 수정 -->
 
 					</div>
-					
+
 					<div class="profile_right">
 						<div>
 							<div class="right_top">닉네임</div>
@@ -99,11 +269,11 @@
 						</div>
 						<div>
 							<div class="right_top">상태메시지</div>
-							<div class="right_contents">일이삼사오육칠팔구공일이삼사오육칠팔구공일이삼사오육칠팔구공일이삼사오육칠팔구공일이삼사오육칠팔구공일이삼사오육칠팔구공</div>
+							<div class="right_contents">${__AUTH__.statusMessage}</div>
 						</div>
 						<div>
 							<div class="right_top">평점</div>
-							<div class="right_contents">3.0</div>
+							<div class="right_contents">${__AUTH__.rating}</div>
 						</div>
 						<div>
 							<div class="right_top">선호여행지</div>
@@ -113,14 +283,14 @@
 							<div class="right_top">MBTI</div>
 							<div class="right_contents">${__AUTH__.MBTI}</div>
 						</div>
-						
-						
+
+
 						<div class="bt_wrap">
 							<button type="submit" id="modifyBtn">수정</button>
 						</div>
-						
+
 					</div>
-					
+
 
 
 
@@ -142,52 +312,47 @@
 						<div class="date">작성일</div>
 					</div>
 					<!-- 불러올 작성글 대략 10개정도 -->
-					<div class="post">
-						<div>
-							<div class="board">동행구하기</div>
-							<div class="title">
-								<a href="#">1번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<div class="date">작성일</div>
-						</div>
-						<div>
-							<div class="num">1:1문의</div>
-							<div class="title">
-								<a href="#">2번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<div class="date">작성일</div>
-						</div>
-						<div>
-							<div class="num">후기게시판</div>
-							<div class="title">
-								<a href="#">3번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<div class="date">작성일</div>
-						</div>
-						<div>
-							<div class="num">QNA</div>
-							<div class="title">
-								<a href="#">4번글</a>
-							</div>
-							<div class="writer">작성자</div>
-							<div class="date">작성일</div>
-						</div>
 
+
+					<div class="post">
+						<c:forEach var="item" items="${_LIST_}">
+							<input type="hidden" name="nickName" value="${item.nickName}">
+							<div id="wirteList">
+								<div class="board">${item.boardName}</div>
+								<div class="title">${item.title}</div>
+								<div class="writer">${item.nickName}</div>
+								<div class="date">
+									<fmt:formatDate value="${item.regiDate}" pattern="yyyy-MM-dd" />
+								</div>
+							</div>
+						</c:forEach>
 					</div>
 
-					<div class="board_page">
-						<a href="#" class="bt first">< <</a> <a href="#" class="bt prev">
-							< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-						<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-							href="#" class="num">5</a> <a href="#" class="bt next">></a> <a
-							href="#" class="bt last">> > </a>
+					<div class="board_page" id="boardPage">
+						<c:if test="${writePageMaker.prev}">
+							<div class="Prev">
+								<a href="/user/mypage?currPage=${writePageMaker.startPage - 1}">Prev</a>
+							</div>
+						</c:if>
 
+						<c:forEach var="pageNum" begin="${writePageMaker.startPage}"
+							end="${writePageMaker.endPage}">
+							<div
+								class="pageNum ${writePageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+						</c:forEach>
+
+						<c:if test="${writePageMaker.next}">
+							<div class="Next">
+								<a href="/user/mypage?currPage=${writePageMaker.endPage + 1}">Next</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
+
+
+
+
 
 			<!-- 마이동행 -->
 			<div id="tabs-3">
@@ -195,83 +360,120 @@
 				<div class="board_list">
 
 					<div class="top">
-						<div class="group">동행이름</div>
-						<div class="title">제목</div>
-						<div class="writer">작성자</div>
 						<div class="area">장소</div>
+						<div class="group">동행이름</div>
+						<div class="writer">작성자</div>
+						<div class="status">결과</div>
 						<div class="startDate">동행시작</div>
-						<div class="enDate">동행종료</div>
+						<div class="endDate">동행종료</div>
 					</div>
 					<!-- 불러올 동행내역 대략 10개정도 -->
 					<div class="post">
-						<div>
-							<div class="group">우리동행</div>
-							<div class="title">
-								<a href="#">1번글 제목</a>
-							</div>
-							<div class="writer">강대수</div>
-							<div class="area">서울</div>
-							<div class="startDate">2022-01-01</div>
-							<div class="enDate">2022-01-03</div>
-						</div>
-						<div>
-							<div class="group">
-								<a href="#">얘네동행</a>
-							</div>
-							<div class="title">
-								<a href="#">2번글 제목</a>
-							</div>
-							<div class="writer">최재균</div>
-							<div class="area">대전</div>
-							<div class="startDate">2022-06-05</div>
-							<div class="enDate">2022-0103</div>
-						</div>
-						<div>
-							<div class="group">
-								<a href="#">얘네동행</a>
-							</div>
-							<div class="title">
-								<a href="#">3번글 제목</a>
-							</div>
-							<div class="writer">조현대</div>
-							<div class="area">대구</div>
-							<div class="startDate">2022-09-09</div>
-							<div class="enDate">2022-11-05</div>
-						</div>
-						<div>
-							<div class="group">
-								<a href="#">남의동행</a>
-							</div>
-							<div class="title">
-								<a href="#">4번글 제목</a>
-							</div>
-							<div class="writer">신현나</div>
-							<div class="area">부산</div>
-							<div class="startDate">2023-01-01</div>
-							<div class="enDate">2023-01-01</div>
-						</div>
-						<div>
-							<div class="group">
-								<a href="#">바보동행</a>
-							</div>
-							<div class="title">
-								<a href="#">5번글 제목</a>
-							</div>
-							<div class="writer">위영선</div>
-							<div class="area">일본</div>
-							<div class="startDate">2023-01-03</div>
-							<div class="enDate">2023-02-02</div>
-						</div>
+
+						<c:set var="count" value="0" />
+						<c:set var="counter" value="0" />
+						
+						<c:forEach var="applist" items="${__APPLIST__}" varStatus="numNo">
+
+							<c:if test="${__AUTH__.nickName == applist.nickName}">
+								<c:set var="count" value="0" />
+
+								<div class="myGroup">
+									<div class="area">${applist.area}</div>
+									<div class="group">${applist.groupName}</div>
+									<div class="writer">${applist.writer}</div>
+									<div class="status">${applist.outCome}</div>
+									<div class="startDate">
+										<fmt:formatDate value="${applist.startDate}"
+											pattern="yyyy-MM-dd" />
+									</div>
+									<div class="endDate">
+										<fmt:formatDate value="${applist.endDate}"
+											pattern="yyyy-MM-dd" />
+									</div>
+								</div>
+
+
+							</c:if>
+
+
+							<c:if test="${(applist.outCome eq '수락' || applist.outCome eq '본인' )&& __AUTH__.nickName != applist.nickName}">
+								<c:set var="count" value="${count + 1}" />
+								<c:if test="${count == 1}">
+									<div class="content hide">
+										<!-- 숨겨진 내용 -->
+										<div class="num">번호</div>
+										<div class="group">동행이름</div>
+										<div class="nick">닉네임</div>
+										<div class="rateresult">
+											<div class="rate">평점</div>
+											<div class="result">제출</div>
+										</div>
+										
+									</div>
+								</c:if>
+								
+								
+								<div class="content2 hide">
+									<div class="num">${count}</div>
+									<div class="group">${applist.groupName}</div>
+									<div class="nick">${applist.nickName}</div>
+									<div class="rate">${rating.ratedUserNickName}</div>
+									<div class="startDate">
+										<fmt:formatDate value="${applist.startDate}"
+											pattern="yyyy-MM-dd" />
+									</div>
+									<div class="endDate">
+										<fmt:formatDate value="${applist.endDate}"
+											pattern="yyyy-MM-dd" />
+									</div>
+									<form action="#" method="post" class="rateresult">
+										<div class="rate" style="padding:5px 0px;">
+											<input type="hidden" name="raterUserNickName" value="${__AUTH__.nickName}">
+											<input type="hidden" name="ratedUserNickName" value="${applist.nickName}">
+											
+											<c:forEach begin="1" end="5" step="1" varStatus="numA">
+												<c:set var="counter" value="${counter + 1}" />
+											    <input type="radio" id="star${counter}" name="rating" value="${6 - numA.index}" />
+											    <label for="star${counter}">
+											    	&#9733;
+											    </label>
+											</c:forEach>
+											
+   											
+										</div>
+										<div class="result">
+											<button type="submit">제출</button>
+										</div>
+																				
+									</form>
+								</div>
+							</c:if>
+
+
+						</c:forEach>
+
 
 					</div>
 
 					<div class="board_page">
-						<a href="#" class="bt first"> < < </a> <a href="#" class="bt prev">
-							< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-						<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-							href="#" class="num">5</a> <a href="#" class="bt next"> > </a> <a
-							href="#" class="bt last"> > > </a>
+						<c:if test="${pageMaker.prev}">
+							<div class="Prev">
+								<a href="/user/mypage?currPage=${pageMaker.startPage - 1}">Prev</a>
+							</div>
+						</c:if>
 
+						<c:forEach var="pageNum" begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}">
+							<div
+								class="pageNum ${pageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next}">
+							<div class="Next">
+								<a href="/user/mypage?currPage=${pageMaker.endPage + 1}">Next</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -346,7 +548,7 @@
 					</div>
 
 					<div class="board_page">
-						<a href="#" class="bt first">< <</a> <a href="#" class="bt prev">
+						<a href="#" class="bt first"> < <</a> <a href="#" class="bt prev">
 							< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
 						<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
 							href="#" class="num">5</a> <a href="#" class="bt next"> > </a> <a
@@ -435,28 +637,21 @@
 				<!-- <h3>회원정보수정</h3> -->
 				<form method="post" action="/mypage">
 
-					<label for="name">이름</label> <input type="text" id="name"
-						name="name" value="${__AUTH__.name}"><br> <label
-						for="email">이메일</label> <input type="text" id="email" name="Email"
-						value="${__AUTH__.EMail}"><br>
+					<label for="name">이름</label> <input type="text" id="name" name="name" value="${__AUTH__.name}"><br> 
+					<label for="email">이메일</label> <input type="text" id="email" name="Email" value="${__AUTH__.EMail}"><br>
 
 					<!-- <button type="button" onclick="sendEmail()">이메일 인증<button><br> -->
-					<label for="emailAuth">인증번호</label> <input type="text"
-						id="emailAuth" name="emailAuth" disabled><br> <label
-						for="password">현재 비밀번호</label> <input type="password"
-						id="password" name="password" required><br> <label
-						for="newPassword">새 비밀번호</label> <input type="password"
-						id="newPassword" name="password"><br> <label
-						for="confirmPassword">새 비밀번호 확인</label> <input type="password"
-						id="confirmPassword" name="password"><br> <input
-						type="submit" value="수정">
+					<label for="emailAuth">인증번호</label> 
+					<input type="text" id="emailAuth" name="emailAuth" disabled><br> 
+					<label for="password">현재 비밀번호</label> 
+					<input type="password" id="password" name="password" required><br> 
+					<label for="newPassword">새 비밀번호</label> 
+					<input type="password" id="newPassword" name="password"><br> 
+					<label for="confirmPassword">새 비밀번호 확인</label> 
+					<input type="password" id="confirmPassword" name="password"><br> 
+					<input type="submit" value="수정">
 				</form>
 			</div>
-
-
-
-
-
 
 		</div>
 
@@ -465,6 +660,12 @@
 	<footer>
 		<jsp:include page="../footer.jsp" />
 	</footer>
+
+
+
+
+
+
 </body>
 
 </html>

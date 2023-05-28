@@ -10,6 +10,7 @@ import org.zerock.myapp.domain.CommentCriteria;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.QnACommentDTO;
 import org.zerock.myapp.domain.QnACommentVO;
+import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.mapper.QnACommentMapper;
 
@@ -87,9 +88,10 @@ public class QnACommentServiceImpl implements QnACommentService, InitializingBea
 
 	@Override
 	public Integer getCommentTotal(Integer postNo) throws ServiceException {
-		// TODO Auto-generated method stub
 		return this.dao.getCommentTotalAmount(postNo);
 	}
+
+
 
 	
 

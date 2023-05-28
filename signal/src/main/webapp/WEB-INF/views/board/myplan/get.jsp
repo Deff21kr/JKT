@@ -39,7 +39,9 @@ function remove() {
 // 플래너 수정
 $(function () {
     $('#modify').click(function () {
-        location.href = "/board/myplan/modifyPlan?planNo=${__MYPLAN__.planNo}";
+    	if(confirm("플래너를 수정하시겠습니까?")) {
+		    location.href = "/board/myplan/modifyPlan?planNo=${__MYPLAN__.planNo}";
+		  } // if
     });
     
     $('#remove').click(function () {

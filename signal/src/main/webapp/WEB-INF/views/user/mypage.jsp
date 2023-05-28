@@ -69,21 +69,17 @@
 						console.log("클리이이이이이익");
 					});
 				});
-				$(function() {
-					$('.pageNum').on('click', function(e) {
-						let selectedPageNum = e.currentTarget.textContent;
-						location = "/user/mypage?#currPage=" + selectedPageNum + "tabs-2";
-					});
-				});
 
 				$(function() {
 					$('.myGroup').on('click', function(e) {
 						var content = $(this).nextUntil('.myGroup');
-						if (content.css('display') === 'none') {
+						if (content.css('display') === 'none' && $(this).find('.status').html() === '수락') {
+							
 							content.css('display', 'block');
 							content.last().css('border-bottom', '1px solid');
 							content.css('border-left', '1px solid');
 							content.css('border-right', '1px solid')
+							
 						} else {
 							content.css('display', 'none');
 						}
@@ -113,6 +109,8 @@
 					    });
 					  });
 					});
+				
+
 
 				</script>
 
@@ -397,7 +395,7 @@
 							</c:if>
 
 
-							<c:if test="${(applist.outCome eq '수락' || applist.outCome eq '본인' )&& __AUTH__.nickName != applist.nickName}">
+							<c:if test="${(applist.outCome eq '수락' || applist.outCome eq '본인' )&& __AUTH__.nickName != applist.nickName }">
 								<c:set var="count" value="${count + 1}" />
 								<c:if test="${count == 1}">
 									<div class="content hide">
@@ -418,15 +416,6 @@
 									<div class="num">${count}</div>
 									<div class="group">${applist.groupName}</div>
 									<div class="nick">${applist.nickName}</div>
-									<div class="rate">${rating.ratedUserNickName}</div>
-									<div class="startDate">
-										<fmt:formatDate value="${applist.startDate}"
-											pattern="yyyy-MM-dd" />
-									</div>
-									<div class="endDate">
-										<fmt:formatDate value="${applist.endDate}"
-											pattern="yyyy-MM-dd" />
-									</div>
 									<form action="#" method="post" class="rateresult">
 										<div class="rate" style="padding:5px 0px;">
 											<input type="hidden" name="raterUserNickName" value="${__AUTH__.nickName}">

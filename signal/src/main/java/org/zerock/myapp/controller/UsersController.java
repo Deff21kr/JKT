@@ -160,7 +160,7 @@ public class UsersController {
 			// 점수 조회
 			RatingsDTO ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
 			log.info("ratingDTO: {}", ratingDTO);
-			model.addAttribute("rating", ratingDTO);
+			model.addAttribute("__rating__", ratingDTO);
 			
 			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
 			model.addAttribute("pageMaker", pageDTO);

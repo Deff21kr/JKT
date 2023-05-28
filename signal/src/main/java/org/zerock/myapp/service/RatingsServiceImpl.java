@@ -10,7 +10,7 @@ import org.zerock.myapp.mapper.RatingsMapper;
 
 import lombok.Setter;
 
-@Service("Ratings")
+@Service("RatingsService")
 public class RatingsServiceImpl implements RatingsService{
 	
 	@Setter(onMethod_ = @Autowired)

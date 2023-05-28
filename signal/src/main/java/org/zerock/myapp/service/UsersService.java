@@ -42,4 +42,6 @@ public interface UsersService {
 		
 		// 8. 마이프로필 글쓴내역 개수 반환
 		public abstract Integer getWriterList(String nickName) throws ControllerException;
+		
+		
 } // end interface

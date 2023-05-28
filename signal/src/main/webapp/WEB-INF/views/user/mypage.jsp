@@ -17,10 +17,12 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
 
-				<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-				<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-				<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-				<script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<script>
 				  let tabId = ''; // 탭 ID 변수를 선언합니다.
 				$(document).ready(function() {
 
@@ -69,21 +71,17 @@
 						console.log("클리이이이이이익");
 					});
 				});
-				$(function() {
-					$('.pageNum').on('click', function(e) {
-						let selectedPageNum = e.currentTarget.textContent;
-						location = "/user/mypage?#currPage=" + selectedPageNum + "tabs-2";
-					});
-				});
 
 				$(function() {
 					$('.myGroup').on('click', function(e) {
 						var content = $(this).nextUntil('.myGroup');
-						if (content.css('display') === 'none') {
+						if (content.css('display') === 'none' && ($(this).find('.status').html() === '수락' || $(this).find('.status').html() === '본인')) {
+							
 							content.css('display', 'block');
 							content.last().css('border-bottom', '1px solid');
 							content.css('border-left', '1px solid');
 							content.css('border-right', '1px solid')
+							
 						} else {
 							content.css('display', 'none');
 						}
@@ -93,6 +91,8 @@
 				$(document).ready(function() {
 					  $('.rateresult').submit(function(e) {
 					    e.preventDefault(); // 폼 기본 제출 동작 막기
+					    
+					    var button = $(this).find('button');
 
 					    // AJAX 요청 생성
 					    $.ajax({
@@ -100,19 +100,32 @@
 					      type: $(this).attr('method'), // 폼의 method 속성 값
 					      data: $(this).serialize(), // 폼 데이터 직렬화
 					      success: function(response) {
+
+					    	  console.log('Success:', response.success);
+					    	  console.log('Message:', response.message);
+					    	  
 					        // 성공적으로 요청을 보냈을 때 수행할 작업
 					        console.log('AJAX 요청 성공');
 					        console.log(response); // 서버로부터의 응답 출력
+					        
+					        button.prop('disabled', true);
+					      	alert(response.message);
 					      },
 					      error: function(xhr, status, error) {
 					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
 					        console.error('AJAX 요청 오류');
 					        console.log('상태:', status);
 					        console.log('오류:', error);
+					        
+					        button.prop('disabled', false);
+					      	alert(response.message);
+
 					      }
 					    });
 					  });
 					});
+				
+
 
 				</script>
 
@@ -120,7 +133,6 @@
 <style>
 .hide {
 	display: none;
-	
 }
 
 #tabs-3 .board_list .post .content div {
@@ -155,7 +167,7 @@
 	padding: 0px;
 }
 
-#tabs-3 .board_list .post .content .rateresult > div{
+#tabs-3 .board_list .post .content .rateresult>div {
 	width: 50%;
 	display: inline-block;
 	font-size: 2rem;
@@ -163,7 +175,7 @@
 	padding-top: 15px;
 }
 
-#tabs-3 .board_list .post .content2 .rateresult > div{
+#tabs-3 .board_list .post .content2 .rateresult>div {
 	width: 50%;
 	display: inline-block;
 	font-size: 1.5rem;
@@ -184,23 +196,22 @@
 }
 
 .rate input[type="radio"] {
-  display: none;
+	display: none;
 }
 
 .rate label {
-  cursor: pointer;
-  color: #ccc;
-  font-size: 32px;
+	cursor: pointer;
+	color: #ccc;
+	font-size: 32px;
 }
 
 .rate input[type="radio"]:checked ~ label {
-  color: #ffcc00;
+	color: #ffcc00;
 }
 
-.result>button[type="submit"]{
+.result>button[type="submit"] {
 	cursor: pointer;
 }
-
 </style>
 
 </head>
@@ -269,11 +280,31 @@
 						</div>
 						<div>
 							<div class="right_top">상태메시지</div>
-							<div class="right_contents">${__AUTH__.statusMessage}</div>
+
+							<c:choose>
+                                <c:when test="${rating.ratedRating != null}">
+                                    <div class="right_contents">${rating.ratedRating}</div>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <div class="right_contents">0.0</div>
+                                </c:otherwise>
+                            </c:choose>
+							
 						</div>
 						<div>
 							<div class="right_top">평점</div>
-							<div class="right_contents">${__AUTH__.rating}</div>
+
+							<c:choose>
+								<c:when test="${rating.ratedRating != null}">
+									<div class="right_contents">${rating.ratedRating}</div>
+								</c:when>
+
+								<c:otherwise>
+									<div class="right_contents">0.0</div>
+								</c:otherwise>
+							</c:choose>
+
 						</div>
 						<div>
 							<div class="right_top">선호여행지</div>
@@ -372,7 +403,7 @@
 
 						<c:set var="count" value="0" />
 						<c:set var="counter" value="0" />
-						
+
 						<c:forEach var="applist" items="${__APPLIST__}" varStatus="numNo">
 
 							<c:if test="${__AUTH__.nickName == applist.nickName}">
@@ -397,7 +428,8 @@
 							</c:if>
 
 
-							<c:if test="${(applist.outCome eq '수락' || applist.outCome eq '본인' )&& __AUTH__.nickName != applist.nickName}">
+							<c:if
+								test="${(applist.outCome eq '수락' || applist.outCome eq '본인' )&& __AUTH__.nickName != applist.nickName}">
 								<c:set var="count" value="${count + 1}" />
 								<c:if test="${count == 1}">
 									<div class="content hide">
@@ -409,43 +441,35 @@
 											<div class="rate">평점</div>
 											<div class="result">제출</div>
 										</div>
-										
+
 									</div>
 								</c:if>
-								
-								
+
+
 								<div class="content2 hide">
 									<div class="num">${count}</div>
 									<div class="group">${applist.groupName}</div>
 									<div class="nick">${applist.nickName}</div>
-									<div class="rate">${rating.ratedUserNickName}</div>
-									<div class="startDate">
-										<fmt:formatDate value="${applist.startDate}"
-											pattern="yyyy-MM-dd" />
-									</div>
-									<div class="endDate">
-										<fmt:formatDate value="${applist.endDate}"
-											pattern="yyyy-MM-dd" />
-									</div>
-									<form action="#" method="post" class="rateresult">
-										<div class="rate" style="padding:5px 0px;">
-											<input type="hidden" name="raterUserNickName" value="${__AUTH__.nickName}">
-											<input type="hidden" name="ratedUserNickName" value="${applist.nickName}">
-											
+									
+									<form action="/user/rate" method="post" class="rateresult">
+										<div class="rate" style="padding: 5px 0px;">
+											<input type="hidden" name="raterUserNickName"
+												value="${__AUTH__.nickName}"> <input type="hidden"
+												name="ratedUserNickName" value="${applist.nickName}">
+
 											<c:forEach begin="1" end="5" step="1" varStatus="numA">
 												<c:set var="counter" value="${counter + 1}" />
-											    <input type="radio" id="star${counter}" name="rating" value="${6 - numA.index}" />
-											    <label for="star${counter}">
-											    	&#9733;
-											    </label>
+												<input type="radio" id="star${counter}" name="rating"
+													value="${6 - numA.index}" />
+												<label for="star${counter}"> &#9733; </label>
 											</c:forEach>
-											
-   											
+
+
 										</div>
 										<div class="result">
 											<button type="submit">제출</button>
 										</div>
-																				
+
 									</form>
 								</div>
 							</c:if>
@@ -637,19 +661,21 @@
 				<!-- <h3>회원정보수정</h3> -->
 				<form method="post" action="/mypage">
 
-					<label for="name">이름</label> <input type="text" id="name" name="name" value="${__AUTH__.name}"><br> 
-					<label for="email">이메일</label> <input type="text" id="email" name="Email" value="${__AUTH__.EMail}"><br>
+					<label for="name">이름</label> <input type="text" id="name"
+						name="name" value="${__AUTH__.name}"><br> <label
+						for="email">이메일</label> <input type="text" id="email" name="Email"
+						value="${__AUTH__.EMail}"><br>
 
 					<!-- <button type="button" onclick="sendEmail()">이메일 인증<button><br> -->
-					<label for="emailAuth">인증번호</label> 
-					<input type="text" id="emailAuth" name="emailAuth" disabled><br> 
-					<label for="password">현재 비밀번호</label> 
-					<input type="password" id="password" name="password" required><br> 
-					<label for="newPassword">새 비밀번호</label> 
-					<input type="password" id="newPassword" name="password"><br> 
-					<label for="confirmPassword">새 비밀번호 확인</label> 
-					<input type="password" id="confirmPassword" name="password"><br> 
-					<input type="submit" value="수정">
+					<label for="emailAuth">인증번호</label> <input type="text"
+						id="emailAuth" name="emailAuth" disabled><br> <label
+						for="password">현재 비밀번호</label> <input type="password"
+						id="password" name="password" required><br> <label
+						for="newPassword">새 비밀번호</label> <input type="password"
+						id="newPassword" name="password"><br> <label
+						for="confirmPassword">새 비밀번호 확인</label> <input type="password"
+						id="confirmPassword" name="password"><br> <input
+						type="submit" value="수정">
 				</form>
 			</div>
 

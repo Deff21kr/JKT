@@ -78,14 +78,42 @@
 
 				$(function() {
 					$('.myGroup').on('click', function(e) {
-						var content = $(this).next('.content');
+						var content = $(this).nextUntil('.myGroup');
 						if (content.css('display') === 'none') {
 							content.css('display', 'block');
+							content.last().css('border-bottom', '1px solid');
+							content.css('border-left', '1px solid');
+							content.css('border-right', '1px solid')
 						} else {
 							content.css('display', 'none');
 						}
 					});
 				});
+				
+				$(document).ready(function() {
+					  $('.rateresult').submit(function(e) {
+					    e.preventDefault(); // 폼 기본 제출 동작 막기
+
+					    // AJAX 요청 생성
+					    $.ajax({
+					      url: $(this).attr('action'), // 폼의 action 속성 값
+					      type: $(this).attr('method'), // 폼의 method 속성 값
+					      data: $(this).serialize(), // 폼 데이터 직렬화
+					      success: function(response) {
+					        // 성공적으로 요청을 보냈을 때 수행할 작업
+					        console.log('AJAX 요청 성공');
+					        console.log(response); // 서버로부터의 응답 출력
+					      },
+					      error: function(xhr, status, error) {
+					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
+					        console.error('AJAX 요청 오류');
+					        console.log('상태:', status);
+					        console.log('오류:', error);
+					      }
+					    });
+					  });
+					});
+
 				</script>
 
 
@@ -96,20 +124,83 @@
 }
 
 #tabs-3 .board_list .post .content div {
-	width: 15.5%;
-	display: inline-block;
-	font-size: 2rem;
-	text-align: center;
-	padding-top: 15px;
-}
-
-#tabs-3 .board_list .post .content .group {
 	width: 20%;
 	display: inline-block;
 	font-size: 2rem;
 	text-align: center;
 	padding-top: 15px;
 }
+
+#tabs-3 .board_list .post .content2 div {
+	width: 20%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post .content .rateresult {
+	width: 40%;
+	display: inline-flex;
+	font-size: 2rem;
+	text-align: center;
+	padding: 0px;
+}
+
+#tabs-3 .board_list .post .content2 .rateresult {
+	width: 40%;
+	display: inline-flex;
+	font-size: 1.5rem;
+	text-align: center;
+	padding: 0px;
+}
+
+#tabs-3 .board_list .post .content .rateresult > div{
+	width: 50%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post .content2 .rateresult > div{
+	width: 50%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+.myGroup {
+	cursor: pointer;
+}
+
+.content {
+	border: 1px solid
+}
+
+.rate {
+	display: inline-block;
+}
+
+.rate input[type="radio"] {
+  display: none;
+}
+
+.rate label {
+  cursor: pointer;
+  color: #ccc;
+  font-size: 32px;
+}
+
+.rate input[type="radio"]:checked ~ label {
+  color: #ffcc00;
+}
+
+.result>button[type="submit"]{
+	cursor: pointer;
+}
+
 </style>
 
 </head>
@@ -280,7 +371,8 @@
 					<div class="post">
 
 						<c:set var="count" value="0" />
-
+						<c:set var="counter" value="0" />
+						
 						<c:forEach var="applist" items="${__APPLIST__}" varStatus="numNo">
 
 							<c:if test="${__AUTH__.nickName == applist.nickName}">
@@ -301,22 +393,28 @@
 									</div>
 								</div>
 
+
 							</c:if>
 
 
-							<c:if test="${applist.outCome eq '수락'}">
+							<c:if test="${(applist.outCome eq '수락' || applist.outCome eq '본인' )&& __AUTH__.nickName != applist.nickName}">
 								<c:set var="count" value="${count + 1}" />
-
-								<div class="content hide">
-									<!-- 숨겨진 내용 -->
-									<div class="num">번호</div>
-									<div class="group">동행이름</div>
-									<div class="nick">닉네임</div>
-									<div class="rate">평점</div>
-									<div class="startDate">동행시작</div>
-									<div class="endDate">동행종료</div>
-								</div>
-								<div class="">
+								<c:if test="${count == 1}">
+									<div class="content hide">
+										<!-- 숨겨진 내용 -->
+										<div class="num">번호</div>
+										<div class="group">동행이름</div>
+										<div class="nick">닉네임</div>
+										<div class="rateresult">
+											<div class="rate">평점</div>
+											<div class="result">제출</div>
+										</div>
+										
+									</div>
+								</c:if>
+								
+								
+								<div class="content2 hide">
 									<div class="num">${count}</div>
 									<div class="group">${applist.groupName}</div>
 									<div class="nick">${applist.nickName}</div>
@@ -329,6 +427,26 @@
 										<fmt:formatDate value="${applist.endDate}"
 											pattern="yyyy-MM-dd" />
 									</div>
+									<form action="#" method="post" class="rateresult">
+										<div class="rate" style="padding:5px 0px;">
+											<input type="hidden" name="raterUserNickName" value="${__AUTH__.nickName}">
+											<input type="hidden" name="ratedUserNickName" value="${applist.nickName}">
+											
+											<c:forEach begin="1" end="5" step="1" varStatus="numA">
+												<c:set var="counter" value="${counter + 1}" />
+											    <input type="radio" id="star${counter}" name="rating" value="${6 - numA.index}" />
+											    <label for="star${counter}">
+											    	&#9733;
+											    </label>
+											</c:forEach>
+											
+   											
+										</div>
+										<div class="result">
+											<button type="submit">제출</button>
+										</div>
+																				
+									</form>
 								</div>
 							</c:if>
 

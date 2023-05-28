@@ -144,6 +144,7 @@ public class UsersController {
 	@GetMapping(path={"/mypage"})
 	String myGroupList(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
 		try {
+			
 			HttpSession session = req.getSession();
 			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
 			log.info("\n\nvo : {}",vo);

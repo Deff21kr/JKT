@@ -39,7 +39,10 @@ public interface UserGroupMapper {
 	                    TBL_USER_GROUP
 	                WHERE nickname = #{nickName}
 	                )
-				ORDER BY u.groupno, u.outcome ,u.appdate desc
+				ORDER BY 
+					u.groupno,
+					CASE WHEN u.nickName = #{nickName} THEN 0 ELSE 1 END,
+					u.outcome ,u.appdate desc
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")

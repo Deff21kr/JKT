@@ -42,10 +42,12 @@ public class RatingsServiceImpl implements RatingsService{
 	@Override
 	public RatingsDTO getRatedRating(String ratedUserNickName) throws ServiceException {
 	    try {
-	        return this.rat.getRatedUserNickName(ratedUserNickName);
+	    	RatingsDTO ratedRating = this.rat.getRatedUserNickName(ratedUserNickName);
+	        return ratedRating;
 	    }catch(Exception e) {
 	        throw new ServiceException(e);
 	    }
+	
 	}
 
 

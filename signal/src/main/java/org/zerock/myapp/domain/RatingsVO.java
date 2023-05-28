@@ -8,4 +8,5 @@ public class RatingsVO {
 	private String raterUserNickName;
 	private String ratedUserNickName;
 	private Integer rating;
+	private Double ratedRating;
 }

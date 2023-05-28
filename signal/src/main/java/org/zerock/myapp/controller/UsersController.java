@@ -142,7 +142,7 @@ public class UsersController {
 	
 	
 	@GetMapping(path={"/mypage"})
-	String myGroupList(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
+	String myGroupList(Model model,HttpServletRequest req,Criteria cri, String ratedNickname, String raterNickName, Integer rating) throws ControllerException {
 		try {
 			
 			HttpSession session = req.getSession();

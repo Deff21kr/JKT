@@ -100,6 +100,7 @@
 					        // 성공적으로 요청을 보냈을 때 수행할 작업
 					        console.log('AJAX 요청 성공');
 					        console.log(response); // 서버로부터의 응답 출력
+					        
 					      },
 					      error: function(xhr, status, error) {
 					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
@@ -426,6 +427,15 @@
 									<div class="num">${count}</div>
 									<div class="group">${applist.groupName}</div>
 									<div class="nick">${applist.nickName}</div>
+									<div class="rate">${raterRating.ratedUserNickName}</div>
+									<div class="startDate">
+										<fmt:formatDate value="${applist.startDate}"
+											pattern="yyyy-MM-dd" />
+									</div>
+									<div class="endDate">
+										<fmt:formatDate value="${applist.endDate}"
+											pattern="yyyy-MM-dd" />
+									</div>
 									<form action="#" method="post" class="rateresult">
 										<div class="rate" style="padding: 5px 0px;">
 											<input type="hidden" name="raterUserNickName"

@@ -16,8 +16,8 @@ public interface RatingsMapper {
 	public abstract List<RatingsDTO> selectRating(String nickName);
 
 	// 점수를 주자
-	public abstract Integer setRaterUserNickName(@Param("ratedUserNickName") String nickName,
-			@Param("raterUserNickName") String setNickName, @Param("rating") Integer rating);
+	public abstract Integer setRaterUserNickName(@Param("raterUserNickName") String nickName,
+			@Param("ratedUserNickName") String setNickName, @Param("rating") Integer rating);
 
 	// 점수를 받고 조회하기
 	@Select("""

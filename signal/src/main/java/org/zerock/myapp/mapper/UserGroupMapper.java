@@ -29,79 +29,30 @@ public interface UserGroupMapper {
 				FROM tbl_user_group u
 				JOIN (
 				    SELECT g.groupno, g.groupname, g.recruitstatus, g.membernum, g.currentmember, g.area, b.postno,
-				           b.title, b.content, b.startdate, b.enddate, b.views, b.regidate, b.modifydate, b.nickname writer
+				           b.title, b.content, b.startdate, b.enddate, b.views, b.regidate, b.modifydate, b.nickname
 				    FROM tbl_groups g
 				    JOIN tbl_groupboard b ON g.postno = b.postno
 				) j ON u.groupno = j.groupno
-				WHERE u.groupno IN (
-	                SELECT GROUPNO
-	                FROM
-	                    TBL_USER_GROUP
-	                WHERE nickname = #{nickName}
-	                ) AND u.nickName IS NOT NULL
-				ORDER BY 
-					u.groupno desc,
-					CASE WHEN u.nickName = #{nickName} THEN 0 ELSE 1 END,
-					u.outcome ,u.appdate desc
-				OFFSET 
-					(#{cri.currPage} -1) * 
-							(SELECT SUM(cnt) 
-								FROM (
-					 				SELECT 
-					                    u.groupno, count(u.groupno) as  cnt
-									FROM tbl_user_group u
-									JOIN (
-									    SELECT g.groupno, g.groupname, g.recruitstatus, g.membernum, g.currentmember, g.area, b.postno,
-									           b.title, b.content, b.startdate, b.enddate, b.views, b.regidate, b.modifydate, b.nickname writer
-									    FROM tbl_groups g
-									    JOIN tbl_groupboard b ON g.postno = b.postno
-									) j ON u.groupno = j.groupno
-									WHERE u.groupno IN (
-						                SELECT GROUPNO
-						                FROM
-						                    TBL_USER_GROUP
-						                WHERE nickname = #{nickName}
-						                ) AND u.nickName IS NOT NULL
-					                GROUP BY
-					                    u.groupno
-									ORDER BY 
-										u.groupno desc
-					                OFFSET (#{cri.currPage} -2) * #{cri.amount} ROWS
-									FETCH NEXT #{cri.amount} ROWS ONLY
-								))
-					ROWS
-				FETCH NEXT 
-								(SELECT SUM(cnt) 
-								FROM (
-					 				SELECT 
-					                    u.groupno, count(u.groupno) as  cnt
-									FROM tbl_user_group u
-									JOIN (
-									    SELECT g.groupno, g.groupname, g.recruitstatus, g.membernum, g.currentmember, g.area, b.postno,
-									           b.title, b.content, b.startdate, b.enddate, b.views, b.regidate, b.modifydate, b.nickname writer
-									    FROM tbl_groups g
-									    JOIN tbl_groupboard b ON g.postno = b.postno
-									) j ON u.groupno = j.groupno
-									WHERE u.groupno IN (
-						                SELECT GROUPNO
-						                FROM
-						                    TBL_USER_GROUP
-						                WHERE nickname = #{nickName}
-						                ) AND u.nickName IS NOT NULL
-					                GROUP BY
-					                    u.groupno
-									ORDER BY 
-										u.groupno desc
-					                OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
-									FETCH NEXT #{cri.amount} ROWS ONLY
-								))
-					ROWS ONLY
+				WHERE u.nickname = #{nickName}
+				  and u.nickname is not null
+				        ORDER BY u.groupno desc,u.appdate desc
+				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
+				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")
 		public abstract List<UserGroupDTO> selectMyAppList(@Param("nickName") String nickName
 														,@Param("cri") Criteria cri
 														) throws DAOException;
-	public abstract List<UserGroupDTO> selectMyAppList2(@Param("nickName") String nickName) throws DAOException;
 		
+		@Select("""
+				SELECT u.groupNo, g.groupName, u.appNo,u.outcome, u.nickName
+				FROM tbl_groups g, tbl_user_group u
+				WHERE 
+                    g.groupNo = u.groupNo and
+					g.groupNo =  #{groupNo} and 
+					u.outCome in ('본인', '수락')
+				""")												
+		public abstract List<UserGroupDTO> selectListFriend(Integer groupNo);											
+														
 		// 2. 신청시 생성
 		public abstract Integer insert(@Param("nickName") String nickName,@Param("groupNo") Integer groupNo) throws DAOException;
 		
@@ -147,7 +98,7 @@ public interface UserGroupMapper {
 	                FROM
 	                    TBL_USER_GROUP
 	                WHERE nickname = #{nickName}
-	                ) AND U.OUTCOME IN ('수락', '본인')
+	                ) 
 	                AND u.nickName IS NOT NULL
 				ORDER BY 
 					u.groupno desc

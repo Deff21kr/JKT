@@ -25,6 +25,7 @@ import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.LoginService;
 import org.zerock.myapp.service.QnACommentService;
 import org.zerock.myapp.service.RatingsService;
@@ -142,9 +143,23 @@ public class UsersController {
 //		
 //	}
 	
+	@ResponseBody
+	@PostMapping("/mypage/friend")
+	List<UserGroupDTO> friend(Model model, Integer groupNo) throws ControllerException {
+		
+		try {
+			List<UserGroupDTO> friend = this.group.getFriendList(groupNo);
+			model.addAttribute("__FRIEND__", friend);
+			return friend;
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+
+	} // friend
+	
 	
 	@GetMapping(path={"/mypage"})
-	String myGroupList(Model model,HttpServletRequest req,Criteria cri, String ratedNickname, String raterNickName, Integer rating) throws ControllerException {
+	String myGroupList(Model model,HttpServletRequest req,Criteria cri, Integer groupNo, String ratedNickname, String raterNickName, Integer rating) throws ControllerException {
 		try {
 			
 			HttpSession session = req.getSession();
@@ -158,6 +173,7 @@ public class UsersController {
 			
 			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName(), cri);
 			model.addAttribute("_LIST_", dto);
+			
 			
 			// 점수 조회
 			RatingsDTO ratingDTO = this.ratingService.getRatedRating(vo.getNickName());

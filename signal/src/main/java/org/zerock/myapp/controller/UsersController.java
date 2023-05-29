@@ -1,10 +1,12 @@
 package org.zerock.myapp.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
@@ -30,6 +33,7 @@ import org.zerock.myapp.service.QnACommentService;
 import org.zerock.myapp.service.RatingsService;
 import org.zerock.myapp.service.UserGroupService;
 import org.zerock.myapp.service.UsersService;
+import org.zerock.myapp.utils.UploadFileUtils;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -52,6 +56,8 @@ public class UsersController {
 	private QnACommentService ser;
 	@Setter (onMethod_ = @Autowired)
 	private RatingsService ratingService;
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	
 	// 1. 회원 목록 조회 (전부)
@@ -188,9 +194,26 @@ public class UsersController {
 	
 	// 프로필 수정
 	@PostMapping("/edit")
-	String profilModify(UsersDTO dto, HttpServletRequest req, Model model) throws ControllerException {
+	String profilModify(UsersDTO dto, HttpServletRequest req, Model model,MultipartFile file) throws ControllerException {
 		log.info("\n\ndto : {}",dto);
 		try {
+			String imgUploadPath = uploadPath + File.separator + "imgUpload";
+			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			String fileName = null;
+			
+			if(file != null) {
+				fileName = UploadFileUtils.fileUpload(imgUploadPath, 
+						   file.getOriginalFilename(), file.getBytes(), ymdPath);   
+				} else {
+				   fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+				}
+			
+			dto.setFileName(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+			
+			Objects.requireNonNull(dto);
+			
+			
+			
 			if(this.service.profileEdit(dto)) {
 				HttpSession session = req.getSession();
 				UsersVO vo = this.service.get(dto.getID());

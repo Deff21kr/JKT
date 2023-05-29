@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html>
@@ -13,20 +14,88 @@
 <title>프로필 수정</title>
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/mypageStyle.css">
+	href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mypageStyle.css">
 
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-	
+<style>
+.edit_write .profile_right {
+	float: right;
+    width: 63%;
+    background-color: aliceblue;
+    border-radius: 10px;
+    padding: 19%;
+    padding-bottom: 157px;
+}
+
+.edit_write .profile_right div {
+	width: 100%;
+	padding-top: 15px; /* 간격을 더 추가 */
+	padding-bottom: 15px; /* 간격을 더 추가 */
+}
+
+.edit_write .profile_right div div {
+	display: inline-block;
+}
+
+.edit_write .profile_right div .right_top {
+	width: 25%;
+	font-size: 2rem;
+	color: black;
+	vertical-align: middle;
+}
+
+.edit_write .profile_right div .right_contents {
+	width: fit-content;
+	font-size: 1.6rem;
+	vertical-align: middle;
+	color: blue;
+}
+
+.edit_write .profile_right .bt_wrap {
+	text-align: center;
+}
+
+.message {
+	width: 100%;
+	height: 5.25em;
+	border: solid 1px black;
+	resize: none;
+}
+
+/* 추가된 부분: 버튼 스타일과 hover 효과 */
+#modifyBtn {
+	background-color: #2b65f8;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	transition-duration: 0.4s; 
+}
+
+#modifyBtn:hover {
+	background-color: #45a049;
+}
+
+/* 폼 요소에 hover 효과 추가 */
+textarea:hover, select:hover {
+	border: 1px solid #aaa;
+}
+</style>
+
 </head>
 
 <body>
 	<div class="edit_write">
 		<div class="profile_right">
-			<form action="/user/edit" method="post">
+			<form action="/user/edit" method="post" class="dataform">
 				<input type="hidden" name="ID" value="${__AUTH__.ID}">
 				<div>
 					<div class="right_top">닉네임</div>
@@ -35,14 +104,10 @@
 				<div>
 					<div class="right_top">상태메시지</div>
 					<textarea name="statusMessage" cols="30" rows="10"
-						placeholder="상태메세지를 입력해주세요."></textarea>
-				</div>
-				<div>
-					<div class="right_top">평점</div>
-					<div class="right_contents">3.0</div>
+						placeholder="상태메세지를 입력해주세요." class="message"></textarea>
 				</div>
 				<label> <span
-					style="text-align: left; font-size: 20px; color: #666;">MBTI</span>>
+					style="text-align: left; font-size: 20px; color: #666;">MBTI</span>
 					<select name="MBTI" required>
 						<option value="">MBTI유형</option>
 						<option value="ISTJ">ISTJ</option>
@@ -81,12 +146,12 @@
 					<button type="submit" id="modifyBtn">수정</button>
 					<script>
 						$(function() {
-						    $("#modifyBtn").click(function() {
-						        window.location.assign="/user/mypage";
-						    });
+							$("#modifyBtn").click(function() {
+								window.location.assign = "/user/mypage";
+							});
 						});
 					</script>
-					<button type="submit" id="modifyBtn" class="modify">수정</button>
+					
 				</div>
 			</form>
 		</div>

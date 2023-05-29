@@ -197,6 +197,10 @@ public class UsersController {
 				log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
 				session.setAttribute("__AUTH__", vo);
 				
+				RatingsDTO ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
+				log.info("ratingDTO: {}", ratingDTO);
+				model.addAttribute("__rating__", ratingDTO);
+				
 			}
 			log.info("\t+ dto: ({}, {})", dto, dto.getID());
 			return "redirect:/user/mypage";

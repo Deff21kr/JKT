@@ -1,24 +1,26 @@
 package org.zerock.myapp.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.domain.RatingsDTO;
-import org.zerock.myapp.domain.CommentCriteria;
-import org.zerock.myapp.domain.CommentPageDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
@@ -142,7 +144,7 @@ public class UsersController {
 	
 	
 	@GetMapping(path={"/mypage"})
-	String myGroupList(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
+	String myGroupList(Model model,HttpServletRequest req,Criteria cri, String ratedNickname, String raterNickName, Integer rating) throws ControllerException {
 		try {
 			
 			HttpSession session = req.getSession();
@@ -158,9 +160,9 @@ public class UsersController {
 			model.addAttribute("_LIST_", dto);
 			
 			// 점수 조회
-			Double ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
+			RatingsDTO ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
 			log.info("ratingDTO: {}", ratingDTO);
-			model.addAttribute("rating", ratingDTO);
+			model.addAttribute("__rating__", ratingDTO);
 			
 			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
 			model.addAttribute("pageMaker", pageDTO);
@@ -236,6 +238,34 @@ public class UsersController {
 //			
 //		}
 		
+		// 평점 제출
+		@PostMapping("/rate")
+		@ResponseBody
+		ResponseEntity<?> rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
+			log.trace("rate() invoked");
+			
+			try {
+				
+				Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
+				if (result) {
+		            // 성공적인 응답 데이터 생성
+		            Map<String, Object> response = new HashMap<>();
+		            response.put("success", true);
+		            response.put("message", "평점이 부여되었습니다.");
+		            
+		            return ResponseEntity.ok(response);
+		        } else {
+		            // 실패 응답 데이터 생성
+		            Map<String, Object> response = new HashMap<>();
+		            response.put("success", false);
+		            response.put("message", "평점 부여에 실패했습니다.");
+		            
+		            return ResponseEntity.badRequest().body(response);
+		        }
+			} catch (Exception e) {
+				throw new ControllerException(e);
+			}
+		} // rate
 		
 	
 		

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <!DOCTYPE html>
     <html lang="ko">
@@ -134,7 +134,7 @@
             });
           });
         });
-      </script>
+        </script>
 
     </head>
 
@@ -166,6 +166,48 @@
                             <dt>조회수</dt>
                             <dd>13</dd>
                         </dl>
+                        <div class="pin">
+                          <input type="hidden" class="pinCheck">
+                          <button class="plus_btn">찜</button>
+                          <!-- <button class="minus_btn">찜-</button> -->
+                        </div>
+                        <script>
+                          let pin = $(".pinCheck").val();
+                          $(".plus_btn").on("click", function() {
+                            $(".pinCheck").val(++pin);
+                          }); 
+                          // $(".minus_btn").on("click", function() {
+                          //   if(pin > 1) {
+                          //     $(".pinCheck").val(--pin);
+                          //   } // if
+                          // });
+
+                          const form = {
+                                          postNo : '${__BOARD__.postNo}',
+                                          nickName : '${__AUTH__.nickName}'
+                          } // form
+
+                          $(".plus_btn").on("click", function(e) {
+                            $.ajax({
+                              url: '/board/pin/register',
+                              type: 'POST',
+                              data: form,
+                              success: function(result) {
+                                pinAlert(result);
+                              } // success
+                            })
+                          });
+                          function pinAlert(result){
+                            if(result == '0') {
+                              alert("게시글을 찜하지 못했습니다.");
+                            } else if(result == 1) {
+                              alert("게시글을 찜했습니다.");
+                            } else if(result == 2) {
+                              alert("이미 게시글을 찜했습니다.");
+                            }
+                          }
+                        </script>
+                        
                     </div>
                     <div class="content" readonly>${__BOARD__.content}</div>
                 </div>

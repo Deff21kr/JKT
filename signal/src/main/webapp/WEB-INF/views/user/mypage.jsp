@@ -280,32 +280,21 @@
 						</div>
 						<div>
 							<div class="right_top">상태메시지</div>
-
+							<div class="right_contents">${__AUTH__.statusMessage}</div>
+						</div>
+						<div>
+						<div class="right_top">평점</div>
 							<c:choose>
-                                <c:when test="${rating.ratedRating != null}">
-                                    <div class="right_contents">${rating.ratedRating}</div>
+                                <c:when test="${__rating__.ratedRating != null}">
+                                <div class="right_contents"><fmt:formatNumber value="${__rating__.ratedRating}" pattern=".0"/></div>
+                                     <!-- <div class="right_contents">${__rating__.ratedRating}</div> -->
                                 </c:when>
-
                                 <c:otherwise>
                                     <div class="right_contents">0.0</div>
                                 </c:otherwise>
                             </c:choose>
-							
 						</div>
-						<div>
-							<div class="right_top">평점</div>
-
-							<c:choose>
-								<c:when test="${rating.ratedRating != null}">
-									<div class="right_contents">${rating.ratedRating}</div>
-								</c:when>
-
-								<c:otherwise>
-									<div class="right_contents">0.0</div>
-								</c:otherwise>
-							</c:choose>
-
-						</div>
+						
 						<div>
 							<div class="right_top">선호여행지</div>
 							<div class="right_contents">${__AUTH__.likeArea}</div>

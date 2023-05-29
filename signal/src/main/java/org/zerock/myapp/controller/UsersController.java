@@ -248,7 +248,6 @@ public class UsersController {
 				UsersVO vo = this.service.get(dto.getID());
 				log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
 				session.setAttribute("__AUTH__", vo);
-				
 			}
 			log.info("\t+ dto: ({}, {})", dto, dto.getID());
 			return "redirect:/user/mypage";

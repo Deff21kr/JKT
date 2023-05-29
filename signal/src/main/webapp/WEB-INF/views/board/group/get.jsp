@@ -174,7 +174,7 @@
                         <script>
                           let pin = $(".pinCheck").val();
                           $(".plus_btn").on("click", function() {
-                            $(".pinCheck").val(++pin);
+                            $(".pinCheck").val(pin++);
                           }); 
                           // $(".minus_btn").on("click", function() {
                           //   if(pin > 1) {
@@ -194,11 +194,11 @@
                               data: form,
                               success: function(result) {
                                 pinAlert(result);
-                              } // success
+                              } // result
                             })
                           });
                           function pinAlert(result){
-                            if(result == '0') {
+                            if(result == 0) {
                               alert("게시글을 찜하지 못했습니다.");
                             } else if(result == 1) {
                               alert("게시글을 찜했습니다.");
@@ -206,6 +206,7 @@
                               alert("이미 게시글을 찜했습니다.");
                             }
                           }
+
                         </script>
                         
                     </div>

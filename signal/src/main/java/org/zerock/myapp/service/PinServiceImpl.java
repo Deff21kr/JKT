@@ -30,50 +30,69 @@ public class PinServiceImpl
 	private PinMapper pinMapper;
 
 	@Override
-	public Integer insert(PinDTO pin) {
-		log.trace("insert() invoked.");
+	public Integer doPin(PinDTO pin) throws ServiceException {
+		log.trace("insert() asdsaddassaddasdas.");
 		
-//		찜 데이터 체크
-		PinDTO checkPin = pinMapper.checkPin(pin);
-		
-		if(checkPin != null) {
-			log.info("*** 데이터가 있습니다.");
-			return 2;
-		} // if
-		
-//		찜 등록 & 에러 시, 0 반환
 		try {
-			log.info("*** 데이터가 없습니다. 데이터 등록합니다.");
-			return pinMapper.insert(pin);
-		} catch(Exception e) {
-			log.info("*** 오류가 났습니다.");
-			return 0;
+			
+			if(this.pinMapper.checkPin(pin) == 0){
+				return this.pinMapper.insert(pin);
+			} else {
+				PinDTO dto = this.pinMapper.select(pin.getPostNo(),pin.getNickName());
+				return this.pinMapper.delete(dto.getPinNo())-1;
+			} // if-else
+		}catch(Exception e) {
+			throw new ServiceException(e);
 		} // try-catch
+		
+////		찜 데이터 체크
+//		PinDTO checkPin = pinMapper.checkPin(pin);
+//		
+//		if(checkPin != null) {
+//			log.info("*** 데이터가 있습니다.");
+//			return 2;
+//		} // if
+//		
+////		찜 등록 & 에러 시, 0 반환
+//		try {
+//			log.info("*** 데이터가 없습니다. 데이터 등록합니다.");
+//			return pinMapper.insert(pin);
+//		} catch(Exception e) {
+//			log.info("*** 오류가 났습니다.");
+//			return 0;
+//		} // try-catch
 		
 	} // insert	
 	
-	@Override
-	public Boolean delete(Integer pinNo) throws ServiceException {
-		log.trace("delete() invoked.");
-		
-		try {
-			return (pinMapper.delete(pinNo) == 1);
-		} catch(Exception e) {
-			throw new ServiceException(e);
-		}
-		
-	} // delete
+//	@Override
+//	public Boolean delete(Integer pinNo) throws ServiceException {
+//		log.trace("delete() invoked.");
+//		
+//		
+//		try {
+//			return (pinMapper.delete(pinNo) == 1);
+//		} catch(Exception e) {
+//			throw new ServiceException(e);
+//		}
+//		
+//	} // delete
 	
-	@Override
-	public List<PinDTO> select(String nickName) {
-		log.trace("select() invoked.");
-		
-		List<PinDTO> list = pinMapper.select(nickName);
-		log.trace("찜 목록 체크: " + list);
-		
-		return list;
-	
-	} // select
+//	@Override
+//	public List<PinDTO> select(String nickName) {
+//		log.trace("select() invoked.");
+//		
+//		List<PinDTO> list = pinMapper.select(nickName);
+//		log.trace("찜 목록 체크: " + list);
+//		
+//		return list;
+//	
+//	} // select
+//	
+//	@Override
+//	public Integer checkPin(PinDTO pin) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	} // checkPin
 
 //	====== IntitializingBean, DisposableBean ======
 

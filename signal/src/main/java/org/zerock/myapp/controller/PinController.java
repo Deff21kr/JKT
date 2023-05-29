@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.zerock.myapp.domain.PinDTO;
+import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.PinService;
 import org.zerock.myapp.service.UsersService;
@@ -27,7 +28,7 @@ import lombok.extern.log4j.Log4j2;
 
 @SessionAttributes({"__PIN__"})
 @Controller
-@RequestMapping("/board/pin")
+@RequestMapping("/board/group")
 
 public class PinController {
 	
@@ -37,45 +38,20 @@ public class PinController {
 	@Setter(onMethod_ = @Autowired)
 	private UsersService user;
 	
-	@PostMapping("/register")
+	@PostMapping("/pin")
 	@ResponseBody
-	public String insert(PinDTO pin, HttpServletRequest req) {
+	public Integer insert(PinDTO pin) throws ControllerException {
 		log.trace("insert invoekd.");
 		
-//		로그인 체크
-//		HttpSession session = req.getSession();
-//		UsersVO vo = (UsersVO)session.getAttribute("userno");
-//		if(vo == null) {
-//			log.trace("로그인 실패!");
-//			return "5";
-//		} // if
-		
-		int result = pinService.insert(pin);
-		log.trace(">>> 결과: " + pin);
-		// insert의 반환타입이 int여서 String으로 변환하기 위해 빈문자열을 추가
-		return result + ""; 
-		
+		try {
+			if(this.pinService.doPin(pin) == 1) {
+				return 1;
+			} else {
+				return 0;
+			} // if-else
+		}catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
 	} // insert
-	
-	@PostMapping("/remove")
-	public String delete(PinDTO pin) throws ServiceException {
-		log.trace("delete() invoked.");
-		
-		pinService.delete(pin.getPinNo());
-		
-		return "redirect:/user/mypage/" + pin.getNickName();
-		
-	} // delete
-	
-	@PostMapping("/list")
-	public String select(@PathVariable("nickName") String nickName, Model model) {
-		log.trace("select({}) invoked.", nickName);
-		
-		model.addAttribute("__PIN__", pinService.select(nickName));
-		
-		return "/user/mypage";
-		
-	} // select
 
-	
 } // end class

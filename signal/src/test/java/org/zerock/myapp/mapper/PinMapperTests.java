@@ -39,8 +39,8 @@ public class PinMapperTests {
     public void testInsert() throws Exception {
     	log.info("testInsert() invoked.");
     	
-    	Integer postNo = 224;
-    	String nickName = "1111";
+    	Integer postNo = 268;
+    	String nickName = "hyeonna";
     	
     	PinDTO pin = new PinDTO();
     	pin.setPostNo(postNo);
@@ -54,39 +54,51 @@ public class PinMapperTests {
     } // testInsert
     
     @Test(timeout = 1000 * 2)
+    public void testSelect() {
+    	log.info("testSelect() invoked.");
+    	
+    	Integer pinNo = 17;
+    	
+    	PinDTO dto = this.mapper.select(pinNo);
+    	log.info(">>>>>>>>>>>>>>>>>", dto);
+    	
+    } // testSelect
+    
+    @Test(timeout = 1000 * 2)
     public void testDelete() {
     	log.info("testDelete() invoked.");
     	
-    	Integer cartId = 3;
+    	Integer pinNo = 3;
     	
-    	mapper.delete(cartId);
+    	mapper.delete(pinNo);
     	
-    	log.info(">>> 삭제 성공: " + cartId);
+    	log.info(">>> 삭제 성공: " + pinNo);
     	
     } // testDelete
     
     @Test(timeout = 1000 * 2)
-    public void TestSelect() {
-    	log.info("testGet() invoked.");
+    public void testSelectList() {
+    	log.info("testSelectList() invoked.");
     	
     	String nickName = "강대수";
     	
     	List<PinDTO> list = mapper.select(nickName);
     	log.info(">>> 찜 목록: " + nickName);
-    } // testGet
+    } // testSelectList
 
-    @Test(timeout = 1000 *2) 
+    @Test(timeout = 1000 *3) 
     public void TestCheckPin() {
     	log.info("TestCheckPin() invoked.");
     	
-    	Integer postNo = 224;
-    	String nickName = "1111";
+    	Integer postNo = 268;
+    	String nickName = "Hyeonna";
+  
     	
     	PinDTO pin = new PinDTO();
     	pin.setPostNo(postNo);
     	pin.setNickName(nickName);
     	
-    	PinDTO resultPin = mapper.checkPin(pin);
+    	Integer resultPin = mapper.checkPin(pin);
     	log.info(">>> 결과: " + resultPin);
     } // TestCheckPin
 

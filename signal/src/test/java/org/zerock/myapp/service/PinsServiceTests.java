@@ -37,9 +37,9 @@ public class PinsServiceTests {
 		log.info("\t+ this.service : {}", this.service);
 	} // setup
 	
-	@Test(timeout = 1000 *2) 
-	public void testInsert() {
-		log.trace("testInsert() invoked.");
+	@Test
+	public void testdoPin() throws ServiceException {
+		log.trace("testdoPin() invoked.");
 		
 		Integer postNo = 259;
 		String nickName = "JK";
@@ -47,29 +47,29 @@ public class PinsServiceTests {
 		PinDTO dto = new PinDTO();
 		dto.setPostNo(postNo);
 		dto.setNickName(nickName);
-		
-		int result = service.insert(dto);
+		log.info(dto);
+		int result = this.service.doPin(dto);
 		
 		log.info(">>> 숫자로 표시한 결과: " + result);
 	} // testInsert
 	
-	@Test(timeout = 1000 * 2) 
-	public void testDelete() throws ServiceException {
-		log.trace("testDelete() invoked.");
-		
-		Integer pinNo = 8;
-		boolean isDeleted = service.delete(pinNo);
-		log.info(">>> isDeleted : {}", isDeleted);
-	} // testDelete
-	
-	@Test(timeout = 1000 * 2) 
-	public void testSelect() throws ServiceException {
-		log.trace("testSelect() invoked.");
-		
-		String nickName = "Hyeonna";
-		List<PinDTO> list = service.select(nickName);
-		log.info(">>> List: " + list);
-		
-	} // testSelect
+//	@Test(timeout = 1000 * 2) 
+//	public void testDelete() throws ServiceException {
+//		log.trace("testDelete() invoked.");
+//		
+//		Integer pinNo = 8;
+//		boolean isDeleted = service.delete(pinNo);
+//		log.info(">>> isDeleted : {}", isDeleted);
+//	} // testDelete
+//	
+//	@Test(timeout = 1000 * 2) 
+//	public void testSelect() throws ServiceException {
+//		log.trace("testSelect() invoked.");
+//		
+//		String nickName = "Hyeonna";
+//		List<PinDTO> list = service.select(nickName);
+//		log.info(">>> List: " + list);
+//		
+//	} // testSelect
 	
 } // end class

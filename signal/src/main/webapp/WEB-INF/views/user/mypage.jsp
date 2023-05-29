@@ -101,15 +101,14 @@
 					      data: $(this).serialize(), // 폼 데이터 직렬화
 					      success: function(response) {
 
-					    	  console.log('Success:', response.success);
+					    	  console.log('Success:', response);
 					    	  console.log('Message:', response.message);
 					    	  
 					        // 성공적으로 요청을 보냈을 때 수행할 작업
 					        console.log('AJAX 요청 성공');
 					        console.log(response); // 서버로부터의 응답 출력
-					        
 					        button.prop('disabled', true);
-					      	alert(response.message);
+					      	alert('평점이 부여되었습니다.');
 					      },
 					      error: function(xhr, status, error) {
 					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
@@ -118,12 +117,40 @@
 					        console.log('오류:', error);
 					        
 					        button.prop('disabled', false);
-					      	alert(response.message);
+					      	alert('평점 부여에 실패했습니다.');
 
 					      }
 					    });
 					  });
 					});
+				
+				
+				$(document).ready(function() {
+					  $('.myGroup').on('click', function(e) {
+					    var groupNo = $(this).find('.groupNo').val();
+
+					    $.ajax({
+					      url: '/user/mypage/friend',
+					      type: 'post',
+					      data: { groupNo: groupNo },
+					      dataType: 'json',
+					      success: function(data) {
+					        // 받은 데이터를 동적으로 웹 페이지에 출력
+					        console.log('성공');
+					        console.log(data)
+					        for (var i = 0; i < data.length; i++) {
+					          var friend = data[i];
+					          $('.content').append('<p>' + friend.nickName + '</p>');
+					          console.log(friend.nickName);
+					        }
+					      },
+					      error: function(xhr, status, error) {
+					        console.log('실패');
+					      }
+					    });
+					  });
+					});
+		
 				
 
 
@@ -280,32 +307,21 @@
 						</div>
 						<div>
 							<div class="right_top">상태메시지</div>
-
+							<div class="right_contents">${__AUTH__.statusMessage}</div>
+						</div>
+						<div>
+						<div class="right_top">평점</div>
 							<c:choose>
-                                <c:when test="${rating.ratedRating != null}">
-                                    <div class="right_contents">${rating.ratedRating}</div>
+                                <c:when test="${__rating__.ratedRating != null}">
+                                <div class="right_contents"><fmt:formatNumber value="${__rating__.ratedRating}" pattern=".0"/></div>
+                                     <!-- <div class="right_contents">${__rating__.ratedRating}</div> -->
                                 </c:when>
-
                                 <c:otherwise>
                                     <div class="right_contents">0.0</div>
                                 </c:otherwise>
                             </c:choose>
-							
 						</div>
-						<div>
-							<div class="right_top">평점</div>
-
-							<c:choose>
-								<c:when test="${rating.ratedRating != null}">
-									<div class="right_contents">${rating.ratedRating}</div>
-								</c:when>
-
-								<c:otherwise>
-									<div class="right_contents">0.0</div>
-								</c:otherwise>
-							</c:choose>
-
-						</div>
+						
 						<div>
 							<div class="right_top">선호여행지</div>
 							<div class="right_contents">${__AUTH__.likeArea}</div>
@@ -410,7 +426,10 @@
 								<c:set var="count" value="0" />
 
 								<div class="myGroup">
+									<input type="hidden" name="groupNo" class="groupNo"
+										value="${applist.groupNo}">
 									<div class="area">${applist.area}</div>
+									<input type="hidden" name="groupNo" value="${applist.groupNo }" >
 									<div class="group">${applist.groupName}</div>
 									<div class="writer">${applist.writer}</div>
 									<div class="status">${applist.outCome}</div>
@@ -428,51 +447,7 @@
 							</c:if>
 
 
-							<c:if
-								test="${(applist.outCome eq '수락' || applist.outCome eq '본인' )&& __AUTH__.nickName != applist.nickName}">
-								<c:set var="count" value="${count + 1}" />
-								<c:if test="${count == 1}">
-									<div class="content hide">
-										<!-- 숨겨진 내용 -->
-										<div class="num">번호</div>
-										<div class="group">동행이름</div>
-										<div class="nick">닉네임</div>
-										<div class="rateresult">
-											<div class="rate">평점</div>
-											<div class="result">제출</div>
-										</div>
-
-									</div>
-								</c:if>
-
-
-								<div class="content2 hide">
-									<div class="num">${count}</div>
-									<div class="group">${applist.groupName}</div>
-									<div class="nick">${applist.nickName}</div>
-									
-									<form action="/user/rate" method="post" class="rateresult">
-										<div class="rate" style="padding: 5px 0px;">
-											<input type="hidden" name="raterUserNickName"
-												value="${__AUTH__.nickName}"> <input type="hidden"
-												name="ratedUserNickName" value="${applist.nickName}">
-
-											<c:forEach begin="1" end="5" step="1" varStatus="numA">
-												<c:set var="counter" value="${counter + 1}" />
-												<input type="radio" id="star${counter}" name="rating"
-													value="${6 - numA.index}" />
-												<label for="star${counter}"> &#9733; </label>
-											</c:forEach>
-
-
-										</div>
-										<div class="result">
-											<button type="submit">제출</button>
-										</div>
-
-									</form>
-								</div>
-							</c:if>
+							
 
 
 						</c:forEach>

@@ -41,6 +41,16 @@ public class UserGroupServiceImpl implements UserGroupService {
 			throw new ServiceException(e);
 		} // try-catch
 	}
+	
+	@Override
+	public List<UserGroupDTO> getFriendList(Integer groupNo) throws ServiceException {
+		try {
+			return this.dao.selectListFriend(groupNo);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	}
+
 
 	@Override
 	public UserGroupDTO get(Integer appNo) throws ServiceException {
@@ -134,5 +144,6 @@ try {
 			throw new ServiceException(e);
 		}
 	}
+
 
 } // end class

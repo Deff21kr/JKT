@@ -31,6 +31,7 @@
       <div class="signup-container">
         <%-- 세션에서 로그인 정보를 가져옴 --%>
           <c:set var="login" value="${sessionScope.__AUTH__}" />
+         
 
           <%-- 로그인 상태에 따라 버튼 보이기/숨기기 --%>
             <c:if test="${empty login}">

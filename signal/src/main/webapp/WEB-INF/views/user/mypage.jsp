@@ -411,6 +411,7 @@
 
 								<div class="myGroup">
 									<div class="area">${applist.area}</div>
+									<input type="hidden" name="groupNo" value="${applist.groupNo }" >
 									<div class="group">${applist.groupName}</div>
 									<div class="writer">${applist.writer}</div>
 									<div class="status">${applist.outCome}</div>

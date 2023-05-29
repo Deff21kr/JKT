@@ -99,7 +99,8 @@ public interface UserGroupMapper {
 				""")
 		public abstract List<UserGroupDTO> selectMyAppList(@Param("nickName") String nickName
 														,@Param("cri") Criteria cri
-														) throws DAOException;;
+														) throws DAOException;
+	public abstract List<UserGroupDTO> selectMyAppList2(@Param("nickName") String nickName) throws DAOException;
 		
 		// 2. 신청시 생성
 		public abstract Integer insert(@Param("nickName") String nickName,@Param("groupNo") Integer groupNo) throws DAOException;

@@ -25,6 +25,5 @@ public class JoinMyPlanDTO {
 	private Date planTime;
 	private String place;
 	private String detailPlan;
-	private Integer plannerType;
 
 }

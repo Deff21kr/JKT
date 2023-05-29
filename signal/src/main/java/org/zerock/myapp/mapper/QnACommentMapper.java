@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.zerock.myapp.domain.QnACommentVO;
+import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.domain.CommentCriteria;
 import org.zerock.myapp.domain.QnACommentDTO;
 
@@ -43,5 +44,6 @@ public interface QnACommentMapper {
 	// 총 게시물 갯수 반환
 	@Select("SELECT count(commentNo) FROM TBL_QNACOMMENT WHERE commentNo > 0 AND postNo = #{postNo}")
 	public abstract Integer getCommentTotalAmount(Integer postNo );
+	
 
 } // end interface

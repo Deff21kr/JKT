@@ -1,25 +1,33 @@
 package org.zerock.myapp.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.PageDTO;
+import org.zerock.myapp.domain.RatingsDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
-import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.LoginService;
+import org.zerock.myapp.service.QnACommentService;
+import org.zerock.myapp.service.RatingsService;
 import org.zerock.myapp.service.UserGroupService;
 import org.zerock.myapp.service.UsersService;
 
@@ -40,6 +48,11 @@ public class UsersController {
 	private LoginService user;
 	@Setter (onMethod_=@Autowired)
 	private UserGroupService group;
+	@Setter (onMethod_ = @Autowired)
+	private QnACommentService ser;
+	@Setter (onMethod_ = @Autowired)
+	private RatingsService ratingService;
+	
 	
 	// 1. 회원 목록 조회 (전부)
 	@GetMapping("/list")//리턴타입이 보이드이므로 리퀘스트 맵핑이 uri
@@ -84,17 +97,17 @@ public class UsersController {
 	
 	// 특정 회원의 모든 게시물 조회
 	@PostMapping(path="/mypage")
-	String modify(UsersDTO dto,RedirectAttributes rttrs) 
+	String modify(UsersDTO dto,RedirectAttributes rttrs, Model model) 
 			throws ControllerException {
 		log.trace("modify({}) invoked.",dto);
 		
 		try {
 			Objects.requireNonNull(dto);
-			
 			if( this.service.modify(dto) ) {
+				
 				rttrs.addAttribute("result","true");
 				rttrs.addAttribute("userno",dto.getID());
-				rttrs.addAttribute("__WRITER__", dto.getNickName());
+
 			}
 			
 			return "redirect:/user/mypage";
@@ -129,16 +142,36 @@ public class UsersController {
 //		
 //	}
 	
+	
 	@GetMapping(path={"/mypage"})
-	void myGroupList(Model model,HttpServletRequest req) throws ControllerException {
+	String myGroupList(Model model,HttpServletRequest req,Criteria cri, String ratedNickname, String raterNickName, Integer rating) throws ControllerException {
 		try {
+			
 			HttpSession session = req.getSession();
 			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
 			log.info("\n\nvo : {}",vo);
-			List<UserGroupDTO> list = this.group.getMyAppList( vo.getNickName() );
+			
+			List<UserGroupDTO> list = this.group.getMyAppList( vo.getNickName(),cri );
 			log.info("\n\nlist : {}",list);
 			// Request Scope  공유속성 생성
 			model.addAttribute("__APPLIST__", list);
+			
+			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName(), cri);
+			model.addAttribute("_LIST_", dto);
+			
+			// 점수 조회
+			RatingsDTO ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
+			log.info("ratingDTO: {}", ratingDTO);
+			model.addAttribute("__rating__", ratingDTO);
+			
+			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
+			model.addAttribute("pageMaker", pageDTO);
+			
+			PageDTO writeListDTO = new PageDTO(cri, this.service.getWriterList(vo.getNickName()));
+			model.addAttribute("writePageMaker", writeListDTO);
+			
+			
+			return "/user/mypage";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		}
@@ -151,23 +184,22 @@ public class UsersController {
 //		
 //	}
 	
+	
+	
 	// 프로필 수정
 	@PostMapping("/edit")
-	String profilModify(UsersDTO dto, RedirectAttributes rttrs, Model model) throws ControllerException {
+	String profilModify(UsersDTO dto, HttpServletRequest req, Model model) throws ControllerException {
 		log.info("\n\ndto : {}",dto);
 		try {
-			
 			if(this.service.profileEdit(dto)) {
+				HttpSession session = req.getSession();
 				UsersVO vo = this.service.get(dto.getID());
 				log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
-//				this.user.authenticate(vo.toDTO());
-				
-				model.addAttribute("__AUTH__", vo); // Request Scope
+				session.setAttribute("__AUTH__", vo);
 				
 			}
 			log.info("\t+ dto: ({}, {})", dto, dto.getID());
-			
-			return "/user/mypage";
+			return "redirect:/user/mypage";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		}
@@ -176,14 +208,65 @@ public class UsersController {
 
 	// 프로필 수정
 		@GetMapping("/edit")
-		void myPageModify(UsersDTO dto, RedirectAttributes rttrs, Model model, String ID, String MBTI) throws ControllerException {
+		void myPageModify(HttpServletRequest req,Model model) throws ControllerException {
 			try {
+				HttpSession session = req.getSession();
+				UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
+				log.info("\n\nvo : {}",vo);
 				
 				
 			} catch(Exception e) {
 				throw new ControllerException(e);
 			}
+			
 		}
+		
+		// 프로필 글쓴 내역 보기
+//		@PostMapping(path = "/mypage/writeList")
+//		void myPageWriterList(UsersDTO dto, Model model) throws ControllerException {
+//			log.info("mypageWriterList 호추ㅜ루룰우룽루ㅜ :({})", dto);
+//			try {
+//				UsersVO vo = this.service.selectWriteList(dto.getNickName());
+//				model.addAttribute("_LIST_", vo);
+//			} catch(Exception e) {
+//				throw new ControllerException(e);
+//			}
+//		}
+//		
+//		@GetMapping(path="mypage")
+//		void myPageWriterListMapping() {
+//			
+//		}
+		
+		// 평점 제출
+		@PostMapping("/rate")
+		@ResponseBody
+		ResponseEntity<?> rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
+			log.trace("rate() invoked");
+			
+			try {
+				
+				Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
+				if (result) {
+		            // 성공적인 응답 데이터 생성
+		            Map<String, Object> response = new HashMap<>();
+		            response.put("success", true);
+		            response.put("message", "평점이 부여되었습니다.");
+		            
+		            return ResponseEntity.ok(response);
+		        } else {
+		            // 실패 응답 데이터 생성
+		            Map<String, Object> response = new HashMap<>();
+		            response.put("success", false);
+		            response.put("message", "평점 부여에 실패했습니다.");
+		            
+		            return ResponseEntity.badRequest().body(response);
+		        }
+			} catch (Exception e) {
+				throw new ControllerException(e);
+			}
+		} // rate
+		
 	
 		
 	

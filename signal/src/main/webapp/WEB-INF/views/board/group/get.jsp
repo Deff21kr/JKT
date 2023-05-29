@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <!DOCTYPE html>
     <html lang="ko">
@@ -21,35 +21,79 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
         
         <script>
+
         var currPage = "${param.currPage}";
         var postNo = "${__BOARD__.postNo}";
         var nickName = "${__AUTH__.nickName}";
 
-        $(function () {
-            $('#listBtn').click(function () {
-    		    let selectedPageNum = e.currentTarget.textContent;
-    		    let url = "/board/group/searchList?currPage=" + selectedPageNum;
 
-    		    // area 파라미터를 추가
-    		    url += "&area=" + encodeURIComponent('${searchPageMaker.cri.area}');
+        $(function() {
+        	$('#listBtn').click(function() {
+        		
+        		var searchParam = location.search
+                var params = new URLSearchParams(searchParam);
+                var getCurrPage= params.get('currPage');
+                var getArea= params.get('area');
+                var getStartDate= params.get('startDate');
+                var getEndDate= params.get('endDate');
+                var getMemberNum= params.get('memberNum');
+                var getRecruitStatus= params.get('recruitStatus');
+        		
+        		var queryParams = "?currPage=" + getCurrPage +
+        		                    "&area=" + getArea +
+        		                    "&startDate=" + getStartDate +
+        		                    "&endDate=" + getEndDate +
+        		                    "&memberNum=" + getMemberNum +
+        		                    "&recruitStatus=" + getRecruitStatus;
+					    console.log(getCurrPage);
+					    console.log(getArea);
+					    console.log(getStartDate);
+					    console.log(getEndDate);
+					    console.log(getMemberNum);
+					    console.log(getRecruitStatus);
+        		  location.href = "/board/group/searchList" + queryParams;
+              });
 
-    		    // startDate 파라미터를 추가
-    		    url += "&startDate=" + encodeURIComponent('${searchPageMaker.cri.startDate}');
+          $('#modifyBtn').click(function() {
+            location.href = "/board/group/modify?currPage=" + currPage + "&postNo=" + postNo;
+          });
 
-    		    // endDate 파라미터를 추가
-    		    url += "&endDate=" + encodeURIComponent('${searchPageMaker.cri.endDate}');
+          $('#applyBtn').click(function() {
+            $.ajax({
+              url: '${pageContext.request.contextPath}/user/mygroup/register',
+              type: 'post',
+              data: {
+                nickName: nickName,
+                postNo: postNo,
+                currPage: currPage
+              },
+              dataType: 'json',
+              success: function(data) {
+                var model = parseInt(data);
+                console.log("1 = 중복o / 0 = 중복x : " + model);
 
-    		    // memberNum 파라미터를 추가
-    		    url += "&memberNum=" + encodeURIComponent('${searchPageMaker.cri.memberNum}');
+                if (model == 1) { // id 이미 있음
+                  console.log('Data 1:', model);
+                  console.log(model);
+                  console.log(typeof(model));
+                  alert('이미 등록된 ID입니다.');
 
-    		    // recruitStatus 파라미터를 추가
-    		    url += "&recruitStatus=" + encodeURIComponent('${searchPageMaker.cri.recruitStatus}');
+                } else {
+                  console.log('Data 2:', model);
+                  console.log(model);
+                  console.log(typeof(model));
+                  alert('신청이 완료되었습니다.');
+                }
+              },
 
-    		    location.href = url;
+              error: function() {
+                console.log("실패");
+              }
+
             });
 
 
-                $('#modifyBtn').click(function () {
+                $('#modifyBtn').click(function () {n
                     location = "/board/group/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";
                 });
                 
@@ -88,8 +132,10 @@
                         });
               
             });
+          });
         });
         </script>
+
     </head>
 
     <body>
@@ -120,6 +166,48 @@
                             <dt>조회수</dt>
                             <dd>13</dd>
                         </dl>
+                        <div class="pin">
+                          <input type="hidden" class="pinCheck">
+                          <button class="plus_btn">찜</button>
+                          <!-- <button class="minus_btn">찜-</button> -->
+                        </div>
+                        <script>
+                          let pin = $(".pinCheck").val();
+                          $(".plus_btn").on("click", function() {
+                            $(".pinCheck").val(++pin);
+                          }); 
+                          // $(".minus_btn").on("click", function() {
+                          //   if(pin > 1) {
+                          //     $(".pinCheck").val(--pin);
+                          //   } // if
+                          // });
+
+                          const form = {
+                                          postNo : '${__BOARD__.postNo}',
+                                          nickName : '${__AUTH__.nickName}'
+                          } // form
+
+                          $(".plus_btn").on("click", function(e) {
+                            $.ajax({
+                              url: '/board/pin/register',
+                              type: 'POST',
+                              data: form,
+                              success: function(result) {
+                                pinAlert(result);
+                              } // success
+                            })
+                          });
+                          function pinAlert(result){
+                            if(result == '0') {
+                              alert("게시글을 찜하지 못했습니다.");
+                            } else if(result == 1) {
+                              alert("게시글을 찜했습니다.");
+                            } else if(result == 2) {
+                              alert("이미 게시글을 찜했습니다.");
+                            }
+                          }
+                        </script>
+                        
                     </div>
                     <div class="content" readonly>${__BOARD__.content}</div>
                 </div>

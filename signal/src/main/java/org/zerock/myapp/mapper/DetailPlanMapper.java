@@ -19,12 +19,11 @@ public interface DetailPlanMapper {
 			SELECT *
 			FROM TBL_DETAILPLAN
 			WHERE 
-				PLANNO = #{planNo} AND
-				PLANNERTYPE = #{plannerType}
+				PLANNO = #{planNo}
 			ORDER BY
 				planDay ASC, to_char(plantime, 'HH24:Mi') ASC
 			""")
-	public abstract List<DetailPlanVO> selectList(@Param("planNo") Integer planNo, @Param("plannerType") Integer plannerType);
+	public abstract List<DetailPlanVO> selectList(@Param("planNo") Integer planNo);
 	
 	// 플랜계획 등록
 	public abstract Integer insert(DetailPlanDTO dto);

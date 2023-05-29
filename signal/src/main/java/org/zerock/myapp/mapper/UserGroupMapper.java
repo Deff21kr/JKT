@@ -16,11 +16,11 @@ public interface UserGroupMapper {
                 FROM TBL_USER_GROUP a
                 INNER JOIN tbl_groups b ON a.groupNo = b.groupNo
                 where b.postno IN (select c.postno from tbl_groups c , tbl_groupboard d where c.postno=d.postno and d.nickname=#{nickName})
-                ORDER BY a.appno desc
+                ORDER BY b.groupno desc, a.appno desc
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")
-		public abstract List<UserGroupDTO> selectList(String nickName,Criteria cri) throws DAOException;
+		public abstract List<UserGroupDTO> selectList(@Param("nickName") String nickName,@Param("cri") Criteria cri) throws DAOException;
 		
 		// 내 동행
 		@Select("""
@@ -33,10 +33,72 @@ public interface UserGroupMapper {
 				    FROM tbl_groups g
 				    JOIN tbl_groupboard b ON g.postno = b.postno
 				) j ON u.groupno = j.groupno
-				WHERE u.nickname = #{nickName}
+				WHERE u.groupno IN (
+	                SELECT GROUPNO
+	                FROM
+	                    TBL_USER_GROUP
+	                WHERE nickname = #{nickName}
+	                ) AND u.nickName IS NOT NULL
+				ORDER BY 
+					u.groupno desc,
+					CASE WHEN u.nickName = #{nickName} THEN 0 ELSE 1 END,
+					u.outcome ,u.appdate desc
+				OFFSET 
+					(#{cri.currPage} -1) * 
+							(SELECT SUM(cnt) 
+								FROM (
+					 				SELECT 
+					                    u.groupno, count(u.groupno) as  cnt
+									FROM tbl_user_group u
+									JOIN (
+									    SELECT g.groupno, g.groupname, g.recruitstatus, g.membernum, g.currentmember, g.area, b.postno,
+									           b.title, b.content, b.startdate, b.enddate, b.views, b.regidate, b.modifydate, b.nickname writer
+									    FROM tbl_groups g
+									    JOIN tbl_groupboard b ON g.postno = b.postno
+									) j ON u.groupno = j.groupno
+									WHERE u.groupno IN (
+						                SELECT GROUPNO
+						                FROM
+						                    TBL_USER_GROUP
+						                WHERE nickname = #{nickName}
+						                ) AND u.nickName IS NOT NULL
+					                GROUP BY
+					                    u.groupno
+									ORDER BY 
+										u.groupno desc
+					                OFFSET (#{cri.currPage} -2) * #{cri.amount} ROWS
+									FETCH NEXT #{cri.amount} ROWS ONLY
+								))
+					ROWS
+				FETCH NEXT 
+								(SELECT SUM(cnt) 
+								FROM (
+					 				SELECT 
+					                    u.groupno, count(u.groupno) as  cnt
+									FROM tbl_user_group u
+									JOIN (
+									    SELECT g.groupno, g.groupname, g.recruitstatus, g.membernum, g.currentmember, g.area, b.postno,
+									           b.title, b.content, b.startdate, b.enddate, b.views, b.regidate, b.modifydate, b.nickname writer
+									    FROM tbl_groups g
+									    JOIN tbl_groupboard b ON g.postno = b.postno
+									) j ON u.groupno = j.groupno
+									WHERE u.groupno IN (
+						                SELECT GROUPNO
+						                FROM
+						                    TBL_USER_GROUP
+						                WHERE nickname = #{nickName}
+						                ) AND u.nickName IS NOT NULL
+					                GROUP BY
+					                    u.groupno
+									ORDER BY 
+										u.groupno desc
+					                OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
+									FETCH NEXT #{cri.amount} ROWS ONLY
+								))
+					ROWS ONLY
 				""")
 		public abstract List<UserGroupDTO> selectMyAppList(@Param("nickName") String nickName
-//														,@Param("cri") Criteria cri
+														,@Param("cri") Criteria cri
 														) throws DAOException;;
 		
 		// 2. 신청시 생성
@@ -67,6 +129,29 @@ public interface UserGroupMapper {
 				and a.outcome != '거절'
 				""")
 		public abstract Integer getTotalAmount(String nickName);
+		
+		// 6. 총 게시물 갯수 반환
+		@Select("""
+				SELECT 
+				    count(distinct u.groupno)
+				FROM tbl_user_group u
+				JOIN (
+				    SELECT g.groupno, g.groupname, g.recruitstatus, g.membernum, g.currentmember, g.area, b.postno,
+				           b.title, b.content, b.startdate, b.enddate, b.views, b.regidate, b.modifydate, b.nickname writer
+				    FROM tbl_groups g
+				    JOIN tbl_groupboard b ON g.postno = b.postno
+				) j ON u.groupno = j.groupno
+				WHERE u.groupno IN (
+	                SELECT GROUPNO
+	                FROM
+	                    TBL_USER_GROUP
+	                WHERE nickname = #{nickName}
+	                ) AND U.OUTCOME IN ('수락', '본인')
+	                AND u.nickName IS NOT NULL
+				ORDER BY 
+					u.groupno desc
+				""")
+		public abstract Integer getTotalAmountAppList(String nickName);
 
 
 }

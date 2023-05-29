@@ -24,7 +24,9 @@
    </view-resolvers>
    
    <interceptors>
-<interceptor>
+	<interceptor>
+         <mapping path="/common/loginPost"/>
+         <mapping path="/common/loginPost/**"/>
          <mapping path="/common/loginPost/**/*"/>
          <beans:ref bean="loginInterceptor"/>
       </interceptor>
@@ -35,6 +37,7 @@
          <mapping path="/user/**/*" />
          <mapping path="/user/**?" />
          <exclude-mapping path="/board/**/*list" />
+         <exclude-mapping path="/board/review/get*" />
          <beans:ref bean="authInterceptor"/>
       </interceptor>
 

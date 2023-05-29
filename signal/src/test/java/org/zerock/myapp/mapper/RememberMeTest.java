@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.DAOException;
 import org.zerock.myapp.persistence.LoginDAO;
 
@@ -53,6 +54,26 @@ public class RememberMeTest {
 					ID, 
 					rememberMeCookie, 
 					rememberMeMaxAge
+				);
+		
+		log.info("\t+ affectedLines: {}", affectedLines);
+	} // testUpdateUserWithRememberMe
+	
+	@Test
+	public void testUpdateUserWithRememberMe22() throws DAOException {	// 단위테스트 
+		log.trace("testUpdateUserWithRememberMe() invoked.");
+		
+		String ID = "123123";
+		String rememberMeCookie = "1234567890ABCDEFG";
+		
+		long oneWeek = 1000 * 60 * 60 * 24 * 7;	// in milliseconds
+		long now = System.currentTimeMillis();	// in milliseconds		
+		Timestamp rememberMeMaxAge = new Timestamp(now + oneWeek);
+		
+		UsersVO affectedLines = 
+			this.login.
+				selectUserByRememberMe(rememberMeCookie
+				
 				);
 		
 		log.info("\t+ affectedLines: {}", affectedLines);

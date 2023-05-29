@@ -64,28 +64,28 @@ public class UserGroupController {
 		}
 	}
 	
-	// 내가 신청한 동행 조회
-	@GetMapping("/myapp")
-	public String userApp(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
-		
-		try {
-			log.trace("동행({} ) invoked.",model);
-			HttpSession session = req.getSession();
-			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
-			log.info("\n\nvo : {}",vo);
-			List<UserGroupDTO> list = this.service.getMyAppList( vo.getNickName() );
-			log.info("\n\nlist : {}",list);
-			// Request Scope  공유속성 생성
-			model.addAttribute("__APPLIST__", list);
-			
-//			PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
-//			model.addAttribute("pageMaker", pageDTO);
-			
-			return "redirect:/user/mypage";
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		}
-	}
+//	// 내가 신청한 동행 조회
+//	@GetMapping("/myapp")
+//	public String userApp(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
+//		
+//		try {
+//			log.trace("동행({} ) invoked.",model);
+//			HttpSession session = req.getSession();
+//			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
+//			log.info("\n\nvo : {}",vo);
+//			List<UserGroupDTO> list = this.service.getMyAppList( vo.getNickName(),cri );
+//			log.info("\n\nlist : {}",list);
+//			// Request Scope  공유속성 생성
+//			model.addAttribute("__APPLIST__", list);
+//			
+////			PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
+////			model.addAttribute("pageMaker", pageDTO);
+//			
+//			return "redirect:/user/mypage";
+//		} catch (Exception e) {
+//			throw new ControllerException(e);
+//		}
+//	}
 	
 	
 	@PostMapping("/mygroup")

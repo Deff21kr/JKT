@@ -147,6 +147,7 @@ public class CommonController {
 		}
 
 	}
+	
 	@GetMapping("/mailCheck")
 	@ResponseBody
 	public String mailCheck(@RequestParam("EMail")String EMail) throws ControllerException {

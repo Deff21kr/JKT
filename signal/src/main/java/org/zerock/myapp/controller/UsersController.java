@@ -25,6 +25,7 @@ import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.LoginService;
 import org.zerock.myapp.service.QnACommentService;
 import org.zerock.myapp.service.RatingsService;
@@ -142,8 +143,60 @@ public class UsersController {
 //		
 //	}
 	
+	@ResponseBody
+	@PostMapping("/mypage/friend")
+	List<UserGroupDTO> friend(Model model, Integer groupNo) throws ControllerException {
+		
+		try {
+			List<UserGroupDTO> friend = this.group.getFriendList(groupNo);
+			model.addAttribute("__FRIEND__", friend);
+			return friend;
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+
+	} // friend
+	
 	
 	@GetMapping(path={"/mypage"})
+	String myGroupList(Model model,HttpServletRequest req,Criteria cri, Integer groupNo, String ratedNickname, String raterNickName, Integer rating) throws ControllerException {
+		try {
+			
+			HttpSession session = req.getSession();
+			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
+			log.info("\n\nvo : {}",vo);
+			
+			List<UserGroupDTO> list = this.group.getMyAppList( vo.getNickName(),cri );
+			log.info("\n\nlist : {}",list);
+			// Request Scope  공유속성 생성
+			model.addAttribute("__APPLIST__", list);
+			
+			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName(), cri);
+			model.addAttribute("_LIST_", dto);
+			
+			
+			// 점수 조회
+			RatingsDTO ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
+			log.info("ratingDTO: {}", ratingDTO);
+			model.addAttribute("__rating__", ratingDTO);
+			
+			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
+			model.addAttribute("pageMaker", pageDTO);
+			
+			PageDTO writeListDTO = new PageDTO(cri, this.service.getWriterList(vo.getNickName()));
+			model.addAttribute("writePageMaker", writeListDTO);
+			
+			
+			return "/user/mypage";
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+		
+		
+	}
+	
+	
+	@GetMapping(path={"/mypage/people"})
 	String myGroupList(Model model,HttpServletRequest req,Criteria cri, String ratedNickname, String raterNickName, Integer rating) throws ControllerException {
 		try {
 			
@@ -178,7 +231,6 @@ public class UsersController {
 		
 		
 	}
-	
 //	@PostMapping(path={"/mypage/group/{동행명}/evaluate"}, params = "ID")
 //	void partnerEvaluate() {
 //		

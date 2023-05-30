@@ -29,7 +29,7 @@
                     <a href="#" class="profile-img">
                         <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                     </a>
-                    <a href="#" class="nickname">${ __REVIEW__.nickname }</a>
+                    <a href="#" class="nickname">${__AUTH__.nickName}</a>
                     <p class="regi-date">
                         <fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${ __REVIEW__.regiDate }" />
                     </p>

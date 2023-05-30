@@ -33,7 +33,10 @@ public interface ReviewBoardService {
 	// 7. 첨부파일 조회 (JSON -> 화면)
 	public List<AttachFileDTO> getAttachList(Integer postNo);
 	
-	// 2. 게시물 등록 + 첨부파일
+	// 8. 게시물 등록 + 첨부파일
 	public Boolean registerWithFile(ReviewBoardDTO dto) throws ServiceException;
+	
+	// 9. 조회수
+	public abstract Integer updateReadcnt(Integer postNo) throws ServiceException;
 
 }//end interface

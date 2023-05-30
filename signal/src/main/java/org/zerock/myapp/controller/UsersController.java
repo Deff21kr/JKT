@@ -1,12 +1,15 @@
 package org.zerock.myapp.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,16 +17,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
 import org.zerock.myapp.domain.RatingsDTO;
-import org.zerock.myapp.domain.CommentCriteria;
-import org.zerock.myapp.domain.CommentPageDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.LoginService;
 import org.zerock.myapp.service.QnACommentService;
 import org.zerock.myapp.service.RatingsService;
@@ -34,6 +37,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
+@SessionAttributes({ "__FRIEND__" })
 @NoArgsConstructor
 @Log4j2
 
@@ -141,10 +145,64 @@ public class UsersController {
 //		
 //	}
 	
+	@ResponseBody
+	@PostMapping("/mypage/friend")
+	List<UserGroupDTO> friend(Model model, Integer groupNo) throws ControllerException {
+		
+		try {
+			List<UserGroupDTO> friend = this.group.getFriendList(groupNo);
+			model.addAttribute("__FRIEND__", friend);
+			log.info("\n\n\t\tfriend : {}\n\n",friend);
+			return friend;
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+
+	} // friend
+	
 	
 	@GetMapping(path={"/mypage"})
-	String myGroupList(Model model,HttpServletRequest req,Criteria cri) throws ControllerException {
+	String myGroupList(Model model,HttpServletRequest req,Criteria cri, Integer groupNo, String ratedNickname, String raterNickName, Integer rating) throws ControllerException {
 		try {
+			
+			HttpSession session = req.getSession();
+			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
+			log.info("\n\nvo : {}",vo);
+			
+			List<UserGroupDTO> list = this.group.getMyAppList( vo.getNickName(),cri );
+			log.info("\n\nlist : {}",list);
+			// Request Scope  공유속성 생성
+			model.addAttribute("__APPLIST__", list);
+			
+			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName(), cri);
+			model.addAttribute("_LIST_", dto);
+			
+			
+			// 점수 조회
+			RatingsDTO ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
+			log.info("ratingDTO: {}", ratingDTO);
+			model.addAttribute("__rating__", ratingDTO);
+			
+			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
+			model.addAttribute("pageMaker", pageDTO);
+			
+			PageDTO writeListDTO = new PageDTO(cri, this.service.getWriterList(vo.getNickName()));
+			model.addAttribute("writePageMaker", writeListDTO);
+			
+			
+			return "/user/mypage";
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+		
+		
+	}
+	
+	
+	@GetMapping(path={"/mypage/people"})
+	String myGroupList(Model model,HttpServletRequest req,Criteria cri, String ratedNickname, String raterNickName, Integer rating) throws ControllerException {
+		try {
+			
 			HttpSession session = req.getSession();
 			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
 			log.info("\n\nvo : {}",vo);
@@ -176,23 +234,6 @@ public class UsersController {
 		
 		
 	}
-	
-	@ResponseBody
-	@PostMapping("/mypage/friend")
-	List<UserGroupDTO> friend(Model model, Integer groupNo) throws ControllerException {
-		
-		try {
-			List<UserGroupDTO> friend = this.group.getFriendList(groupNo);
-			model.addAttribute("__FRIEND__", friend);
-			log.info("\n\n\t\tfriend : {}\n\n",friend);
-			return friend;
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		}
-
-	} // friend
-	
-	
 //	@PostMapping(path={"/mypage/group/{동행명}/evaluate"}, params = "ID")
 //	void partnerEvaluate() {
 //		
@@ -210,7 +251,6 @@ public class UsersController {
 				UsersVO vo = this.service.get(dto.getID());
 				log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
 				session.setAttribute("__AUTH__", vo);
-				
 			}
 			log.info("\t+ dto: ({}, {})", dto, dto.getID());
 			return "redirect:/user/mypage";
@@ -252,6 +292,23 @@ public class UsersController {
 //			
 //		}
 		
+		// 평점 제출
+		@PostMapping("/rate")
+		@ResponseBody
+		ResponseEntity<String> rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
+			log.trace("rate() invoked");
+			
+			try {
+		        Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
+		        if (result) {
+		            log.info("\t + rate : {}", result);
+		        }
+
+		        return ResponseEntity.ok("평점이 부여되었습니다.");
+		    } catch (Exception e) {
+		        throw new ControllerException(e);
+		    }
+		} // rate
 		
 	
 		

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
@@ -36,6 +37,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
+@SessionAttributes({ "__FRIEND__" })
 @NoArgsConstructor
 @Log4j2
 
@@ -150,6 +152,7 @@ public class UsersController {
 		try {
 			List<UserGroupDTO> friend = this.group.getFriendList(groupNo);
 			model.addAttribute("__FRIEND__", friend);
+			log.info("\n\n\t\tfriend : {}\n\n",friend);
 			return friend;
 		} catch (Exception e) {
 			throw new ControllerException(e);

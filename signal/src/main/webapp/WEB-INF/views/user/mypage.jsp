@@ -95,15 +95,15 @@
 
 					    // AJAX 요청 생성
 					    $.ajax({
-					      url: $(this).attr('action'), // 폼의 action 속성 값
-					      type: $(this).attr('method'), // 폼의 method 속성 값
+					      url: '/user/rate', // 폼의 action 속성 값
+					      type: 'post',
 					      data: $(this).serialize(), // 폼 데이터 직렬화
 					      success: function(response) {
 					    	  
 					        // 성공적으로 요청을 보냈을 때 수행할 작업
 					        console.log('AJAX 요청 성공');
-					        button.prop('disabled', true);
-					        alert(response);
+					       // button.prop('disabled', true);
+					        //alert(response);
 					      },
 					      error: function(xhr, status, error) {
 					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
@@ -112,7 +112,7 @@
 					        console.log('오류:', error);
 					        
 					        button.prop('disabled', false);
-					      	alert(response);
+					      	alert(data);
 
 					      }
 					    });
@@ -489,9 +489,8 @@
 
 								<form action="/user/rate" method="post" class="rateresult" id="rateForm">
 									<div class="rate" style="padding: 5px 0px;">
-										<input type="hidden" name="raterUserNickName"
-											value="${__AUTH__.nickName}"> <input type="hidden"
-											name="ratedUserNickName" class="ratedUserNickName" value="">
+										<input type="hidden" name="raterUserNickName" value="${__AUTH__.nickName}"> 
+										<input type="hidden" name="ratedUserNickName" class="ratedUserNickName" value="">
 
 										<c:forEach begin="1" end="5" step="1" varStatus="numA">
 											<c:set var="counter" value="${counter + 1}" />
@@ -503,7 +502,7 @@
 
 									</div>
 									<div class="result">
-										<button id="" type="submit">제출</button>
+										<button id="rateForm" type="submit">제출</button>
 									</div>
 
 								</form>
@@ -559,56 +558,16 @@
 					</div>
 					<!-- 불러올 작성글 대략 10개정도 -->
 					<div class="post">
+					<c:forEach var="pin" items="${__pinList__}">
 						<div>
-							<div class="group">우리동행</div>
-							<div class="title">
-								<a href="#">서울ㄲㄲ?</a>
-							</div>
-							<div class="area">서울</div>
-							<div class="startDate">2022-01-01</div>
-							<div class="endDate">2022-01-03</div>
-							<div class="status">현황</div>
+						<div class="group">${pin.groupName }</div>
+						<div class="title">${pin.title }</div>
+						<div class="area">${pin.area }</div>
+						<div class="startDate">${pin.startDate }</div>
+						<div class="endDate">${pin.endDate}</div>
+						<div class="status">${pin.recruitStatus }</div>
 						</div>
-						<div>
-							<div class="group">쟤네동행</div>
-							<div class="title">
-								<a href="#">나랑ㄲㄲ?</a>
-							</div>
-							<div class="area">대전</div>
-							<div class="startDate">2022-06-05</div>
-							<div class="endDate">2022-0103</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">얘네동행</div>
-							<div class="title">
-								<a href="#">현댂ㄲ?</a>
-							</div>
-							<div class="area">대구</div>
-							<div class="startDate">2022-09-09</div>
-							<div class="endDate">2022-11-05</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">남의동행</div>
-							<div class="title">
-								<a href="#">부산ㄲㄲ?</a>
-							</div>
-							<div class="area">부산</div>
-							<div class="startDate">2023-01-01</div>
-							<div class="endDate">2023-01-01</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">바보동행</div>
-							<div class="title">
-								<a href="#">바보임</a>
-							</div>
-							<div class="area">일본</div>
-							<div class="startDate">2023-01-03</div>
-							<div class="endDate">2023-02-02</div>
-							<div class="status">현황</div>
-						</div>
+						</c:forEach>
 
 					</div>
 

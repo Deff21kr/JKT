@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.PageDTO;
+import org.zerock.myapp.domain.PinDTO;
 import org.zerock.myapp.domain.RatingsDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
@@ -223,6 +225,11 @@ public class UsersController {
 			log.info("ratingDTO: {}", ratingDTO);
 			model.addAttribute("__rating__", ratingDTO);
 			
+			// 찜 내역 조회
+			List<GroupBoardDTO> groupBoardDTO = this.service.selectPinLists(vo.getNickName(), cri);
+			log.info("groupBoard: {}***********************************", groupBoardDTO);
+			model.addAttribute("__pinList__", groupBoardDTO);
+			
 			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
 			model.addAttribute("pageMaker", pageDTO);
 			
@@ -317,21 +324,24 @@ public class UsersController {
 		
 		// 평점 제출
 		@PostMapping("/rate")
-		@ResponseBody
-		ResponseEntity<String> rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
+//		@ResponseBody
+//		ResponseEntity<String>
+		Integer rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
 			log.trace("rate() invoked");
 			
 			try {
-		        Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
-		        if (result) {
-		            log.info("\t + rate : {}", result);
-			        return ResponseEntity.ok("평점이 부여되었습니다.");
-
-		        }else {
-		        	log.info("실패");
-		            return ResponseEntity.ok("평점이 부여에 실패하였습니다.");
-
-		        }
+//		        Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
+//		        if (result) {
+//		            log.info("\t + rate : {}", result);
+////			        return ResponseEntity.ok("평점이 부여되었습니다.");
+//
+//		        }else {
+//		        	log.info("실패");
+////		            return ResponseEntity.ok("평점이 부여에 실패하였습니다.");
+//
+//		        }
+				
+				return (this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating);
 
 		    } catch (Exception e) {
 		        throw new ControllerException(e);

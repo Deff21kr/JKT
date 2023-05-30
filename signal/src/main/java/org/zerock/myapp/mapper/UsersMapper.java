@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.http.ResponseEntity;
 import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 
@@ -66,4 +67,19 @@ public interface UsersMapper {
 			+ "UNION\r\n"
 			+ "SELECT NICKNAME, title, content, regidate, boardname FROM TBL_GROUPBOARD WHERE NICKNAME = #{nickName})")
 	public abstract Integer getWriteList(String nickName);
+
+	// 10. 찜 내역 보기
+	@Select("""
+			select b.nickName, a.title, a.BOARDNAME From TBL_GROUPBOARD a,
+			TBL_PIN b WHERE a.postNo = b.postNo AND b.nickName = #{nickName}
+				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
+				FETCH NEXT #{cri.amount} ROWS ONLY
+			""")
+	public abstract List<GroupBoardDTO> selectPinList(@Param("nickName") String nickName, Criteria cri);
+
+	// 11. 찜 내역의 찜 총 개수
+	@Select("""
+			select count(nickName) FROM TBL_PIN WHERE nickName = #{nickName};
+			""")
+	public abstract Integer getPinList(@Param("nickName") String nickName);
 }

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
@@ -178,18 +179,41 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 	}
 
 	@Override
-	public List<UsersDTO> selectWriteList(String nickName, Criteria cri) throws ControllerException {
+	public List<UsersDTO> selectWriteList(String nickName, Criteria cri) throws ServiceException {
 		try {
 			return this.dao.selectWriteList(nickName, cri);
 		} catch(Exception e) {
-			throw new ControllerException(e);
+			throw new ServiceException(e);
 		}
 		
 	}
 
 	@Override
-	public Integer getWriterList(String nickName) throws ControllerException {
-		return this.dao.getWriteList(nickName);
+	public Integer getWriterList(String nickName) throws ServiceException {
+		try {
+			return this.dao.getWriteList(nickName);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+		
+	}
+
+	@Override
+	public List<GroupBoardDTO> selectPinLists(String nickName, Criteria cri) throws ServiceException {
+		try {
+		return this.dao.selectPinList(nickName, cri);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public Integer getPinList(String nickName) throws ServiceException {
+		try {
+		return this.dao.getPinList(nickName);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
 	}
 
 	

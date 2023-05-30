@@ -93,9 +93,6 @@ public class GroupBoardController {
 		} // try-catch
 	} // list
 	
- 
-    
-	
 	
 	// 2. 새로운 게시물 등록
 	@PostMapping("/register")
@@ -112,8 +109,6 @@ public class GroupBoardController {
 				rttrs.addFlashAttribute("postno", dto.getPostNo());
 			    UsersVO one = this.user.getByNick(dto.getNickName());
 			    this.mapping.registerDefault(one.getNickName(), dh.getGroupNo());
-			    
-				
 				
 				return "redirect:/board/group/list";
 			} else {
@@ -132,6 +127,7 @@ public class GroupBoardController {
 		
 	} // register
 	
+	
 	// 3. 특정 게시물 상세조회
     @GetMapping(path={"/get", "/modify"},  params = "postNo")
     void get(@RequestParam Integer postNo, Model model, CommentCriteria commentCri, @Param("currPage") Integer currPage, RedirectAttributes rttrs) throws  ControllerException {
@@ -145,6 +141,8 @@ public class GroupBoardController {
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
             
+            Integer prc = this.service.plusReadcnt(postNo);
+            model.addAttribute("__BOARD__", prc);
             
             CommentPageDTO pageDTO = new CommentPageDTO(this.commentService.getCommentTotal(postNo), commentCri);
     		model.addAttribute("__commentPage__", pageDTO);

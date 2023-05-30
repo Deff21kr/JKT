@@ -30,38 +30,39 @@
 		<jsp:include page="../header.jsp" />
 	</header>
 
-  <main>
-    <form action="/common/loginPost" method="post">
-      <fieldset>
-        <legend><h3>로그인</h3></legend>
-        <div class="user-area">
-          <label for="userid">
-            <i class="fas fa-user"></i>
-          </label>
-          <input id="userid" name="ID" type="text" autocomplete="none" placeholder="로그인">
-        </div>
-        <div class="user-area">
-          <label for="userpw">
-            <i class="fas fa-lock"></i>
-          </label>
-          <input id="userpw" name="password" type="password" placeholder="비밀번호">
-        </div>
-        <a href="#">비밀번호를 잊었습니까?</a>
-        
-        <div>Remember-me <input type="checkbox" name="rememberMe"></div>
-                <p></p>
-
-                <div><button type="submit">Sign-in</button></div>
-      </fieldset>
-    </form>
+    <main style = "margin : 270px auto">
+      <form action="/common/loginPost" method="post">
+        <fieldset>
+          <legend><h3>로그인</h3></legend>
+          <div class="user-area">
+            <label for="userid">
+              <i class="fas fa-user"></i>
+            </label>
+            <input id="userid" name="ID" type="text" autocomplete="none" placeholder="로그인">
+          </div>
+          <div class="user-area">
+            <label for="userpw">
+              <i class="fas fa-lock"></i>
+            </label>
+            <input id="userpw" name="password" type="password" placeholder="비밀번호">
+          </div>
+          <a href="#">비밀번호를 잊었습니까?</a>
+          
+          <div class="rememberme">Remember-me <input type="checkbox" name="rememberMe" class="remembermeBtn"></div>
+                  <p></p>
+  
+                  <div class="sign"><button type="submit" class="signBtn"> <span>Sign-in</span> </button></div>
+        </fieldset>
+      </form>
+      
+      <div class="message">
+        ${msg}
+    </div>
     
-    <div class="message">
-  		${msg}
-	</div>
-  
+   
+    
+    </main>
  
-  
-  </main>
   
   <footer>
 	<jsp:include page="../footer.jsp" />

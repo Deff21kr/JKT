@@ -13,8 +13,6 @@ public interface UserGroupService {
 		
 		public abstract List<UserGroupDTO> getMyAppList(String nickName,Criteria cri) throws ServiceException;
 		
-		public abstract List<UserGroupDTO> getFriendList(Integer groupNo) throws ServiceException;
-		
 		public abstract Boolean register(String nickName,Integer groupNo) throws ServiceException;
 		
 		public abstract Boolean registerDefault(String nickName,Integer groupNo) throws ServiceException;

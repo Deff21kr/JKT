@@ -30,8 +30,11 @@ public interface GroupBoardService {
 	// 7. 총 게시물 갯수 반환
 	public abstract Integer getTotal() throws ServiceException;
 	
-	// 7. 검색 조회된 게시물 갯수 반환
+	// 8. 검색 조회된 게시물 갯수 반환
 	public abstract Integer getSearchTotal(GroupBoardCriteria cri) throws ServiceException;
+	
+	// 9. 조회수 증가
+	public abstract Integer plusReadcnt(Integer postNo) throws ServiceException;
 
 
 } // end interface

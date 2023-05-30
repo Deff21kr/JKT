@@ -51,7 +51,7 @@
 					    e.preventDefault();
 					    let selectedPageNum = e.currentTarget.textContent;
 					    console.log("ID2: " + tabId);
-					    console.log("페이지: " + ${pageMaker.cri.currPage});
+					    console.log("페이지: " );
 					    window.location.href ="/user/mypage"+"?currPage="+selectedPageNum+ tabId;
 					    
 				

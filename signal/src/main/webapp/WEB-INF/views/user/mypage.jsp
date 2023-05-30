@@ -65,96 +65,121 @@
 					heightStyle: "content"
 				});
 
-				$(function() {
-					$("#modifyBtn").click(function() {
-						location = "/user/edit"
-						console.log("클리이이이이이익");
-					});
-				});
+				   $(function() {
+	                    $("#modifyBtn").click(function() {
+	                        location = "/user/edit"
+	                        console.log("클리이이이이이익");
+	                    });
+	                });
+	                
+	                /* $(function() {
+	                $(function() {
+	                    $('.myGroup').on('click', function(e) {
+	                        var content = $(this).nextUntil('.myGroup');
+	                        if (content.css('display') === 'none' && ($(this).find('.status').html() === '수락' || $(this).find('.status').html() === '본인')) {
+	                            
+	                        var content = $(this).next('.content');
+	                        if (content.css('display') === 'none') {
+	                            content.css('display', 'block');
+	                            content.last().css('border-bottom', '1px solid');
+	                            content.css('border-left', '1px solid');
+	                            content.css('border-right', '1px solid')
+	                            
+	                        } else {
+	                            content.css('display', 'none');
+	                        }
+	                    });
+	                }); */
+	                
+	                $(document).ready(function() {
+	                      $('.rateresult').submit(function(e) {
+	                        e.preventDefault(); // 폼 기본 제출 동작 막기
+	                        
+	                        var button = $(this).find('button');
 
-				$(function() {
-					$('.myGroup').on('click', function(e) {
-						var content = $(this).nextUntil('.myGroup');
-						if (content.css('display') === 'none' && ($(this).find('.status').html() === '수락' || $(this).find('.status').html() === '본인')) {
-							
-							content.css('display', 'block');
-							content.last().css('border-bottom', '1px solid');
-							content.css('border-left', '1px solid');
-							content.css('border-right', '1px solid')
-							
-						} else {
-							content.css('display', 'none');
-						}
-					});
-				});
-				
-				$(document).ready(function() {
-					  $('.rateresult').submit(function(e) {
-					    e.preventDefault(); // 폼 기본 제출 동작 막기
-					    
-					    var button = $(this).find('button');
+	                        // AJAX 요청 생성
+	                        $.ajax({
+	                          url: $(this).attr('action'), // 폼의 action 속성 값
+	                          type: $(this).attr('method'), // 폼의 method 속성 값
+	                          data: $(this).serialize(), // 폼 데이터 직렬화
+	                          success: function(response) {
+	                              
+	                            // 성공적으로 요청을 보냈을 때 수행할 작업
+	                            console.log('AJAX 요청 성공');
+	                            button.prop('disabled', true);
+	                            alert(response);
+	                          },
+	                          error: function(xhr, status, error) {
+	                            // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
+	                            console.error('AJAX 요청 오류');
+	                            console.log('상태:', status);
+	                            console.log('오류:', error);
+	                            
+	                            button.prop('disabled', false);
+	                              alert('평점 부여에 실패했습니다.');
 
-					    // AJAX 요청 생성
-					    $.ajax({
-					      url: $(this).attr('action'), // 폼의 action 속성 값
-					      type: $(this).attr('method'), // 폼의 method 속성 값
-					      data: $(this).serialize(), // 폼 데이터 직렬화
-					      success: function(response) {
+	                          }
+	                        });
+	                      });
+	                    });
+	                
+	                var friend = [];
+	                $(document).ready(function() {
+	                    $('.myGroup').off('click').on('click', function(e) {
+	                    var groupNo = $(this).find('.groupNo').val();
+	                    var brother = $(this).next().next();
+	                    var bro = $(this).next();
+	                    var clonedBrother = brother.clone();
+	                    var closestMyGroup = $(this).closest('.myGroup');
+	                    
+	                    $('.content2').addClass('hide');
+	                    $('.content').addClass('hide');
+	                    
+	                    $.ajax({
+	                      url: '/user/mypage/friend',
+	                      type: 'post',
+	                      data: { groupNo: groupNo },
+	                      dataType: 'json',
+	                      success: function(data) {
+	                        console.log('성공');
+	                        console.log(data);
+	                        bro.removeClass('hide');
+	                        
+	                        for (var i = data.length - 1; i >= 0; i--) {
+	                          friend = data[i];
+	                          console.log(friend);
+	                            
+	                            clonedBrother = brother.clone();
+	                            
+	                            clonedBrother.find('.num').html(i + 1);
+	                            clonedBrother.find('.group').html(friend.groupName);
+	                            clonedBrother.find('.nick').html(friend.nickName);
+	                            clonedBrother.find('.rate').find('.ratedUserNickName').val(friend.nickName);
+	                            var starElements = clonedBrother.find('.rate').find('.star'); // 별점 요소들을 선택
+	                            starElements.each(function(index) {
+	                              var starElement = $(this);
+	                              var originalId = starElement.attr('id');
+	                              var modifiedStarId = originalId ? originalId + String(i) : 'star' + (index + 1) + String(i); // 기존 id가 존재하면 그대로 사용, 없으면 'star' + 숫자 + 숫자 형태로 생성
+	                              starElement.attr('id', modifiedStarId);
+	                              starElement.next('label').attr('for', modifiedStarId); // 해당 별점 요소에 대응하는 label의 for 속성을 설정
+	                            });
+	                            clonedBrother.removeClass('hide'); // 새로운 내용을 보여줌
+	                            $(clonedBrother).insertAfter(brother);
+	                        }
+	                        
+	                          brother.remove();
+	                          
+	                          
+	                      },
+	                      // ... (error handling)
+	                    });
+	                  });
+	                });
 
-					    	  console.log('Success:', response);
-					    	  console.log('Message:', response.message);
-					    	  
-					        // 성공적으로 요청을 보냈을 때 수행할 작업
-					        console.log('AJAX 요청 성공');
-					        console.log(response); // 서버로부터의 응답 출력
-					        button.prop('disabled', true);
-					      	alert('평점이 부여되었습니다.');
-					      },
-					      error: function(xhr, status, error) {
-					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
-					        console.error('AJAX 요청 오류');
-					        console.log('상태:', status);
-					        console.log('오류:', error);
-					        
-					        button.prop('disabled', false);
-					      	alert('평점 부여에 실패했습니다.');
+	        
+	                
 
-					      }
-					    });
-					  });
-					});
-				
-				
-				$(document).ready(function() {
-					  $('.myGroup').on('click', function(e) {
-					    var groupNo = $(this).find('.groupNo').val();
-
-					    $.ajax({
-					      url: '/user/mypage/friend',
-					      type: 'post',
-					      data: { groupNo: groupNo },
-					      dataType: 'json',
-					      success: function(data) {
-					        // 받은 데이터를 동적으로 웹 페이지에 출력
-					        console.log('성공');
-					        console.log(data)
-					        for (var i = 0; i < data.length; i++) {
-					          var friend = data[i];
-					          $('.content').append('<p>' + friend.nickName + '</p>');
-					          console.log(friend.nickName);
-					        }
-					      },
-					      error: function(xhr, status, error) {
-					        console.log('실패');
-					      }
-					    });
-					  });
-					});
-		
-				
-
-
-				</script>
+	                </script>
 
 
 <style>

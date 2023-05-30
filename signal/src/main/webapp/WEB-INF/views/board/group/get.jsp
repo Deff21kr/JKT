@@ -19,6 +19,7 @@
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
+        <script src="https://kit.fontawesome.com/1d07350235.js" crossorigin="anonymous"></script>
         
         <script>
 
@@ -166,8 +167,11 @@
                             <dt>조회수</dt>
                             <dd>${__BOARD__.readCnt}</dd>
                         </dl>
-                        <div class="pin">
-                          <button type="button" id="pinBtn">찜</button>
+
+                        <!-- 찜 -->
+                        <div class="pin">찜
+                          <i id="pinBtn" class="fa-regular fa-thumbs-up"></i>
+                          <!-- <button type="button" id="pinBtn">찜</button> -->
                         </div>
                         <script>
                          $('#pinBtn').click(function() {
@@ -183,10 +187,10 @@
                                 console.log("result()invoked." + result);
                                 
                                 if(result == 1) {
-                                  console.log(result);
+                                  
                                   alert('게시물을 찜했습니다.');
                                 } else {
-                                  console.log(result);
+                                  
                                   alert('찜을 취소했습니다.');
                                 }
                               },
@@ -195,38 +199,7 @@
                               }
                             })
                          });
-                        $(document).ready(function() {
-                            $(".plus_btn").click(function() {
-                              var form = {
-                                postNo: '${__BOARD__.postNo}',
-                                nickName: '${__AUTH__.nickName}'
-                              };
-
-                              $.ajax({
-                                url: '/board/group/pin',
-                                type: 'POST',
-                                data: form,
-                                dataType: 'json',
-                                success: function(result) {
-                                  if (result === 1) {
-                                	alert('찜하였습니다.');
-                                    console.log(result);
-                                    // 찜 성공 메시지 출력 또는 다른 동작 수행
-                                  } else if (result === 0) {
-                                	  alert('취소하였습니다..');
-                                    console.log(result);
-                                    // 취소 성공 메시지 출력 또는 다른 동작 수행
-                                  }
-                                },
-                                error: function() {
-                                  console.log("오류가 발생하였습니다.");
-                                  // 오류 처리 로직
-                                }
-                              });
-                            });
-                          });
                         </script>
-                        
                     </div>
                     <div class="content" readonly>${__BOARD__.content}</div>
                 </div>

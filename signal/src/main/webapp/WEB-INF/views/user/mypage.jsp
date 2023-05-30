@@ -88,7 +88,7 @@
 				}); */
 				
 				$(document).ready(function() {
-					  $('.rateresult').submit(function(e) {
+					  $('#rateForm').submit(function(e) {
 					    e.preventDefault(); // 폼 기본 제출 동작 막기
 					    
 					    var button = $(this).find('button');
@@ -112,7 +112,7 @@
 					        console.log('오류:', error);
 					        
 					        button.prop('disabled', false);
-					      	alert('평점 부여에 실패했습니다.');
+					      	alert(response);
 
 					      }
 					    });
@@ -139,7 +139,7 @@
 				      success: function(data) {
 				        console.log('성공');
 				        console.log(data);
-			        	bro.removeClass('hide');
+				        bro.removeClass('hide')
 			        	
 				        for (var i = data.length - 1; i >= 0; i--) {
 				          friend = data[i];
@@ -462,6 +462,22 @@
 
 
 							</c:if>
+							
+							<c:set var="count" value="${count + 1}" />
+		                     <c:if test="${count == 1}">
+		                        <div class="content hide">
+		                           <!-- 숨겨진 내용 -->
+		                           <div class="num">번호</div>
+		                           <div class="group">동행이름</div>
+		                           <div class="nick">닉네임</div>
+		                           <div class="rateresult">
+		                              <div class="rate">평점</div>
+		                              <div class="result">제출</div>
+		                           </div>
+		
+		                        </div>
+		                     </c:if>
+							
 
 
 

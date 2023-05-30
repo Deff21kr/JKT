@@ -12,6 +12,7 @@
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="readCnt" column="readcnt"/>
+        <result property="likes" column="likes"/>
         <result property="regiDate" column="regidate"/>
         <result property="modifyDate" column="modifydate"/>
         <collection property="attachList" ofType="org.zerock.myapp.domain.AttachFileDTO">

@@ -19,7 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+<<<<<<< HEAD
 import org.springframework.web.multipart.MultipartFile;
+=======
+import org.springframework.web.bind.annotation.SessionAttributes;
+>>>>>>> a6dad44ad149922a8eb0eeb8eb6eecb8662df335
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
@@ -40,6 +44,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
+@SessionAttributes({ "__FRIEND__" })
 @NoArgsConstructor
 @Log4j2
 
@@ -156,6 +161,7 @@ public class UsersController {
 		try {
 			List<UserGroupDTO> friend = this.group.getFriendList(groupNo);
 			model.addAttribute("__FRIEND__", friend);
+			log.info("\n\n\t\tfriend : {}\n\n",friend);
 			return friend;
 		} catch (Exception e) {
 			throw new ControllerException(e);
@@ -318,30 +324,19 @@ public class UsersController {
 		// 평점 제출
 		@PostMapping("/rate")
 		@ResponseBody
-		ResponseEntity<?> rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
+		ResponseEntity<String> rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
 			log.trace("rate() invoked");
 			
 			try {
-				
-				Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
-				if (result) {
-		            // 성공적인 응답 데이터 생성
-		            Map<String, Object> response = new HashMap<>();
-		            response.put("success", true);
-		            response.put("message", "평점이 부여되었습니다.");
-		            
-		            return ResponseEntity.ok(response);
-		        } else {
-		            // 실패 응답 데이터 생성
-		            Map<String, Object> response = new HashMap<>();
-		            response.put("success", false);
-		            response.put("message", "평점 부여에 실패했습니다.");
-		            
-		            return ResponseEntity.badRequest().body(response);
+		        Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
+		        if (result) {
+		            log.info("\t + rate : {}", result);
 		        }
-			} catch (Exception e) {
-				throw new ControllerException(e);
-			}
+
+		        return ResponseEntity.ok("평점이 부여되었습니다.");
+		    } catch (Exception e) {
+		        throw new ControllerException(e);
+		    }
 		} // rate
 		
 	

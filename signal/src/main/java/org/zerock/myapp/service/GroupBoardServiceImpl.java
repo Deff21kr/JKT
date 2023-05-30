@@ -125,9 +125,19 @@ public class GroupBoardServiceImpl
 		return this.dao.getSearchTotalAmount(cri);
 	} // getSearchTotal
 	
+	// 9. 조회 수 증가
+	@Override
+	public Integer plusReadcnt(Integer postNo) throws ServiceException {
+		log.trace("plusReadcnt({}) invoked.", postNo);
+		
+		try {
+			return this.dao.plusReadcnt(postNo);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
 
-
-	
+	} // plusReadcnt
 	
 //	====== IntitializingBean, DisposableBean ======
 
@@ -149,6 +159,5 @@ public class GroupBoardServiceImpl
 		
 	} // destroy
 	
-
 
 } // end class

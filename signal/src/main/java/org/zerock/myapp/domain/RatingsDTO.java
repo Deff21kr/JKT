@@ -9,5 +9,4 @@ public class RatingsDTO {
 	private Integer rating;
 	private Double ratedRating;
 	
-
 }

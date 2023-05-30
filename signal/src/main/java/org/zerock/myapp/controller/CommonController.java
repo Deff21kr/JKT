@@ -114,7 +114,7 @@ public class CommonController {
 	@GetMapping("/register")
 	String register() {
 		log.trace("join() invoked.");
-		return "/common/register";
+		return "redirect:/common/register";
 
 	}
 

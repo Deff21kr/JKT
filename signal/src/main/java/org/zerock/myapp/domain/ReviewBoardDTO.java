@@ -10,7 +10,7 @@ public class ReviewBoardDTO {
 	
 	
 	private Integer postNo;
-	private String nickname;
+	private String nickName;
 	private String title;
 	private String content;
 	

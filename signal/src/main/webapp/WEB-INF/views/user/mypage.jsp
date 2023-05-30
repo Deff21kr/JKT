@@ -68,11 +68,10 @@
 				$(function() {
 					$("#modifyBtn").click(function() {
 						location = "/user/edit"
-						console.log("클리이이이이이익");
 					});
 				});
 
-				$(function() {
+				/* $(function() {
 					$('.myGroup').on('click', function(e) {
 						var content = $(this).nextUntil('.myGroup');
 						if (content.css('display') === 'none' && ($(this).find('.status').html() === '수락' || $(this).find('.status').html() === '본인')) {
@@ -86,7 +85,7 @@
 							content.css('display', 'none');
 						}
 					});
-				});
+				}); */
 				
 				$(document).ready(function() {
 					  $('.rateresult').submit(function(e) {
@@ -100,15 +99,11 @@
 					      type: $(this).attr('method'), // 폼의 method 속성 값
 					      data: $(this).serialize(), // 폼 데이터 직렬화
 					      success: function(response) {
-
-					    	  console.log('Success:', response);
-					    	  console.log('Message:', response.message);
 					    	  
 					        // 성공적으로 요청을 보냈을 때 수행할 작업
 					        console.log('AJAX 요청 성공');
-					        console.log(response); // 서버로부터의 응답 출력
 					        button.prop('disabled', true);
-					      	alert('평점이 부여되었습니다.');
+					        alert(response);
 					      },
 					      error: function(xhr, status, error) {
 					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
@@ -124,35 +119,61 @@
 					  });
 					});
 				
-				
+				var friend = [];
 				$(document).ready(function() {
-					  $('.myGroup').on('click', function(e) {
-					    var groupNo = $(this).find('.groupNo').val();
+					$('.myGroup').off('click').on('click', function(e) {
+				    var groupNo = $(this).find('.groupNo').val();
+				    var brother = $(this).next().next();
+				    var bro = $(this).next();
+				    var clonedBrother = brother.clone();
+				    var closestMyGroup = $(this).closest('.myGroup');
+				    
+				    $('.content2').addClass('hide');
+				    $('.content').addClass('hide');
+				    
+				    $.ajax({
+				      url: '/user/mypage/friend',
+				      type: 'post',
+				      data: { groupNo: groupNo },
+				      dataType: 'json',
+				      success: function(data) {
+				        console.log('성공');
+				        console.log(data);
+			        	bro.removeClass('hide');
+			        	
+				        for (var i = data.length - 1; i >= 0; i--) {
+				          friend = data[i];
+				          console.log(friend);
+				        	
+				            clonedBrother = brother.clone();
+				            
+				            clonedBrother.find('.num').html(i + 1);
+				            clonedBrother.find('.group').html(friend.groupName);
+				            clonedBrother.find('.nick').html(friend.nickName);
+				            clonedBrother.find('.rate').find('.ratedUserNickName').val(friend.nickName);
+				            var starElements = clonedBrother.find('.rate').find('.star'); // 별점 요소들을 선택
+				            starElements.each(function(index) {
+				              var starElement = $(this);
+				              var originalId = starElement.attr('id');
+				              var modifiedStarId = originalId ? originalId + String(i) : 'star' + (index + 1) + String(i); // 기존 id가 존재하면 그대로 사용, 없으면 'star' + 숫자 + 숫자 형태로 생성
+				              starElement.attr('id', modifiedStarId);
+				              starElement.next('label').attr('for', modifiedStarId); // 해당 별점 요소에 대응하는 label의 for 속성을 설정
+				            });
+				            clonedBrother.removeClass('hide'); // 새로운 내용을 보여줌
+				            $(clonedBrother).insertAfter(brother);
+				        }
+					    
+				          brother.remove();
+				          
+				          
+				      },
+				      // ... (error handling)
+				    });
+				  });
+				});
 
-					    $.ajax({
-					      url: '/user/mypage/friend',
-					      type: 'post',
-					      data: { groupNo: groupNo },
-					      dataType: 'json',
-					      success: function(data) {
-					        // 받은 데이터를 동적으로 웹 페이지에 출력
-					        console.log('성공');
-					        console.log(data)
-					        for (var i = 0; i < data.length; i++) {
-					          var friend = data[i];
-					          $('.content').append('<p>' + friend.nickName + '</p>');
-					          console.log(friend.nickName);
-					        }
-					      },
-					      error: function(xhr, status, error) {
-					        console.log('실패');
-					      }
-					    });
-					  });
-					});
 		
 				
-
 
 				</script>
 
@@ -410,8 +431,41 @@
 
 
 
+							<div class="content2 hide">
+								<div class="num">${count}</div>
+								<div class="group"></div>
+								<div class="nick"></div>
 
+								<form action="/user/rate" method="post" class="rateresult" id="rateForm">
+									<div class="rate" style="padding: 5px 0px;">
+										<input type="hidden" name="raterUserNickName"
+											value="${__AUTH__.nickName}"> <input type="hidden"
+											name="ratedUserNickName" class="ratedUserNickName" value="">
+
+										<c:forEach begin="1" end="5" step="1" varStatus="numA">
+											<c:set var="counter" value="${counter + 1}" />
+											<input type="radio" id="star${counter}" class="star"
+												name="rating" value="${6 - numA.index}" />
+											<label for="star${counter}"> &#9733; </label>
+										</c:forEach>
+
+
+									</div>
+									<div class="result">
+										<button id="" type="submit">제출</button>
+									</div>
+
+								</form>
+							</div>
 						</c:forEach>
+
+
+
+
+
+
+
+
 
 
 					</div>
@@ -615,7 +669,7 @@
 				</form>
 			</div>
 
-			>>>>>>> 3df4bc50020d03686cdfe24676ca125806c0e143
+	
 		</div>
 
 	</div>

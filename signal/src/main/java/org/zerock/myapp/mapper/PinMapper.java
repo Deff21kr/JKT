@@ -3,21 +3,22 @@ package org.zerock.myapp.mapper;
 import java.util.List;
 
 import org.zerock.myapp.domain.PinDTO;
-import org.zerock.myapp.exception.DAOException;
 
 public interface PinMapper {
 	
-	public Integer insert(PinDTO pin) throws Exception;
+	public abstract Integer insert(PinDTO pin) throws Exception;
 	
-	public Integer delete(Integer pinNo);
+	public abstract Integer delete(Integer pinNo);
 	
 //	찜 수정 
 //	public Integer modify(PinDTO pin);
 	
 //	찜 목록
-	public List<PinDTO> select(String nickName);
+	public abstract List<PinDTO> selectList(String nickName);
+	
+	public abstract PinDTO select(Integer postNo, String nickName);
 	
 //	회원정보와 게시글 정보를 넘겨서 해당 row가 있는지 확인
-	public PinDTO checkPin(PinDTO pin);
+	public abstract Integer checkPin(PinDTO pin);
 	
 } // end interface

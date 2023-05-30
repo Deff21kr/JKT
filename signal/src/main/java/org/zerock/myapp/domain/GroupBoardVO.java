@@ -14,12 +14,11 @@ public class GroupBoardVO {
 	private String recruitStatus;
 	private Timestamp startDate;
 	private Timestamp endDate;
-	private Integer views;
 	private Timestamp regiDate;
 	private Timestamp modifyDate;
 	private String nickName;
 	private String groupName;
 	private String boardName;
-	
+	private Integer readCnt;
 	
 }

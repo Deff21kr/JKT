@@ -189,11 +189,14 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 
 	@Override
 	public Integer getWriterList(String nickName) throws ServiceException {
-		return this.dao.getWriteList(nickName);
+		
+		try {
+			return this.dao.getWriteList(nickName);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		}
 	}
-
 	
-
 
 //	======================================================
 

@@ -7,4 +7,5 @@ public class RatingsDTO {
 	private String raterUserNickName;
 	private String ratedUserNickName;
 	private Integer rating;
+	private Double ratedRating;
 }

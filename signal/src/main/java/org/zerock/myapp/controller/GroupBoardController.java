@@ -141,9 +141,6 @@ public class GroupBoardController {
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
             
-            Integer prc = this.service.plusReadcnt(postNo);
-            model.addAttribute("__BOARD2__", prc);
-            
             CommentPageDTO pageDTO = new CommentPageDTO(this.commentService.getCommentTotal(postNo), commentCri);
     		model.addAttribute("__commentPage__", pageDTO);
         }catch (Exception e){

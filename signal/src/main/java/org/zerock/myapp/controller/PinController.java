@@ -41,7 +41,7 @@ public class PinController {
 	@PostMapping("/pin")
 	@ResponseBody
 	public Integer insert(PinDTO pin) throws ControllerException {
-		log.trace("insert invoekd.");
+		log.trace("\n\npin : {} ",pin);
 		
 		try {
 			if(this.pinService.doPin(pin) == 1) {

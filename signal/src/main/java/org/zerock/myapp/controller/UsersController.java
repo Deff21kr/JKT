@@ -1,9 +1,7 @@
 package org.zerock.myapp.controller;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import javax.annotation.Resource;
@@ -19,8 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
@@ -29,7 +27,6 @@ import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
-import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.LoginService;
 import org.zerock.myapp.service.QnACommentService;
 import org.zerock.myapp.service.RatingsService;
@@ -328,9 +325,14 @@ public class UsersController {
 		        Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
 		        if (result) {
 		            log.info("\t + rate : {}", result);
+			        return ResponseEntity.ok("평점이 부여되었습니다.");
+
+		        }else {
+		        	log.info("실패");
+		            return ResponseEntity.ok("평점이 부여에 실패하였습니다.");
+
 		        }
 
-		        return ResponseEntity.ok("평점이 부여되었습니다.");
 		    } catch (Exception e) {
 		        throw new ControllerException(e);
 		    }

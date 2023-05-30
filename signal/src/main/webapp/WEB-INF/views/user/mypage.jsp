@@ -594,12 +594,12 @@
 					<div class="post">
 					<c:forEach var="pin" items="${__pinList__}">
 						<div>
-						<div class="group">${pin.groupName }</div>
-						<div class="title">${pin.title }</div>
-						<div class="area">${pin.area }</div>
-						<div class="startDate">${pin.startDate }</div>
+						<div class="group">${pin.groupName}</div>
+						<div class="title">${pin.title}</div>
+						<div class="area">${pin.area}</div>
+						<div class="startDate">${pin.startDate}</div>
 						<div class="endDate">${pin.endDate}</div>
-						<div class="status">${pin.recruitStatus }</div>
+						<div class="status">${pin.recruitStatus}</div>
 						</div>
 						</c:forEach>
 

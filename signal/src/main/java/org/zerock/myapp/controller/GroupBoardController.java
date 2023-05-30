@@ -16,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.CommentCriteria;
 import org.zerock.myapp.domain.CommentPageDTO;
 import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.GroupBoardCommentDTO;
+import org.zerock.myapp.domain.GroupBoardCommentVO;
 import org.zerock.myapp.domain.GroupBoardCriteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.GroupBoardPageDTO;
@@ -25,6 +27,7 @@ import org.zerock.myapp.domain.QnACommentDTO;
 import org.zerock.myapp.domain.QnACommentVO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
+import org.zerock.myapp.service.GroupBoardCommentService;
 import org.zerock.myapp.service.GroupBoardService;
 import org.zerock.myapp.service.GroupService;
 import org.zerock.myapp.service.QnACommentService;
@@ -51,7 +54,7 @@ public class GroupBoardController {
 	@Setter(onMethod_ = @Autowired)
 	private UserGroupService mapping;
 	@Setter(onMethod_ = @Autowired)
-	private QnACommentService commentService;
+	private GroupBoardCommentService commentService;
 	
 //	// 1. 게시판 목록 조회
 	@GetMapping("/list")
@@ -134,12 +137,12 @@ public class GroupBoardController {
             GroupBoardVO vo = this.service.get(postNo);
             model.addAttribute("__BOARD__", vo);
             
-            List<QnACommentVO> commentList = this.commentService.selectList(commentCri, postNo);
+            List<GroupBoardCommentVO> commentList = this.commentService.selectList(commentCri, postNo);
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
             
             Integer prc = this.service.plusReadcnt(postNo);
-            model.addAttribute("__BOARD__", prc);
+            model.addAttribute("__BOARD2__", prc);
             
             CommentPageDTO pageDTO = new CommentPageDTO(this.commentService.getCommentTotal(postNo), commentCri);
     		model.addAttribute("__commentPage__", pageDTO);
@@ -190,8 +193,8 @@ public class GroupBoardController {
 	
 	// 댓글 등록
 //		@RequestMapping(value = "/qnaReply", method= {RequestMethod.POST})
-		@PostMapping("/qnaReply")
-		String insert(@ModelAttribute QnACommentDTO dto, Criteria cri,RedirectAttributes rttrs, @RequestParam("currPage") Integer currPage, CommentCriteria commentCri) throws ControllerException {
+		@PostMapping("/Reply")
+		String insert(@ModelAttribute GroupBoardCommentDTO dto, Criteria cri,RedirectAttributes rttrs, @RequestParam("currPage") Integer currPage, CommentCriteria commentCri) throws ControllerException {
 		    log.trace("addComment({}) invoked.", dto);
 		    try {
 		    	commentService.insert(dto);
@@ -207,7 +210,7 @@ public class GroupBoardController {
 		
 		// 댓글 수정
 		@PostMapping("/edit")
-		String editComment(QnACommentDTO dto, RedirectAttributes rttrs) throws ControllerException {
+		String editComment(GroupBoardCommentDTO dto, RedirectAttributes rttrs) throws ControllerException {
 			log.trace("editComment({}) invoked.", dto);
 			
 			try {

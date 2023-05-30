@@ -8,4 +8,16 @@ public class RatingsVO {
 	private String raterUserNickName;
 	private String ratedUserNickName;
 	private Integer rating;
+	private Double ratedRating;
+	
+	public RatingsDTO toDTO() {
+		RatingsDTO dto = new RatingsDTO();
+		
+		dto.setRatedRating(ratedRating);
+		dto.setRatedUserNickName(ratedUserNickName);
+		dto.setRaterUserNickName(raterUserNickName);
+		dto.setRating(rating);
+		
+		return dto;
+	}
 }

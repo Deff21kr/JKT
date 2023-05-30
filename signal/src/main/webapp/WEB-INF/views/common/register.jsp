@@ -18,14 +18,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
-	<style>
-		input[type="date"] {
-        width: 200px;
-        padding: 8px;
-        border-radius: 5px;
-        border: 1px solid rgb(208, 207, 207);
-      }
-	</style>
+
 
 </head>
 
@@ -317,7 +310,7 @@
                     <label>
                         <tr>
                             <p style="text-align: left; font-size: 20px; color: #666;">생년월일</p>
-                            <td><input type="date" class="textform" id="birthDate" placeholder="생년월일을 입력해주세요."
+                            <td><input type="date" class="textform" id="birthDate"
                                 name="birthDate" required></td>
                             <div id="birth_check" style="font-size: 12px; padding-top: 5px;"></div>
                         </tr>
@@ -410,19 +403,7 @@
 			<div></div>
 		</div>
 	</div>
-	<script defer="defer">
-		document.addEventListener('DOMContentLoaded', function() {
-			  var birthDate = document.getElementById('birthDate');
-
-			  var startDatepicker = flatpickr(birthDate, {
-			    dateFormat: 'Y-m-d', // 선택한 날짜의 형식 설정
-			    minDate: '1900-01-01' // 현재 날짜부터 선택 가능하도록 설정
-			  
-			  });
-
-			});
-
-	</script>
+	
 	<footer>
       <jsp:include page="../footer.jsp" />
    	</footer>

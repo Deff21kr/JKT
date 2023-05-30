@@ -36,6 +36,9 @@ public interface ReviewBoardMapper {
 	//6. 총 게시물 갯수 반환 
 	@Select("SELECT count(postNo) FROM tbl_board_review WHERE postno > 0")
 	public abstract Integer getTotalAmount();
+	
+	// 7. 조회수 올리기
+	public abstract Integer updateReadcnt(Integer postNo);
 
 
 }//end class

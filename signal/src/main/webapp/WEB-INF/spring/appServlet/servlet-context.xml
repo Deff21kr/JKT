@@ -24,9 +24,7 @@
    </view-resolvers>
    
    <interceptors>
-	<interceptor>
-         <mapping path="/common/loginPost"/>
-         <mapping path="/common/loginPost/**"/>
+<interceptor>
          <mapping path="/common/loginPost/**/*"/>
          <beans:ref bean="loginInterceptor"/>
       </interceptor>

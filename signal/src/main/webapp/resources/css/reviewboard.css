@@ -26,15 +26,15 @@ h1 {
     background-color: rgb(221, 221, 221);
     font-size: 4rem;
     margin: auto;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     padding: 10px;
+    
 }
 
 
 .container {
-    width: 70%;
-    margin: 40px auto;
-    /* border: 2px solid blue;  */
+    width: 1200px;
+    margin: 100px auto;
 }
 
 
@@ -44,7 +44,6 @@ h1 {
     justify-content: center;
     height: fit-content;
     width: 100%;
-    /* border: 4px solid red; */
     flex-flow: row wrap;
 }
 
@@ -105,9 +104,14 @@ h1 {
 }
 
 .postimg {
-    width: 100%;
-    height: 100%;
     object-fit: fill;
+    text-decoration: none;
+    width: 300px  !important;
+    height: 300px !important;
+    border-radius: 15px;
+    overflow: hidden;
+    display: inline-block;
+    
 }
 
 .like {
@@ -177,7 +181,6 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 #pagination ul {
@@ -200,6 +203,8 @@ h1 {
     /* 글자의 세로높이를 중앙으로 정렬 */
     line-height: 30px;
     cursor: pointer;
+    
+    margin-bottom: 100px;
 }
 
 .Prev,

@@ -13,6 +13,6 @@ public interface RatingsService {
 	public abstract Integer setRaterRating(String nickName,String setNickName ,Integer rating) throws ServiceException;
 	
 	// 점수 받기(조회)
-	public abstract RatingsDTO getRatedRating(String nickName) throws ServiceException;
+	public abstract Double getRatedRating(String nickName) throws ServiceException;
 	
 }

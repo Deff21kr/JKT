@@ -137,7 +137,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     		 }
     		 
     		 
-    		  res.sendRedirect("/common/loginPost");
+    		  res.sendRedirect("/common/loginPost?redirectURL=" + req.getRequestURL());
         	  return false; // 원래 요청을 처리하지 못하도록 함
     		  
     	  } // if- else

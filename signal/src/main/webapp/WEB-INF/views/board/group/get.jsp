@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <!DOCTYPE html>
     <html lang="ko">
@@ -134,7 +134,7 @@
             });
           });
         });
-        </script>
+      </script>
 
     </head>
 
@@ -195,6 +195,39 @@
                               }
                             })
                          });
+<<<<<<< HEAD
+=======
+                        $(document).ready(function() {
+                            $(".plus_btn").click(function() {
+                              var form = {
+                                postNo: '${__BOARD__.postNo}',
+                                nickName: '${__AUTH__.nickName}'
+                              };
+
+                              $.ajax({
+                                url: '/board/group/pin',
+                                type: 'POST',
+                                data: form,
+                                dataType: 'json',
+                                success: function(result) {
+                                  if (result === 1) {
+                                	alert('찜하였습니다.');
+                                    console.log(result);
+                                    // 찜 성공 메시지 출력 또는 다른 동작 수행
+                                  } else if (result === 0) {
+                                	  alert('취소하였습니다..');
+                                    console.log(result);
+                                    // 취소 성공 메시지 출력 또는 다른 동작 수행
+                                  }
+                                },
+                                error: function() {
+                                  console.log("오류가 발생하였습니다.");
+                                  // 오류 처리 로직
+                                }
+                              });
+                            });
+                          });
+>>>>>>> 37b6b428fafe14823a5c4a01e9968215a058ba52
                         </script>
                         
                     </div>

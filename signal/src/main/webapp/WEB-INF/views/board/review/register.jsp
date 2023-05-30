@@ -53,6 +53,10 @@
 			formObj.append(str).submit();
 			console.log(str);
 			console.log("폼태그 제출완료!!!!");
+
+			//폼제출후 제출버튼 비활성화
+	        $("button[type='submit']").prop('disabled', true);
+	       
 		});
 		
 		
@@ -173,6 +177,7 @@
 
 
 <body>
+	<%@include file="../../header.jsp" %>
 
 	<div class="container">
 		<h1>여행후기 작성</h1>
@@ -194,10 +199,8 @@
 		<form name="reviewform" action="/board/review/register" method="POST">
 
 			<div class="content-wrap">
-				<input type="text" name="nickname" placeholder=" 닉네임 입력하세요 "
-					maxlength="30" class="title" required> <input type="text"
-					name="title" placeholder=" 제목을 입력하세요 " maxlength="30" class="title"
-					required>
+				<input type="hidden" name="nickName" value ="${__AUTH__.nickName }" required>
+				<input type="text"name="title" placeholder=" 제목을 입력하세요 " maxlength="30" class="title"required>
 				<textarea class="content" name="content" cols="50" rows="100"
 					placeholder="내용을 입력하세요"></textarea>
 			</div>
@@ -208,6 +211,8 @@
 			</div>
 		</form>
 	</div>
+	
+	<%@include file="../../footer.jsp" %>
 </body>
 
 </html>

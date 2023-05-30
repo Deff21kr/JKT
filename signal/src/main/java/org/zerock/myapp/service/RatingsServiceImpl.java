@@ -10,7 +10,7 @@ import org.zerock.myapp.mapper.RatingsMapper;
 
 import lombok.Setter;
 
-@Service("RatingsService")
+@Service("Ratings")
 public class RatingsServiceImpl implements RatingsService{
 	
 	@Setter(onMethod_ = @Autowired)
@@ -40,14 +40,12 @@ public class RatingsServiceImpl implements RatingsService{
 //	}
 	
 	@Override
-	public RatingsDTO getRatedRating(String ratedUserNickName) throws ServiceException {
+	public Double getRatedRating(String ratedUserNickName) throws ServiceException {
 	    try {
-	    	RatingsDTO ratedRating = this.rat.getRatedUserNickName(ratedUserNickName);
-	        return ratedRating;
+	        return this.rat.getRatedUserNickName(ratedUserNickName);
 	    }catch(Exception e) {
 	        throw new ServiceException(e);
 	    }
-	
 	}
 
 

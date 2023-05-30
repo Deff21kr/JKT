@@ -157,8 +157,8 @@ public class UsersController {
 		
 		try {
 			List<UserGroupDTO> friend = this.group.getFriendList(groupNo);
-			model.addAttribute("__FRIEND__", friend);
-			log.info("\n\n\t\tfriend : {}\n\n",friend);
+//			model.addAttribute("__FRIEND__", friend);
+//			log.info("\n\n\t\tfriend : {}\n\n",friend);
 			return friend;
 		} catch (Exception e) {
 			throw new ControllerException(e);

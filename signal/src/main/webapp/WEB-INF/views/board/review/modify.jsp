@@ -21,15 +21,15 @@
     </head>
 
     <body>
+    	<%@include file="../../header.jsp" %>
         <main class="wrap-container">
-            <h1>여행후기 수정페이지 </h1>
-            <hr>
+            <h1> modify </h1>
             <section class="head">
                 <div class="user-info">
                     <a href="#" class="profile-img">
                         <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                     </a>
-                    <a href="#" class="nickname">${__AUTH__.nickName}</a>
+                    <a href="#" class="nickname">${ __REVIEW__.nickName }</a>
                     <p class="regi-date">
                         <fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${ __REVIEW__.regiDate }" />
                     </p>
@@ -39,11 +39,11 @@
             <form name="modifyform" action="/board/review/modify" method="post">
                 <section class="title">
                     <input type="hidden" name="postNo" value="${ __REVIEW__.postNo }">
-                    <input type="hidden" name="nickname" value="${ __REVIEW__.nickname }">
+                    <input type="hidden" name="nickName" value="${ __REVIEW__.nickName }">
                     <p> <input type="text" class="modifytitle" name="title" value="${ __REVIEW__.title }"></p>
                 </section>
 
-                <hr>
+                <hr class="modify-hr">
 
                 <section class="content">
                     <br>
@@ -59,7 +59,9 @@
             <button type="submit" name="submit" class="submitBtn" > 수정완료 </button>
             <button class="removeBtn"> 삭제 </button>
         </div>
-
+		
+		<%@include file="../../footer.jsp" %>
+		
         <script>
             $(function () {
                 $('.listBtn').click(function () {

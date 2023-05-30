@@ -295,30 +295,19 @@ public class UsersController {
 		// 평점 제출
 		@PostMapping("/rate")
 		@ResponseBody
-		ResponseEntity<?> rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
+		ResponseEntity<String> rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
 			log.trace("rate() invoked");
 			
 			try {
-				
-				Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
-				if (result) {
-		            // 성공적인 응답 데이터 생성
-		            Map<String, Object> response = new HashMap<>();
-		            response.put("success", true);
-		            response.put("message", "평점이 부여되었습니다.");
-		            
-		            return ResponseEntity.ok(response);
-		        } else {
-		            // 실패 응답 데이터 생성
-		            Map<String, Object> response = new HashMap<>();
-		            response.put("success", false);
-		            response.put("message", "평점 부여에 실패했습니다.");
-		            
-		            return ResponseEntity.badRequest().body(response);
+		        Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
+		        if (result) {
+		            log.info("\t + rate : {}", result);
 		        }
-			} catch (Exception e) {
-				throw new ControllerException(e);
-			}
+
+		        return ResponseEntity.ok("평점이 부여되었습니다.");
+		    } catch (Exception e) {
+		        throw new ControllerException(e);
+		    }
 		} // rate
 		
 	

@@ -140,8 +140,9 @@
 					        console.log(data)
 					        for (var i = 0; i < data.length; i++) {
 					          var friend = data[i];
-					          $('.content').append('<p>' + friend.nickName + '</p>');
+					          $('.myGroup').parent.append('<p>' + friend.nickName + '</p>');
 					          console.log(friend.nickName);
+					          console.log('작동하는가?');
 					        }
 					      },
 					      error: function(xhr, status, error) {

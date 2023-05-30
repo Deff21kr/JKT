@@ -167,46 +167,34 @@
                             <dd>13</dd>
                         </dl>
                         <div class="pin">
-                          <input type="hidden" class="pinCheck">
-                          <button class="plus_btn">찜</button>
-                          <!-- <button class="minus_btn">찜-</button> -->
+                          <button type="button" id="pinBtn">찜</button>
                         </div>
                         <script>
-                          let pin = $(".pinCheck").val();
-                          $(".plus_btn").on("click", function() {
-                            $(".pinCheck").val(pin++);
-                          }); 
-                          // $(".minus_btn").on("click", function() {
-                          //   if(pin > 1) {
-                          //     $(".pinCheck").val(--pin);
-                          //   } // if
-                          // });
-
-                          const form = {
-                                          postNo : '${__BOARD__.postNo}',
-                                          nickName : '${__AUTH__.nickName}'
-                          } // form
-
-                          $(".plus_btn").on("click", function(e) {
+                         $('#pinBtn').click(function() {
                             $.ajax({
-                              url: '/board/pin/register',
+                              url:'${pageContext.request.contextPath}/board/group/pin',
                               type: 'POST',
-                              data: form,
+                              data: {
+                                postNo : '${__BOARD__.postNo}',
+                                nickName : '${__AUTH__.nickName}'
+                              }, // data
+                              dataType: 'json',
                               success: function(result) {
-                                pinAlert(result);
-                              } // result
+                                console.log("result()invoked." + result);
+                                
+                                if(result == 1) {
+                                  console.log(result);
+                                  alert('게시물을 찜했습니다.');
+                                } else {
+                                  console.log(result);
+                                  alert('찜을 취소했습니다.');
+                                }
+                              },
+                              error: function() {
+                                console.log('실패');
+                              }
                             })
-                          });
-                          function pinAlert(result){
-                            if(result == 0) {
-                              alert("게시글을 찜하지 못했습니다.");
-                            } else if(result == 1) {
-                              alert("게시글을 찜했습니다.");
-                            } else if(result == 2) {
-                              alert("이미 게시글을 찜했습니다.");
-                            }
-                          }
-
+                         });
                         </script>
                         
                     </div>

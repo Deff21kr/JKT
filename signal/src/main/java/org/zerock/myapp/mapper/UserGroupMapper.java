@@ -29,7 +29,7 @@ public interface UserGroupMapper {
 				FROM tbl_user_group u
 				JOIN (
 				    SELECT g.groupno, g.groupname, g.recruitstatus, g.membernum, g.currentmember, g.area, b.postno,
-				           b.title, b.content, b.startdate, b.enddate, b.views, b.regidate, b.modifydate, b.nickname writer
+				           b.title, b.content, b.startdate, b.enddate, b.readcnt, b.regidate, b.modifydate, b.nickname writer
 				    FROM tbl_groups g
 				    JOIN tbl_groupboard b ON g.postno = b.postno
 				) j ON u.groupno = j.groupno
@@ -83,7 +83,7 @@ public interface UserGroupMapper {
 				FROM tbl_user_group u
 				JOIN (
 				    SELECT g.groupno, g.groupname, g.recruitstatus, g.membernum, g.currentmember, g.area, b.postno,
-				           b.title, b.content, b.startdate, b.enddate, b.views, b.regidate, b.modifydate, b.nickname writer
+				           b.title, b.content, b.startdate, b.enddate, b.readcnt, b.regidate, b.modifydate, b.nickname writer
 				    FROM tbl_groups g
 				    JOIN tbl_groupboard b ON g.postno = b.postno
 				) j ON u.groupno = j.groupno

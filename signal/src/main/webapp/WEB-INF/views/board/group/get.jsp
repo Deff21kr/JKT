@@ -97,41 +97,7 @@
                     location = "/board/group/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";
                 });
                 
-                $('#applyBtn').click(function () {
-                    
-                    $.ajax({
-                          url: '${pageContext.request.contextPath}/user/mygroup/register',
-                          type: 'post',
-                          data :{
-                        	  nickName : nickName,
-                              postNo : postNo,
-                              currPage : currPage
-                          },
-                          dataType: 'json',
-                          success: function(data) {
-                              var model = parseInt(data);
-                            console.log("1 = 중복o / 0 = 중복x : " + model);
-                            
-                            if (model==1) { // id 이미 있음
-                                console.log('Data 1:', model);
-                                console.log(model);
-                                console.log(typeof(model));
-                                alert('이미 등록된 ID입니다.');
-                                 
-                            } else {
-                                console.log('Data 2:', model);
-                                console.log(model);
-                                console.log(typeof(model));
-                                alert('신청이 완료되었습니다.');
-                            }
-                          },
-                          
-                          error: function() {
-                            console.log("실패");
-                          }
-                        });
-              
-            });
+             
           });
         });
         </script>
@@ -171,41 +137,38 @@
                           <button class="plus_btn">찜</button>
                           <!-- <button class="minus_btn">찜-</button> -->
                         </div>
+                        
                         <script>
-                          let pin = $(".pinCheck").val();
-                          $(".plus_btn").on("click", function() {
-                            $(".pinCheck").val(++pin);
-                          }); 
-                          // $(".minus_btn").on("click", function() {
-                          //   if(pin > 1) {
-                          //     $(".pinCheck").val(--pin);
-                          //   } // if
-                          // });
+                        $(document).ready(function() {
+                            $(".plus_btn").click(function() {
+                              var form = {
+                                postNo: '${__BOARD__.postNo}',
+                                nickName: '${__AUTH__.nickName}'
+                              };
 
-                          const form = {
-                                          postNo : '${__BOARD__.postNo}',
-                                          nickName : '${__AUTH__.nickName}'
-                          } // form
-
-                          $(".plus_btn").on("click", function(e) {
-                            $.ajax({
-                              url: '/board/pin/register',
-                              type: 'POST',
-                              data: form,
-                              success: function(result) {
-                                pinAlert(result);
-                              } // success
-                            })
+                              $.ajax({
+                                url: '/board/group/pin',
+                                type: 'POST',
+                                data: form,
+                                dataType: 'json',
+                                success: function(result) {
+                                  if (result === 1) {
+                                	alert('찜하였습니다.');
+                                    console.log(result);
+                                    // 찜 성공 메시지 출력 또는 다른 동작 수행
+                                  } else if (result === 0) {
+                                	  alert('취소하였습니다..');
+                                    console.log(result);
+                                    // 취소 성공 메시지 출력 또는 다른 동작 수행
+                                  }
+                                },
+                                error: function() {
+                                  console.log("오류가 발생하였습니다.");
+                                  // 오류 처리 로직
+                                }
+                              });
+                            });
                           });
-                          function pinAlert(result){
-                            if(result == '0') {
-                              alert("게시글을 찜하지 못했습니다.");
-                            } else if(result == 1) {
-                              alert("게시글을 찜했습니다.");
-                            } else if(result == 2) {
-                              alert("이미 게시글을 찜했습니다.");
-                            }
-                          }
                         </script>
                         
                     </div>

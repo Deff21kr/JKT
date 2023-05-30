@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.PageDTO;
@@ -175,6 +176,22 @@ public class UsersController {
 		
 		
 	}
+	
+	@ResponseBody
+	@PostMapping("/mypage/friend")
+	List<UserGroupDTO> friend(Model model, Integer groupNo) throws ControllerException {
+		
+		try {
+			List<UserGroupDTO> friend = this.group.getFriendList(groupNo);
+			model.addAttribute("__FRIEND__", friend);
+			log.info("\n\n\t\tfriend : {}\n\n",friend);
+			return friend;
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+
+	} // friend
+	
 	
 //	@PostMapping(path={"/mypage/group/{동행명}/evaluate"}, params = "ID")
 //	void partnerEvaluate() {

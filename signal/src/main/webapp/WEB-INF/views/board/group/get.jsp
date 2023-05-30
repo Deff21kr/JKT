@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <!DOCTYPE html>
     <html lang="ko">
@@ -97,10 +97,44 @@
                     location = "/board/group/modify?currPage=${param.currPage}&postNo=${__BOARD__.postNo}";
                 });
                 
-             
+                $('#applyBtn').click(function () {
+                    
+                    $.ajax({
+                          url: '${pageContext.request.contextPath}/user/mygroup/register',
+                          type: 'post',
+                          data :{
+                        	  nickName : nickName,
+                              postNo : postNo,
+                              currPage : currPage
+                          },
+                          dataType: 'json',
+                          success: function(data) {
+                              var model = parseInt(data);
+                            console.log("1 = 중복o / 0 = 중복x : " + model);
+                            
+                            if (model==1) { // id 이미 있음
+                                console.log('Data 1:', model);
+                                console.log(model);
+                                console.log(typeof(model));
+                                alert('이미 등록된 ID입니다.');
+                                 
+                            } else {
+                                console.log('Data 2:', model);
+                                console.log(model);
+                                console.log(typeof(model));
+                                alert('신청이 완료되었습니다.');
+                            }
+                          },
+                          
+                          error: function() {
+                            console.log("실패");
+                          }
+                        });
+              
+            });
           });
         });
-        </script>
+      </script>
 
     </head>
 

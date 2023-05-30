@@ -17,12 +17,10 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
 
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
-<script>
+				<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+				<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+				<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+				<script>
 				  let tabId = ''; // 탭 ID 변수를 선언합니다.
 				$(document).ready(function() {
 
@@ -68,197 +66,49 @@
 				$(function() {
 					$("#modifyBtn").click(function() {
 						location = "/user/edit"
+						console.log("클리이이이이이익");
+					});
+				});
+				$(function() {
+					$('.pageNum').on('click', function(e) {
+						let selectedPageNum = e.currentTarget.textContent;
+						location = "/user/mypage?#currPage=" + selectedPageNum + "tabs-2";
 					});
 				});
 
-				/* $(function() {
+				$(function() {
 					$('.myGroup').on('click', function(e) {
-						var content = $(this).nextUntil('.myGroup');
-						if (content.css('display') === 'none' && ($(this).find('.status').html() === '수락' || $(this).find('.status').html() === '본인')) {
-							
+						var content = $(this).next('.content');
+						if (content.css('display') === 'none') {
 							content.css('display', 'block');
-							content.last().css('border-bottom', '1px solid');
-							content.css('border-left', '1px solid');
-							content.css('border-right', '1px solid')
-							
 						} else {
 							content.css('display', 'none');
 						}
 					});
-				}); */
-				
-				$(document).ready(function() {
-					  $('.rateresult').submit(function(e) {
-					    e.preventDefault(); // 폼 기본 제출 동작 막기
-					    
-					    var button = $(this).find('button');
-
-					    // AJAX 요청 생성
-					    $.ajax({
-					      url: $(this).attr('action'), // 폼의 action 속성 값
-					      type: $(this).attr('method'), // 폼의 method 속성 값
-					      data: $(this).serialize(), // 폼 데이터 직렬화
-					      success: function(response) {
-					    	  
-					        // 성공적으로 요청을 보냈을 때 수행할 작업
-					        console.log('AJAX 요청 성공');
-					        button.prop('disabled', true);
-					        alert(response);
-					      },
-					      error: function(xhr, status, error) {
-					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
-					        console.error('AJAX 요청 오류');
-					        console.log('상태:', status);
-					        console.log('오류:', error);
-					        
-					        button.prop('disabled', false);
-					      	alert('평점 부여에 실패했습니다.');
-
-					      }
-					    });
-					  });
-					});
-				
-				var friend = [];
-				$(document).ready(function() {
-					$('.myGroup').off('click').on('click', function(e) {
-				    var groupNo = $(this).find('.groupNo').val();
-				    var brother = $(this).next().next();
-				    var bro = $(this).next();
-				    var clonedBrother = brother.clone();
-				    var closestMyGroup = $(this).closest('.myGroup');
-				    
-				    $('.content2').addClass('hide');
-				    $('.content').addClass('hide');
-				    
-				    $.ajax({
-				      url: '/user/mypage/friend',
-				      type: 'post',
-				      data: { groupNo: groupNo },
-				      dataType: 'json',
-				      success: function(data) {
-				        console.log('성공');
-				        console.log(data);
-			        	bro.removeClass('hide');
-			        	
-				        for (var i = data.length - 1; i >= 0; i--) {
-				          friend = data[i];
-				          console.log(friend);
-				        	
-				            clonedBrother = brother.clone();
-				            
-				            clonedBrother.find('.num').html(i + 1);
-				            clonedBrother.find('.group').html(friend.groupName);
-				            clonedBrother.find('.nick').html(friend.nickName);
-				            clonedBrother.find('.rate').find('.ratedUserNickName').val(friend.nickName);
-				            var starElements = clonedBrother.find('.rate').find('.star'); // 별점 요소들을 선택
-				            starElements.each(function(index) {
-				              var starElement = $(this);
-				              var originalId = starElement.attr('id');
-				              var modifiedStarId = originalId ? originalId + String(i) : 'star' + (index + 1) + String(i); // 기존 id가 존재하면 그대로 사용, 없으면 'star' + 숫자 + 숫자 형태로 생성
-				              starElement.attr('id', modifiedStarId);
-				              starElement.next('label').attr('for', modifiedStarId); // 해당 별점 요소에 대응하는 label의 for 속성을 설정
-				            });
-				            clonedBrother.removeClass('hide'); // 새로운 내용을 보여줌
-				            $(clonedBrother).insertAfter(brother);
-				        }
-					    
-				          brother.remove();
-				          
-				          
-				      },
-				      // ... (error handling)
-				    });
-				  });
 				});
-
-		
-				
-
 				</script>
 
 
 <style>
 .hide {
 	display: none;
+	
 }
 
 #tabs-3 .board_list .post .content div {
+	width: 15.5%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post .content .group {
 	width: 20%;
 	display: inline-block;
 	font-size: 2rem;
 	text-align: center;
 	padding-top: 15px;
-}
-
-#tabs-3 .board_list .post .content2 div {
-	width: 20%;
-	display: inline-block;
-	font-size: 1.5rem;
-	text-align: center;
-	padding-top: 15px;
-}
-
-#tabs-3 .board_list .post .content .rateresult {
-	width: 40%;
-	display: inline-flex;
-	font-size: 2rem;
-	text-align: center;
-	padding: 0px;
-}
-
-#tabs-3 .board_list .post .content2 .rateresult {
-	width: 40%;
-	display: inline-flex;
-	font-size: 1.5rem;
-	text-align: center;
-	padding: 0px;
-}
-
-#tabs-3 .board_list .post .content .rateresult>div {
-	width: 50%;
-	display: inline-block;
-	font-size: 2rem;
-	text-align: center;
-	padding-top: 15px;
-}
-
-#tabs-3 .board_list .post .content2 .rateresult>div {
-	width: 50%;
-	display: inline-block;
-	font-size: 1.5rem;
-	text-align: center;
-	padding-top: 15px;
-}
-
-.myGroup {
-	cursor: pointer;
-}
-
-.content {
-	border: 1px solid
-}
-
-.rate {
-	display: inline-block;
-}
-
-.rate input[type="radio"] {
-	display: none;
-}
-
-.rate label {
-	cursor: pointer;
-	color: #ccc;
-	font-size: 32px;
-}
-
-.rate input[type="radio"]:checked ~ label {
-	color: #ffcc00;
-}
-
-.result>button[type="submit"] {
-	cursor: pointer;
 }
 </style>
 
@@ -332,20 +182,8 @@
 						</div>
 						<div>
 							<div class="right_top">평점</div>
-							<c:choose>
-								<c:when test="${__rating__.ratedRating != null}">
-									<div class="right_contents">
-										<fmt:formatNumber value="${__rating__.ratedRating}"
-											pattern=".0" />
-									</div>
-									<!-- <div class="right_contents">${__rating__.ratedRating}</div> -->
-								</c:when>
-								<c:otherwise>
-									<div class="right_contents">0.0</div>
-								</c:otherwise>
-							</c:choose>
+							<div class="right_contents">${__AUTH__.rating}</div>
 						</div>
-
 						<div>
 							<div class="right_top">선호여행지</div>
 							<div class="right_contents">${__AUTH__.likeArea}</div>
@@ -442,7 +280,6 @@
 					<div class="post">
 
 						<c:set var="count" value="0" />
-						<c:set var="counter" value="0" />
 
 						<c:forEach var="applist" items="${__APPLIST__}" varStatus="numNo">
 
@@ -450,8 +287,6 @@
 								<c:set var="count" value="0" />
 
 								<div class="myGroup">
-									<input type="hidden" name="groupNo" class="groupNo"
-										value="${applist.groupNo}">
 									<div class="area">${applist.area}</div>
 									<div class="group">${applist.groupName}</div>
 									<div class="writer">${applist.writer}</div>
@@ -466,61 +301,39 @@
 									</div>
 								</div>
 
-
 							</c:if>
 
 
-							<c:set var="count" value="${count + 1}" />
-							<c:if test="${count == 1}">
+							<c:if test="${applist.outCome eq '수락'}">
+								<c:set var="count" value="${count + 1}" />
+
 								<div class="content hide">
 									<!-- 숨겨진 내용 -->
 									<div class="num">번호</div>
 									<div class="group">동행이름</div>
 									<div class="nick">닉네임</div>
-									<div class="rateresult">
-										<div class="rate">평점</div>
-										<div class="result">제출</div>
+									<div class="rate">평점</div>
+									<div class="startDate">동행시작</div>
+									<div class="endDate">동행종료</div>
+								</div>
+								<div class="">
+									<div class="num">${count}</div>
+									<div class="group">${applist.groupName}</div>
+									<div class="nick">${applist.nickName}</div>
+									<div class="rate">${rating.ratedUserNickName}</div>
+									<div class="startDate">
+										<fmt:formatDate value="${applist.startDate}"
+											pattern="yyyy-MM-dd" />
 									</div>
-
+									<div class="endDate">
+										<fmt:formatDate value="${applist.endDate}"
+											pattern="yyyy-MM-dd" />
+									</div>
 								</div>
 							</c:if>
 
 
-							<div class="content2 hide">
-								<div class="num">${count}</div>
-								<div class="group"></div>
-								<div class="nick"></div>
-
-								<form action="/user/rate" method="post" class="rateresult" id="rateForm">
-									<div class="rate" style="padding: 5px 0px;">
-										<input type="hidden" name="raterUserNickName"
-											value="${__AUTH__.nickName}"> <input type="hidden"
-											name="ratedUserNickName" class="ratedUserNickName" value="">
-
-										<c:forEach begin="1" end="5" step="1" varStatus="numA">
-											<c:set var="counter" value="${counter + 1}" />
-											<input type="radio" id="star${counter}" class="star"
-												name="rating" value="${6 - numA.index}" />
-											<label for="star${counter}"> &#9733; </label>
-										</c:forEach>
-
-
-									</div>
-									<div class="result">
-										<button id="" type="submit">제출</button>
-									</div>
-
-								</form>
-							</div>
 						</c:forEach>
-
-
-
-
-
-
-
-
 
 
 					</div>
@@ -723,6 +536,8 @@
 						type="submit" value="수정">
 				</form>
 			</div>
+
+
 
 		</div>
 

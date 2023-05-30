@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>후기 상세 페이지</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/readreview.css">
+        <link rel="stylesheet" href="../../resources/css/readreview.css">
         <script src="https://kit.fontawesome.com/e6512126dd.js" crossorigin="anonymous"></script>
 
         <!-- 부트스트랩 슬라이더 -->
@@ -18,37 +18,30 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         
-        
-
+      
     </head>
 
     <body>
+    
+    	<%@include file="../../header.jsp" %>
         <main class="wrap-container">
             <h1>여행후기 상세페이지</h1>
             <hr>
             <section class="head">
-         
 				<p class="post-No">${ __REVIEW__.postNo }</p>
                 <div class="user-info">
                     <a href="#" class="profile-img">
                         <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                     </a>
-                    <a href="#" class="nickname">${ __REVIEW__.nickname }</a>
+                    <a href="#" class="nickname">${ __REVIEW__.nickName }</a>
                     <p class="regi-date"><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${ __REVIEW__.regiDate }"/></p>
-                    
-    
                 </div>
 
                 <button class="likebtn">
                     <i class="fa-regular fa-heart"></i> 좋아요
                 </button>
-                <span class="morebtn">
-                    <a href="#">
-                        <i class="fa-solid fa-bars"></i>
-                    </a>
-                </span>
             </section>
-            <section class="title">
+            <section class="post-title">
                 <p> ${ __REVIEW__.title }</p>
             </section>
 
@@ -82,7 +75,7 @@
                 </div>
             </div>
 
-            <section class="content">
+            <section class="post-content">
                 <br>
                 <p>${ __REVIEW__.content }</p>
             </section>
@@ -94,7 +87,8 @@
         </div>
 
         <!-- 댓글영역 -->
-        
+        <%@include file="../../reviewboardComment.jsp" %>
+        <%@include file="../../footer.jsp" %>
         <script>
         
             $(function () {

@@ -132,7 +132,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService, InitializingB
 
 	
 	
-	//총 게시물 수 얻기
+	//6. 총 게시물 수 얻기
 	@Override
 	public Integer getTotal() throws ServiceException {
 		log.trace("getTotal() invoked.");
@@ -141,7 +141,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService, InitializingB
 	}// getTotal
 	
 	
-	//특정게시물 번호의 첨부파일 얻기
+	//7. 특정게시물 번호의 첨부파일 얻기
 	@Override
 	public List<AttachFileDTO> getAttachList(Integer postNo) {
 		log.info("{}번의 게시물로부터 첨부파일을 얻었습니다.", postNo);
@@ -151,6 +151,17 @@ public class ReviewBoardServiceImpl implements ReviewBoardService, InitializingB
 	}// getAttachList
 	
 	
+	//8. 조회수
+	@Override
+	public Integer updateReadcnt(Integer postNo) throws ServiceException {
+		log.trace("updateReadcnt({}) invoked.", postNo);
+			
+		try {
+			return this.dao.updateReadcnt(postNo);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch			
+	} // updateRecnt
 	
 	
 	

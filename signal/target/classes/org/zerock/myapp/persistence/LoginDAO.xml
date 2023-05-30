@@ -12,7 +12,7 @@
        UPDATE tbl_users
       SET
           rememberMe = #{rememberMe, jdbcType=VARCHAR},
-          rememberAge = #{rememberMeAge, jdbcType=TIMESTAMP}
+          rememberAge = #{rememberMeAge, jdbcType=DATE}
       WHERE
           id = #{ID}
     </update>

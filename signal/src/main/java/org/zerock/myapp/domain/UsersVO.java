@@ -32,6 +32,7 @@ public class UsersVO {
 	private String content;
 	private Timestamp regiDate;
 	private Double rating;
+	private String fileName;
 	
 	public UsersDTO toDTO() {
 		
@@ -56,6 +57,7 @@ public class UsersVO {
 		dto.setContent(content);
 		dto.setRegiDate(regiDate);
 		dto.setRating(rating);
+		dto.setFileName(fileName);
 		return dto;
 	}
 	

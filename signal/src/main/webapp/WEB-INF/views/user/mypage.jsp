@@ -51,7 +51,7 @@
 					    e.preventDefault();
 					    let selectedPageNum = e.currentTarget.textContent;
 					    console.log("ID2: " + tabId);
-					    console.log("페이지: " + ${pageMaker.cri.currPage});
+					    console.log("페이지: " );
 					    window.location.href ="/user/mypage"+"?currPage="+selectedPageNum+ tabId;
 					    
 				
@@ -176,6 +176,19 @@
 				
 
 				</script>
+
+
+<script>
+  $("#fileName").change(function(){
+   if(this.files && this.files[0]) {
+    var reader = new FileReader;
+    reader.onload = function(data) {
+     $(".select_img img").attr("src", data.target.result).width(500);        
+    }
+    reader.readAsDataURL(this.files[0]);
+   }
+  });
+ </script>
 
 
 <style>
@@ -306,22 +319,10 @@
 				<div class="myprofile">
 
 					<div class="profile_left">
+         				<!-- <img src="/imgs/${__AUTH__.fileName}"> -->
+   					</div>
 
-						<div class="img_container">
-							<div class="img_contents">
-								<img
-									src="${pageContext.request.contextPath}/resources/img/임의 프로필.png"
-									alt="프로필사진">
-							</div>
-							<label> <input type="file" accept="image/*"
-								style="width: 1px; height: 1px; font-size: 0px; line-height: 0; opacity: 0;">
-							</label>
-						</div>
-						<!-- 프로필 이미지 수정 -->
-
-					</div>
-
-					<div class="profile_right">
+					   <div class="profile_right">
 						<div>
 							<div class="right_top">닉네임</div>
 							<div class="right_contents">${__AUTH__.nickName}</div>
@@ -335,8 +336,7 @@
 							<c:choose>
 								<c:when test="${__rating__.ratedRating != null}">
 									<div class="right_contents">
-										<fmt:formatNumber value="${__rating__.ratedRating}"
-											pattern=".0" />
+										<fmt:formatNumber value="${__rating__.ratedRating}" pattern=".0" />
 									</div>
 									<!-- <div class="right_contents">${__rating__.ratedRating}</div> -->
 								</c:when>
@@ -345,7 +345,7 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
-
+	
 						<div>
 							<div class="right_top">선호여행지</div>
 							<div class="right_contents">${__AUTH__.likeArea}</div>
@@ -354,21 +354,17 @@
 							<div class="right_top">MBTI</div>
 							<div class="right_contents">${__AUTH__.MBTI}</div>
 						</div>
-
-
+	
+	
 						<div class="bt_wrap">
 							<button type="submit" id="modifyBtn">수정</button>
 						</div>
-
+	
 					</div>
 
-
-
-
-				</div>
+				</div>			
 
 			</div>
-			<!-- 프로필 끝-->
 
 			<!-- 작성글 -->
 			<div id="tabs-2">
@@ -420,10 +416,7 @@
 					</div>
 				</div>
 			</div>
-
-
-
-
+			
 
 			<!-- 마이동행 -->
 			<div id="tabs-3">
@@ -453,6 +446,7 @@
 									<input type="hidden" name="groupNo" class="groupNo"
 										value="${applist.groupNo}">
 									<div class="area">${applist.area}</div>
+									<input type="hidden" name="groupNo" value="${applist.groupNo }">
 									<div class="group">${applist.groupName}</div>
 									<div class="writer">${applist.writer}</div>
 									<div class="status">${applist.outCome}</div>
@@ -470,20 +464,6 @@
 							</c:if>
 
 
-							<c:set var="count" value="${count + 1}" />
-							<c:if test="${count == 1}">
-								<div class="content hide">
-									<!-- 숨겨진 내용 -->
-									<div class="num">번호</div>
-									<div class="group">동행이름</div>
-									<div class="nick">닉네임</div>
-									<div class="rateresult">
-										<div class="rate">평점</div>
-										<div class="result">제출</div>
-									</div>
-
-								</div>
-							</c:if>
 
 
 							<div class="content2 hide">
@@ -724,17 +704,17 @@
 				</form>
 			</div>
 
+	
 		</div>
 
 	</div>
+	<!-- 프로필 끝-->
+
+	
 
 	<footer>
 		<jsp:include page="../footer.jsp" />
 	</footer>
-
-
-
-
 
 
 </body>

@@ -29,12 +29,12 @@
 		INSERT INTO tbl_users
 		(id, nickname, name,
 		password, gender, email,
-		phonenumber, birthdate, MBTI, likeArea )
+		phonenumber, birthdate, MBTI, likeArea, filename )
 		VALUES (#{ID}, #{nickName},
 		#{name},
 		#{password}, #{gender}, #{EMail},
 		#{phoneNumber}, #{birthDate},
-		#{MBTI}, #{likeArea} )
+		#{MBTI}, #{likeArea}, filename=#{filename,jdbcType=VARCHAR} )
 
 	</insert>
 
@@ -51,6 +51,7 @@
 		password=#{password},
 		email=#{EMail},
 		phoneNumber=#{phoneNumber}
+		filename=#{filename,jdbcType=VARCHAR}
 		<if test="MBTI != null">
 			,MBTI=#{MBTI}
 		</if>

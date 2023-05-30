@@ -1,0 +1,9 @@
+diff a/signal/src/main/webapp/WEB-INF/views/user/mypage.jsp b/signal/src/main/webapp/WEB-INF/views/user/mypage.jsp	(rejected hunks)
+@@ -470,6 +470,7 @@
+ 							</c:if>
+ 
+ 
++							<c:set var="count" value="${count + 1}" />
+ 							<c:if test="${count == 1}">
+ 								<div class="content hide">
+ 									<!-- 숨겨진 내용 -->

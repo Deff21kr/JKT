@@ -215,9 +215,7 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 			throw new ServiceException(e);
 		}
 	}
-
 	
-
 
 //	======================================================
 

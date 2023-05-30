@@ -1,8 +1,6 @@
 package org.zerock.myapp.service;
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

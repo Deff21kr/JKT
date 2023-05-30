@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
-import javax.annotation.Resource;
+//import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -58,7 +58,8 @@ public class UsersController {
 	private QnACommentService ser;
 	@Setter (onMethod_ = @Autowired)
 	private RatingsService ratingService;
-	@Resource(name="uploadPath")
+	
+	@Autowired
 	private String uploadPath;
 	
 	

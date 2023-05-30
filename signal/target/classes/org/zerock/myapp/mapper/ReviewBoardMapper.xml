@@ -96,7 +96,7 @@
     <!-- 특정 게시물 업데이트 -->
     <update id="update">
         UPDATE tbl_board_review
-        SET nickName = #{nickname},
+        SET nickName = #{nickName},
         	title = #{title}, 
             content = #{content},  
             modifyDate = current_date

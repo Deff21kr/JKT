@@ -12,7 +12,6 @@
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="readCnt" column="readcnt"/>
-        <result property="likes" column="likes"/>
         <result property="regiDate" column="regidate"/>
         <result property="modifyDate" column="modifydate"/>
         <collection property="attachList" ofType="org.zerock.myapp.domain.AttachFileDTO">
@@ -96,7 +95,7 @@
     <!-- 특정 게시물 업데이트 -->
     <update id="update">
         UPDATE tbl_board_review
-        SET nickName = #{nickname},
+        SET nickName = #{nickName},
         	title = #{title}, 
             content = #{content},  
             modifyDate = current_date

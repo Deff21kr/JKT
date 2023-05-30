@@ -25,8 +25,6 @@
     
     	<%@include file="../../header.jsp" %>
         <main class="wrap-container">
-            <h1>여행후기 상세페이지</h1>
-            <hr>
             <section class="head">
 				<p class="post-No">${ __REVIEW__.postNo }</p>
                 <div class="user-info">
@@ -34,7 +32,7 @@
                         <img src="${pageContext.request.contextPath}/resources/img/profile.jpg" alt="프로필사진" />
                     </a>
                     <a href="#" class="nickname">${ __REVIEW__.nickName }</a>
-                    <p class="regi-date"><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${ __REVIEW__.regiDate }"/></p>
+                    <div class="regi-date"><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${ __REVIEW__.regiDate }"/></div>
                 </div>
 
                 <button class="likebtn">
@@ -42,7 +40,7 @@
                 </button>
             </section>
             <section class="post-title">
-                <p> ${ __REVIEW__.title }</p>
+                <div> ${ __REVIEW__.title }</div>
             </section>
 
             <hr>

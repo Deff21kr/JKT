@@ -81,7 +81,7 @@
 			</div>
 
 			<!-- 댓글 작성 -->
-			<form action="/board/group/qnaReply" method="POST">
+			<form action="/board/group/Reply" method="POST">
 				<input type="hidden" name="postNo" value="${__BOARD__.postNo}">
 				<input type="hidden" name="nickName" value="${__AUTH__.nickName}">
 				<input type="hidden" name="currPage" value="${param.currPage}">

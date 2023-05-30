@@ -187,10 +187,10 @@
                                 console.log("result()invoked." + result);
                                 
                                 if(result == 1) {
-                                  
+                                  $('#pinBtn').addClass('active');
                                   alert('게시물을 찜했습니다.');
                                 } else {
-                                  
+                                  $('#pinBtn').removeClass('active');
                                   alert('찜을 취소했습니다.');
                                 }
                               },

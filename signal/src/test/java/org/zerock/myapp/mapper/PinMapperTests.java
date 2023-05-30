@@ -52,7 +52,7 @@ public class PinMapperTests {
     	log.info(">>> 결과: " + result);
     	
     } // testInsert
-//    
+    
 //    @Test(timeout = 1000 * 2)
 //    public void testSelect() {
 //    	log.info("testSelect() invoked.");

@@ -178,17 +178,17 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 	}
 
 	@Override
-	public List<UsersDTO> selectWriteList(String nickName, Criteria cri) throws ControllerException {
+	public List<UsersDTO> selectWriteList(String nickName, Criteria cri) throws ServiceException {
 		try {
 			return this.dao.selectWriteList(nickName, cri);
 		} catch(Exception e) {
-			throw new ControllerException(e);
+			throw new ServiceException(e);
 		}
 		
 	}
 
 	@Override
-	public Integer getWriterList(String nickName) throws ControllerException {
+	public Integer getWriterList(String nickName) throws ServiceException {
 		return this.dao.getWriteList(nickName);
 	}
 

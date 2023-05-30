@@ -1,21 +1,14 @@
 package org.zerock.myapp.controller;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.zerock.myapp.domain.PinDTO;
 import org.zerock.myapp.exception.ControllerException;
-import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.service.PinService;
 import org.zerock.myapp.service.UsersService;
 
@@ -41,7 +34,7 @@ public class PinController {
 	@PostMapping("/pin")
 	@ResponseBody
 	public Integer insert(PinDTO pin) throws ControllerException {
-		log.trace("\n\npin : {} ",pin);
+		log.trace("insert invoekd.");
 		
 		try {
 			if(this.pinService.doPin(pin) == 1) {

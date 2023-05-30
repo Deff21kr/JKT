@@ -133,12 +133,35 @@
                             <dd>13</dd>
                         </dl>
                         <div class="pin">
-                          <input type="hidden" class="pinCheck">
-                          <button class="plus_btn">찜</button>
-                          <!-- <button class="minus_btn">찜-</button> -->
+                          <button type="button" id="pinBtn">찜</button>
                         </div>
                         
                         <script>
+                         $('#pinBtn').click(function() {
+                            $.ajax({
+                              url:'${pageContext.request.contextPath}/board/group/pin',
+                              type: 'POST',
+                              data: {
+                                postNo : '${__BOARD__.postNo}',
+                                nickName : '${__AUTH__.nickName}'
+                              }, // data
+                              dataType: 'json',
+                              success: function(result) {
+                                console.log("result()invoked." + result);
+                                
+                                if(result == 1) {
+                                  console.log(result);
+                                  alert('게시물을 찜했습니다.');
+                                } else {
+                                  console.log(result);
+                                  alert('찜을 취소했습니다.');
+                                }
+                              },
+                              error: function() {
+                                console.log('실패');
+                              }
+                            })
+                         });
                         $(document).ready(function() {
                             $(".plus_btn").click(function() {
                               var form = {

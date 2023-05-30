@@ -60,27 +60,27 @@
       <beans:property name="maxUploadSize" value="104857560"/>
       <beans:property name="maxUploadSizePerFile" value="5242880"/>
       <beans:property name="preserveFilename" value="true"/>
+      <!--  
       <beans:property name="uploadTempDir" value="file:/C:/upload/tmp"/>
-      
+      -->
    </beans:bean>
+   
    
    	<beans:bean class="java.lang.String" id="uploadPath">
 		<beans:constructor-arg value="C:/Upload" />
 	</beans:bean>
 
-
-
-	
 	
 	<!-- 일반 파일 업로드 경로 -->
 	
 	<resources mapping="/imgUpload/**" 	location="resources/imgUpload/" /> 
 	
 	<resources mapping="/imgs/**" 	location="file:///C:/Upload/" />
+	
 	<!-- 현재 / 제거 상태 -->
 
 	
-   		
+   
    
    <view-controller path="/common/logout" view-name="/common/logout"  status-code="200" />
    <view-controller path="/user/mypage" view-name="user/mypage"  status-code="200" />

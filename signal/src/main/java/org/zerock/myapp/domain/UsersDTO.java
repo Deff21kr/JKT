@@ -33,6 +33,7 @@ public class UsersDTO {
 	private Timestamp regiDate;
 	private Double rating;
 	private String fileName;
+	private Integer postNo;
 	
 
 }

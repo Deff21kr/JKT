@@ -71,21 +71,22 @@
 					});
 				});
 
-				/* $(function() {
-					$('.myGroup').on('click', function(e) {
-						var content = $(this).nextUntil('.myGroup');
-						if (content.css('display') === 'none' && ($(this).find('.status').html() === '수락' || $(this).find('.status').html() === '본인')) {
-							
-							content.css('display', 'block');
-							content.last().css('border-bottom', '1px solid');
-							content.css('border-left', '1px solid');
-							content.css('border-right', '1px solid')
-							
-						} else {
-							content.css('display', 'none');
+				$(function() {
+					$('.writeList').on('click', function(e) {
+						var postNum = $(this).find('.postNum').val();
+						var boardName = $(this).find('.board').html();
+						if(boardName == 'QnA'){
+							console.log('============>', boardName)
+							location = '/board/qna/get?postNo='+ postNum;
+						} else if(boardName == '동행찾기'){
+							console.log('============>', boardName)
+							location = '/board/group/get?postNo='+ postNum;
+						} else if(boardName == '여행후기'){
+							console.log('============>', boardName)
+							location = '/board/review/get?postNo='+ postNum;
 						}
 					});
-				}); */
+				});
 				
 				$(document).ready(function() {
 					  $('#rateForm').submit(function(e) {
@@ -123,6 +124,13 @@
 				$(document).ready(function() {
 					$('.myGroup').off('click').on('click', function(e) {
 						
+					if($('.content3').length > 0 ){
+						var content = $(this).nextUntil('.myGroup');
+						content.hide();
+						$('.content3').remove();
+						return false;
+					}
+					
 					if($(this).find('.status').html() == '진행중' || $(this).find('.status').html() == '거절'){
 						return false;
 					}
@@ -307,6 +315,10 @@
 .result>button[type="submit"] {
 	cursor: pointer;
 }
+
+.board_list>.post>.writeList>div{
+	cursor: pointer;
+}
 </style>
 
 </head>
@@ -417,8 +429,8 @@
 
 					<div class="post">
 						<c:forEach var="item" items="${_LIST_}">
-							<input type="hidden" name="nickName" value="${item.nickName}">
-							<div id="wirteList">
+							<div class="writeList">
+								<input type="hidden" class="postNum" name="postNo" value="${item.postNo}">
 								<div class="board">${item.boardName}</div>
 								<div class="title">${item.title}</div>
 								<div class="writer">${item.nickName}</div>

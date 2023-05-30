@@ -70,8 +70,8 @@ public class CommonController {
 					return "redirect:/";
 				}
 
-			} else { // 로그인 실패
-				rttrs.addAttribute("__RESULT__", "실패");
+			} else {
+				rttrs.addAttribute("__RESULT__", "로그인 실패..");
 				return "redirect:/common/loginPost"; // 다시 로그인 페이지로
 			}
 		} catch (Exception e) {

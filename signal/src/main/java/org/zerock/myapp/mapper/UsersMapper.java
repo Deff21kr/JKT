@@ -80,7 +80,7 @@ public interface UsersMapper {
 
 	// 11. 찜 내역의 찜 총 개수
 	@Select("""
-			select count(nickName) FROM TBL_PIN WHERE nickName = #{nickName};
+			select count(nickName) FROM TBL_PIN WHERE nickName = #{nickName}
 			""")
 	public abstract Integer getPinList(@Param("nickName") String nickName);
 }

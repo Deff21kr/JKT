@@ -6,6 +6,10 @@ import org.zerock.myapp.domain.PinDTO;
 
 public interface PinMapper {
 	
+	
+	// 이 클래스 안써도됨 usersMapper에 합쳐놨음  
+	
+	
 	public abstract Integer insert(PinDTO pin) throws Exception;
 	
 	public abstract Integer delete(Integer pinNo);

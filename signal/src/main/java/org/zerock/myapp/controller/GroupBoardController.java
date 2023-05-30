@@ -139,7 +139,7 @@ public class GroupBoardController {
             log.info("\t+ 댓글 조회된다아아아아");
             
             Integer prc = this.service.plusReadcnt(postNo);
-            model.addAttribute("__BOARD__", prc);
+            model.addAttribute("__BOARD2__", prc);
             
             CommentPageDTO pageDTO = new CommentPageDTO(this.commentService.getCommentTotal(postNo), commentCri);
     		model.addAttribute("__commentPage__", pageDTO);

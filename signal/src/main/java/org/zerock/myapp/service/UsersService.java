@@ -38,14 +38,14 @@ public interface UsersService {
 	public abstract Boolean profileEdit(UsersDTO dto) throws ServiceException;
 
 	// 7. 마이프로필 글쓴내역보기
-	public abstract List<UsersDTO> selectWriteList(String nickName, Criteria cri) throws ControllerException;
+	public abstract List<UsersDTO> selectWriteList(String nickName, Criteria cri) throws ServiceException;
 
 	// 8. 마이프로필 글쓴내역 개수 반환
-	public abstract Integer getWriterList(String nickName) throws ControllerException;
+	public abstract Integer getWriterList(String nickName) throws ServiceException;
 
 	// 9. 마이프로필 찜 내역확인
-	public abstract List<GroupBoardDTO> selectPinList(String nickName, Criteria cri) throws ControllerException;
+	public abstract List<GroupBoardDTO> selectPinList(String nickName, Criteria cri) throws ServiceException;
 
 	// 10. 마이프로필 찜내역 개수 반환
-	public abstract Integer getPinList(String nickName) throws ControllerException;
+	public abstract Integer getPinList(String nickName) throws ServiceException;
 } // end interface

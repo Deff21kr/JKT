@@ -164,12 +164,11 @@
                         </dl>
                         <dl>
                             <dt>조회수</dt>
-                            <dd>13</dd>
+                            <dd>${__BOARD__.readCnt}</dd>
                         </dl>
                         <div class="pin">
                           <button type="button" id="pinBtn">찜</button>
                         </div>
-                        
                         <script>
                          $('#pinBtn').click(function() {
                             $.ajax({

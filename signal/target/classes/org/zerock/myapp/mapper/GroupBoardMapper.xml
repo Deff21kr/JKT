@@ -89,6 +89,10 @@
 	    </if>
 	</select>
 
-
+    <update id="plusReadcnt">
+        UPDATE tbl_groupboard
+        SET readCnt = readCnt + 1
+        WHERE postNo = #{postNo}
+    </update>
 
 </mapper>

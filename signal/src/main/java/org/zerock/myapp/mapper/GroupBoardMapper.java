@@ -45,4 +45,7 @@ public interface GroupBoardMapper {
 	// 8. 검색 조회된 게시물 갯수 반환
 	public abstract Integer getSearchTotalAmount(GroupBoardCriteria cri);
 	
+	// 9. 조회수 올리기
+	public abstract Integer plusReadcnt (Integer postNo);
+	
 } // end interface

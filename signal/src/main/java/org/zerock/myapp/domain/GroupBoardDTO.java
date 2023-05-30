@@ -21,5 +21,6 @@ public class GroupBoardDTO {
 	private String nickName;
 	private String groupName;
 	private String boardName;
+	private Integer readCnt;
 
 } // end class

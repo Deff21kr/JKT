@@ -122,6 +122,11 @@
 				var friend = [];
 				$(document).ready(function() {
 					$('.myGroup').off('click').on('click', function(e) {
+						
+					if($(this).find('.status').html() == '진행중' || $(this).find('.status').html() == '거절'){
+						return false;
+					}
+						
 				    var groupNo = $(this).find('.groupNo').val();
 				    var brother = $(this).next().next();
 				    var bro = $(this).next();
@@ -130,7 +135,10 @@
 				    
 				    $('.content2').addClass('hide');
 				    $('.content').addClass('hide');
-				    
+					$('.content3').remove(); // 모든 content3 클래스 제거
+
+					bro.removeClass('hide');
+					
 				    $.ajax({
 				      url: '/user/mypage/friend',
 				      type: 'post',
@@ -139,14 +147,15 @@
 				      success: function(data) {
 				        console.log('성공');
 				        console.log(data);
-				        bro.removeClass('hide')
-			        	
+				        
+				        bro.show();
+				        
 				        for (var i = data.length - 1; i >= 0; i--) {
 				          friend = data[i];
 				          console.log(friend);
 				        	
-				            clonedBrother = brother.clone();
-				            
+				            clonedBrother = brother.clone();		// content2 클래스 복제
+				            clonedBrother.attr('class', 'content3')	// content2 복제한 클래스 content3으로 이름 바꿈
 				            clonedBrother.find('.num').html(i + 1);
 				            clonedBrother.find('.group').html(friend.groupName);
 				            clonedBrother.find('.nick').html(friend.nickName);
@@ -154,17 +163,15 @@
 				            var starElements = clonedBrother.find('.rate').find('.star'); // 별점 요소들을 선택
 				            starElements.each(function(index) {
 				              var starElement = $(this);
-				              var originalId = starElement.attr('id');
+				              var originalId = starElement.attr('id'); 
 				              var modifiedStarId = originalId ? originalId + String(i) : 'star' + (index + 1) + String(i); // 기존 id가 존재하면 그대로 사용, 없으면 'star' + 숫자 + 숫자 형태로 생성
 				              starElement.attr('id', modifiedStarId);
 				              starElement.next('label').attr('for', modifiedStarId); // 해당 별점 요소에 대응하는 label의 for 속성을 설정
 				            });
-				            clonedBrother.removeClass('hide'); // 새로운 내용을 보여줌
+				            
 				            $(clonedBrother).insertAfter(brother);
 				        }
-					    
-				          brother.remove();
-				          
+				        $('.content3').show();
 				          
 				      },
 				      // ... (error handling)
@@ -204,13 +211,7 @@
 	padding-top: 15px;
 }
 
-#tabs-3 .board_list .post .content2 div {
-	width: 20%;
-	display: inline-block;
-	font-size: 1.5rem;
-	text-align: center;
-	padding-top: 15px;
-}
+
 
 #tabs-3 .board_list .post .content .rateresult {
 	width: 40%;
@@ -218,6 +219,23 @@
 	font-size: 2rem;
 	text-align: center;
 	padding: 0px;
+}
+
+
+#tabs-3 .board_list .post .content .rateresult>div {
+	width: 50%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post .content2 div {
+	width: 20%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
 }
 
 #tabs-3 .board_list .post .content2 .rateresult {
@@ -228,15 +246,31 @@
 	padding: 0px;
 }
 
-#tabs-3 .board_list .post .content .rateresult>div {
+#tabs-3 .board_list .post .content2 .rateresult>div {
 	width: 50%;
 	display: inline-block;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	text-align: center;
 	padding-top: 15px;
 }
 
-#tabs-3 .board_list .post .content2 .rateresult>div {
+#tabs-3 .board_list .post .content3 div {
+	width: 20%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post .content3 .rateresult {
+	width: 40%;
+	display: inline-flex;
+	font-size: 1.5rem;
+	text-align: center;
+	padding: 0px;
+}
+
+#tabs-3 .board_list .post .content3 .rateresult>div {
 	width: 50%;
 	display: inline-block;
 	font-size: 1.5rem;

@@ -1,0 +1,9 @@
+diff a/signal/src/main/webapp/WEB-INF/views/user/mypage.jsp b/signal/src/main/webapp/WEB-INF/views/user/mypage.jsp	(rejected hunks)
+@@ -280,7 +280,6 @@
+ 					<div class="post">
+ 
+ 						<c:set var="count" value="0" />
+-						<c:set var="counter" value="0" />
+ 
+ 						<c:forEach var="applist" items="${__APPLIST__}" varStatus="numNo">
+ 

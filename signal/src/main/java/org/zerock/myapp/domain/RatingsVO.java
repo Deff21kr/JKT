@@ -10,14 +10,15 @@ public class RatingsVO {
 	private Integer rating;
 	private Double ratedRating;
 	
-	public RatingsDTO toDTO() {
-		RatingsDTO dto = new RatingsDTO();
+public RatingsDTO toDTO() {
 		
+		RatingsDTO dto = new RatingsDTO();
 		dto.setRatedRating(ratedRating);
 		dto.setRatedUserNickName(ratedUserNickName);
 		dto.setRaterUserNickName(raterUserNickName);
 		dto.setRating(rating);
-		
 		return dto;
+		
+		
 	}
 }

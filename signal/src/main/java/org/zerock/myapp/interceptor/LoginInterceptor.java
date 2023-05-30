@@ -39,6 +39,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 		
 		// Step.1 로그인 요청을 보낸 웹브라우저에 대응되는 세션객체 획득
 		HttpSession session = req.getSession(false);
+		String qe = req.getQueryString() ;
+		String uri = (String) req.getSession().getAttribute("redirectUri");
+		log.info("\n\n잠만 : {}\nqe3 : {}",qe,uri);
 		if(session != null) {
 			log.info("\t+ sessionId: {}", session.getId());
 			
@@ -46,7 +49,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			session.invalidate();
 			log.info("\t+ Session({}) Destroyed.", session.getId());
 		} // if
-		
+		 req.getSession().setAttribute("redirectUri",uri);
 		return true; // 인증로직은 기존대로 컨트롤러의 핸들러가 처리하도록 해줘야 함
 	} // preHandle
 
@@ -144,6 +147,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			return obj != null;
 		} else {
 			session=req.getSession(true);
+			session.setAttribute("__RESULT__","비회원");
 			Object obj = session.getAttribute("__RESULT__");
 			log.info("\t+ obj: {}", obj);
 			return obj != null;
@@ -156,6 +160,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		log.trace("checkRememberMeOption(req) invoked.");
 		
 		String rememberMe = req.getParameter("rememberMe");		// if checkbox checked, return "on"
+		log.info("\n\nrememberMe : {} ",rememberMe);
 		return rememberMe != null;
 	} // checkRememberMeOption
 	

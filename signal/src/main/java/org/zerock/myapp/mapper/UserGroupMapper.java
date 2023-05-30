@@ -16,7 +16,7 @@ public interface UserGroupMapper {
                 FROM TBL_USER_GROUP a
                 INNER JOIN tbl_groups b ON a.groupNo = b.groupNo
                 where b.postno IN (select c.postno from tbl_groups c , tbl_groupboard d where c.postno=d.postno and d.nickname=#{nickName})
-                ORDER BY a.appno desc
+                ORDER BY b.groupno desc, a.appno desc
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")
@@ -33,20 +33,26 @@ public interface UserGroupMapper {
 				    FROM tbl_groups g
 				    JOIN tbl_groupboard b ON g.postno = b.postno
 				) j ON u.groupno = j.groupno
-				WHERE u.groupno IN (
-	                SELECT GROUPNO
-	                FROM
-	                    TBL_USER_GROUP
-	                WHERE nickname = #{nickName}
-	                )
-				ORDER BY u.groupno, u.outcome ,u.appdate desc
+				WHERE u.nickname = #{nickName}
+				  and u.nickname is not null
+				        ORDER BY u.groupno desc,u.appdate desc
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 				""")
 		public abstract List<UserGroupDTO> selectMyAppList(@Param("nickName") String nickName
 														,@Param("cri") Criteria cri
-														) throws DAOException;;
+														) throws DAOException;
 		
+		@Select("""
+				SELECT u.groupNo, g.groupName, u.appNo,u.outcome, u.nickName
+				FROM tbl_groups g, tbl_user_group u
+				WHERE 
+                    g.groupNo = u.groupNo and
+					g.groupNo =  #{groupNo} and 
+					u.outCome in ('본인', '수락')
+				""")												
+		public abstract List<UserGroupDTO> selectListFriend(Integer groupNo);											
+														
 		// 2. 신청시 생성
 		public abstract Integer insert(@Param("nickName") String nickName,@Param("groupNo") Integer groupNo) throws DAOException;
 		
@@ -79,7 +85,7 @@ public interface UserGroupMapper {
 		// 6. 총 게시물 갯수 반환
 		@Select("""
 				SELECT 
-				    count(u.appno)
+				    count(distinct u.groupno)
 				FROM tbl_user_group u
 				JOIN (
 				    SELECT g.groupno, g.groupname, g.recruitstatus, g.membernum, g.currentmember, g.area, b.postno,
@@ -87,7 +93,15 @@ public interface UserGroupMapper {
 				    FROM tbl_groups g
 				    JOIN tbl_groupboard b ON g.postno = b.postno
 				) j ON u.groupno = j.groupno
-				WHERE u.nickname = #{nickName}
+				WHERE u.groupno IN (
+	                SELECT GROUPNO
+	                FROM
+	                    TBL_USER_GROUP
+	                WHERE nickname = #{nickName}
+	                ) 
+	                AND u.nickName IS NOT NULL
+				ORDER BY 
+					u.groupno desc
 				""")
 		public abstract Integer getTotalAmountAppList(String nickName);
 

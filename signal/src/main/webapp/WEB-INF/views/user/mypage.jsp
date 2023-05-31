@@ -178,6 +178,7 @@
 				            });
 				            
 				            $(clonedBrother).insertAfter(brother);
+				             
 				        }
 				        $('.content3').show();
 				          
@@ -187,7 +188,11 @@
 				  });
 				});
 
-		
+		$(function(){
+			$('.rateBtn').click(function(){
+				location.replace('/user/mypage#tabs-3');
+			})
+		})
 				
 
 				</script>
@@ -551,7 +556,7 @@
 
 									</div>
 									<div class="result">
-										<button id="rateForm" type="submit">제출</button>
+										<button id="rateForm" type="submit" class="rateBtn">제출</button>
 									</div>
 
 								</form>

@@ -92,7 +92,6 @@ h1 {
 
 }
 
-
 /* 게시글 영역  */
 .post {
     width: 300px;
@@ -129,6 +128,16 @@ h1 {
     position: absolute;
     right: 30px;
 }
+
+/* 지역  */
+.area {
+	margin-left:10px;
+	color:#2B65F8;
+	font-size: 17px;
+	font-weight: bold;
+	margin-top:5px;
+}
+
 
 
 

@@ -54,7 +54,7 @@
 					    console.log(getRecruitStatus);
 					    
 				    if (searchParam.startsWith("?postNo=")) {
-			            location.href = "/board/group/list?currPage=" + getCurrPage;
+			            location.href = "/board/group/list";
 			        } else if (searchParam.startsWith("?currPage=")) {
 			        	location.href = "/board/group/list?currPage=" + getCurrPage;
 			        } else {

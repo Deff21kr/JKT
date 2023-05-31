@@ -31,14 +31,14 @@
 		$(function() {
 			$('.content > .card > .image').on('click', function(e) {
 				var postNum = $(this).prev().val();
-				location = '/board/group/get?postNo='+ postNum;
+				location = '/board/group/get?postNo='+ postNum + 'currPage=1';
 			});
 		});
 		
 		$(function() {
 			$('.content > .card > .detail').on('click', function(e) {
 				var postNum = $(this).prev().prev().prev().val();
-				location = '/board/group/get?postNo='+ postNum;
+				location = '/board/group/get?postNo='+ postNum + 'currPage=1';
 			});
 		});
 		
@@ -159,7 +159,7 @@
 
               <div class="title">
                   <button type="button" id="locationBtn">
-                      <i class="fa-solid fa-location-dot"></i>서울
+                      <i class="fa-solid fa-location-dot"></i>${reviewVO.area}
                   </button>
               </div>
             

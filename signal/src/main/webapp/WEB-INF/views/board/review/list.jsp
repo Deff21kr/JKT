@@ -58,6 +58,9 @@
                                     <a href="/board/review/get?currPage=${pageMaker.cri.currPage}&postNo=${boardVO.postNo}"
                                         class="post-link post-link-${boardVO.postNo}"></a>
                                 </div>
+                                <div class=area>
+                      			<i class="fa-solid fa-location-dot">${boardVO.area}</i>
+                  				</div>
                             </div>
                         </li>
 

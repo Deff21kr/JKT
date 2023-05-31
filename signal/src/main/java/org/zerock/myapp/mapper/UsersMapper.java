@@ -83,4 +83,19 @@ public interface UsersMapper {
 			select count(nickName) FROM TBL_PIN WHERE nickName = #{nickName}
 			""")
 	public abstract Integer getPinList(@Param("nickName") String nickName);
+	
+	// 12. 회원이름 조회
+	public abstract Integer checkUserName(String name);
+	
+	// 13. 회원이메일 조회
+	public abstract Integer checkUserEMail(String EMail);
+	
+	// 14. 찾은 id 반환
+	public abstract String showId(String name, String EMail);
+	
+	// 15. 회원ID 조회
+	public abstract Integer checkUserId(String EMail);
+	
+	// 16. 비밀번호 변경
+	public abstract Boolean changepw(String ID, String password);
 }

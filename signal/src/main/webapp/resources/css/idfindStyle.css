@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+/* idfindStyle.css */
+
+/* 아이디 찾기 페이지 스타일 */
+.myprofile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.myprofile .profile_right {
+  margin-left: 50px;
+}
+
+.myprofile label {
+  display: block;
+  margin-bottom: 20px;
+  margin-left: 100px;
+}
+
+.myprofile input[type="text"],
+.myprofile input[type="email"] {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.myprofile .abc {
+  display: flex;
+  align-items: center;
+}
+
+.myprofile .email_btn {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.myprofile .size {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.myprofile .showid {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.myprofile .btn {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-right: 230px;
+}
+
+.myprofile .message {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}

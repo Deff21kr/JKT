@@ -77,13 +77,13 @@
 						var boardName = $(this).find('.board').html();
 						if(boardName == 'QnA'){
 							console.log('============>', boardName)
-							location = '/board/qna/get?postNo='+ postNum;
+							location = '/board/qna/get?postNo='+ postNum + '&currPage=1';
 						} else if(boardName == '동행찾기'){
 							console.log('============>', boardName)
-							location = '/board/group/get?postNo='+ postNum;
+							location = '/board/group/get?postNo='+ postNum + '&currPage=1';
 						} else if(boardName == '여행후기'){
 							console.log('============>', boardName)
-							location = '/board/review/get?postNo='+ postNum;
+							location = '/board/review/get?postNo='+ postNum + '&currPage=1';
 						}
 					});
 				});

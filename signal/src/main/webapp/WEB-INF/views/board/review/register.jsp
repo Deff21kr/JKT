@@ -197,7 +197,6 @@
 
 		<!-- 글쓰기 영역 -->
 		<form name="reviewform" action="/board/review/register" method="POST">
-
 			<div class="content-wrap">
 				<input type="hidden" name="nickName" value ="${__AUTH__.nickName }" required>
 				<input type="text"name="title" placeholder=" 제목을 입력하세요 " maxlength="30" class="title"required>

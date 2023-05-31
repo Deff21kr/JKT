@@ -39,7 +39,6 @@
 		     , b.title
 		     , b.content
              , b.readCnt
-      <!--        , b.likes   -->
              , b.regiDate
              , b.modifyDate
 		     , f.fileName
@@ -59,7 +58,6 @@
 		     , b.title
 		     , b.content
              , b.readCnt
-       <!--        , b.likes    -->
              , b.regiDate
              , b.modifyDate
 		     , f.fileName

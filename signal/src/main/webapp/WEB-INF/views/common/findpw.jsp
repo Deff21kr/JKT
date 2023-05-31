@@ -36,6 +36,7 @@
 						//============== 존재하는 아이디인지 검사 ===============//
 						$("#ID").blur(function () {
 							var ID = $('#ID').val();
+							$('#hiddenID').val(ID);
 
 							$.ajax({
 								url: '${pageContext.request.contextPath}/common/checkUserId?ID=' + ID,
@@ -131,7 +132,7 @@
 							var ID = $('#ID').val();
 							var name = $('#name').val();
 							var EMail = $('#EMail').val();
-
+					
 							var validAll = true;
 							for (var i = 0; i <= inval_Arr.length; i++) {
 								if (inval_Arr[i] == false) {
@@ -139,7 +140,7 @@
 									console.log(i + " : " + inval_Arr[i]);
 								}
 							}
-
+				
 							if (validAll) {
 								$("#tabs-1").empty();
 								$("#tabs-1").html(`
@@ -151,7 +152,7 @@
 
 						                <label for="password2">비밀번호 확인:</label>
 						                <input type="password" id="password2" name="password2" required>
-
+						                <input type="hidden" id="hiddenID" name="ID" value="">
 						                <button type="submit" id="chpwbtn">비밀번호 변경</button>
 						            </form>
 						            </div>
@@ -161,10 +162,10 @@
 								return false;
 							}
 						});
-
+						
 						$("#tabs-1").on("click", "#chpwbtn", function (e) {
 						    e.preventDefault();
-
+						    
 						    password = $("#password").val();
 						    var password2 = $("#password2").val();
 
@@ -173,6 +174,7 @@
 						    } else if (password === "" || password2 === "") {
 						        alert("비밀번호를 입력하세요.");
 						    } else {
+						    	
 						        $.ajax({
 						            url: "${pageContext.request.contextPath}/common/changepw",
 						            type: "POST",

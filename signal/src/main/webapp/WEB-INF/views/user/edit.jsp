@@ -36,7 +36,9 @@
 
 <body>
 
-
+	<header>
+		<jsp:include page="../header.jsp" />
+	</header>
 	<div id="wrap" class="wrap">
     <div class="wrap_title"></div>
     <div id="container">
@@ -134,6 +136,10 @@
     </div>
 </div>
 
+
+	<footer>
+		<jsp:include page="../footer.jsp" />
+	</footer>
 
 
 

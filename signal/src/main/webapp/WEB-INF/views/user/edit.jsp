@@ -121,14 +121,24 @@
                     </div>
                     <div class="bt_wrap">
                         <button type="submit" id="modifyBtn">수정</button>
-                        <script>
+                        <button type="submit" id="cancelBtn">취소</button>
+                    </div>
+                    
+                     <script>
                             $(function() {
                                 $("#modifyBtn").click(function() {
                                     window.location.assign("/user/mypage");
                                 });
                             });
+                            
+                            $(function() {
+                            	$("#cancelBtn").click(function(){
+                            		// history.back();
+                            		
+                            		location.href="/user/mypage";
+                            	})
+                            })
                         </script>
-                    </div>
                     </form>
                 </div>
             </div>

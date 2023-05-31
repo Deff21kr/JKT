@@ -197,6 +197,13 @@
 
 		<!-- 글쓰기 영역 -->
 		<form name="reviewform" action="/board/review/register" method="POST">
+			
+			<div class="review-area">
+				<div class="area">
+					<input type="text" name="area">
+				</div>
+			</div>
+
 
 			<div class="content-wrap">
 				<input type="hidden" name="nickName" value ="${__AUTH__.nickName }" required>

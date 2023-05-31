@@ -201,7 +201,7 @@
 			<div class="content-wrap">
 				<input type="hidden" name="nickName" value ="${__AUTH__.nickName }" required>
 				<input type="text"name="title" placeholder=" 제목을 입력하세요 " maxlength="30" class="title"required>
-				<textarea class="content" name="content" cols="50" rows="100"
+				<textarea class="post_content" name="content" cols="50" rows="100"
 					placeholder="내용을 입력하세요"></textarea>
 			</div>
 

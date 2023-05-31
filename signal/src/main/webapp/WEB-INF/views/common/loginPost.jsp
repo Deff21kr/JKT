@@ -22,6 +22,8 @@
         if(result != null && result.length > 0) {
             alert(result);
         } // if
+        
+        
     </script>
     
 </head>
@@ -38,15 +40,16 @@
             <label for="userid">
               <i class="fas fa-user"></i>
             </label>
-            <input id="userid" name="ID" type="text" autocomplete="none" placeholder="로그인">
+            
+            <input id="userid" name="ID" type="text" autocomplete="none" placeholder="ID" required>
           </div>
           <div class="user-area">
             <label for="userpw">
               <i class="fas fa-lock"></i>
             </label>
-            <input id="userpw" name="password" type="password" placeholder="비밀번호">
+            <input id="userpw" name="password" type="password" placeholder="비밀번호" required>
           </div>
-          <a href="#">비밀번호를 잊었습니까?</a>
+          <div class="rememberme" > <a href="#">비밀번호를 잊었습니까?</a></div>
           
           <div class="rememberme">Remember-me <input type="checkbox" name="rememberMe" class="remembermeBtn"></div>
                   <p></p>

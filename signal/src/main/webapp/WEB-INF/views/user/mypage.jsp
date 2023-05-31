@@ -51,7 +51,7 @@
 					    e.preventDefault();
 					    let selectedPageNum = e.currentTarget.textContent;
 					    console.log("ID2: " + tabId);
-					    console.log("페이지: " + ${pageMaker.cri.currPage});
+					    console.log("페이지: " );
 					    window.location.href ="/user/mypage"+"?currPage="+selectedPageNum+ tabId;
 					    
 				
@@ -71,39 +71,40 @@
 					});
 				});
 
-				/* $(function() {
-					$('.myGroup').on('click', function(e) {
-						var content = $(this).nextUntil('.myGroup');
-						if (content.css('display') === 'none' && ($(this).find('.status').html() === '수락' || $(this).find('.status').html() === '본인')) {
-							
-							content.css('display', 'block');
-							content.last().css('border-bottom', '1px solid');
-							content.css('border-left', '1px solid');
-							content.css('border-right', '1px solid')
-							
-						} else {
-							content.css('display', 'none');
+				$(function() {
+					$('.writeList').on('click', function(e) {
+						var postNum = $(this).find('.postNum').val();
+						var boardName = $(this).find('.board').html();
+						if(boardName == 'QnA'){
+							console.log('============>', boardName)
+							location = '/board/qna/get?postNo='+ postNum;
+						} else if(boardName == '동행찾기'){
+							console.log('============>', boardName)
+							location = '/board/group/get?postNo='+ postNum;
+						} else if(boardName == '여행후기'){
+							console.log('============>', boardName)
+							location = '/board/review/get?postNo='+ postNum;
 						}
 					});
-				}); */
+				});
 				
 				$(document).ready(function() {
-					  $('.rateresult').submit(function(e) {
+					  $('#rateForm').submit(function(e) {
 					    e.preventDefault(); // 폼 기본 제출 동작 막기
 					    
 					    var button = $(this).find('button');
 
 					    // AJAX 요청 생성
 					    $.ajax({
-					      url: $(this).attr('action'), // 폼의 action 속성 값
-					      type: $(this).attr('method'), // 폼의 method 속성 값
+					      url: '/user/rate', // 폼의 action 속성 값
+					      type: 'post',
 					      data: $(this).serialize(), // 폼 데이터 직렬화
 					      success: function(response) {
 					    	  
 					        // 성공적으로 요청을 보냈을 때 수행할 작업
 					        console.log('AJAX 요청 성공');
-					        button.prop('disabled', true);
-					        alert(response);
+					       // button.prop('disabled', true);
+					        //alert(response);
 					      },
 					      error: function(xhr, status, error) {
 					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
@@ -112,7 +113,7 @@
 					        console.log('오류:', error);
 					        
 					        button.prop('disabled', false);
-					      	alert('평점 부여에 실패했습니다.');
+					      	alert(data);
 
 					      }
 					    });
@@ -122,6 +123,18 @@
 				var friend = [];
 				$(document).ready(function() {
 					$('.myGroup').off('click').on('click', function(e) {
+						
+					if($('.content3').length > 0 ){
+						var content = $(this).nextUntil('.myGroup');
+						content.hide();
+						$('.content3').remove();
+						return false;
+					}
+					
+					if($(this).find('.status').html() == '진행중' || $(this).find('.status').html() == '거절'){
+						return false;
+					}
+						
 				    var groupNo = $(this).find('.groupNo').val();
 				    var brother = $(this).next().next();
 				    var bro = $(this).next();
@@ -130,7 +143,10 @@
 				    
 				    $('.content2').addClass('hide');
 				    $('.content').addClass('hide');
-				    
+					$('.content3').remove(); // 모든 content3 클래스 제거
+
+					bro.removeClass('hide');
+					
 				    $.ajax({
 				      url: '/user/mypage/friend',
 				      type: 'post',
@@ -139,14 +155,15 @@
 				      success: function(data) {
 				        console.log('성공');
 				        console.log(data);
-			        	bro.removeClass('hide');
-			        	
+				        
+				        bro.show();
+				        
 				        for (var i = data.length - 1; i >= 0; i--) {
 				          friend = data[i];
 				          console.log(friend);
 				        	
-				            clonedBrother = brother.clone();
-				            
+				            clonedBrother = brother.clone();		// content2 클래스 복제
+				            clonedBrother.attr('class', 'content3')	// content2 복제한 클래스 content3으로 이름 바꿈
 				            clonedBrother.find('.num').html(i + 1);
 				            clonedBrother.find('.group').html(friend.groupName);
 				            clonedBrother.find('.nick').html(friend.nickName);
@@ -154,17 +171,15 @@
 				            var starElements = clonedBrother.find('.rate').find('.star'); // 별점 요소들을 선택
 				            starElements.each(function(index) {
 				              var starElement = $(this);
-				              var originalId = starElement.attr('id');
+				              var originalId = starElement.attr('id'); 
 				              var modifiedStarId = originalId ? originalId + String(i) : 'star' + (index + 1) + String(i); // 기존 id가 존재하면 그대로 사용, 없으면 'star' + 숫자 + 숫자 형태로 생성
 				              starElement.attr('id', modifiedStarId);
 				              starElement.next('label').attr('for', modifiedStarId); // 해당 별점 요소에 대응하는 label의 for 속성을 설정
 				            });
-				            clonedBrother.removeClass('hide'); // 새로운 내용을 보여줌
+				            
 				            $(clonedBrother).insertAfter(brother);
 				        }
-					    
-				          brother.remove();
-				          
+				        $('.content3').show();
 				          
 				      },
 				      // ... (error handling)
@@ -204,13 +219,7 @@
 	padding-top: 15px;
 }
 
-#tabs-3 .board_list .post .content2 div {
-	width: 20%;
-	display: inline-block;
-	font-size: 1.5rem;
-	text-align: center;
-	padding-top: 15px;
-}
+
 
 #tabs-3 .board_list .post .content .rateresult {
 	width: 40%;
@@ -218,6 +227,23 @@
 	font-size: 2rem;
 	text-align: center;
 	padding: 0px;
+}
+
+
+#tabs-3 .board_list .post .content .rateresult>div {
+	width: 50%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post .content2 div {
+	width: 20%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
 }
 
 #tabs-3 .board_list .post .content2 .rateresult {
@@ -228,15 +254,31 @@
 	padding: 0px;
 }
 
-#tabs-3 .board_list .post .content .rateresult>div {
+#tabs-3 .board_list .post .content2 .rateresult>div {
 	width: 50%;
 	display: inline-block;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	text-align: center;
 	padding-top: 15px;
 }
 
-#tabs-3 .board_list .post .content2 .rateresult>div {
+#tabs-3 .board_list .post .content3 div {
+	width: 20%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post .content3 .rateresult {
+	width: 40%;
+	display: inline-flex;
+	font-size: 1.5rem;
+	text-align: center;
+	padding: 0px;
+}
+
+#tabs-3 .board_list .post .content3 .rateresult>div {
 	width: 50%;
 	display: inline-block;
 	font-size: 1.5rem;
@@ -271,6 +313,10 @@
 }
 
 .result>button[type="submit"] {
+	cursor: pointer;
+}
+
+.board_list>.post>.writeList>div{
 	cursor: pointer;
 }
 </style>
@@ -384,8 +430,8 @@
 
 					<div class="post">
 						<c:forEach var="item" items="${_LIST_}">
-							<input type="hidden" name="nickName" value="${item.nickName}">
-							<div id="wirteList">
+							<div class="writeList">
+								<input type="hidden" class="postNum" name="postNo" value="${item.postNo}">
 								<div class="board">${item.boardName}</div>
 								<div class="title">${item.title}</div>
 								<div class="writer">${item.nickName}</div>
@@ -463,6 +509,22 @@
 
 
 							</c:if>
+							
+							<c:set var="count" value="${count + 1}" />
+		                     <c:if test="${count == 1}">
+		                        <div class="content hide">
+		                           <!-- 숨겨진 내용 -->
+		                           <div class="num">번호</div>
+		                           <div class="group">동행이름</div>
+		                           <div class="nick">닉네임</div>
+		                           <div class="rateresult">
+		                              <div class="rate">평점</div>
+		                              <div class="result">제출</div>
+		                           </div>
+		
+		                        </div>
+		                     </c:if>
+							
 
 
 
@@ -474,9 +536,8 @@
 
 								<form action="/user/rate" method="post" class="rateresult" id="rateForm">
 									<div class="rate" style="padding: 5px 0px;">
-										<input type="hidden" name="raterUserNickName"
-											value="${__AUTH__.nickName}"> <input type="hidden"
-											name="ratedUserNickName" class="ratedUserNickName" value="">
+										<input type="hidden" name="raterUserNickName" value="${__AUTH__.nickName}"> 
+										<input type="hidden" name="ratedUserNickName" class="ratedUserNickName" value="">
 
 										<c:forEach begin="1" end="5" step="1" varStatus="numA">
 											<c:set var="counter" value="${counter + 1}" />
@@ -488,21 +549,12 @@
 
 									</div>
 									<div class="result">
-										<button id="" type="submit">제출</button>
+										<button id="rateForm" type="submit">제출</button>
 									</div>
 
 								</form>
 							</div>
 						</c:forEach>
-
-
-
-
-
-
-
-
-
 
 					</div>
 
@@ -544,66 +596,37 @@
 					</div>
 					<!-- 불러올 작성글 대략 10개정도 -->
 					<div class="post">
+					<c:forEach var="pin" items="${__pinList__}">
 						<div>
-							<div class="group">우리동행</div>
-							<div class="title">
-								<a href="#">서울ㄲㄲ?</a>
-							</div>
-							<div class="area">서울</div>
-							<div class="startDate">2022-01-01</div>
-							<div class="endDate">2022-01-03</div>
-							<div class="status">현황</div>
+						<div class="group">${pin.groupName}</div>
+						<div class="title">${pin.title}</div>
+						<div class="area">${pin.area}</div>
+						<div class="startDate">${pin.startDate}</div>
+						<div class="endDate">${pin.endDate}</div>
+						<div class="status">${pin.recruitStatus}</div>
 						</div>
-						<div>
-							<div class="group">쟤네동행</div>
-							<div class="title">
-								<a href="#">나랑ㄲㄲ?</a>
-							</div>
-							<div class="area">대전</div>
-							<div class="startDate">2022-06-05</div>
-							<div class="endDate">2022-0103</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">얘네동행</div>
-							<div class="title">
-								<a href="#">현댂ㄲ?</a>
-							</div>
-							<div class="area">대구</div>
-							<div class="startDate">2022-09-09</div>
-							<div class="endDate">2022-11-05</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">남의동행</div>
-							<div class="title">
-								<a href="#">부산ㄲㄲ?</a>
-							</div>
-							<div class="area">부산</div>
-							<div class="startDate">2023-01-01</div>
-							<div class="endDate">2023-01-01</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">바보동행</div>
-							<div class="title">
-								<a href="#">바보임</a>
-							</div>
-							<div class="area">일본</div>
-							<div class="startDate">2023-01-03</div>
-							<div class="endDate">2023-02-02</div>
-							<div class="status">현황</div>
-						</div>
+						</c:forEach>
 
 					</div>
 
 					<div class="board_page">
-						<a href="#" class="bt first"> < <</a> <a href="#" class="bt prev">
-							< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-						<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-							href="#" class="num">5</a> <a href="#" class="bt next"> > </a> <a
-							href="#" class="bt last"> > > </a>
+						<c:if test="${pinPageMaker.prev}">
+							<div class="Prev">
+								<a href="/user/mypage?currPage=${pinPageMaker.startPage - 1}">Prev</a>
+							</div>
+						</c:if>
 
+						<c:forEach var="pageNum" begin="${pinPageMaker.startPage}"
+							end="${pinPageMaker.endPage}">
+							<div
+								class="pageNum ${pinPageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+						</c:forEach>
+
+						<c:if test="${pinPageMaker.next}">
+							<div class="Next">
+								<a href="/user/mypage?currPage=${pinPageMaker.endPage + 1}">Next</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>

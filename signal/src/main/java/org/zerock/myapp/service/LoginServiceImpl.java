@@ -31,25 +31,29 @@ public class LoginServiceImpl implements LoginService {
 	public UsersVO authenticate(UsersDTO dto) throws ServiceException {
 		log.info("login({}) invoked.", dto);
 		
-		UsersVO vo = this.users.select(dto.getID());
-		boolean is =this.encoder.matches(dto.getPassword(), vo.getPassword() );
-		log.info("\n\nlogin : {}\nvo:{}",is,vo);
+			
+		try {
+	        UsersVO vo = this.users.select(dto.getID());
+
+	        if (vo == null) {
+	            log.warn("사용자를 찾을 수 없습니다.");
+	            return null;
+	        }
+
+	        boolean isMatched = this.encoder.matches(dto.getPassword(), vo.getPassword());
+
+	        if (isMatched) {
+	            log.info("비밀번호가 일치합니다. 사용자 정보를 반환합니다.");
+	            return this.mapper.selectUserIdPw(vo.toDTO());
+	        } else {
+	            log.warn("비밀번호가 일치하지 않습니다.");
+	            return null;
+	        }
+	    } catch (Exception e) {
+	        throw new ServiceException(e);
+	    }
 		
 		
-		try {	
-			if(is) {
-				log.info("\nvo: {}\ndto : {}",vo,dto);
-				return this.mapper.selectUserIdPw(this.users.select(dto.getID()).toDTO());
-			} else {
-				log.warn("아이디 비밀번호가 일치하지 않습니다.");
-				return null;
-			}
-				
-		} catch (Exception e) {
-			throw new ServiceException(e);
-		}
-		
-	
 	
 	} // login
 	

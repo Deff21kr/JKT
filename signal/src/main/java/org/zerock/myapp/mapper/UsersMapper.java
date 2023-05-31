@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.http.ResponseEntity;
 import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 
@@ -41,15 +42,15 @@ public interface UsersMapper {
 
 	// 8. 글쓴 내역보기
 	@Select("""
-				SELECT NICKNAME, TITLE, CONTENT, REGIDATE, BOARDNAME
+				SELECT NICKNAME, TITLE, CONTENT, REGIDATE, BOARDNAME, POSTNO
 			FROM (
-			SELECT NICKNAME, TITLE, CONTENT, REGIDATE, BOARDNAME
+			SELECT NICKNAME, TITLE, CONTENT, REGIDATE, BOARDNAME, POSTNO
 			FROM TBL_QNABOARD WHERE NICKNAME = #{nickName}
 			UNION
-			SELECT NICKNAME, TITLE, CONTENT, REGIDATE, BOARDNAME
+			SELECT NICKNAME, TITLE, CONTENT, REGIDATE, BOARDNAME, POSTNO
 			FROM TBL_REVIEWBOARD WHERE NICKNAME = #{nickName}
 			UNION
-			SELECT NICKNAME, TITLE, CONTENT, REGIDATE, BOARDNAME
+			SELECT NICKNAME, TITLE, CONTENT, REGIDATE, BOARDNAME, POSTNO
 			FROM TBL_GROUPBOARD WHERE NICKNAME = #{nickName}
 			)
 			ORDER BY REGIDATE DESC
@@ -66,4 +67,20 @@ public interface UsersMapper {
 			+ "UNION\r\n"
 			+ "SELECT NICKNAME, title, content, regidate, boardname FROM TBL_GROUPBOARD WHERE NICKNAME = #{nickName})")
 	public abstract Integer getWriteList(String nickName);
+
+	// 10. 찜 내역 보기
+	@Select("""
+			select a.groupName, a.title, a.area, a.startDate, a.endDate, a.RECRUITSTATUS
+			From TBL_GROUPBOARD a, TBL_PIN b WHERE a.postNo = b.postNo AND b.nickName = #{nickName}
+			Order By a.startDate DESC
+				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
+				FETCH NEXT #{cri.amount} ROWS ONLY
+			""")
+	public abstract List<GroupBoardDTO> selectPinList(@Param("nickName") String nickName, Criteria cri);
+
+	// 11. 찜 내역의 찜 총 개수
+	@Select("""
+			select count(nickName) FROM TBL_PIN WHERE nickName = #{nickName}
+			""")
+	public abstract Integer getPinList(@Param("nickName") String nickName);
 }

@@ -98,18 +98,9 @@ hr {
   cursor: pointer;
   color: grey;
 }
-
-.cs1 a:hover {
-  color: black;
-  text-decoration: underline;
-}
 .cs2 a:hover {
   color: black;
   text-decoration: underline;
-}
-
-.A-foot .cs1 {
-  width: 170px;
 }
 
 /* .comp {

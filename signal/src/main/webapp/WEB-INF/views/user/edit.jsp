@@ -80,7 +80,7 @@
                     <div>
                         <div class="right_top">선호여행지</div>
                         <label>
-                            <select id="likeArea" name="likeArea" required>
+                            <select id="likeArea" name="likeArea">
                                 <option value="">좋아하는 지역을 선택하세요</option>
                                 <option value="서울">서울</option>
                                 <option value="강원">강원</option>
@@ -96,7 +96,7 @@
                     <div>
                         <div class="right_top">MBTI</div>
                         <label>
-                            <select name="MBTI" required>
+                            <select name="MBTI">
                                 <option value="">MBTI유형</option>
                                 <option value="ISTJ">ISTJ</option>
                                 <option value="ISFJ">ISFJ</option>

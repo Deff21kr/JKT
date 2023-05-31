@@ -24,7 +24,6 @@
 	              <img src="../../resources/img/travelsignal2.png" alt="여행시그널로고">
 	            </div>
 	            <div>
-	              <div class="cs1"><a href="#"><strong>자주묻는게시판</strong></a></div>
 	              <div class="cs2"><a href="/board/oneonone/list"><strong>1:1문의게시판</strong></a></div>
 	            </div>
 	            <!-- <div class="comp">

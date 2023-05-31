@@ -31,14 +31,14 @@
 		$(function() {
 			$('.content > .card > .image').on('click', function(e) {
 				var postNum = $(this).prev().val();
-				location = '/board/group/get?postNo='+ postNum;
+				location = '/board/group/get?postNo='+ postNum + 'currPage=1';
 			});
 		});
 		
 		$(function() {
 			$('.content > .card > .detail').on('click', function(e) {
 				var postNum = $(this).prev().prev().prev().val();
-				location = '/board/group/get?postNo='+ postNum;
+				location = '/board/group/get?postNo='+ postNum + 'currPage=1';
 			});
 		});
 		

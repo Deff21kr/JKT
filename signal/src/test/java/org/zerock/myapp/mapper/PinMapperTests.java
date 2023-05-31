@@ -47,10 +47,10 @@ public class PinMapperTests {
     	pin.setNickName(nickName);
     	log.info(pin);
     	
-//    	int result = 0;
-//    	result = mapper.insert(pin);
-//    	
-//    	log.info(">>> 결과: " + result);
+    	int result = 0;
+    	result = mapper.insert(pin);
+  	
+    	log.info(">>> 결과: " + result);
     	
     } // testInsert
     

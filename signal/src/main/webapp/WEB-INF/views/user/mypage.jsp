@@ -366,7 +366,7 @@
 			
 					<div class="profile_left">
 						<label for="image"></label>
-         				<img id="fileName" src="/imgs/${fileName}"/>
+         				<img src="/edit?file={__AUTH__.fileName}"/>
    					</div>
 
 					   <div class="profile_right">

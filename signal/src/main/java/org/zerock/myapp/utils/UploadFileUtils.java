@@ -17,7 +17,7 @@ public class UploadFileUtils {
 	
 //private static String baseUploadPath = "C:/app/scoop/apps/tomcat9/apache-tomcat-9.0.55/wtpwebapps/signal/resources";  
 //	private static String baseUploadPath = "C:/Upload";
-	private static String baseUploadPath = "resources/img";
+	private static String baseUploadPath = "JKT/signal/src/main/webapp/resources/img";
 
 	static final int THUMB_WIDTH = 300;
     static final int THUMB_HEIGHT = 300;

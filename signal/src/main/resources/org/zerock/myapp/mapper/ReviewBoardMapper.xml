@@ -12,7 +12,6 @@
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="readCnt" column="readcnt"/>
-    <!--      <result property="likes" column="likes"/> -->
         <result property="regiDate" column="regidate"/>
         <result property="modifyDate" column="modifydate"/>
         <collection property="attachList" ofType="org.zerock.myapp.domain.AttachFileDTO">
@@ -40,7 +39,6 @@
 		     , b.title
 		     , b.content
              , b.readCnt
-      <!--        , b.likes   -->
              , b.regiDate
              , b.modifyDate
 		     , f.fileName
@@ -60,7 +58,6 @@
 		     , b.title
 		     , b.content
              , b.readCnt
-       <!--        , b.likes    -->
              , b.regiDate
              , b.modifyDate
 		     , f.fileName
@@ -76,10 +73,8 @@
         <selectKey keyProperty="postNo" order="AFTER" resultType="int">
         SELECT "ISEQ$$_77491".CURRVAL FROM dual
         </selectKey>
-        INSERT INTO tbl_board_review (nickName, title, content, readCnt <!--likes -->) 
-        VALUES (#{nickName},#{title}, #{content},  0, 0)
         INSERT INTO tbl_board_review (nickName, title, content, readCnt) 
-        VALUES (#{nickName},#{title}, #{content},  0)
+        VALUES (#{nickName},#{title}, #{content}, 0)
     </insert>
 
     <!-- 상세조회 -->

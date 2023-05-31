@@ -174,7 +174,6 @@
                             <dt>조회수</dt>
                             <dd>${__BOARD__.readCnt}</dd>
                         </dl>
-
                         <!-- 찜 -->
                         <div class="pin">찜
                           <i id="pinBtn" class="fa-regular fa-thumbs-up"></i>

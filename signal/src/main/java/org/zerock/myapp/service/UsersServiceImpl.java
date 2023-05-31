@@ -177,7 +177,8 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		log.trace("\n*********************************************************\n			destroy() "
 				+ "\n********************************************************* ");
 	}
-
+	
+	// 글쓴 내역
 	@Override
 	public List<UsersDTO> selectWriteList(String nickName, Criteria cri) throws ServiceException {
 		try {
@@ -187,7 +188,8 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		}
 		
 	}
-
+	
+	// 글쓴 내역의 총 개수
 	@Override
 	public Integer getWriterList(String nickName) throws ServiceException {
 		try {
@@ -197,7 +199,8 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		}
 		
 	}
-
+	
+	// 찜 리스트
 	@Override
 	public List<GroupBoardDTO> selectPinLists(String nickName, Criteria cri) throws ServiceException {
 		try {
@@ -206,7 +209,8 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 			throw new ServiceException(e);
 		}
 	}
-
+	
+	// 찜 총 개수
 	@Override
 	public Integer getPinList(String nickName) throws ServiceException {
 		try {

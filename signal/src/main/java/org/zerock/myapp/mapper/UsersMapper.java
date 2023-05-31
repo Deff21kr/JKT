@@ -70,8 +70,9 @@ public interface UsersMapper {
 
 	// 10. 찜 내역 보기
 	@Select("""
-			select b.nickName, a.title, a.BOARDNAME From TBL_GROUPBOARD a,
-			TBL_PIN b WHERE a.postNo = b.postNo AND b.nickName = #{nickName}
+			select a.groupName, a.title, a.area, a.startDate, a.endDate, a.RECRUITSTATUS
+			From TBL_GROUPBOARD a, TBL_PIN b WHERE a.postNo = b.postNo AND b.nickName = #{nickName}
+			Order By a.startDate DESC
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 			""")
@@ -79,7 +80,7 @@ public interface UsersMapper {
 
 	// 11. 찜 내역의 찜 총 개수
 	@Select("""
-			select count(nickName) FROM TBL_PIN WHERE nickName = #{nickName};
+			select count(nickName) FROM TBL_PIN WHERE nickName = #{nickName}
 			""")
 	public abstract Integer getPinList(@Param("nickName") String nickName);
 }

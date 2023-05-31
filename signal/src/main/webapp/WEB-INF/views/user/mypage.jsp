@@ -555,15 +555,6 @@
 							</div>
 						</c:forEach>
 
-
-
-
-
-
-
-
-
-
 					</div>
 
 					<div class="board_page">
@@ -606,24 +597,35 @@
 					<div class="post">
 					<c:forEach var="pin" items="${__pinList__}">
 						<div>
-						<div class="group">${pin.groupName }</div>
-						<div class="title">${pin.title }</div>
-						<div class="area">${pin.area }</div>
-						<div class="startDate">${pin.startDate }</div>
+						<div class="group">${pin.groupName}</div>
+						<div class="title">${pin.title}</div>
+						<div class="area">${pin.area}</div>
+						<div class="startDate">${pin.startDate}</div>
 						<div class="endDate">${pin.endDate}</div>
-						<div class="status">${pin.recruitStatus }</div>
+						<div class="status">${pin.recruitStatus}</div>
 						</div>
 						</c:forEach>
 
 					</div>
 
 					<div class="board_page">
-						<a href="#" class="bt first"> < <</a> <a href="#" class="bt prev">
-							< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-						<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-							href="#" class="num">5</a> <a href="#" class="bt next"> > </a> <a
-							href="#" class="bt last"> > > </a>
+						<c:if test="${pinPageMaker.prev}">
+							<div class="Prev">
+								<a href="/user/mypage?currPage=${pinPageMaker.startPage - 1}">Prev</a>
+							</div>
+						</c:if>
 
+						<c:forEach var="pageNum" begin="${pinPageMaker.startPage}"
+							end="${pinPageMaker.endPage}">
+							<div
+								class="pageNum ${pinPageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+						</c:forEach>
+
+						<c:if test="${pinPageMaker.next}">
+							<div class="Next">
+								<a href="/user/mypage?currPage=${pinPageMaker.endPage + 1}">Next</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>

@@ -159,7 +159,7 @@
 
               <div class="title">
                   <button type="button" id="locationBtn">
-                      <i class="fa-solid fa-location-dot"></i>서울
+                      <i class="fa-solid fa-location-dot"></i>${reviewVO.area}
                   </button>
               </div>
             

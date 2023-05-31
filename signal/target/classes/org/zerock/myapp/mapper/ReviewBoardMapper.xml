@@ -14,6 +14,7 @@
         <result property="readCnt" column="readcnt"/>
         <result property="regiDate" column="regidate"/>
         <result property="modifyDate" column="modifydate"/>
+        <result property="area" column="area"/>
         <collection property="attachList" ofType="org.zerock.myapp.domain.AttachFileDTO">
             <id property="uuid" column="uuid"/>
             <result property="fileName" column="filename" />
@@ -41,6 +42,7 @@
              , b.readCnt
              , b.regiDate
              , b.modifyDate
+             , b.area
 		     , f.fileName
 		     , f.uploadPath
              , f.uuid
@@ -60,6 +62,7 @@
              , b.readCnt
              , b.regiDate
              , b.modifyDate
+             , b.area
 		     , f.fileName
 		     , f.uploadPath
              , f.uuid
@@ -73,8 +76,8 @@
         <selectKey keyProperty="postNo" order="AFTER" resultType="int">
         SELECT "ISEQ$$_77491".CURRVAL FROM dual
         </selectKey>
-        INSERT INTO tbl_board_review (nickName, title, content, readCnt) 
-        VALUES (#{nickName},#{title}, #{content}, 0)
+        INSERT INTO tbl_board_review (nickName, title, content, readCnt, area) 
+        VALUES (#{nickName},#{title}, #{content},  0, #{area})
     </insert>
 
     <!-- 상세조회 -->
@@ -96,7 +99,8 @@
         SET nickName = #{nickName},
         	title = #{title}, 
             content = #{content},  
-            modifyDate = current_date
+            modifyDate = current_date,
+            area = #{area}
         WHERE postNo = #{postNo}
     </update>
     

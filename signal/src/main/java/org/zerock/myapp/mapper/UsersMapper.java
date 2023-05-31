@@ -70,8 +70,12 @@ public interface UsersMapper {
 
 	// 10. 찜 내역 보기
 	@Select("""
-			select a.postNo, a.groupName, a.title, a.area, a.startDate, a.endDate, a.RECRUITSTATUS
-			From TBL_GROUPBOARD a, TBL_PIN b WHERE a.postNo = b.postNo AND b.nickName = #{nickName}
+			select 
+				b.nickName ,a.postNo, a.groupName, a.title, a.area, a.startDate, a.endDate, a.RECRUITSTATUS
+			From 
+				TBL_GROUPBOARD a, TBL_PIN b 
+			WHERE 
+				a.postNo = b.postNo AND b.nickName = #{nickName}
 			Order By a.startDate DESC
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY

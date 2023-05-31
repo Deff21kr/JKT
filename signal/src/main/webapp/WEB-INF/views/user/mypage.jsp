@@ -140,7 +140,7 @@
 				    var bro = $(this).next();
 				    var clonedBrother = brother.clone();
 				    var closestMyGroup = $(this).closest('.myGroup');
-				    
+
 				    $('.content2').addClass('hide');
 				    $('.content').addClass('hide');
 					$('.content3').remove(); // 모든 content3 클래스 제거

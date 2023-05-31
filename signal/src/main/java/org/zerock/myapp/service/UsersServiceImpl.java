@@ -153,6 +153,56 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		}
 		
 	}
+	
+	public Integer checkUserName(String name) throws ServiceException {
+		try {
+			return this.dao.checkUserName(name);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	public Integer checkUserEMail(String EMail) throws ServiceException {
+		try {
+			return this.dao.checkUserEMail(EMail);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	public Integer checkUserId(String ID) throws ServiceException {
+		try {
+			return this.dao.checkUserId(ID);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	
+	
+	public String showId(String name, String EMail) throws ServiceException{
+		try {
+			return this.dao.showId(name, EMail);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+
+	public Boolean changepw(String ID, String password) throws ServiceException {
+		try {
+			UsersVO vo = this.dao.select(ID);
+			UsersDTO dto = vo.toDTO();
+			
+			String hashedPassword = this.encoder.encode(password);
+			dto.setPassword(hashedPassword);
+			
+			return this.dao.changepw(ID, password);
+			
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	}
 
 
 

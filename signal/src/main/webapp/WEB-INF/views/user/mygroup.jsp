@@ -38,12 +38,14 @@
       <div class="board_wrap">
       <div class="board_title">
         <h2>
-          <strong>동행</strong>
+          <strong>동행 신청 현황</strong>
         </h2>
       </div>
 
-      <div class="board_trans_condition">
-        <form action="search.do" method="get">
+       <div class="board_trans_condition">
+       	<h3 style="font-size : 2rem; margin-left : 30px;">동행의 신청자를 보여줍니다.</h3>
+       </div>
+      <!--  <form action="search.do" method="get">
 
           <div class="board_trans_condition_area">
             <div class="title">
@@ -86,7 +88,7 @@
             </select> <input type="submit" value="검색">
           </div>
         </form>
-      </div>
+      </div> -->
 
       <div class="board_list_wrap">
 
@@ -100,7 +102,7 @@
             <div class="status">동행 상태</div>
             <div class="result">신청 결과</div>
             <div class="member">모집인원</div>
-            <div class="current">현재인원</div>
+            <div class="currmem">현재인원</div>
           </div>
 
           <div class="board_list_post">
@@ -127,7 +129,7 @@
                     </c:if>
                     
                     <div class="member">${group.memberNum}</div>
-                    <div class="current">${group.currentMember}</div>
+                    <div class="currmem">${group.currentMember}</div>
                 </c:forEach>
 
               </div>

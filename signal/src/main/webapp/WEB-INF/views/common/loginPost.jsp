@@ -40,22 +40,31 @@
             <label for="userid">
               <i class="fas fa-user"></i>
             </label>
-            
             <input id="userid" name="ID" type="text" autocomplete="none" placeholder="ID" required>
           </div>
+
           <div class="user-area">
             <label for="userpw">
               <i class="fas fa-lock"></i>
             </label>
             <input id="userpw" name="password" type="password" placeholder="비밀번호" required>
           </div>
-          <div class="rememberme" > </div>
-          <div class="rememberme" ><a href="/common/findid">'ID'찾기</a> <p> </p> <a href="/common/findpw">'비밀번호' 찾기</a></div>
-          
-          <div class="rememberme">Remember-me <input type="checkbox" name="rememberMe" class="remembermeBtn"></div>
-                  <p></p>
-  
-                  <div class="sign"><button type="submit" class="signBtn"> <span>Sign-in</span> </button></div>
+
+          <div class="rememberme">Remember-me 
+            <input type="checkbox" name="rememberMe" class="remembermeBtn">
+          </div>
+
+          <!-- <div class="rememberme" > </div> -->
+          <div class="sign">
+            <button type="submit" class="signBtn"> 
+            <span>Sign-in</span> </button>
+          </div>
+
+          <div class="find" >
+            <a href="/common/findid">'ID'찾기</a> 
+            <a href="/common/findpw">'비밀번호'찾기</a>
+          </div>
+
         </fieldset>
       </form>
       

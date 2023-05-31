@@ -34,10 +34,6 @@
                     <a href="#" class="nickname">${ __REVIEW__.nickName }</a>
                     <div class="regi-date"><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${ __REVIEW__.regiDate }"/></div>
                 </div>
-
-                <button class="likebtn">
-                    <i class="fa-regular fa-heart"></i> 좋아요
-                </button>
             </section>
             <section class="post-title">
                 <div> ${ __REVIEW__.title }</div>
@@ -78,12 +74,17 @@
                 <p>${ __REVIEW__.content }</p>
             </section>
         </main>
-
+        
+        <div class="like-area">
+            <button class="likebtn">
+            	<span> 0 </span>
+                <i class="fa-regular fa-heart"></i> 좋아요
+        	</button>	
+       	</div>
         <div class="btn-menu">
-            <button class="listBtn"> 목록 </button>
-            <button class="modifyBtn"> 수정 </button>
-        </div>
-
+            		<button class="listBtn"> 목록 </button>
+            		<button class="modifyBtn"> 수정 </button>
+       	</div>
         <!-- 댓글영역 -->
         <%@include file="../../reviewboardComment.jsp" %>
         <%@include file="../../footer.jsp" %>

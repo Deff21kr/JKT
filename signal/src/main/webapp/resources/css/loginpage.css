@@ -147,22 +147,25 @@ button {
 .signBtn {
 	align-items: center;
 	width: 70%;
+  margin-top: -20px;
+  margin-bottom: 20px;
 	font-size : 20px;
   height: 55px;
  	cursor: pointer;
  	
-  background-color: rgb(0, 96, 231, 0.389);
+  background-color: rgb(0, 98, 231);
   color:#fff;
   border:none;
   cursor: pointer;
   border-radius: 5px;
 }
-.signBtn:hover{
+/* .signBtn:hover{
   background: rgb(0, 98, 231);
-}
+} */
 
 .rememberme {
-	display: flex;
+  position: relative;
+	/* display: flex; */
 	align-items: center;
 	width: 100%;
 	font-size: 15px;
@@ -170,7 +173,8 @@ button {
 	padding: 0.3rem 1rem;
 }
 
-.rememberme a {
+.rememberme a,
+.find a {
   margin-right: 20px;
 }
 
@@ -179,12 +183,23 @@ button {
 	display : inline-block;
 	width: 17px; /* 원하는 가로 크기로 조절 */
  	height: 17px;
-	margin-left: 50px;
+	margin-left: 20px;
 	cursor: pointer;
 	vertical-align: middle;
 	align-items: center;
 	margin-top : 2px;
 	
+}
+
+.find {
+  position: relative;
+  /* display: flex; */
+	align-items: center;
+	width: 100%;
+	font-size: 15px;
+	height : 30px;
+	padding: 0.3rem 1rem;
+  color: grey;
 }
 
 legend h3 {

@@ -13,6 +13,7 @@ public class ReviewBoardDTO {
 	private String nickName;
 	private String title;
 	private String content;
+	private Integer readCnt;
 	
 	private List<AttachFileDTO> attachList;
 

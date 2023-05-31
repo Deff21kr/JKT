@@ -47,7 +47,7 @@ public class FileUploadController {
 
 		List<AttachFileDTO> list = new ArrayList<>();
 
-		String uploadFolder = "C:/upload/tmp";
+		String uploadFolder = "JKT/signal/src/main/webapp/resources/img";
 		// 업로드파일의 정보 출력
 		log.info("uploadFile : {}", Arrays.toString(uploadFile));
 
@@ -198,7 +198,8 @@ public class FileUploadController {
 			return new ResponseEntity<>("Unsupported encoding.", HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (Exception e) {
 			log.error("파일삭제를 실패했습니다.: {}", fileName, e);
-			return new ResponseEntity<>("Failed to delete the file.", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new
+					ResponseEntity<>("Failed to delete the file.", HttpStatus.INTERNAL_SERVER_ERROR);
 		} // try-catch
 
 	}// deleteFile

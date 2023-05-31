@@ -71,8 +71,11 @@
 		<beans:constructor-arg value="C:/Upload" />
 	</beans:bean>
 	
-	
-	
+<beans:bean class="java.lang.String" id="uploadPath">
+    <beans:constructor-arg value="JKT/signal/src/main/webapp/resources/img" />
+</beans:bean>
+
+
 	
 	
 	<!-- 일반 파일 업로드 경로 -->
@@ -94,4 +97,3 @@
    <context:component-scan base-package="org.zerock.myapp.utils" /> 
    
 </beans:beans>
-

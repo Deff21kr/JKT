@@ -51,7 +51,7 @@
                                             alt="프로필사진" />
                                     </a>
                                     <a href="#" class="nickname">${boardVO.nickName}</a>
-                               
+                                    <span class="like"><i class="fa-regular fa-heart"></i> 0</span>
                                     <span class="view"><i class="fa-solid fa-eye"></i> ${boardVO.readCnt}</span>
                                 </div>
                                 <div class="post">

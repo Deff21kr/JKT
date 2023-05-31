@@ -342,7 +342,7 @@ public class UsersController {
 //
 //		        }
 				
-				return (this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating);
+				return this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating);
 
 		    } catch (Exception e) {
 		        throw new ControllerException(e);

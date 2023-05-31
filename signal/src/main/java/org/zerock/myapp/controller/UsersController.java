@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -290,24 +291,24 @@ public class UsersController {
 
 	// 평점 제출
 	@PostMapping("/rate")
-//		@ResponseBody
-//		ResponseEntity<String>
-	Integer rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
+String rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
 		log.trace("rate() invoked");
 
 		try {
-//		        Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
-//		        if (result) {
-//		            log.info("\t + rate : {}", result);
-////			        return ResponseEntity.ok("평점이 부여되었습니다.");
-//
-//		        }else {
-//		        	log.info("실패");
-////		            return ResponseEntity.ok("평점이 부여에 실패하였습니다.");
-//
-//		        }
+		        Boolean result = this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating) == 1;
+		        if (result) {
+		            log.info("\t + rate : {}", result);
+//			        return ResponseEntity.ok("평점이 부여되었습니다.");
+		            return "redirect:/user/mypage#tabs-3";
 
-			return (this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating));
+		        }else {
+		        	log.info("실패");
+//		            return ResponseEntity.ok("평점이 부여에 실패하였습니다.");
+		        	return null;
+
+		        }
+
+//			return (this.ratingService.setRaterRating(raterUserNickName, ratedUserNickName, rating));
 
 		} catch (Exception e) {
 			throw new ControllerException(e);

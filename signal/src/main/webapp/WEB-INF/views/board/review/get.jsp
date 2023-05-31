@@ -71,6 +71,7 @@
 
             <section class="post-content">
                 <br>
+                <div class="area"> #${__REVIEW__.area } </div>
                 <p>${ __REVIEW__.content }</p>
             </section>
         </main>

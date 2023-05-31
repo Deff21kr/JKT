@@ -37,6 +37,9 @@
             </section>
             
             <form name="modifyform" action="/board/review/modify" method="post">
+                <div class="area">
+                	<input type="text" class="modifyarea" name="area" value="${ __REVIEW__.area }">
+                </div>
                 <section class="title">
                     <input type="hidden" name="postNo" value="${ __REVIEW__.postNo }">
                     <input type="hidden" name="nickName" value="${ __REVIEW__.nickName }">

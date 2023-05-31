@@ -30,8 +30,6 @@
 
 						// 비밀번호 정규식
 						var pwJ = /^[A-Za-z0-9]{8,20}$/;
-						var ID = ""; // 입력받은 아이디 값 저장 변수
-						var password = ""; // 변경된 비밀번호 값 저장 변수
 
 						//============== 존재하는 아이디인지 검사 ===============//
 						$("#ID").blur(function () {
@@ -59,6 +57,8 @@
 									console.log("실패");
 								}
 							});
+
+
 						});
 
 						//============== 존재하는 회원인지 검사 ===============//
@@ -142,14 +142,14 @@
 							}
 				
 							if (validAll) {
-								$("#tabs-1").empty();
-								$("#tabs-1").html(`
-						        	<div class="changepw">
-						            <h2>새로운 비밀번호 입력</h2>
-						            <form>
-						                <label for="password">새로운 비밀번호:</label>
-						                <input type="password" id="password" name="password" required>
+							    var newPasswordForm = `
+							        <div class="changepw">
+							            <h2>새로운 비밀번호 입력</h2>
+							            <form>
+							                <label for="password">새로운 비밀번호:</label>
+							                <input type="password" id="password" name="password" required>
 
+<<<<<<< HEAD
 						                <label for="password2">비밀번호 확인:</label>
 						                <input type="password" id="password2" name="password2" required>
 						                <input type="hidden" id="hiddenID" name="ID" value="">
@@ -157,6 +157,17 @@
 						            </form>
 						            </div>
 						        `);
+=======
+							                <label for="password2">비밀번호 확인:</label>
+							                <input type="password" id="password2" name="password2" required>
+
+							                <button type="submit" id="chpwbtn">비밀번호 변경</button>
+							            </form>
+							        </div>
+							    `;
+							    
+							    $("#tabs-1").append(newPasswordForm);
+>>>>>>> 7441ec5c18012f0b71612517dfbfe5499a504717
 							} else {
 								alert('기각');
 								return false;
@@ -165,7 +176,10 @@
 						
 						$("#tabs-1").on("click", "#chpwbtn", function (e) {
 						    e.preventDefault();
+<<<<<<< HEAD
 						    
+=======
+>>>>>>> 7441ec5c18012f0b71612517dfbfe5499a504717
 						    password = $("#password").val();
 						    var password2 = $("#password2").val();
 
@@ -174,7 +188,11 @@
 						    } else if (password === "" || password2 === "") {
 						        alert("비밀번호를 입력하세요.");
 						    } else {
+<<<<<<< HEAD
 						    	
+=======
+
+>>>>>>> 7441ec5c18012f0b71612517dfbfe5499a504717
 						        $.ajax({
 						            url: "${pageContext.request.contextPath}/common/changepw",
 						            type: "POST",
@@ -183,6 +201,8 @@
 						                password: password
 						            },
 						            success: function (response) {
+										alert("다시 로그인 해주세요");
+										
 						                location.href = "${pageContext.request.contextPath}/common/loginPost";
 						            },
 						            error: function (xhr, status, error) {

@@ -10,12 +10,14 @@ import org.springframework.util.FileCopyUtils;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnails;
 
+
+
 @Log4j2
 public class UploadFileUtils {
 	
 //private static String baseUploadPath = "C:/app/scoop/apps/tomcat9/apache-tomcat-9.0.55/wtpwebapps/signal/resources";  
-	private static String baseUploadPath = "C:/Upload";
-
+//	private static String baseUploadPath = "C:/Upload";
+	private static String baseUploadPath = "resources/img";
 
 	static final int THUMB_WIDTH = 300;
     static final int THUMB_HEIGHT = 300;

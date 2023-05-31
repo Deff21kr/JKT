@@ -140,7 +140,7 @@
 				    var bro = $(this).next();
 				    var clonedBrother = brother.clone();
 				    var closestMyGroup = $(this).closest('.myGroup');
-				    
+
 				    $('.content2').addClass('hide');
 				    $('.content').addClass('hide');
 					$('.content3').remove(); // 모든 content3 클래스 제거
@@ -363,9 +363,10 @@
 
 
 				<div class="myprofile">
-
+			
 					<div class="profile_left">
-         				<!-- <img src="/imgs/${__AUTH__.fileName}"> -->
+						<label for="image"></label>
+         				<img id="fileName" src="/imgs/${fileName}"/>
    					</div>
 
 					   <div class="profile_right">

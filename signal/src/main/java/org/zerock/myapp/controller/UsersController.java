@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.PageDTO;
-import org.zerock.myapp.domain.PinDTO;
 import org.zerock.myapp.domain.RatingsDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
@@ -39,6 +37,7 @@ import org.zerock.myapp.utils.UploadFileUtils;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import net.coobird.thumbnailator.Thumbnails;
 
 @SessionAttributes({ "__FRIEND__" })
 @NoArgsConstructor
@@ -242,7 +241,44 @@ public class UsersController {
 	
 	
 	
-	
+	@GetMapping(path={"/mypage/people"})
+	String myGroupList(Model model,HttpServletRequest req,Criteria cri, String ratedNickname, String raterNickName, Integer rating, MultipartFile file) throws ControllerException {
+		try {
+			
+			
+			
+			HttpSession session = req.getSession();
+			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
+			log.info("\n\nvo : {}",vo);
+			
+			List<UserGroupDTO> list = this.group.getMyAppList( vo.getNickName(),cri );
+			log.info("\n\nlist : {}",list);
+			// Request Scope  공유속성 생성
+			model.addAttribute("__APPLIST__", list);
+			
+			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName(), cri);
+			model.addAttribute("_LIST_", dto);
+			
+			// 점수 조회
+			RatingsDTO ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
+			log.info("ratingDTO: {}", ratingDTO);
+			model.addAttribute("__rating__", ratingDTO);
+			
+			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
+			model.addAttribute("pageMaker", pageDTO);
+			
+			PageDTO writeListDTO = new PageDTO(cri, this.service.getWriterList(vo.getNickName()));
+			model.addAttribute("writePageMaker", writeListDTO);
+			
+			
+			return "/user/mypage";
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+		
+		
+	}
+
 //	@PostMapping(path={"/mypage/group/{동행명}/evaluate"}, params = "ID")
 //	void partnerEvaluate() {
 //		
@@ -250,41 +286,81 @@ public class UsersController {
 
 	// 프로필 수정
 	@PostMapping("/edit")
-	String profilModify(UsersDTO dto, HttpServletRequest req, Model model, MultipartFile file)
-			throws ControllerException {
-		log.info("\n\ndto : {}", dto);
-		try {
-			String imgUploadPath = uploadPath + File.separator + "imgUpload";
-			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-			String fileName = null;
+	String profilModify(UsersDTO dto, HttpServletRequest req, Model model, MultipartFile file) throws ControllerException {
+	    log.info("\n\ndto : {}", dto);
+	    try {
+	        String imgUploadPath = uploadPath + File.separator + "imgUpload";
+	        String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+	        String fileName = null;
 
-			log.info("PATH :: {}, {}, {}", imgUploadPath, ymdPath, file);
+	        log.info("PATH :: {}, {}, {}", imgUploadPath, ymdPath, file);
 
-			if (file != null) {
-				fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(),
-						ymdPath);
+	        if (file != null) {
+	            fileName = UploadFileUtils.fileUpload(imgUploadPath,
+	                    file.getOriginalFilename(), file.getBytes(), ymdPath);
 
-			} else {
-				fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
-			}
+	            // Generate thumbnail
+	            String thumbnailName = "thumbnail_" + fileName;
+	            Thumbnails.of(new File(imgUploadPath + File.separator + ymdPath + File.separator + fileName))
+	                    .size(160, 160)
+	                    .toFile(new File(imgUploadPath + File.separator + ymdPath + File.separator + thumbnailName));
 
-			dto.setFileName(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+	            dto.setFileName(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+	        } else {
+	            fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+	            dto.setFileName(fileName);
+	        }
 
-			Objects.requireNonNull(dto);
+	        Objects.requireNonNull(dto);
 
-			if (this.service.profileEdit(dto)) {
-				HttpSession session = req.getSession();
-				UsersVO vo = this.service.get(dto.getID());
-				log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
-				session.setAttribute("__AUTH__", vo);
-			}
-			log.info("\t+ dto: ({}, {})", dto, dto.getID());
-			return "redirect:/user/mypage";
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		}
+	        if (this.service.profileEdit(dto)) {
+	            HttpSession session = req.getSession();
+	            UsersVO vo = this.service.get(dto.getID());
+	            log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
+	            session.setAttribute("__AUTH__", vo);
+	        }
+	        log.info("\t+ dto: ({}, {})", dto, dto.getID());
+	        return "redirect:/user/mypage";
+	    } catch (Exception e) {
+	        throw new ControllerException(e);
+	    }
+	    }
+//	String profilModify(UsersDTO dto, HttpServletRequest req, Model model, MultipartFile file)
+//			throws ControllerException {
+//		log.info("\n\ndto : {}", dto);
+//		try {
+//			String imgUploadPath = uploadPath + File.separator + "imgUpload";
+//			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+//			String fileName = null;
+//
+//			log.info("PATH :: {}, {}, {}", imgUploadPath, ymdPath, file);
+//
+//			if (file != null) {
+//				fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(),
+//						ymdPath);
+//
+//			} else {
+//				fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+//			}
+//
+//			dto.setFileName(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+//
+//			Objects.requireNonNull(dto);
+//
+//			if (this.service.profileEdit(dto)) {
+//				HttpSession session = req.getSession();
+//				UsersVO vo = this.service.get(dto.getID());
+//				log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
+//				session.setAttribute("__AUTH__", vo);
+//			}
+//			log.info("\t+ dto: ({}, {})", dto, dto.getID());
+//			return "redirect:/user/mypage";
+//		} catch (Exception e) {
+//			throw new ControllerException(e);
+//		}
+//
+//	}
 
-	}
 
 	// 프로필 수정
 	@GetMapping("/edit")
@@ -343,4 +419,8 @@ public class UsersController {
 		}
 	} // rate
 
+		
+		
+	
+   
 } // end class

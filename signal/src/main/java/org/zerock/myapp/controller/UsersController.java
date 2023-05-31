@@ -200,46 +200,7 @@ public class UsersController {
 		}
 
 	}
-
-//	---------------------- 이거 뭐임?? ---------------------------------------
-	@GetMapping(path = { "/mypage/people" })
-	String myGroupList(Model model, HttpServletRequest req, Criteria cri, String ratedNickname, String raterNickName,
-			Integer rating) throws ControllerException {
-		try {
-
-			HttpSession session = req.getSession();
-			UsersVO vo = (UsersVO) session.getAttribute("__AUTH__");
-			log.info("\n\nvo : {}", vo);
-
-			List<UserGroupDTO> list = this.group.getMyAppList(vo.getNickName(), cri);
-			log.info("\n\nlist : {}", list);
-			// Request Scope 공유속성 생성
-			model.addAttribute("__APPLIST__", list);
-
-			List<UsersDTO> dto = this.service.selectWriteList(vo.getNickName(), cri);
-			model.addAttribute("_LIST_", dto);
-
-			// 점수 조회
-			RatingsDTO ratingDTO = this.ratingService.getRatedRating(vo.getNickName());
-			log.info("ratingDTO: {}", ratingDTO);
-			model.addAttribute("__rating__", ratingDTO);
-
-			PageDTO pageDTO = new PageDTO(cri, this.group.getTotalAppList(vo.getNickName()));
-			model.addAttribute("pageMaker", pageDTO);
-
-			PageDTO writeListDTO = new PageDTO(cri, this.service.getWriterList(vo.getNickName()));
-			model.addAttribute("writePageMaker", writeListDTO);
-			
-			
-			return "/user/mypage";
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		}
-
-	}
-//	---------------------- 이거 뭐임?? ---------------------------------------
-	
-	
+		
 	
 	@GetMapping(path={"/mypage/people"})
 	String myGroupList(Model model,HttpServletRequest req,Criteria cri, String ratedNickname, String raterNickName, Integer rating, MultipartFile file) throws ControllerException {

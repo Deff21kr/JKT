@@ -49,7 +49,8 @@
             </label>
             <input id="userpw" name="password" type="password" placeholder="비밀번호" required>
           </div>
-          <div class="rememberme" > <a href="#">비밀번호를 잊었습니까?</a></div>
+          <div class="rememberme" > </div>
+          <div class="rememberme" ><a href="/common/findid">'ID'찾기</a> <p> </p> <a href="/common/findpw">'비밀번호' 찾기</a></div>
           
           <div class="rememberme">Remember-me <input type="checkbox" name="rememberMe" class="remembermeBtn"></div>
                   <p></p>

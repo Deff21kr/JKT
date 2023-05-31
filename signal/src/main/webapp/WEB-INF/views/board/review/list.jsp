@@ -59,7 +59,7 @@
                                         class="post-link post-link-${boardVO.postNo}"></a>
                                 </div>
                                 <div class=area>
-                      			<i class="fa-solid fa-location-dot">${boardVO.area}</i>
+                      			<i class="fa-solid fa-location-dot"> ${boardVO.area}</i>
                   				</div>
                             </div>
                         </li>

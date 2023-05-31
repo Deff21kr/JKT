@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,7 @@ import org.zerock.myapp.utils.UploadFileUtils;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import net.coobird.thumbnailator.Thumbnails;
 
 @SessionAttributes({ "__FRIEND__" })
 @NoArgsConstructor
@@ -203,8 +205,10 @@ public class UsersController {
 	
 	
 	@GetMapping(path={"/mypage/people"})
-	String myGroupList(Model model,HttpServletRequest req,Criteria cri, String ratedNickname, String raterNickName, Integer rating) throws ControllerException {
+	String myGroupList(Model model,HttpServletRequest req,Criteria cri, String ratedNickname, String raterNickName, Integer rating, MultipartFile file) throws ControllerException {
 		try {
+			
+			
 			
 			HttpSession session = req.getSession();
 			UsersVO vo = (UsersVO)session.getAttribute("__AUTH__"); 
@@ -246,42 +250,46 @@ public class UsersController {
 	
 	// 프로필 수정
 	@PostMapping("/edit")
-	String profilModify(UsersDTO dto, HttpServletRequest req, Model model,MultipartFile file) throws ControllerException {
-		log.info("\n\ndto : {}",dto);
-		try {
-			String imgUploadPath = uploadPath + File.separator + "imgUpload";
-			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-			String fileName = null;
-			
-			log.info("PATH :: {}, {}, {}", imgUploadPath, ymdPath, file);
-			
-			if(file != null) {
-				fileName = UploadFileUtils.fileUpload(imgUploadPath, 
-						   file.getOriginalFilename(), file.getBytes(), ymdPath);   
-						
-				} else {
-				   fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
-				}
-			
-			dto.setFileName(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-			
-			Objects.requireNonNull(dto);
-			
-			
-			
-			if(this.service.profileEdit(dto)) {
-				HttpSession session = req.getSession();
-				UsersVO vo = this.service.get(dto.getID());
-				log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
-				session.setAttribute("__AUTH__", vo);
-			}
-			log.info("\t+ dto: ({}, {})", dto, dto.getID());
-			return "redirect:/user/mypage";
-		} catch(Exception e) {
-			throw new ControllerException(e);
-		}
-		
+	String profilModify(UsersDTO dto, HttpServletRequest req, Model model, MultipartFile file) throws ControllerException {
+	    log.info("\n\ndto : {}", dto);
+	    try {
+	        String imgUploadPath = uploadPath + File.separator + "imgUpload";
+	        String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+	        String fileName = null;
+
+	        log.info("PATH :: {}, {}, {}", imgUploadPath, ymdPath, file);
+
+	        if (file != null) {
+	            fileName = UploadFileUtils.fileUpload(imgUploadPath,
+	                    file.getOriginalFilename(), file.getBytes(), ymdPath);
+
+	            // Generate thumbnail
+	            String thumbnailName = "thumbnail_" + fileName;
+	            Thumbnails.of(new File(imgUploadPath + File.separator + ymdPath + File.separator + fileName))
+	                    .size(160, 160)
+	                    .toFile(new File(imgUploadPath + File.separator + ymdPath + File.separator + thumbnailName));
+
+	            dto.setFileName(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+	        } else {
+	            fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+	            dto.setFileName(fileName);
+	        }
+
+	        Objects.requireNonNull(dto);
+
+	        if (this.service.profileEdit(dto)) {
+	            HttpSession session = req.getSession();
+	            UsersVO vo = this.service.get(dto.getID());
+	            log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
+	            session.setAttribute("__AUTH__", vo);
+	        }
+	        log.info("\t+ dto: ({}, {})", dto, dto.getID());
+	        return "redirect:/user/mypage";
+	    } catch (Exception e) {
+	        throw new ControllerException(e);
+	    }
 	}
+
 
 	// 프로필 수정
 		@GetMapping("/edit")
@@ -337,6 +345,8 @@ public class UsersController {
 		        throw new ControllerException(e);
 		    }
 		} // rate
+		
+		
 		
 	
 		

@@ -317,9 +317,10 @@
 
 
 				<div class="myprofile">
-
+			
 					<div class="profile_left">
-         				<!-- <img src="/imgs/${__AUTH__.fileName}"> -->
+						<label for="image"></label>
+         				<img id="fileName" src="/imgs/${fileName}"/>
    					</div>
 
 					   <div class="profile_right">

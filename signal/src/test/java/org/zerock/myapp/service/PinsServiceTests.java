@@ -48,9 +48,9 @@ public class PinsServiceTests {
 		dto.setPostNo(postNo);
 		dto.setNickName(nickName);
 		log.info(dto);
-//		int result = this.service.doPin(dto);
-//		
-//		log.info(">>> 숫자로 표시한 결과: " + result);
+		
+		int result = this.service.doPin(dto);
+		log.info(">>> 결과: " + result);
 	} // testdoPin
 	
 //	@Test(timeout = 1000 * 2) 

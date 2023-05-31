@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.myapp.domain.LikeDTO;
+import org.zerock.myapp.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,7 +36,7 @@ public class LikeServiceTests {
 	} // setup
 	
 	@Test
-	public void testdoLike() {
+	public void testdoLike() throws ServiceException {
 		log.trace("testdoLike() invoked.");
 		
 		Integer postNo = 265;
@@ -45,6 +46,9 @@ public class LikeServiceTests {
 		dto.setPostNo(postNo);
 		dto.setNickName(nickName);
 		log.info(dto);
+		
+		int result = this.service.doLike(dto);
+		log.info(">>> 결과: " + result);
 		
 	} // testdoLike
 	

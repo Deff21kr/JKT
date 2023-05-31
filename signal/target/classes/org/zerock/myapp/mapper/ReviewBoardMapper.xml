@@ -74,7 +74,7 @@
         SELECT "ISEQ$$_77491".CURRVAL FROM dual
         </selectKey>
         INSERT INTO tbl_board_review (nickName, title, content, readCnt) 
-        VALUES (#{nickName},#{title}, #{content},  0)
+        VALUES (#{nickName},#{title}, #{content}, 0)
     </insert>
 
     <!-- 상세조회 -->

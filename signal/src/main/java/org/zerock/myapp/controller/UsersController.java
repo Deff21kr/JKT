@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.PageDTO;
-import org.zerock.myapp.domain.PinDTO;
 import org.zerock.myapp.domain.RatingsDTO;
 import org.zerock.myapp.domain.UserGroupDTO;
 import org.zerock.myapp.domain.UsersDTO;
@@ -244,8 +241,6 @@ public class UsersController {
 	
 	
 	
-	
-<<<<<<< HEAD
 	@GetMapping(path={"/mypage/people"})
 	String myGroupList(Model model,HttpServletRequest req,Criteria cri, String ratedNickname, String raterNickName, Integer rating, MultipartFile file) throws ControllerException {
 		try {
@@ -283,8 +278,7 @@ public class UsersController {
 		
 		
 	}
-=======
->>>>>>> e8178138f2d87e102e059ff77b6d82b432a57e3e
+
 //	@PostMapping(path={"/mypage/group/{동행명}/evaluate"}, params = "ID")
 //	void partnerEvaluate() {
 //		
@@ -292,7 +286,6 @@ public class UsersController {
 
 	// 프로필 수정
 	@PostMapping("/edit")
-<<<<<<< HEAD
 	String profilModify(UsersDTO dto, HttpServletRequest req, Model model, MultipartFile file) throws ControllerException {
 	    log.info("\n\ndto : {}", dto);
 	    try {
@@ -331,43 +324,42 @@ public class UsersController {
 	    } catch (Exception e) {
 	        throw new ControllerException(e);
 	    }
-=======
-	String profilModify(UsersDTO dto, HttpServletRequest req, Model model, MultipartFile file)
-			throws ControllerException {
-		log.info("\n\ndto : {}", dto);
-		try {
-			String imgUploadPath = uploadPath + File.separator + "imgUpload";
-			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-			String fileName = null;
-
-			log.info("PATH :: {}, {}, {}", imgUploadPath, ymdPath, file);
-
-			if (file != null) {
-				fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(),
-						ymdPath);
-
-			} else {
-				fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
-			}
-
-			dto.setFileName(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-
-			Objects.requireNonNull(dto);
-
-			if (this.service.profileEdit(dto)) {
-				HttpSession session = req.getSession();
-				UsersVO vo = this.service.get(dto.getID());
-				log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
-				session.setAttribute("__AUTH__", vo);
-			}
-			log.info("\t+ dto: ({}, {})", dto, dto.getID());
-			return "redirect:/user/mypage";
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		}
-
->>>>>>> e8178138f2d87e102e059ff77b6d82b432a57e3e
-	}
+	    }
+//	String profilModify(UsersDTO dto, HttpServletRequest req, Model model, MultipartFile file)
+//			throws ControllerException {
+//		log.info("\n\ndto : {}", dto);
+//		try {
+//			String imgUploadPath = uploadPath + File.separator + "imgUpload";
+//			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+//			String fileName = null;
+//
+//			log.info("PATH :: {}, {}, {}", imgUploadPath, ymdPath, file);
+//
+//			if (file != null) {
+//				fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(),
+//						ymdPath);
+//
+//			} else {
+//				fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+//			}
+//
+//			dto.setFileName(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+//
+//			Objects.requireNonNull(dto);
+//
+//			if (this.service.profileEdit(dto)) {
+//				HttpSession session = req.getSession();
+//				UsersVO vo = this.service.get(dto.getID());
+//				log.info("\t+ 브이이이어ㅗ오오오오오 :{} ", vo);
+//				session.setAttribute("__AUTH__", vo);
+//			}
+//			log.info("\t+ dto: ({}, {})", dto, dto.getID());
+//			return "redirect:/user/mypage";
+//		} catch (Exception e) {
+//			throw new ControllerException(e);
+//		}
+//
+//	}
 
 
 	// 프로필 수정
@@ -427,15 +419,7 @@ public class UsersController {
 		}
 	} // rate
 
-<<<<<<< HEAD
-		    } catch (Exception e) {
-		        throw new ControllerException(e);
-		    }
-		} // rate
 		
-		
-		
-	
 		
 	
    

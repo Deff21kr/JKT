@@ -39,7 +39,7 @@ public class LikeServiceTests {
 	public void testdoLike() throws ServiceException {
 		log.trace("testdoLike() invoked.");
 		
-		Integer postNo = 265;
+		Integer postNo = 276;
 		String nickName = "hyeonna";
 		
 		LikeDTO dto = new LikeDTO();

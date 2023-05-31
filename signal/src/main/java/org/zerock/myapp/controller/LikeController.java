@@ -33,11 +33,11 @@ public class LikeController {
 	
 	@PostMapping("/like")
 	@ResponseBody
-	public Integer insert(LikeDTO dto) throws ControllerException {
+	public Integer insert(LikeDTO like) throws ControllerException {
 		log.trace("insert invoked.");
 		
 		try {
-			if(this.likeService.doLike(dto) == 1) {
+			if(this.likeService.doLike(like) == 1) {
 				return 1;
 			} else {
 				return 0;

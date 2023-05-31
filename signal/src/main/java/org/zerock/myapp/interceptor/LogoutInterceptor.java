@@ -44,7 +44,6 @@ public class LogoutInterceptor implements HandlerInterceptor {
 		if(session != null) { // 로그아웃처리수행			
 			session.invalidate();	// 금고상자(즉, 세션객체)자체를 삭제해버림!!
 		} // if
-		
 		// 자동로그인과 관련된 로직이 추가되어야 함
 		// 왜? 자동로그인 설정된 웹브라우저가 "명시적으로" 로그아웃을 요청했으니,
 		// 자동로그인 설정 "해제" 시켜줘야 함.
@@ -68,7 +67,6 @@ public class LogoutInterceptor implements HandlerInterceptor {
 		} // if
 				
 		res.sendRedirect("/common/loginPost");	// 로그아웃처리 후, 로그인 창으로 다시 밀어버림
-		
 		return false;		// 이미 결정됨: 로그아웃 처리는 여기서 하겟다!!!!란 의도
 	} // preHandle
 

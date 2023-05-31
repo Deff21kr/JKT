@@ -32,7 +32,7 @@ public class LikeServiceImpl
 		log.info("doLike() invoked.");
 		
 		try {
-			if(this.likeMapper.insert(like) == 0) {
+			if(this.likeMapper.checkLike(like) == 0) {
 				return this.likeMapper.insert(like);
 			} else {
 				LikeDTO dto = this.likeMapper.select(like.getPostNo(), like.getNickName());

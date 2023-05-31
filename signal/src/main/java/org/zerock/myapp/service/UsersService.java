@@ -48,4 +48,19 @@ public interface UsersService {
 
 	// 10. 마이프로필 찜내역 개수 반환
 	public abstract Integer getPinList(String nickName) throws ServiceException;
+	
+	// 회원이름 조회
+	public abstract Integer checkUserName(String name) throws ServiceException;
+	
+	// 회원이메일 조회
+	public abstract Integer checkUserEMail(String EMail) throws ServiceException;
+	
+	// 찾은 id 반환
+	public abstract String showId(String name, String EMail) throws ServiceException;
+	
+	// 회원ID 조회
+	public abstract Integer checkUserId(String ID) throws ServiceException;
+	
+	// 비밀번호 변경
+	public abstract Boolean changepw(String ID, String password) throws ServiceException;
 } // end interface

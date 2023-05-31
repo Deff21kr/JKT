@@ -1,0 +1,362 @@
+@charset "utf-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 10px;
+}
+
+#wrap {
+	width: 1000px;
+	margin: 100px auto;
+	font-size: 0;
+}
+
+#wrap>.wrap_title {
+	margin-bottom: 20px;
+}
+
+.wrap_title>h2>strong {
+	font-size: 2.5rem;
+}
+
+div div div > .size {
+  font-size: 1.8rem;; /* 원하는 폰트 크기로 변경 */
+}
+div div div div LABEL > .size {
+  font-size: 1.8rem;; /* 원하는 폰트 크기로 변경 */
+}
+div div div div label div > .email_btn {
+  font-size: 1.8rem;; /* 원하는 폰트 크기로 변경 */
+}
+div div div div p > .btn {
+  font-size: 1.8rem;; /* 원하는 폰트 크기로 변경 */
+}
+.message {
+    font-size: 1.8rem;
+    font-style: italic;
+    font-weight: bold;
+}
+.changepw {
+	font-size: 1.8rem;
+}
+
+
+
+/* ---------------------------------------- */
+#container {
+	width: 100%;
+	box-sizing: border-box;
+}
+#container ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  list-style: none;
+}
+
+#container ul li {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#container ul li div {
+  text-align: center;
+}
+
+/* ============ tabs-1 ============= */
+#tabs-1 .myprofile {
+	width: 98%;
+	overflow: hidden;
+	display: flex;
+}
+
+#tabs-1 .myprofile .profile_left {
+	display: flex;
+	align-items: center;
+	/* justify-content: center; */
+	float: left;
+	width: 40%;
+	height: auto;
+}
+
+#tabs-1 .myprofile .profile_left>.img_container {
+	position: relative;
+	display: inline-block;
+	border-radius: 50%;
+	height: auto;
+	vertical-align: middle;
+}
+
+#tabs-1 .myprofile .profile_left  .img_container>.img_contents {
+	text-align: center;
+	vertical-align: middle;
+	height: auto;
+}
+
+#tabs-1 .myprofile .profile_left>.img_container>label::before {
+	content: "";
+	width: 24px;
+	height: 24px;
+	background-image: url("../img/kakao.png");
+	display: inline-block;
+	background-size: cover;
+	position: absolute;
+	/* vertical-align: top; */
+	top: 80%;
+	left: 80%;
+}
+
+#tabs-1 .myprofile .profile_right {
+	float: right;
+	width: 58%;
+}
+
+
+
+/* ============ tabs-2 ============= */
+#tabs-2 .board_list .top div {
+	width: 24.5%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-2 .board_list .post div div {
+	width: 24.5%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+#tabs-2 .board_list .post div .title {
+	width: 24.5%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: left;
+}
+
+/* #tabs-2 .board_list .post div div > a{
+    width: 24.5%;
+    
+} */
+
+/* ========== tabs-3 =========== */
+#tabs-3 .board_list .top div {
+	width: 15.5%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .top .group {
+	width: 20%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-3 .board_list .post div div {
+	width: 15.5%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+#tabs-3 .board_list .post div .group {
+	width: 20%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: left;
+}
+
+/* ========== tabs-4 =========== */
+#tabs-4 .wish_list .top div {
+	width: 15.5%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-4 .wish_list .top .title {
+	width: 20%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-4 .wish_list .post div div {
+	width: 15.5%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+#tabs-4 .wish_list .post div .title {
+	width: 20%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: left;
+	padding-top: 15px;
+}
+
+/* ========== tabs-5 =========== */
+#tabs-5 .like_list .top div {
+	width: 25%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-5 .like_list .top .title {
+	width: 48%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#tabs-5 .like_list .post div div {
+	width: 25%;
+	display: inline-block;
+	font-size: 1.5rem;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+#tabs-5 .like_list .post div .title {
+	width: 48%;
+	display: inline-block;
+	font-size: 2rem;
+	text-align: left;
+	padding-top: 15px;
+}
+
+/* ========== tabs-6 =========== */
+#tabs-6 form label {
+	display: inline-block;
+	width: 25%;
+	font-size: 2rem;
+	text-align: center;
+}
+
+#tabs-6 input {
+	display: inline-block;
+	font-size: 2rem;
+}
+
+/* =========== paging =========== */
+
+.board_page {
+    /* 위로 여백 떨어짐 */
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0;
+}
+
+.board_page .Prev,
+.board_page .pageNum,
+.board_page .Next {
+    display: inline-block;
+    width: 32px;
+    height: 35px;
+    box-sizing: border-box;
+    border: 1px solid rgb(208, 207, 207) ;
+    border-left: 0;
+    vertical-align: middle;
+    line-height: 100%;
+}
+
+/* .board_page a {
+    display: inline-block;
+    width: 32px;
+    height: 35px;
+    box-sizing: border-box;
+    border: 1px solid rgb(208, 207, 207) ;
+    border-left: 0;
+    vertical-align: middle;
+    line-height: 100%;
+} */
+
+.board_page .Prev,
+.board_page .Next {
+    width: 40px;
+    padding-top: 10px;
+    font-size: 1.2rem;
+    /* << 사이 조정 */
+    letter-spacing: -1px;
+    cursor: pointer;
+}
+
+.board_page .pageNum {
+    padding-top: 9px;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+/* .board_page a.num.on {
+    border-color: #2B65F8;
+    background: #2B65F8 ;
+    color: #fff;
+} */
+
+.current {
+    border-color: #2B65F8;
+    background: #2B65F8 ;
+    color: #fff;
+}
+
+.board_page .Prev {
+    border-left: 1px solid rgb(208, 207, 207) ;
+}
+
+.board_page .pageNum {
+    border-left: 1px solid rgb(208, 207, 207) ;
+}
+
+
+/* =========== 마이프로필 수정버튼 =========== */
+.profile_right .bt_wrap {
+	margin-top: 30px;
+	text-align: center;
+	/* font-size=0, 버튼 가운데 여백이 사라짐 */
+	font-size: 0;
+}
+
+.profile_right .bt_wrap button {
+	display: inline-block;
+	min-width: 80px;
+	margin-left: 10px;
+	/* 상,하,좌,우 여백은 10px */
+	padding: 10px;
+	border: 1px solid #000;
+	border-radius: 2px;
+	font-size: 1.4rem;
+	cursor: pointer;
+	background: #2B65F8;
+	color: #fff;
+}
+
+/* margin-left 10px을 주면 전체적으로 오른쪽으로 밀림
+   목록버튼은 자리 유지 */
+.profile_right .bt_wrap button:first-child {
+	margin-left: 0;
+}

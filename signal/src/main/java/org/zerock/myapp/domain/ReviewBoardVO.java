@@ -18,6 +18,7 @@ public class ReviewBoardVO {
 	private Integer readCnt;
 	private Timestamp regiDate;
 	private Timestamp modifyDate;
+	private String area;
 	
 //	private Integer replyCnt;
 	private List<AttachFileDTO> attachList;
@@ -33,7 +34,7 @@ public class ReviewBoardVO {
 		dto.setTitle(title);
 		dto.setContent(content);
 		dto.setAttachList(attachList);
-
+		dto.setArea(area);
 		log.info("\t+ dto: {}");
 
 		return dto;

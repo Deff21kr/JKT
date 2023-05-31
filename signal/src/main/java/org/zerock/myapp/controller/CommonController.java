@@ -1,5 +1,7 @@
 package org.zerock.myapp.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
@@ -160,6 +162,85 @@ public class CommonController {
 		}
 
 	}
+	
+	// 아이디 비밀번호 찾기
+	@GetMapping("/findid")
+	void findIdPw() {
+		log.trace("findIdPw() invoked.");
+		
+	}
+	
+	@GetMapping("/findpw")
+	void findpw() {
+		log.trace("findpw() invoked.");
+		
+	}
+	
+	// 입력받은 이름의 회원 존재 확인
+	@GetMapping("/checkUserName")
+	@ResponseBody
+	public Integer checkUserName(@RequestParam("name")String name) throws ControllerException {
+		try {	
+			return this.service.checkUserName(name);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	}
+	
+	
+	// 입력받은 이메일의 회원 존재 확인
+	@GetMapping("/checkUserEMail")
+	@ResponseBody
+	public Integer checkUserEMail(@RequestParam("EMail")String EMail) throws ControllerException {
+		try {	
+			return this.service.checkUserEMail(EMail);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	}
+	
+	// 입력받은 ID의 회원 존재 확인
+	@GetMapping("/checkUserId")
+	@ResponseBody
+	public Integer checkUserId(@RequestParam("ID")String ID) throws ControllerException {
+		try {	
+			return this.service.checkUserId(ID);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	}
+	
+	
+	// 찾은 아이디 반환
+    @GetMapping("/showId")
+    @ResponseBody
+    public Map<String, Object> showId(@RequestParam("name") String name, @RequestParam("EMail") String EMail) throws ControllerException {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            String ID = this.service.showId(name, EMail);
+            response.put("success", true);
+            response.put("ID", ID);
+        } catch (ServiceException e) {
+            response.put("success", false);
+            response.put("error", e.getMessage());
+        }
+        return response;
+    }
+    
+    // 비밀번호 변경
+    @PostMapping("/changepw")
+    @ResponseBody
+    public Boolean changepw(@RequestParam("ID") String ID, @RequestParam("password") String password) throws ControllerException {
+        log.info("ID : {}, password : {}", ID, password);
+        try {
+        	return this.service.changepw(ID, password);
+        	
+        } catch(Exception e) {
+			throw new ControllerException(e);
+        }
+    }
+	
+	
 
 //		============================================================
 

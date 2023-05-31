@@ -87,7 +87,32 @@
 		WHERE ID = #{ID}
 	</update>
 
+	<update id="changepw">
+		UPDATE tbl_users
+		SET
+		password=#{password}
+		WHERE ID = #{ID}
+	</update>
 	
+		<select id="checkUserName" resultType="int">
+		SELECT count(name) FROM tbl_users
+		where name = #{name}
+	</select>
+
+	<select id="checkUserEMail" resultType="int">
+		SELECT count(EMail) FROM tbl_users
+		where EMail = #{EMail}
+	</select>
+	
+	<select id="showId" resultType="String">
+		SELECT id FROM tbl_users
+		WHERE name = #{name} AND EMail = #{EMail}
+	</select>
+
+	<select id="checkUserId" resultType="int">
+		SELECT count(ID) FROM tbl_users
+		where ID = #{ID}
+	</select>
 
 
 

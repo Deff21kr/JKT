@@ -76,11 +76,26 @@ public interface UsersMapper {
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 			""")
-	public abstract List<GroupBoardDTO> selectPinList(@Param("nickName") String nickName, Criteria cri);
+	public abstract List<GroupBoardDTO> selectPinList(@Param("nickName") String nickName, @Param("cri")Criteria cri);
 
 	// 11. 찜 내역의 찜 총 개수
 	@Select("""
 			select count(nickName) FROM TBL_PIN WHERE nickName = #{nickName}
 			""")
 	public abstract Integer getPinList(@Param("nickName") String nickName);
+	
+	// 12. 회원이름 조회
+	public abstract Integer checkUserName(String name);
+	
+	// 13. 회원이메일 조회
+	public abstract Integer checkUserEMail(String EMail);
+	
+	// 14. 찾은 id 반환
+	public abstract String showId(String name, String EMail);
+	
+	// 15. 회원ID 조회
+	public abstract Integer checkUserId(String EMail);
+	
+	// 16. 비밀번호 변경
+	public abstract Boolean changepw(String ID, String password);
 }

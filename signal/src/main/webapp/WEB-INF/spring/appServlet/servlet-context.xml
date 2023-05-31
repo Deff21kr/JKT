@@ -71,8 +71,6 @@
 		<beans:constructor-arg value="C:/Upload" />
 	</beans:bean>
 
-
-	
 	
 	<!-- 일반 파일 업로드 경로 -->
 	

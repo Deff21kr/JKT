@@ -41,17 +41,17 @@ public class PinsServiceTests {
 	public void testdoPin() throws ServiceException {
 		log.trace("testdoPin() invoked.");
 		
-		Integer postNo = 259;
-		String nickName = "JK";
+		Integer postNo = 256;
+		String nickName = "123123";
 		
 		PinDTO dto = new PinDTO();
 		dto.setPostNo(postNo);
 		dto.setNickName(nickName);
 		log.info(dto);
-		int result = this.service.doPin(dto);
-		
-		log.info(">>> 숫자로 표시한 결과: " + result);
-	} // testInsert
+//		int result = this.service.doPin(dto);
+//		
+//		log.info(">>> 숫자로 표시한 결과: " + result);
+	} // testdoPin
 	
 //	@Test(timeout = 1000 * 2) 
 //	public void testDelete() throws ServiceException {

@@ -13,7 +13,7 @@
 <title>마이페이지</title>
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/mypageStyle.css">
+	href="${pageContext.request.contextPath }/resources/css/mypage2Style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
 
@@ -187,13 +187,20 @@
 				    });
 				  });
 				});
-
-		$(function(){
-			$('.rateBtn').click(function(){
-				location.replace('/user/mypage#tabs-3');
+	
+			$(function(){
+				$('.rateBtn').click(function(){
+					location.replace('/user/mypage#tabs-3');
+				})
 			})
-		})
-				
+			
+			$(function() {
+				$('.pin').on('click', function(e) {
+					var postNum = $(this).find('.pinPostNo').val();
+						location = '/board/group/get?postNo='+ postNum + '&currPage=1';
+				});
+			});
+					
 
 				</script>
 
@@ -324,6 +331,11 @@
 .board_list>.post>.writeList>div{
 	cursor: pointer;
 }
+
+#tabs-4 > div > div.post > .pin{
+	cursor: pointer;
+}
+
 </style>
 
 </head>
@@ -604,7 +616,8 @@
 					<!-- 불러올 작성글 대략 10개정도 -->
 					<div class="post">
 					<c:forEach var="pin" items="${__pinList__}">
-						<div>
+						<div class="pin">
+						<input type="hidden" class="pinPostNo" value="${pin.postNo}">
 						<div class="group">${pin.groupName}</div>
 						<div class="title">${pin.title}</div>
 						<div class="area">${pin.area}</div>

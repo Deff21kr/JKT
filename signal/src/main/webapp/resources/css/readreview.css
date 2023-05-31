@@ -145,8 +145,8 @@ hr {
     color: #ffffff;
 }
 
-span {
-	margin-right: 3px;
+.likecount {
+	margin-right: 18px;
 	font-size: 15px;
 	color: #2B65F8;
 }

@@ -89,6 +89,7 @@
 }
 
 .card .image {
+  cursor: pointer;
   height: 65%;
   width: 100%;
 }

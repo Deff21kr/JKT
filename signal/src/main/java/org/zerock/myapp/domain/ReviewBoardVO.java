@@ -16,6 +16,7 @@ public class ReviewBoardVO {
 	private String content;
 	
 	private Integer readCnt;
+//	private Integer likes;
 	private Timestamp regiDate;
 	private Timestamp modifyDate;
 	

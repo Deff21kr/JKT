@@ -71,7 +71,7 @@ public class CommonController {
 				}
 
 			} else {
-				rttrs.addAttribute("__RESULT__", "로그인 실패..");
+				rttrs.addAttribute("__RESULT__", "로그인 실패.");
 				return "redirect:/common/loginPost"; // 다시 로그인 페이지로
 			}
 		} catch (Exception e) {
@@ -112,9 +112,9 @@ public class CommonController {
 	} // 회원가입창으로 이동
 
 	@GetMapping("/register")
-	String register() {
+	void register() {
 		log.trace("join() invoked.");
-		return "redirect:/common/register";
+//		return "/common/register";
 
 	}
 

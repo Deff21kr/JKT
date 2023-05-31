@@ -49,7 +49,6 @@ fieldset {
 }
 
 
-
 #hr-line {
   height: 5rem;
   width: 100%;
@@ -158,6 +157,9 @@ button {
   cursor: pointer;
   border-radius: 5px;
 }
+.signBtn:hover{
+  background: rgb(0, 98, 231);
+}
 
 .rememberme {
 	display: flex;
@@ -166,6 +168,10 @@ button {
 	font-size: 15px;
 	height : 30px;
 	padding: 0.3rem 1rem;
+}
+
+.rememberme a {
+  margin-right: 20px;
 }
 
 

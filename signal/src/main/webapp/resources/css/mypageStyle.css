@@ -50,16 +50,20 @@ html {
 #tabs-1 .myprofile {
 	width: 98%;
 	overflow: hidden;
-	display: flex;
+	display: grid;
+    margin: auto;
+    position: initial;
 }
 
 #tabs-1 .myprofile .profile_left {
 	display: flex;
-	align-items: center;
+	align-items: self-end;
 	/* justify-content: center; */
 	float: left;
-	width: 40%;
-	height: auto;
+	width: 28%;
+    height: 240px;
+    margin: auto;
+    border: 1px solid;
 }
 
 #tabs-1 .myprofile .profile_left>.img_container {
@@ -92,6 +96,7 @@ html {
 #tabs-1 .myprofile .profile_right {
 	float: right;
 	width: 58%;
+	margin: auto;
 }
 
 #tabs-1 .myprofile .profile_right div {

@@ -39,16 +39,17 @@ public class PinMapperTests {
     public void testInsert() throws Exception {
     	log.info("testInsert() invoked.");
     	
-    	Integer postNo = 268;
-    	String nickName = "hyeonna";
+    	Integer postNo = 256;
+    	String nickName = "123123";
     	
     	PinDTO pin = new PinDTO();
     	pin.setPostNo(postNo);
     	pin.setNickName(nickName);
+    	log.info(pin);
     	
     	int result = 0;
     	result = mapper.insert(pin);
-    	
+  	
     	log.info(">>> 결과: " + result);
     	
     } // testInsert

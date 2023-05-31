@@ -365,9 +365,11 @@
 				<div class="myprofile">
 			
 					<div class="profile_left">
-						<label for="image"></label>
-         				<img src="/edit?file={__AUTH__.fileName}"/>
-   					</div>
+   <img src="/imgs/f46df139-5e6d-4138-bac5-b238928ac268_r2.jpg" />
+
+</div>
+
+
 
 					   <div class="profile_right">
 						<div>

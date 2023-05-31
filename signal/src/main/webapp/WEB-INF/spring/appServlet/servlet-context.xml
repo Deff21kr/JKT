@@ -66,11 +66,10 @@
    </beans:bean>
    
    
-	<!--  
+	
 	<beans:bean class="java.lang.String" id="uploadPath">
 		<beans:constructor-arg value="C:/Upload" />
 	</beans:bean>
-	-->
 	
 <beans:bean class="java.lang.String" id="uploadPath">
     <beans:constructor-arg value="JKT/signal/src/main/webapp/resources/img" />
@@ -81,11 +80,8 @@
 	
 	<!-- 일반 파일 업로드 경로 -->
 	
-<resources mapping="/imgUpload/**" location="classpath:/imgUpload/" />
-<resources mapping="/imgs/**" location="classpath:/webapp/resources/img/" />
-
-	
-<!--  	<resources mapping="/imgs/**" 	location="file:///C:/Upload/" /> -->
+	<resources mapping="/imgUpload/**" 	location="resources/imgUpload/" /> 
+  	<resources mapping="/imgs/**" 	location="file:///C:/Upload/" /> 
 	<!-- 현재 / 제거 상태 -->
 
 
@@ -101,4 +97,3 @@
    <context:component-scan base-package="org.zerock.myapp.utils" /> 
    
 </beans:beans>
-

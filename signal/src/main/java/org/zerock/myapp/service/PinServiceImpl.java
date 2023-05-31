@@ -29,7 +29,7 @@ public class PinServiceImpl
 
 	@Override
 	public Integer doPin(PinDTO pin) throws ServiceException {
-		log.trace("insert() asdsaddassaddasdas.");
+		log.trace("doPin() asdsaddassaddasdas.");
 		
 		try {
 			

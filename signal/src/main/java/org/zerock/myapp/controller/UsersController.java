@@ -287,22 +287,6 @@ public class UsersController {
 
 	}
 
-	// 프로필 글쓴 내역 보기
-//		@PostMapping(path = "/mypage/writeList")
-//		void myPageWriterList(UsersDTO dto, Model model) throws ControllerException {
-//			log.info("mypageWriterList 호추ㅜ루룰우룽루ㅜ :({})", dto);
-//			try {
-//				UsersVO vo = this.service.selectWriteList(dto.getNickName());
-//				model.addAttribute("_LIST_", vo);
-//			} catch(Exception e) {
-//				throw new ControllerException(e);
-//			}
-//		}
-//		
-//		@GetMapping(path="mypage")
-//		void myPageWriterListMapping() {
-//			
-//		}
 
 	// 평점 제출
 	@PostMapping("/rate")

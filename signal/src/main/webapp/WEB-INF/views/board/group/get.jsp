@@ -39,7 +39,7 @@
                 var getEndDate= params.get('endDate');
                 var getMemberNum= params.get('memberNum');
                 var getRecruitStatus= params.get('recruitStatus');
-        		
+        		console.log("search : " +searchParam );
         		var queryParams = "?currPage=" + getCurrPage +
         		                    "&area=" + getArea +
         		                    "&startDate=" + getStartDate +
@@ -52,7 +52,14 @@
 					    console.log(getEndDate);
 					    console.log(getMemberNum);
 					    console.log(getRecruitStatus);
-        		  location.href = "/board/group/searchList" + queryParams;
+					    
+				    if (searchParam.startsWith("?postNo=")) {
+			            location.href = "/board/group/list?currPage=" + getCurrPage;
+			        } else if (searchParam.startsWith("?currPage=")) {
+			        	location.href = "/board/group/list?currPage=" + getCurrPage;
+			        } else {
+			            location.href = "/board/group/searchList" + queryParams;
+			        }
               });
 
           $('#modifyBtn').click(function() {

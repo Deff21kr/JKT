@@ -197,7 +197,7 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 			String hashedPassword = this.encoder.encode(password);
 			dto.setPassword(hashedPassword);
 			
-			return this.dao.changepw(ID, password);
+			return this.dao.changepw(ID, hashedPassword);
 			
 		} catch(Exception e) {
 			throw new ServiceException(e);

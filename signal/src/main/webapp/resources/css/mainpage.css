@@ -286,7 +286,15 @@
   width: 100%;
 }
 
-.review-card .image img {
+.review-card > .image > a, 
+.review-card > .image > a > div{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+
+.review-card > .image > a > div > img {
   height: 100%;
   width: 100%;
   object-fit: cover;

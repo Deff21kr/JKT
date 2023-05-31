@@ -70,10 +70,6 @@
 	<beans:bean class="java.lang.String" id="uploadPath">
 		<beans:constructor-arg value="C:/Upload" />
 	</beans:bean>
-	
-<beans:bean class="java.lang.String" id="uploadPath">
-    <beans:constructor-arg value="JKT/signal/src/main/webapp/resources/img" />
-</beans:bean>
 
 
 	

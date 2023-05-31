@@ -76,7 +76,7 @@ public interface UsersMapper {
 				OFFSET (#{cri.currPage} -1) * #{cri.amount} ROWS
 				FETCH NEXT #{cri.amount} ROWS ONLY
 			""")
-	public abstract List<GroupBoardDTO> selectPinList(@Param("nickName") String nickName, Criteria cri);
+	public abstract List<GroupBoardDTO> selectPinList(@Param("nickName") String nickName, @Param("cri") Criteria cri);
 
 	// 11. 찜 내역의 찜 총 개수
 	@Select("""

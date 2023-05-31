@@ -13,7 +13,7 @@
 <title>마이페이지</title>
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/mypageStyle.css">
+	href="${pageContext.request.contextPath }/resources/css/mypage2Style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bstyle2.css">
 

@@ -1,5 +1,6 @@
 package org.zerock.myapp.interceptor;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 
 import javax.servlet.http.Cookie;
@@ -119,7 +120,18 @@ public class LoginInterceptor implements HandlerInterceptor {
 //				}
 //			
 			
-		} 
+		} else {
+	        // 로그인 실패 시 처리
+	        String result = (String) req.getSession().getAttribute("__RESULT__");
+	        if (result != null && result.equals("실패")) {
+	            // 로그인 실패 메시지를 모델에 추가
+	            modelAndView.addObject("errorMsg", "로그인에 실패했습니다. 다시 시도해주세요.");
+	            // 로그인 페이지로 리다이렉트
+	            res.sendRedirect("/common/loginPost");
+	            return; // 리다이렉트 후에는 메서드를 종료하여 중복 호출을 방지합니다.
+	        }
+		}
+		
 	} // postHandle
 	
 	
@@ -137,7 +149,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	
 	
 	// 조건1: 인증성공여부 반환
-	private boolean isAuthenticated(HttpServletRequest req) {	// 인증성공되었는가!?
+	private boolean isAuthenticated(HttpServletRequest req) throws IOException {	// 인증성공되었는가!?
 		log.trace("isAuthenticated(req) invoked.");
 		
 		HttpSession session = req.getSession(false);

@@ -192,7 +192,7 @@ html {
 .board_list > div.top >.member {
     width: 10%;
 }
-.board_list > div.top >.current {
+.board_list > div.top >.currmem {
     width: 10%;
 }
 
@@ -224,16 +224,16 @@ html {
 .board_list_post .member {
     width: 10%;
 }
-.board_list_post .current {
+.board_list_post .currmem {
     width: 10%;
 }
 
 
 .board_page {
-    /* 위로 여백 떨어짐 */
-    margin-top: 30px;
+    padding-top: 20px;
     text-align: center;
     font-size: 0;
+    padding-bottom: 20px;
 }
 
 .board_page .Prev,

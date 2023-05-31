@@ -71,21 +71,22 @@
 					});
 				});
 
-				/* $(function() {
-					$('.myGroup').on('click', function(e) {
-						var content = $(this).nextUntil('.myGroup');
-						if (content.css('display') === 'none' && ($(this).find('.status').html() === '수락' || $(this).find('.status').html() === '본인')) {
-							
-							content.css('display', 'block');
-							content.last().css('border-bottom', '1px solid');
-							content.css('border-left', '1px solid');
-							content.css('border-right', '1px solid')
-							
-						} else {
-							content.css('display', 'none');
+				$(function() {
+					$('.writeList').on('click', function(e) {
+						var postNum = $(this).find('.postNum').val();
+						var boardName = $(this).find('.board').html();
+						if(boardName == 'QnA'){
+							console.log('============>', boardName)
+							location = '/board/qna/get?postNo='+ postNum;
+						} else if(boardName == '동행찾기'){
+							console.log('============>', boardName)
+							location = '/board/group/get?postNo='+ postNum;
+						} else if(boardName == '여행후기'){
+							console.log('============>', boardName)
+							location = '/board/review/get?postNo='+ postNum;
 						}
 					});
-				}); */
+				});
 				
 				$(document).ready(function() {
 					  $('#rateForm').submit(function(e) {
@@ -95,15 +96,15 @@
 
 					    // AJAX 요청 생성
 					    $.ajax({
-					      url: $(this).attr('action'), // 폼의 action 속성 값
-					      type: $(this).attr('method'), // 폼의 method 속성 값
+					      url: '/user/rate', // 폼의 action 속성 값
+					      type: 'post',
 					      data: $(this).serialize(), // 폼 데이터 직렬화
 					      success: function(response) {
 					    	  
 					        // 성공적으로 요청을 보냈을 때 수행할 작업
 					        console.log('AJAX 요청 성공');
-					        button.prop('disabled', true);
-					        alert(response);
+					       // button.prop('disabled', true);
+					        //alert(response);
 					      },
 					      error: function(xhr, status, error) {
 					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
@@ -112,7 +113,7 @@
 					        console.log('오류:', error);
 					        
 					        button.prop('disabled', false);
-					      	alert(response);
+					      	alert(data);
 
 					      }
 					    });
@@ -123,6 +124,13 @@
 				$(document).ready(function() {
 					$('.myGroup').off('click').on('click', function(e) {
 						
+					if($('.content3').length > 0 ){
+						var content = $(this).nextUntil('.myGroup');
+						content.hide();
+						$('.content3').remove();
+						return false;
+					}
+					
 					if($(this).find('.status').html() == '진행중' || $(this).find('.status').html() == '거절'){
 						return false;
 					}
@@ -132,7 +140,7 @@
 				    var bro = $(this).next();
 				    var clonedBrother = brother.clone();
 				    var closestMyGroup = $(this).closest('.myGroup');
-				    
+
 				    $('.content2').addClass('hide');
 				    $('.content').addClass('hide');
 					$('.content3').remove(); // 모든 content3 클래스 제거
@@ -307,6 +315,10 @@
 .result>button[type="submit"] {
 	cursor: pointer;
 }
+
+.board_list>.post>.writeList>div{
+	cursor: pointer;
+}
 </style>
 
 </head>
@@ -351,9 +363,10 @@
 
 
 				<div class="myprofile">
-
+			
 					<div class="profile_left">
-         				<!-- <img src="/imgs/${__AUTH__.fileName}"> -->
+						<label for="image"></label>
+         				<img id="fileName" src="/imgs/${fileName}"/>
    					</div>
 
 					   <div class="profile_right">
@@ -417,8 +430,8 @@
 
 					<div class="post">
 						<c:forEach var="item" items="${_LIST_}">
-							<input type="hidden" name="nickName" value="${item.nickName}">
-							<div id="wirteList">
+							<div class="writeList">
+								<input type="hidden" class="postNum" name="postNo" value="${item.postNo}">
 								<div class="board">${item.boardName}</div>
 								<div class="title">${item.title}</div>
 								<div class="writer">${item.nickName}</div>
@@ -523,9 +536,8 @@
 
 								<form action="/user/rate" method="post" class="rateresult" id="rateForm">
 									<div class="rate" style="padding: 5px 0px;">
-										<input type="hidden" name="raterUserNickName"
-											value="${__AUTH__.nickName}"> <input type="hidden"
-											name="ratedUserNickName" class="ratedUserNickName" value="">
+										<input type="hidden" name="raterUserNickName" value="${__AUTH__.nickName}"> 
+										<input type="hidden" name="ratedUserNickName" class="ratedUserNickName" value="">
 
 										<c:forEach begin="1" end="5" step="1" varStatus="numA">
 											<c:set var="counter" value="${counter + 1}" />
@@ -537,21 +549,12 @@
 
 									</div>
 									<div class="result">
-										<button id="" type="submit">제출</button>
+										<button id="rateForm" type="submit">제출</button>
 									</div>
 
 								</form>
 							</div>
 						</c:forEach>
-
-
-
-
-
-
-
-
-
 
 					</div>
 
@@ -593,66 +596,37 @@
 					</div>
 					<!-- 불러올 작성글 대략 10개정도 -->
 					<div class="post">
+					<c:forEach var="pin" items="${__pinList__}">
 						<div>
-							<div class="group">우리동행</div>
-							<div class="title">
-								<a href="#">서울ㄲㄲ?</a>
-							</div>
-							<div class="area">서울</div>
-							<div class="startDate">2022-01-01</div>
-							<div class="endDate">2022-01-03</div>
-							<div class="status">현황</div>
+						<div class="group">${pin.groupName}</div>
+						<div class="title">${pin.title}</div>
+						<div class="area">${pin.area}</div>
+						<div class="startDate">${pin.startDate}</div>
+						<div class="endDate">${pin.endDate}</div>
+						<div class="status">${pin.recruitStatus}</div>
 						</div>
-						<div>
-							<div class="group">쟤네동행</div>
-							<div class="title">
-								<a href="#">나랑ㄲㄲ?</a>
-							</div>
-							<div class="area">대전</div>
-							<div class="startDate">2022-06-05</div>
-							<div class="endDate">2022-0103</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">얘네동행</div>
-							<div class="title">
-								<a href="#">현댂ㄲ?</a>
-							</div>
-							<div class="area">대구</div>
-							<div class="startDate">2022-09-09</div>
-							<div class="endDate">2022-11-05</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">남의동행</div>
-							<div class="title">
-								<a href="#">부산ㄲㄲ?</a>
-							</div>
-							<div class="area">부산</div>
-							<div class="startDate">2023-01-01</div>
-							<div class="endDate">2023-01-01</div>
-							<div class="status">현황</div>
-						</div>
-						<div>
-							<div class="group">바보동행</div>
-							<div class="title">
-								<a href="#">바보임</a>
-							</div>
-							<div class="area">일본</div>
-							<div class="startDate">2023-01-03</div>
-							<div class="endDate">2023-02-02</div>
-							<div class="status">현황</div>
-						</div>
+						</c:forEach>
 
 					</div>
 
 					<div class="board_page">
-						<a href="#" class="bt first"> < <</a> <a href="#" class="bt prev">
-							< </a> <a href="#" class="num on">1</a> <a href="#" class="num">2</a>
-						<a href="#" class="num">3</a> <a href="#" class="num">4</a> <a
-							href="#" class="num">5</a> <a href="#" class="bt next"> > </a> <a
-							href="#" class="bt last"> > > </a>
+						<c:if test="${pinPageMaker.prev}">
+							<div class="Prev">
+								<a href="/user/mypage?currPage=${pinPageMaker.startPage - 1}">Prev</a>
+							</div>
+						</c:if>
 
+						<c:forEach var="pageNum" begin="${pinPageMaker.startPage}"
+							end="${pinPageMaker.endPage}">
+							<div
+								class="pageNum ${pinPageMaker.cri.currPage == pageNum? 'current':''}">${pageNum}</div>
+						</c:forEach>
+
+						<c:if test="${pinPageMaker.next}">
+							<div class="Next">
+								<a href="/user/mypage?currPage=${pinPageMaker.endPage + 1}">Next</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>

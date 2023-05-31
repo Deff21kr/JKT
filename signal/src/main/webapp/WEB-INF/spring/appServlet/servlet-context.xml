@@ -66,18 +66,26 @@
    </beans:bean>
    
    
-   	<beans:bean class="java.lang.String" id="uploadPath">
+	<!--  
+	<beans:bean class="java.lang.String" id="uploadPath">
 		<beans:constructor-arg value="C:/Upload" />
 	</beans:bean>
+	-->
+	
+	<beans:bean class="java.lang.String" id="uploadPath">
+		<beans:constructor-arg value="resources/img" />
+	</beans:bean>
 
+
+	
 	
 	<!-- 일반 파일 업로드 경로 -->
 	
 	<resources mapping="/imgUpload/**" 	location="resources/imgUpload/" /> 
-	
-	<resources mapping="/imgs/**" 	location="file:///C:/Upload/" />
-	
+	<resources mapping="/imgs/**" 	location="file://resources/img/" />
+<!--  	<resources mapping="/imgs/**" 	location="file:///C:/Upload/" /> -->
 	<!-- 현재 / 제거 상태 -->
+
 
 	
    

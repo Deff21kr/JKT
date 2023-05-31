@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
   <!DOCTYPE html>
   <html lang="ko">
@@ -23,7 +24,24 @@
     <!-- script -->
     <script src="../../resources/js/mainpage.js" defer></script>
     <script src="../../resources/js/review.js" defer></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     
+	<script>
+		$(function() {
+			$('.content > .card > .image').on('click', function(e) {
+				var postNum = $(this).prev().val();
+				location = '/board/group/get?postNo='+ postNum;
+			});
+		});
+		
+		$(function() {
+			$('.content > .card > .detail').on('click', function(e) {
+				var postNum = $(this).prev().prev().prev().val();
+				location = '/board/group/get?postNo='+ postNum;
+			});
+		});
+	</script>
 
   </head>
 
@@ -44,222 +62,40 @@
     <div class="container">
       <i id="left" class="fa-solid fa-angle-left"></i>
       <div class="content">
+          
+          <c:forEach items="${__GROUPBOARD__}" var="groupVO">
           <div class="card">
+          	  <input type="hidden" class="postNum" value="${groupVO.postNo}">
               <div class="image">
                   <img src="../../resources/img/9.png" alt="">
               </div>
 
               <div class="recruit-status">
-                  <button type="button" id="recruitBtn">모집중</button>
+                  <button type="button" id="recruitBtn">${groupVO.recruitStatus}</button>
               </div>
 
               <div class="detail">
                 <div class="info">
-                    <button type="button" id="area">전라</button>
-                    <button type="button" id="day">2023/05/19~2023/05/27</button>
+                    <button type="button" id="area">${groupVO.area}</button>
+                    <button type="button" id="day">
+	                    <fmt:formatDate value="${groupVO.startDate}"
+							pattern="yyyy/MM/dd" />
+											~
+						<fmt:formatDate value="${groupVO.endDate}"
+							pattern="yyyy/MM/dd" />
+                    </button>
                 </div>
 
-                <div class="title">2박 3일 서울여행 동행 구함</div>
+                <div class="title">${groupVO.title}</div>
               
                 <div class="profile">
                     <img src="../../resources/img/profile.jpg" alt="">
-                    <span class="nickName">Hyeon</span>
+                    <span class="nickName">${groupVO.nickName}</span>
                 </div>
               </div>
           </div>
+          </c:forEach>
 
-          <div class="card">
-            <div class="image">
-                <img src="../../resources/img/9.png" alt="">
-            </div>
-
-            <div class="recruit-status">
-                <button type="button" id="recruitBtn">모집중</button>
-            </div>
-
-            <div class="detail">
-              <div class="info">
-                  <button type="button" id="area">전라</button>
-                  <button type="button" id="day">2023/05/19~2023/05/27</button>
-              </div>
-
-              <div class="title">2박 3일 서울여행 동행 구함</div>
-            
-              <div class="profile">
-                  <img src="../../resources/img/profile.jpg" alt="">
-                  <span class="nickName">Hyeon</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="image">
-                <img src="../../resources/img/9.png" alt="">
-            </div>
-
-            <div class="recruit-status">
-                <button type="button" id="recruitBtn">모집중</button>
-            </div>
-
-            <div class="detail">
-              <div class="info">
-                  <button type="button" id="area">전라</button>
-                  <button type="button" id="day">2023/05/19~2023/05/27</button>
-              </div>
-
-              <div class="title">2박 3일 서울여행 동행 구함</div>
-            
-              <div class="profile">
-                  <img src="../../resources/img/profile.jpg" alt="">
-                  <span class="nickName">Hyeon</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="image">
-                <img src="../../resources/img/9.png" alt="">
-            </div>
-
-            <div class="recruit-status">
-                <button type="button" id="recruitBtn">모집중</button>
-            </div>
-
-            <div class="detail">
-              <div class="info">
-                  <button type="button" id="area">전라</button>
-                  <button type="button" id="day">2023/05/19~2023/05/27</button>
-              </div>
-
-              <div class="title">2박 3일 서울여행 동행 구함</div>
-            
-              <div class="profile">
-                  <img src="../../resources/img/profile.jpg" alt="">
-                  <span class="nickName">Hyeon</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="image">
-                <img src="../../resources/img/9.png" alt="">
-            </div>
-
-            <div class="recruit-status">
-                <button type="button" id="recruitBtn">모집중</button>
-            </div>
-
-            <div class="detail">
-              <div class="info">
-                  <button type="button" id="area">전라</button>
-                  <button type="button" id="day">2023/05/19~2023/05/27</button>
-              </div>
-
-              <div class="title">2박 3일 서울여행 동행 구함</div>
-            
-              <div class="profile">
-                  <img src="../../resources/img/profile.jpg" alt="">
-                  <span class="nickName">Hyeon</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="image">
-                <img src="../../resources/img/9.png" alt="">
-            </div>
-
-            <div class="recruit-status">
-                <button type="button" id="recruitBtn">모집중</button>
-            </div>
-
-            <div class="detail">
-              <div class="info">
-                  <button type="button" id="area">전라</button>
-                  <button type="button" id="day">2023/05/19~2023/05/27</button>
-              </div>
-
-              <div class="title">2박 3일 서울여행 동행 구함</div>
-            
-              <div class="profile">
-                  <img src="../../resources/img/profile.jpg" alt="">
-                  <span class="nickName">Hyeon</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="image">
-                <img src="../../resources/img/9.png" alt="">
-            </div>
-
-            <div class="recruit-status">
-                <button type="button" id="recruitBtn">모집중</button>
-            </div>
-
-            <div class="detail">
-              <div class="info">
-                  <button type="button" id="area">전라</button>
-                  <button type="button" id="day">2023/05/19~2023/05/27</button>
-              </div>
-
-              <div class="title">2박 3일 서울여행 동행 구함</div>
-            
-              <div class="profile">
-                  <img src="../../resources/img/profile.jpg" alt="">
-                  <span class="nickName">Hyeon</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="image">
-                <img src="../../resources/img/9.png" alt="">
-            </div>
-
-            <div class="recruit-status">
-                <button type="button" id="recruitBtn">모집중</button>
-            </div>
-
-            <div class="detail">
-              <div class="info">
-                  <button type="button" id="area">전라</button>
-                  <button type="button" id="day">2023/05/19~2023/05/27</button>
-              </div>
-
-              <div class="title">2박 3일 서울여행 동행 구함</div>
-            
-              <div class="profile">
-                  <img src="../../resources/img/profile.jpg" alt="">
-                  <span class="nickName">Hyeon</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="image">
-                <img src="../../resources/img/9.png" alt="">
-            </div>
-
-            <div class="recruit-status">
-                <button type="button" id="recruitBtn">모집중</button>
-            </div>
-
-            <div class="detail">
-              <div class="info">
-                  <button type="button" id="area">전라</button>
-                  <button type="button" id="day">2023/05/19~2023/05/27</button>
-              </div>
-
-              <div class="title">2박 3일 서울여행 동행 구함</div>
-            
-              <div class="profile">
-                  <img src="../../resources/img/profile.jpg" alt="">
-                  <span class="nickName">Hyeon</span>
-              </div>
-            </div>
-          </div>
-          
       </div>
       <i id="right" class="fa-solid fa-angle-right"></i>
     </div>
@@ -473,48 +309,17 @@
     <div class="middle">
       <div class="middle-content">
         <ul>
-          <li>
-            <a href="#" target="_self">
-              <span>Q&A</span>
-              2박 3일 서울 추천코스 알려주세요!
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_self">
-              <span>Q&A</span>
-              2박 3일 서울 추천코스 알려주세요!
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_self">
-              <span>Q&A</span>
-              2박 3일 서울 추천코스 알려주세요!
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_self">
-              <span>Q&A</span>
-              2박 3일 서울 추천코스 알려주세요!
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_self">
-              <span>Q&A</span>
-              2박 3일 서울 추천코스 알려주세요!
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_self">
-              <span>Q&A</span>
-              2박 3일 서울 추천코스 알려주세요!
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_self">
-              <span>Q&A</span>
-              2박 3일 서울 추천코스 알려주세요!
-            </a>
-          </li>
+          <c:forEach items="${__QNA__}" var="QnAVO">
+          
+	          <li>
+	            <a href="/board/qna/get?postNo=${QnAVO.postNo}" target="_self">
+	              <span>Q&A</span>
+	              ${QnAVO.title}
+	            </a>
+	          </li>
+          
+          </c:forEach>
+          
         </ul>
       </div>
     </div>

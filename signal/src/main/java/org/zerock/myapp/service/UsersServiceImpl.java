@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zerock.myapp.domain.Criteria;
+import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
 import org.zerock.myapp.exception.ControllerException;
@@ -176,7 +177,8 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		log.trace("\n*********************************************************\n			destroy() "
 				+ "\n********************************************************* ");
 	}
-
+	
+	// 글쓴 내역
 	@Override
 	public List<UsersDTO> selectWriteList(String nickName, Criteria cri) throws ServiceException {
 		try {
@@ -186,14 +188,38 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		}
 		
 	}
-
+	
+	// 글쓴 내역의 총 개수
 	@Override
 	public Integer getWriterList(String nickName) throws ServiceException {
-		return this.dao.getWriteList(nickName);
+		try {
+			return this.dao.getWriteList(nickName);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+		
 	}
-
 	
-
+	// 찜 리스트
+	@Override
+	public List<GroupBoardDTO> selectPinLists(String nickName, Criteria cri) throws ServiceException {
+		try {
+		return this.dao.selectPinList(nickName, cri);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	// 찜 총 개수
+	@Override
+	public Integer getPinList(String nickName) throws ServiceException {
+		try {
+		return this.dao.getPinList(nickName);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
 
 //	======================================================
 

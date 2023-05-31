@@ -141,6 +141,9 @@ div>ul>li>span {
 }
 
 .board_page {
+	position: absolute;
+	left:50%;
+	bottom: 35px;
 	/* 위로 여백 떨어짐 */
 	margin-top: 30px;
 	text-align: center;
@@ -223,7 +226,7 @@ div>ul>li>span {
 		</div>
 
 		<div class="maincontent"
-			style="border: 1px solid gainsboro; width: 1113px; min-height: 700px; margin: 0px auto 40px; border-radius: 20px; padding: 20px 0px;">
+			style="position:relative; border: 1px solid gainsboro; width: 1113px; min-height: 700px; margin: 0px auto 40px; border-radius: 20px; padding: 20px 0px;">
 
 			<c:if test="${not empty __AUTH__.nickName}">
 				<c:forEach var="MyPlanVO" items="${__MYPLAN__}">

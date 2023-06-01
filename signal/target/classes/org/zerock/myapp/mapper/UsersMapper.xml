@@ -87,6 +87,7 @@
 		WHERE ID = #{ID}
 	</update>
 
+
 	<update id="changepw">
 		UPDATE tbl_users
 		SET
@@ -94,7 +95,7 @@
 		WHERE ID = #{ID}
 	</update>
 	
-		<select id="checkUserName" resultType="int">
+	<select id="checkUserName" resultType="int">
 		SELECT count(name) FROM tbl_users
 		where name = #{name}
 	</select>

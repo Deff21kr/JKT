@@ -3,6 +3,9 @@ package org.zerock.myapp.controller;
 import java.util.List;
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -128,7 +131,7 @@ public class GroupBoardController {
    
    // 3. 특정 게시물 상세조회
     @GetMapping(path={"/get", "/modify"},  params = "postNo")
-    void get(@RequestParam Integer postNo, Model model, CommentCriteria commentCri, @Param("currPage") Integer currPage, RedirectAttributes rttrs) throws  ControllerException {
+    void get(@RequestParam Integer postNo, Model model, CommentCriteria commentCri, Criteria cri,@Param("currPage") Integer currPage, RedirectAttributes rttrs) throws  ControllerException {
         log.trace("get() invoked.");
 
         try{
@@ -138,6 +141,10 @@ public class GroupBoardController {
             List<GroupBoardCommentVO> commentList = this.commentService.selectList(commentCri, postNo);
             model.addAttribute("__COMMENT_LIST__", commentList);
             log.info("\t+ 댓글 조회된다아아아아");
+            
+            List<GroupBoardDTO> groupBoardDTO = this.user.selectPinLists(vo.getNickName(), cri);
+            log.info("groupBoard: {}***********************************", groupBoardDTO);
+            model.addAttribute("__pinList__", groupBoardDTO);
             
             Integer readCnt = this.service.plusReadcnt(postNo);
             

@@ -19,6 +19,7 @@
             <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
             <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
             <script>
+
                $(function () {
                   $("#container").tabs();
                   heightStyle: "content"
@@ -87,70 +88,49 @@
                      });
                   });
 
-						//   ============ 이메일 인증 ===================
-						let code = '';
-						$('#mail_Check_Btn').click(function () {
-							const EMail = $('#EMail').val(); // 이메일 주소값 얻어오기!
-							console.log('완성된 이메일 : ' + EMail); // 이메일 오는지 확인
-							const checkInput = $('#mail_Check_Input') // 인증번호 입력하는곳 
-							var name = $('#name').val();
-							var ID = $('#ID').val();
-
-							$.ajax({
-								url: '${pageContext.request.contextPath}/common/IDEMail',
-								type: 'get',
-								data: {
-									ID: ID,
-									name: name,
-									EMail: EMail
-								},
-								dataType: 'json',
-								success: function (data) {
-
-									if (data == 1) {
-										$.ajax({
-											type: 'get',
-											url: "${pageContext.request.contextPath}/common/mailCheck?EMail=" + EMail, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
-
-											success: function (data) {
-												console.log("data : " + data);
-												checkInput.attr('disabled', false);
-												code = data;
-												alert('인증번호가 전송되었습니다.')
-											}
-										}); // end ajax
-									} else {
-										alert("등록된 이메일이 아닙니다.");
-									}
-								},
-								error: function () {
-									console.log("실패");
-								}
-							});
-
-
-
-						}); // end send eamil
-
                   //   ============ 이메일 인증 ===================
                   let code = '';
                   $('#mail_Check_Btn').click(function () {
                      const EMail = $('#EMail').val(); // 이메일 주소값 얻어오기!
                      console.log('완성된 이메일 : ' + EMail); // 이메일 오는지 확인
                      const checkInput = $('#mail_Check_Input') // 인증번호 입력하는곳 
-
+                     var name = $('#name').val();
+                     var ID = $('#ID').val();
 
                      $.ajax({
+                        url: '${pageContext.request.contextPath}/common/IDEMail',
                         type: 'get',
-                        url: "${pageContext.request.contextPath}/common/mailCheck?EMail=" + EMail, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
-
+                        data: {
+                           ID: ID,
+                           name: name,
+                           EMail: EMail
+                        },
+                        dataType: 'json',
                         success: function (data) {
-                           console.log("data : " + data);
-                           checkInput.attr('disabled', false);
-                           code = data;
-                           alert('인증번호가 전송되었습니다.')
+
+                           if (data == 1) {
+                              $.ajax({
+                                 type: 'get',
+                                 url: "${pageContext.request.contextPath}/common/mailCheck?EMail=" + EMail, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+
+                                 success: function (data) {
+                                    console.log("data : " + data);
+                                    checkInput.attr('disabled', false);
+                                    code = data;
+                                    alert('인증번호가 전송되었습니다.')
+                                 }
+                              }); // end ajax
+                           } else {
+                              alert("등록된 이메일이 아닙니다.");
+                           }
+                        },
+                        error: function () {
+                           console.log("실패");
                         }
-                     }); // end ajax
+                     });
+
+
+
                   }); // end send eamil
 
 
@@ -187,17 +167,17 @@
                      }
 
 
-							if (validAll) {
-							    var newPasswordForm = `
+                     if (validAll) {
+                        var newPasswordForm = `
 									<label>
 										<p style="text-align: left; font-size: 20px; color: #666;">새로운 비밀번호</p>
-										<input type="text" placeholder="새로운 비밀번호" class="size" id="password" name="password" required>
+										<input type="password" placeholder="새로운 비밀번호" class="size" id="password" name="password" required>
 										<div id="ID_check" style="font-size: 12px; padding-top: 5px;"></div>
 									</label>
 
 									<label>
 										<p style="text-align: left; font-size: 20px; color: #666;">비밀번호 확인</p>
-										<input type="text" placeholder="비밀번호 확인" class="size" id="password2" name="password2" required>
+										<input type="password" placeholder="비밀번호 확인" class="size" id="password2" name="password2" required>
 										<div id="name_check" style="font-size: 12px; padding-top: 5px;"></div>
 									</label>
 
@@ -205,71 +185,48 @@
 										<input type="submit" value="비밀번호 변경" id="chpwbtn" class="btn">
 									</p>
 							    `;
-							    
-							    $(".profile_right").append(newPasswordForm);
-							} else {
-								alert('기각');
-								return false;
-							}
-						});
 
-                     if (validAll) {
-                         var newPasswordForm = `
-                             <div class="changepw">
-                                 <h2>새로운 비밀번호 입력</h2>
-                                 <form>
-                                     <label for="password">새로운 비밀번호:</label>
-                                     <input type="password" id="password" name="password" required>
-
-                                     <label for="password2">비밀번호 확인:</label>
-                                     <input type="password" id="password2" name="password2" required>
-
-                                     <button type="submit" id="chpwbtn">비밀번호 변경</button>
-                                 </form>
-                             </div>
-                         `;
-                         
-                         $("#tabs-1").append(newPasswordForm);
+                        $(".profile_right").append(newPasswordForm);
                      } else {
                         alert('기각');
                         return false;
                      }
                   });
 
-
-                  $("#tabs-1").on("click", "#chpwbtn", function (e) {
-                      e.preventDefault();
-                      password = $("#password").val();
-                      var password2 = $("#password2").val();
-
-                      if (password !== password2) {
-                          alert("새로운 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
-                      } else if (password === "" || password2 === "") {
-                          alert("비밀번호를 입력하세요.");
-                      } else {
-
-                          $.ajax({
-                              url: "${pageContext.request.contextPath}/common/changepw",
-                              type: "POST",
-                              data: {
-                                 ID: $('#ID').val(),
-                                  password: password
-                              },
-                              success: function (response) {
-                              alert("다시 로그인 해주세요");
-                              
-                                  location.href = "${pageContext.request.contextPath}/common/loginPost";
-                              },
-                              error: function (xhr, status, error) {
-                                  alert("실패");
-                              }
-                          });
-                      }
-                  });
                
+
+
+               $("#tabs-1").on("click", "#chpwbtn", function (e) {
+                  e.preventDefault();
+                  password = $("#password").val();
+                  var password2 = $("#password2").val();
+
+                  if (password !== password2) {
+                     alert("새로운 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+                  } else if (password === "" || password2 === "") {
+                     alert("비밀번호를 입력하세요.");
+                  } else {
+
+                     $.ajax({
+                        url: "${pageContext.request.contextPath}/common/changepw",
+                        type: "POST",
+                        data: {
+                           ID: $('#ID').val(),
+                           password: password
+                        },
+                        success: function (response) {
+                           alert("다시 로그인 해주세요");
+
+                           location.href = "${pageContext.request.contextPath}/common/loginPost";
+                        },
+                        error: function (xhr, status, error) {
+                           alert("실패");
+                        }
+                     });
+                  }
                });
 
-
+            });
             </script>
 
          </head>
@@ -320,8 +277,7 @@
                            <label>
                               <p style="text-align: left; font-size: 20px; color: #666">E-mail</p>
                               <div class="abc">
-                                 <input type="email" placeholder="이메일" class="size" id="EMail" name="EMail"
-                                    required>
+                                 <input type="email" placeholder="이메일" class="size" id="EMail" name="EMail" required>
                                  <button type="button" id="mail_Check_Btn" class="email_btn" />인증번호 전송
                               </div>
 
@@ -334,30 +290,22 @@
                            </label>
 
 
-									<p class="showid" >
-										<input type="submit" value="비밀번호 찾기" id="reg_submit" class="btn">
-									</p>
-								</div>
-
                            <p class="showid">
                               <input type="submit" value="비밀번호 찾기" id="reg_submit" class="btn">
                            </p>
                         </div>
-
-
-
-
                      </div>
-
                   </div>
-
-
 
                </div>
 
-               <footer>
-                  <jsp:include page="../footer.jsp" />
-               </footer>
+
+
+            </div>
+
+            <footer>
+               <jsp:include page="../footer.jsp" />
+            </footer>
 
 
 

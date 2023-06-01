@@ -21,6 +21,7 @@
 }
 
 .myprofile input[type="text"],
+.myprofile input[type="password"],
 .myprofile input[type="email"] {
   width: 300px;
   padding: 10px;

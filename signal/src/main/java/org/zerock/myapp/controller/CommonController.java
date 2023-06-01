@@ -239,6 +239,30 @@ public class CommonController {
 			throw new ControllerException(e);
         }
     }
+    
+	// 이름 이메일 매칭 확인
+	@GetMapping("/nameEMail")
+	@ResponseBody
+	public Integer nameEMail(@RequestParam("name")String name, @RequestParam("EMail")String EMail) throws ControllerException {
+		try {	
+			return this.service.nameEMail(name, EMail);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	}
+	
+	// ID 이메일 매칭 확인
+	@GetMapping("/IDEMail")
+	@ResponseBody
+	public Integer IDEMail(@RequestParam("name")String name, @RequestParam("ID")String ID, @RequestParam("EMail")String EMail) throws ControllerException {
+		try {	
+			return this.service.IDEMail(name, ID, EMail);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+	}
+    
+    
 	
 	
 

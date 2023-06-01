@@ -63,4 +63,10 @@ public interface UsersService {
 	
 	// 비밀번호 변경
 	public abstract Boolean changepw(String ID, String password) throws ServiceException;
+	
+	// 
+	public Integer nameEMail(String name, String EMail) throws ServiceException;
+	
+	// 
+	public Integer IDEMail(String name, String ID, String EMail) throws ServiceException;
 } // end interface

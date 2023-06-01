@@ -56,11 +56,15 @@ html {
 #tabs-1 .myprofile .profile_left {
 	display: flex;
 	align-items: center;
-	/* justify-content: center; */
+	justify-content: center;
 	float: left;
-	width: 40%;
-	height: auto;
+	width: 260px;
+    height: 260px;
+    margin-right: 80px;
+    margin-top: 60px;
+    margin-left: 10px;
 }
+
 
 #tabs-1 .myprofile .profile_left>.img_container {
 	position: relative;
@@ -92,6 +96,7 @@ html {
 #tabs-1 .myprofile .profile_right {
 	float: right;
 	width: 58%;
+	padding-top: 50px;
 }
 
 #tabs-1 .myprofile .profile_right div {

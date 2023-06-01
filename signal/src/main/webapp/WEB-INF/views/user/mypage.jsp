@@ -217,6 +217,19 @@
 
 
 <style>
+
+
+
+#ive {
+
+	width: 80%;
+	height: 80%;
+	margin-left: 20px;
+	border-radius: 50%;
+
+
+}
+
 .hide {
 	display: none;
 }
@@ -380,9 +393,8 @@
 				<div class="myprofile">
 			
 					<div class="profile_left">
-   <img src="/imgs/f46df139-5e6d-4138-bac5-b238928ac268_r2.jpg" />
-
-</div>
+   						<img src="${pageContext.request.contextPath}/resources/img/ive.jpg" id="ive"/>
+					</div>
 
 
 

@@ -23,6 +23,8 @@
     <!-- script
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script defer src="${pageContext.request.contextPath }/js/script.js"></script>  -->
+    
+
     </head>
     
     <body>
@@ -52,7 +54,16 @@
         <li><a href="${pageContext.request.contextPath }/board/group/list" target="_self">동행 찾기</a> </li>
         <li><a href="/board/qna/list" >QnA</a> </li>
         <li><a href="/user/mygroup" target="_self">동행현황</a> </li>
-        <li><a href="/board/myplan/main" target="_self">플래너</a> </li>
+		<li style="text-align: center;position: relative;">플래너
+			<ul style="width: 143px; border: 1px solid lightgrey; top: 23px;z-index: 1;position: absolute;display: none;left: -41px;height: 87px;flex-direction: column;justify-content: center;background: white;">
+			    <li style="height: 33px;">
+			        <a class="size14" href="/board/myplan/main" target="_self">나만의 플래너</a>
+			    </li>
+			    <li style="height: 33px;">
+		        	<a class="size14" href="/board/groupplan/main" target="_self">동행 플래너</a>
+		    	</li>
+			</ul>
+	    </li>
         <li><a href="/board/review/list" target="_self">여행후기</a> </li>
         <li>
           <div>
@@ -64,6 +75,16 @@
        <hr class="header-bottom-line">
     </header>
         
+    <script defer="defer">
+    $(document).ready(function() {
+	    $('.category > li:contains("플래너")').hover(function() {
+	    	$(this).find('ul').css('display', 'flex');
+	    	}, function() {
+	    	$(this).find('ul').css('display', 'none');
+	    	});
+    });
+	    
+    </script>
     </body>
 
     </html>

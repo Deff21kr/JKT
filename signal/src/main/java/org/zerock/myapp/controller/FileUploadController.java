@@ -30,6 +30,8 @@ import org.zerock.myapp.exception.ControllerException;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 
 @NoArgsConstructor
 @Log4j2
@@ -47,7 +49,7 @@ public class FileUploadController {
 
 		List<AttachFileDTO> list = new ArrayList<>();
 
-		String uploadFolder = "JKT/signal/src/main/webapp/resources/img";
+		String uploadFolder = "C:/upload/tmp";
 		// 업로드파일의 정보 출력
 		log.info("uploadFile : {}", Arrays.toString(uploadFile));
 
@@ -109,9 +111,24 @@ public class FileUploadController {
 				FileOutputStream thumbnail = new FileOutputStream(new File(dir, "thumb_" + uploadFileName));
 				// 썸네일 파일 생성
 				log.info("thumbnail : {}", thumbnail);
-				Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 300, 300);
-				thumbnail.close();
-			} // if
+				
+				// 썸네일 크롭 영역 계산
+	            int thumbnailSize = 300;
+	            int originalWidth = Thumbnails.of(multipartFile.getInputStream()).scale(1).asBufferedImage().getWidth();
+	            int originalHeight = Thumbnails.of(multipartFile.getInputStream()).scale(1).asBufferedImage().getHeight();
+
+	            int cropSize = Math.min(originalWidth, originalHeight);
+	            int x = (originalWidth - cropSize) / 2;
+	            int y = (originalHeight - cropSize) / 2;
+
+	            Thumbnails.of(multipartFile.getInputStream())
+	            		.sourceRegion(Positions.CENTER, cropSize, cropSize)// 크롭 영역 지정
+	                    .size(thumbnailSize, thumbnailSize)
+	                    .toOutputStream(thumbnail);
+	            
+	            thumbnail.close();
+	        } // if
+
 
 			// 리스트에 추가
 			list.add(attachDTO);
@@ -198,8 +215,7 @@ public class FileUploadController {
 			return new ResponseEntity<>("Unsupported encoding.", HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (Exception e) {
 			log.error("파일삭제를 실패했습니다.: {}", fileName, e);
-			return new
-					ResponseEntity<>("Failed to delete the file.", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("Failed to delete the file.", HttpStatus.INTERNAL_SERVER_ERROR);
 		} // try-catch
 
 	}// deleteFile

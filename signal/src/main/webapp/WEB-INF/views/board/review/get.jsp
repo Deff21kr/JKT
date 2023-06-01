@@ -41,7 +41,7 @@
 
             <hr>
             <div class="container">
-                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -78,16 +78,40 @@
         </main>
         
         <div class="like-area">
-            <button class="likebtn">
-            	<span class="likecount"> 0 </span>
-                <i class="fa-regular fa-heart"></i> 좋아요
-        	</button>	
+                <button class="likebtn">
+            	<!-- <span class="likecount"> 0 </span> -->
+                <i id="like" class="fa-regular fa-heart"></i> 좋아요
+                </button>
+            <script>
+                $('#like').click(function() {
+                    $.ajax({
+                        url:'${pageContext.request.contextPath}/board/review/like',
+                        type: 'POST',
+                        data: {
+                            postNo : '${__REVIEW__.postNo}',
+                            nickName : '${__AUTH__.nickName}'
+                        }, // data
+                        dataType : 'json',
+                        success: function(result) {
+                            console.log("result() invoked." + result);
+
+                            if(result == 1) {
+                                alert('좋아요를 눌렀습니다.');
+                            } else {
+                                alert('좋아요를 취소했습니다.');
+                            } // if-else
+                        },
+                        error: function() {
+                            console.log('실패');
+                        }
+                    })
+                });
+            </script>
+
        	</div>
         <div class="btn-menu">
             		<button class="listBtn"> 목록 </button>
-            		<c:if test="${__REVIEW__.nickName.equals(__AUTH__.nickName)}" >
-            			<button class="modifyBtn"> 수정 </button>
-            		</c:if>
+            		<button class="modifyBtn"> 수정 </button>
        	</div>
         <!-- 댓글영역 -->
         <%@include file="../../reviewboardComment.jsp" %>

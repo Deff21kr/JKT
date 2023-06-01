@@ -79,7 +79,7 @@
         
         <div class="like-area">
             <button class="likebtn">
-            	<span class="likecount"> 0 </span>
+            	<!-- <span class="likecount"> 0 </span> -->
                 <i class="fa-regular fa-heart"></i> 좋아요
         	</button>	
        	</div>

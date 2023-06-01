@@ -89,12 +89,10 @@
 				});
 				
 				$(document).ready(function() {
-					  $('#rateForm').submit(function(e) {
+					  $('.rateresult').submit(function(e) {
 					    e.preventDefault(); // 폼 기본 제출 동작 막기
 					    
-					    var button = $(this).find('button');
-
-					    // AJAX 요청 생성
+					    var button = $(this).find('button');								    // AJAX 요청 생성
 					    $.ajax({
 					      url: '/user/rate', // 폼의 action 속성 값
 					      type: 'post',
@@ -553,7 +551,7 @@
 								<div class="group"></div>
 								<div class="nick"></div>
 
-								<form action="/user/rate" method="post" class="rateresult" id="rateForm">
+								<form action="/user/rate" method="post" class="rateresult">
 									<div class="rate" style="padding: 5px 0px;">
 										<input type="hidden" name="raterUserNickName" value="${__AUTH__.nickName}"> 
 										<input type="hidden" name="ratedUserNickName" class="ratedUserNickName" value="">

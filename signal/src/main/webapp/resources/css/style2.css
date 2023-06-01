@@ -108,6 +108,14 @@ hr {
   margin-bottom: 20px;
   margin-top: 20px;
 } */
+ul>li>a.size14 {
+	font-size: 15px;
+	color: #9a9a9a;
+}
+
+ul>li>a.size14:hover {
+	color: black;
+}
 
 #prov, 
 #priv {

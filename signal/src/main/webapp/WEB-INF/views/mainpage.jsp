@@ -31,14 +31,14 @@
 		$(function() {
 			$('.content > .card > .image').on('click', function(e) {
 				var postNum = $(this).prev().val();
-				location = '/board/group/get?postNo='+ postNum + '?currPage=1';
+				location = '/board/group/get?postNo='+ postNum + '&currPage=1';
 			});
 		});
 		
 		$(function() {
 			$('.content > .card > .detail').on('click', function(e) {
 				var postNum = $(this).prev().prev().prev().val();
-				location = '/board/group/get?postNo='+ postNum + '?currPage=1';
+				location = '/board/group/get?postNo='+ postNum + '&currPage=1';
 			});
 		});
 		
@@ -188,7 +188,7 @@
           <c:forEach items="${__QNA__}" var="QnAVO">
           
 	          <li>
-	            <a href="/board/qna/get?postNo=${QnAVO.postNo}" target="_self">
+	            <a href="/board/qna/get?postNo=${QnAVO.postNo}&currPage=1" target="_self">
 	              <span>Q&A</span>
 	              ${QnAVO.title}
 	            </a>

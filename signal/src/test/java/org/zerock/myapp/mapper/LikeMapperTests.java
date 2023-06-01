@@ -38,8 +38,8 @@ public class LikeMapperTests {
 	public void testInsert() throws Exception{
 		log.trace("testInsert() invoked.");
 		
-		Integer postNo = 270;
-		String nickName = "123123";
+		Integer postNo = 276;
+		String nickName = "hyeonna";
 		
 		LikeDTO like = new LikeDTO();
 		like.setPostNo(postNo);

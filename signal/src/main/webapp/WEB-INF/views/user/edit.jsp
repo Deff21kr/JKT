@@ -69,6 +69,8 @@
                             <%=request.getRealPath("/") %>
                         </div>
                 </div>
+                
+                <p></p>
                 <div class="profile_right">
                     <input type="hidden" name="ID" value="${__AUTH__.ID}">
                     <div>

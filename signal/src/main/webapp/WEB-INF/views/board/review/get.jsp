@@ -78,10 +78,36 @@
         </main>
         
         <div class="like-area">
-            <button class="likebtn">
-            	<span class="likecount"> 0 </span>
-                <i class="fa-regular fa-heart"></i> 좋아요
-        	</button>	
+                <button class="likebtn">
+            	<!-- <span class="likecount"> 0 </span> -->
+                <i id="like" class="fa-regular fa-heart"></i> 좋아요
+                </button>
+            <script>
+                $('#like').click(function() {
+                    $.ajax({
+                        url:'${pageContext.request.contextPath}/board/review/like',
+                        type: 'POST',
+                        data: {
+                            postNo : '${__REVIEW__.postNo}',
+                            nickName : '${__AUTH__.nickName}'
+                        }, // data
+                        dataType : 'json',
+                        success: function(result) {
+                            console.log("result() invoked." + result);
+
+                            if(result == 1) {
+                                alert('좋아요를 눌렀습니다.');
+                            } else {
+                                alert('좋아요를 취소했습니다.');
+                            } // if-else
+                        },
+                        error: function() {
+                            console.log('실패');
+                        }
+                    })
+                });
+            </script>
+
        	</div>
         <div class="btn-menu">
             		<button class="listBtn"> 목록 </button>

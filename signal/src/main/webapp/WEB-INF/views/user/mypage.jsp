@@ -543,9 +543,6 @@
 		                     </c:if>
 							
 
-
-
-
 							<div class="content2 hide">
 								<div class="num">${count}</div>
 								<div class="group"></div>

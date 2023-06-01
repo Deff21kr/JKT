@@ -202,6 +202,7 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		}
 	}
 	
+	// 아이디 찾기
 	public Integer nameEMail(String name, String EMail) throws ServiceException {
 		try {
 			return this.dao.nameEMail(name, EMail);
@@ -210,6 +211,8 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 		}
 	}
 	
+	
+	// 비밀번호 찾기
 	public Integer IDEMail(String name, String ID, String EMail) throws ServiceException {
 		try {
 			return this.dao.IDEMail(name, ID, EMail);

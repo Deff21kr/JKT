@@ -6,14 +6,12 @@ import java.util.Objects;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
-import org.zerock.myapp.exception.ControllerException;
 import org.zerock.myapp.exception.ServiceException;
 import org.zerock.myapp.mapper.UsersMapper;
 
@@ -199,6 +197,22 @@ public class UsersServiceImpl implements UsersService, InitializingBean, Disposa
 			
 			return this.dao.changepw(ID, hashedPassword);
 			
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	public Integer nameEMail(String name, String EMail) throws ServiceException {
+		try {
+			return this.dao.nameEMail(name, EMail);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	public Integer IDEMail(String name, String ID, String EMail) throws ServiceException {
+		try {
+			return this.dao.IDEMail(name, ID, EMail);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		}

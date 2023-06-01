@@ -113,6 +113,16 @@
 		SELECT count(ID) FROM tbl_users
 		where ID = #{ID}
 	</select>
+	
+	<select id="nameEMail" resultType="int">
+		SELECT count(name) FROM tbl_users
+		where name = #{name} AND EMail = #{EMail}
+	</select>
+	
+	<select id="IDEMail" resultType="int">
+		SELECT count(ID) FROM tbl_users
+		where ID = #{ID} AND EMail = #{EMail} AND name = #{name}
+	</select>
 
 
 

@@ -291,7 +291,7 @@ public class UsersController {
 
    // 평점 제출
    @PostMapping("/rate")
-//      @ResponseBody
+   @ResponseBody
 //      ResponseEntity<String>
    Integer rate(String raterUserNickName, String ratedUserNickName, Integer rating) throws ControllerException {
       log.trace("rate() invoked");

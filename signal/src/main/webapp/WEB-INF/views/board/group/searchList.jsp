@@ -35,9 +35,10 @@
             	    let currPage = "${searchPageMaker.cri.currPage}";
             	    location = "/board/group/register?currPage=" + currPage;
             	  });
-            	  $('.pageNum').on('click', function (e) {
+            	  
+           	$('.pageNum').on('click', function (e) {
             		    let selectedPageNum = e.currentTarget.textContent;
-            		    colsole.log(selectedPageNum);
+            		    console.log(selectedPageNum);
             		    let url = "/board/group/searchList?currPage=" + selectedPageNum;
 
             		    // area 파라미터를 추가
@@ -54,8 +55,7 @@
 
             		    // recruitStatus 파라미터를 추가
             		    url += "&recruitStatus=" + encodeURIComponent('${searchPageMaker.cri.recruitStatus}');
-            		    colsole.log(url);
-        //    		    location.href = url;
+            		    location.href = url;
             		});
 
                   });

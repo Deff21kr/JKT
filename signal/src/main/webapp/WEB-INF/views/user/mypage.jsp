@@ -88,35 +88,35 @@
 					});
 				});
 				
-				$(document).ready(function() {
-					  $('.rateresult').submit(function(e) {
-					    e.preventDefault(); // 폼 기본 제출 동작 막기
-					    
-					    var button = $(this).find('button');								    // AJAX 요청 생성
-					    $.ajax({
-					      url: '/user/rate', // 폼의 action 속성 값
-					      type: 'post',
-					      data: $(this).serialize(), // 폼 데이터 직렬화
-					      success: function(response) {
-					    	  
-					        // 성공적으로 요청을 보냈을 때 수행할 작업
-					        console.log('AJAX 요청 성공');
-					       // button.prop('disabled', true);
-					        //alert(response);
-					      },
-					      error: function(xhr, status, error) {
-					        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
-					        console.error('AJAX 요청 오류');
-					        console.log('상태:', status);
-					        console.log('오류:', error);
-					        
-					        button.prop('disabled', false);
-					      	alert(data);
-
-					      }
-					    });
-					  });
-					});
+					$(document).ready(function() {
+						  $('.rateresult').submit(function(e) {
+						    e.preventDefault(); // 폼 기본 제출 동작 막기
+						    
+						    var button = $(this).find('button');								    // AJAX 요청 생성
+						    $.ajax({
+						      url: '/user/rate', // 폼의 action 속성 값
+						      type: 'post',
+						      data: $(this).serialize(), // 폼 데이터 직렬화
+						      success: function(response) {
+						    	  
+						        // 성공적으로 요청을 보냈을 때 수행할 작업
+						        console.log('AJAX 요청 성공');
+						       // button.prop('disabled', true);
+						        //alert(response);
+						      },
+						      error: function(xhr, status, error) {
+						        // 요청을 보내는 중에 오류가 발생했을 때 수행할 작업
+						        console.error('AJAX 요청 오류');
+						        console.log('상태:', status);
+						        console.log('오류:', error);
+						        
+						        button.prop('disabled', false);
+						      	alert(data);
+	
+						      }
+						    });
+						  });
+						});
 				
 				var friend = [];
 				$(document).ready(function() {

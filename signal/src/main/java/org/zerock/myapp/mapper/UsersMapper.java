@@ -9,6 +9,7 @@ import org.zerock.myapp.domain.Criteria;
 import org.zerock.myapp.domain.GroupBoardDTO;
 import org.zerock.myapp.domain.UsersDTO;
 import org.zerock.myapp.domain.UsersVO;
+import org.zerock.myapp.exception.ServiceException;
 
 public interface UsersMapper {
 
@@ -102,4 +103,10 @@ public interface UsersMapper {
 	
 	// 16. 비밀번호 변경
 	public abstract Boolean changepw(String ID, String password);
+	
+	// 17. 이름 이메일 매칭 확인
+	public Integer nameEMail(String name, String EMail) throws ServiceException;
+	
+	// 18. ID 이메일 매칭 확인
+	public Integer IDEMail(String name, String ID, String EMail) throws ServiceException;
 }

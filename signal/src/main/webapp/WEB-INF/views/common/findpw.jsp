@@ -87,6 +87,51 @@
                      });
                   });
 
+						//   ============ 이메일 인증 ===================
+						let code = '';
+						$('#mail_Check_Btn').click(function () {
+							const EMail = $('#EMail').val(); // 이메일 주소값 얻어오기!
+							console.log('완성된 이메일 : ' + EMail); // 이메일 오는지 확인
+							const checkInput = $('#mail_Check_Input') // 인증번호 입력하는곳 
+							var name = $('#name').val();
+							var ID = $('#ID').val();
+
+							$.ajax({
+								url: '${pageContext.request.contextPath}/common/IDEMail',
+								type: 'get',
+								data: {
+									ID: ID,
+									name: name,
+									EMail: EMail
+								},
+								dataType: 'json',
+								success: function (data) {
+
+									if (data == 1) {
+										$.ajax({
+											type: 'get',
+											url: "${pageContext.request.contextPath}/common/mailCheck?EMail=" + EMail, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+
+											success: function (data) {
+												console.log("data : " + data);
+												checkInput.attr('disabled', false);
+												code = data;
+												alert('인증번호가 전송되었습니다.')
+											}
+										}); // end ajax
+									} else {
+										alert("등록된 이메일이 아닙니다.");
+									}
+								},
+								error: function () {
+									console.log("실패");
+								}
+							});
+
+
+
+						}); // end send eamil
+
                   //   ============ 이메일 인증 ===================
                   let code = '';
                   $('#mail_Check_Btn').click(function () {
@@ -107,6 +152,7 @@
                         }
                      }); // end ajax
                   }); // end send eamil
+
 
                   $('#mail_Check_Input').blur(function () {
                      const inputCode = $('#mail_Check_Input').val();
@@ -140,6 +186,33 @@
                         }
                      }
 
+
+							if (validAll) {
+							    var newPasswordForm = `
+									<label>
+										<p style="text-align: left; font-size: 20px; color: #666;">새로운 비밀번호</p>
+										<input type="text" placeholder="새로운 비밀번호" class="size" id="password" name="password" required>
+										<div id="ID_check" style="font-size: 12px; padding-top: 5px;"></div>
+									</label>
+
+									<label>
+										<p style="text-align: left; font-size: 20px; color: #666;">비밀번호 확인</p>
+										<input type="text" placeholder="비밀번호 확인" class="size" id="password2" name="password2" required>
+										<div id="name_check" style="font-size: 12px; padding-top: 5px;"></div>
+									</label>
+
+									<p class="showid">
+										<input type="submit" value="비밀번호 변경" id="chpwbtn" class="btn">
+									</p>
+							    `;
+							    
+							    $(".profile_right").append(newPasswordForm);
+							} else {
+								alert('기각');
+								return false;
+							}
+						});
+
                      if (validAll) {
                          var newPasswordForm = `
                              <div class="changepw">
@@ -162,6 +235,7 @@
                         return false;
                      }
                   });
+
 
                   $("#tabs-1").on("click", "#chpwbtn", function (e) {
                       e.preventDefault();
@@ -258,6 +332,12 @@
                               <div id="mail_check" style="font-size: 12px; padding-top: 5px;"></div>
                               <div id="mail_check_num" style="font-size: 12px; padding-top: 5px;"></div>
                            </label>
+
+
+									<p class="showid" >
+										<input type="submit" value="비밀번호 찾기" id="reg_submit" class="btn">
+									</p>
+								</div>
 
                            <p class="showid">
                               <input type="submit" value="비밀번호 찾기" id="reg_submit" class="btn">

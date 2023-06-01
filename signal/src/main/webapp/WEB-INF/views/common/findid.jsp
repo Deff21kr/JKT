@@ -31,7 +31,7 @@
 						//============== 존재하는 회원인지 검사 ===============//
 						$("#name").blur(function () {
 							var name = $('#name').val();
-							
+
 							$.ajax({
 								url: '${pageContext.request.contextPath}/common/checkUserName?name=' + name,
 								type: 'get',
@@ -61,19 +61,41 @@
 							const EMail = $('#EMail').val(); // 이메일 주소값 얻어오기!
 							console.log('완성된 이메일 : ' + EMail); // 이메일 오는지 확인
 							const checkInput = $('#mail_Check_Input') // 인증번호 입력하는곳 
-
+							var name = $('#name').val();
 
 							$.ajax({
+								url: '${pageContext.request.contextPath}/common/nameEMail',
 								type: 'get',
-								url: "${pageContext.request.contextPath}/common/mailCheck?EMail=" + EMail, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
-
+								data: {
+									name: name,
+									EMail: EMail
+								},
+								dataType: 'json',
 								success: function (data) {
-									console.log("data : " + data);
-									checkInput.attr('disabled', false);
-									code = data;
-									alert('인증번호가 전송되었습니다.')
+
+									if (data == 1) {
+										$.ajax({
+											type: 'get',
+											url: "${pageContext.request.contextPath}/common/mailCheck?EMail=" + EMail, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+
+											success: function (data) {
+												console.log("data : " + data);
+												checkInput.attr('disabled', false);
+												code = data;
+												alert('인증번호가 전송되었습니다.')
+											}
+										}); // end ajax
+									} else {
+										alert("등록된 이메일이 아닙니다.");
+									}
+								},
+								error: function () {
+									console.log("실패");
 								}
-							}); // end ajax
+							});
+
+
+
 						}); // end send eamil
 
 						$('#mail_Check_Input').blur(function () {
@@ -96,44 +118,44 @@
 
 
 						$("#reg_submit").click(function () {
-						    var name = $('#name').val();
-						    var EMail = $('#EMail').val();
+							var name = $('#name').val();
+							var EMail = $('#EMail').val();
 
-						    var validAll = true;
-						    for (var i = 0; i <= 1; i++) {
-						        if (inval_Arr[i] == false) {
-						            validAll = false;
-						            console.log(i + " : " + inval_Arr[i]);
-						        }
-						    }
+							var validAll = true;
+							for (var i = 0; i <= 1; i++) {
+								if (inval_Arr[i] == false) {
+									validAll = false;
+									console.log(i + " : " + inval_Arr[i]);
+								}
+							}
 
-						    if (validAll) {
-						        $.ajax({
-						            url: "${pageContext.request.contextPath}/common/showId",
-						            type: "get",
-						            data: {
-						                name: name,
-						                EMail: EMail
-						            },
-						            dataType: 'json',
-						            success: function(data) {
-						            	if (data.success) {
-						                    var ID = data.ID;
-						                    $('#tabs-1').empty().append('<p class="message">회원님의 아이디는 "' + ID + '" 입니다.</p>');
-						                } else {
-						                    $('#tabs-1').empty().append('<p class="message">아이디를 찾지 못했습니다.</p>');
-						                }
-						            },
-						            error: function () {
-						                console.log('아이디 찾기 요청 실패');
-						            }
-						        });
-						    } else {
-						        alert('기각');
-						        return false;
-						    }
-						});		
-						
+							if (validAll) {
+								$.ajax({
+									url: "${pageContext.request.contextPath}/common/showId",
+									type: "get",
+									data: {
+										name: name,
+										EMail: EMail
+									},
+									dataType: 'json',
+									success: function (data) {
+										if (data.success) {
+											var ID = data.ID;
+											$('#tabs-1').empty().append('<p class="message">회원님의 아이디는 "' + ID + '" 입니다.</p>');
+										} else {
+											$('#tabs-1').empty().append('<p class="message">아이디를 찾지 못했습니다.</p>');
+										}
+									},
+									error: function () {
+										console.log('아이디 찾기 요청 실패');
+									}
+								});
+							} else {
+								alert('기각');
+								return false;
+							}
+						});
+
 					});
 
 
@@ -166,7 +188,7 @@
 						</ul>
 
 						<div id="tabs-1">
-ul
+							ul
 
 							<div class="myprofile">
 
@@ -193,7 +215,7 @@ ul
 										<div id="mail_check" style="font-size: 12px; padding-top: 5px;"></div>
 										<div id="mail_check_num" style="font-size: 12px; padding-top: 5px;"></div>
 									</label>
-									
+
 									<p class="showid">
 										<input type="submit" value="아이디 찾기" id="reg_submit" class="btn">
 									</p>

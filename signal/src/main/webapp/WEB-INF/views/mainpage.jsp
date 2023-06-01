@@ -188,7 +188,7 @@
           <c:forEach items="${__QNA__}" var="QnAVO">
           
 	          <li>
-	            <a href="/board/qna/get?postNo=${QnAVO.postNo}" target="_self">
+	            <a href="/board/qna/get?postNo=${QnAVO.postNo}&currPage=1" target="_self">
 	              <span>Q&A</span>
 	              ${QnAVO.title}
 	            </a>
